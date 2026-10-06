@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<title>메디링크 강원 · MediLink Kangwon (서비스명 리뉴얼 프로토타입)</title>
+<style>
+@font-face{font-family:'Pretendard';src:url('PretendardVariable.woff2') format('woff2-variations');font-weight:45 920;font-display:swap}
+:root{
+  --ink:#090909;--paper:#fff;--gray:#f1f1f1;--muted:#666;--rule:#e5e5e5;--hair:#dedede;
+  --accent:#0038C3;--accent-text:#004EA2;--accent-bg:#E9EEFA;--accent-on-dark:#9CB9FF;
+  --mk-from:#0038C3;--mk-to:#A9C4FF;
+  --body:13px;--gutter:40px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;font-size:var(--body);line-height:1.7;letter-spacing:-.04em;color:var(--ink);background:var(--paper);font-weight:400;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;letter-spacing:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{padding:0 var(--gutter)}
+.en,.label,.parts{font-family:'Montserrat','Pretendard',sans-serif;letter-spacing:-.01em}
+.label{letter-spacing:.06em}
+.wm b,.en b{font-weight:700}
+.label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+
+/* GNB */
+.gnb{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--ink);display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 var(--gutter)}
+.lockup{display:flex;align-items:center;gap:10px;font-weight:500;font-size:15px}
+.lockup img{display:block;height:36px;width:auto}
+.gnb nav{display:flex;gap:28px}
+.gnb nav a{font-weight:500;padding:6px 0;border-bottom:2px solid transparent}
+.gnb nav a:hover{border-bottom-color:var(--ink)}
+.gnb .cta{border:1px solid var(--ink);padding:6px 14px;font-weight:500;transition:.2s}
+.gnb .cta:hover{background:var(--ink);color:#fff}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1.05fr 1fr;min-height:620px;border-bottom:1px solid var(--ink)}
+.hero-l{padding:88px var(--gutter) 56px;display:flex;flex-direction:column;justify-content:space-between}
+.hero h1{font-size:56px;line-height:1.12;font-weight:500;letter-spacing:-.06em;margin:18px 0 22px}
+.hero h1 em{font-style:normal;color:var(--accent-text)}
+.hero p.lead{font-size:15px;max-width:460px;color:#333}
+.ask{margin-top:36px;border-bottom:1px solid var(--ink);display:flex;align-items:center;gap:10px;padding-bottom:10px;max-width:520px}
+.ask input{flex:1;border:0;outline:0;font:inherit;font-size:16px;letter-spacing:-.03em;background:transparent;padding:6px 0}
+.ask input::placeholder{color:#8a8a8a}
+.ask button{border:1px solid var(--ink);padding:6px 16px;white-space:nowrap;font-weight:500;transition:.2s}
+.ask button:hover{background:var(--ink);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;max-width:520px}
+.chip{border:1px solid var(--hair);padding:5px 12px;font-weight:500;transition:.2s}
+.chip:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.hero-note{font-size:11px;color:var(--muted);margin-top:28px}
+.hero-r{background:var(--gray);position:relative;overflow:hidden;border-left:1px solid var(--ink)}
+.blobs{position:absolute;inset:0;filter:url(#goo)}
+.blobs i{position:absolute;border-radius:50%;background:var(--accent);animation:float 14s ease-in-out infinite}
+.blobs i:nth-child(1){width:46%;aspect-ratio:1;left:27%;top:22%}
+.blobs i:nth-child(2){width:17.6%;aspect-ratio:1;left:10%;top:56%;background:var(--ink);animation-delay:-4s;animation-duration:17s}
+.blobs i:nth-child(3){width:28.4%;aspect-ratio:1;left:60%;top:5%;background:var(--accent);animation:stick 9s ease-in-out infinite}
+.blobs i:nth-child(6){width:17.6%;aspect-ratio:1;left:55%;top:20%;background:var(--accent);animation:stick 9s ease-in-out infinite;animation-delay:-1s}
+@keyframes stick{0%,100%{transform:translate(0,0)}50%{transform:translate(5%,-6%)}}
+.dot-s{position:absolute;width:17.6%;aspect-ratio:1;border-radius:50%;background:var(--accent);left:71%;top:62%;z-index:2}
+.dot-s.b{width:6.7%;left:86%;top:56%;background:var(--ink)}
+.blobs i:nth-child(5){width:6.7%;aspect-ratio:1;left:18%;top:20%;animation-delay:-9s;animation-duration:11s}
+@keyframes float{0%,100%{transform:translate(0,0)}33%{transform:translate(7%,-9%)}66%{transform:translate(-8%,6%)}}
+.plus{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:17.6%;aspect-ratio:1;z-index:2}
+.plus::before,.plus::after{content:"";position:absolute;background:#fff;border-radius:999px}
+.plus::before{left:34.5%;right:34.5%;top:0;bottom:0}
+.plus::after{top:34.5%;bottom:34.5%;left:0;right:0}
+.hero-mark{position:absolute;left:50%;top:50%;width:62%;height:auto;transform:translate(-50%,-50%);animation:breathe 8s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-51.5%) scale(1.025)}}
+.bubble{position:absolute;z-index:3;background:#fff;border:1px solid var(--ink);padding:10px 14px;max-width:230px;font-size:12px;line-height:1.55}
+.bubble b{font-weight:500;display:block;color:var(--accent-text);font-size:11px;margin-bottom:2px}
+.bubble.a{left:6%;top:7%}
+.bubble.b{right:6%;bottom:6%}
+
+/* SECTION */
+section{padding:96px var(--gutter);border-bottom:1px solid var(--ink)}
+.sec-hd{display:grid;grid-template-columns:200px 1fr;gap:40px;margin-bottom:48px}
+.sec-hd h2{font-size:32px;font-weight:500;letter-spacing:-.05em;line-height:1.3}
+.sec-hd p{margin-top:10px;color:#444;max-width:560px}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ink);border:1px solid var(--ink)}
+.card{background:var(--gray);padding:28px 24px 24px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between;transition:.2s}
+.card:hover{background:var(--ink);color:#fff}
+.card:hover .card-d{color:#ccc}
+.card:hover .card-ic{border-color:#fff}
+.card-ic{width:44px;height:44px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;transition:.2s}
+.card-ic svg{width:22px;height:22px}
+.card h3{font-size:19px;font-weight:500;letter-spacing:-.05em;margin:48px 0 6px}
+.card-d{color:var(--muted);transition:.2s}
+.card .go{margin-top:18px;font-weight:500;font-size:12px}
+.live{margin-top:1px;display:flex;align-items:center;gap:16px;background:var(--accent-bg);border:1px solid var(--ink);border-top:0;padding:14px 24px}
+.live .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.live b{font-weight:500;color:var(--accent-text)}
+
+/* AI dialogue */
+.talk{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink);border:1px solid var(--ink)}
+.talk>div{background:#fff;padding:36px}
+.msgs{display:flex;flex-direction:column;gap:14px}
+.m{max-width:86%;padding:12px 16px;border:1px solid var(--ink);font-size:13px}
+.m.u{align-self:flex-end;background:var(--ink);color:#fff}
+.m.ai{background:var(--gray);border-color:var(--gray)}
+.m .src{display:block;margin-top:8px;font-size:11px;color:var(--muted)}
+.m .row{display:flex;gap:8px;margin-top:10px}
+.m .row span{border:1px solid var(--ink);background:#fff;padding:3px 10px;font-weight:500;font-size:12px}
+.points{display:grid;gap:0}
+.points li{list-style:none;display:grid;grid-template-columns:36px 1fr;padding:18px 0;border-bottom:1px solid var(--rule)}
+.points li:first-child{padding-top:0}
+.points li:last-child{border:0;padding-bottom:0}
+.points .n{color:var(--accent-text);font-weight:500}
+.points b{font-weight:500;font-size:15px;display:block;margin-bottom:2px}
+.points span{color:#444}
+
+/* BRAND */
+.dark{background:var(--ink);color:#fff}
+.dark .label{color:#9a9a9a}
+.dark .sec-hd p{color:#bbb}
+.brand-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:1px;background:#333;border:1px solid #333}
+.brand-grid>div{background:var(--ink);padding:40px}
+.sym-stage{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#333}
+.sym-stage>div{background:var(--ink);aspect-ratio:1;display:grid;place-items:center;padding:20px}
+.sym-stage .w{background:#fff}.sym-stage .b{background:var(--accent)}.sym-stage .g{background:var(--gray)}
+.sym-stage img{width:62%;height:auto}
+.names{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#333;margin-top:1px}
+.names>div{background:var(--ink);padding:28px 40px}
+.names .big{font-size:30px;font-weight:500;letter-spacing:-.05em;line-height:1.2;margin-top:8px}
+.names .big small{display:block;font-size:12px;font-weight:400;color:#aaa;letter-spacing:-.02em;margin-top:6px}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th,.tbl td{text-align:left;padding:12px 0;border-bottom:1px solid #333;vertical-align:top;font-weight:400}
+.tbl th{width:96px;color:#9a9a9a;font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.tbl td b{font-weight:500}
+.tbl .x{color:#8a8a8a;text-decoration:line-through}
+.parts{display:flex;gap:10px;align-items:center;margin:6px 0 26px;font-size:22px;font-weight:500;letter-spacing:-.04em;flex-wrap:wrap}
+.parts span.c{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--accent-on-dark)}
+.parts em{font-style:normal;color:#9a9a9a;font-size:12px;font-weight:400;margin-left:4px}
+
+/* FOOTER */
+footer.site-ft{background:#000;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:20px 40px;padding:100px 48px 48px}
+.site-ft p{margin:0}
+.ft-bi{display:inline-block;margin-bottom:20px}
+.ft-bi img{display:block;height:40px;width:auto}
+.site-ft-links{display:flex;gap:20px;flex-wrap:wrap}
+.site-ft-links a{color:#bbb}.site-ft-links a:hover{color:#fff}
+.site-ft-r{text-align:right;color:#bbb}
+.site-ft-r .copy{margin-top:6px;color:#888}
+.site-ft-note{grid-column:1/-1;border-top:1px solid #333;padding-top:20px;margin-top:20px!important;color:#888;font-size:12px}
+
+@media(max-width:900px){
+  :root{--gutter:20px}
+  .gnb nav{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-l{padding:48px var(--gutter) 40px}
+  .hero h1{font-size:38px}
+  .hero-r{min-height:380px;border-left:0;border-top:1px solid var(--ink)}
+  section{padding:56px var(--gutter)}
+  .sec-hd{grid-template-columns:1fr;gap:10px}
+  .svc{grid-template-columns:1fr 1fr}
+  .talk,.brand-grid,.names{grid-template-columns:1fr}
+  .brand-grid>div,.names>div,.talk>div{padding:24px}
+  footer.site-ft{grid-template-columns:1fr;padding:64px 20px 32px}
+  .site-ft-r{text-align:left}
+}
+@media(max-width:520px){.svc{grid-template-columns:1fr}.card{min-height:200px}.card h3{margin-top:28px}}
+@media(prefers-reduced-motion:reduce){.hero-mark,.blobs i,.live .dot{animation:none}}
+</style>
+</head>
+<body>
+
+
+<header class="gnb">
+  <a class="lockup" href="#top"><img src="assets/medilink-bi.svg" alt="메디링크 강원 MediLink Kangwon"></a>
+  <nav aria-label="주요 메뉴">
+    <a href="#services">의료 서비스</a>
+    <a href="#ai">AI 상담</a>
+    <a href="#brand">서비스 소개</a>
+    <a href="#brand">브랜드</a>
+  </nav>
+  <a class="cta" href="#ai">AI에게 물어보기</a>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div class="hero-l">
+    <div>
+      <span class="label">AI Medical Portal for Gangwon</span>
+      <h1>강원도민의 건강,<br><em>묻고, 잇고,</em> 찾습니다.</h1>
+      <p class="lead">병의원·질병·응급까지, 궁금한 것을 말하면 AI가 공공데이터를 근거로 가까운 의료기관과 다음 행동을 안내합니다.</p>
+      <form class="ask" onsubmit="return false">
+        <input type="text" placeholder="예) 춘천에서 지금 진료하는 소아과 알려줘" aria-label="질문 입력">
+        <button type="submit">묻기</button>
+      </form>
+      <div class="chips">
+        <a class="chip" href="#services">병·의원 찾기</a><a class="chip" href="#services">질병 정보</a><a class="chip" href="#services">응급실 LIVE</a><a class="chip" href="#services">약국 찾기</a>
+      </div>
+    </div>
+    <p class="hero-note">본 서비스의 안내는 의료적 판단을 대신하지 않습니다. 응급 상황에서는 119에 연락하세요.</p>
+  </div>
+  <div class="hero-r" aria-hidden="true">
+    <img class="hero-mark" src="assets/medilink-symbol.svg" alt="">
+    <div class="bubble a"><b>AI 응대</b>어지러움이 계속되는데 어느 과로 가야 하나요?</div>
+    <div class="bubble b"><b class="en">MediLink</b>신경과 또는 내과 진료가 가능한 강릉 내 기관 3곳을 찾았어요.</div>
+  </div>
+</div>
+
+<section id="services">
+  <div class="sec-hd">
+    <span class="label">01 · Services</span>
+    <div><h2>하나의 창구에서<br>필요한 의료 정보를 잇습니다</h2><p>기존 의료 서비스 기능은 그대로, 이름과 첫 화면의 경험만 하나로 묶었습니다.</p></div>
+  </div>
+  <div class="svc">
+    <a class="card" href="#"><div><div class="card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 21V7l8-4 8 4v14M9 21v-6h6v6M12 8v4M10 10h4"/></svg></div><h3>병·의원 찾기</h3><p class="card-d">지역·진료과·운영 시간으로 가까운 기관을 찾고 지도로 확인</p></div><span class="go">바로가기 →</span></a>
+    <a class="card" href="#"><div><div class="card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="9" cy="12" r="5"/><circle cx="17" cy="8" r="3"/><circle cx="18" cy="17" r="2.2"/></svg></div><h3>질병 · 증상 정보</h3><p class="card-d">증상에서 질환을 이해하고, 어느 진료과로 가야 할지 안내</p></div><span class="go">바로가기 →</span></a>
+    <a class="card" href="#"><div><div class="card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3v18M3 12h18"/></svg></div><h3>응급실 LIVE</h3><p class="card-d">응급실 가용 병상과 연락처를 실시간으로 확인</p></div><span class="go">바로가기 →</span></a>
+    <a class="card" href="#"><div><div class="card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="9" width="18" height="6" rx="3" transform="rotate(-35 12 12)"/><path d="M10 8l4 8" transform="rotate(-35 12 12)"/></svg></div><h3>약국 · 의약 정보</h3><p class="card-d">운영 중인 약국과 의약품 정보를 한 곳에서 확인</p></div><span class="go">바로가기 →</span></a>
+  </div>
+  <div class="live"><span class="dot"></span><b>응급실 LIVE</b><span>공공데이터 실시간 연동 · 가용 병상 정보는 갱신 시점에 따라 달라질 수 있습니다.</span></div>
+</section>
+
+<section id="ai">
+  <div class="sec-hd">
+    <span class="label">02 · AI Concierge</span>
+    <div><h2>찾아 헤매지 않고,<br>말하면 이어집니다</h2><p>검색어를 고민하는 대신 평소 말로 묻습니다. 답변에는 근거와 출처, 다음 행동이 함께 붙습니다.</p></div>
+  </div>
+  <div class="talk">
+    <div class="msgs">
+      <div class="m u">아이가 밤에 열이 나는데 지금 갈 수 있는 곳 있어?</div>
+      <div class="m ai">현재 위치 기준으로 응급실 운영 기관 2곳이 확인됩니다. 열이 39℃ 이상이거나 경련·호흡 곤란이 있으면 119에 먼저 연락하세요.
+        <div class="row"><span>응급실 LIVE 보기</span><span>가까운 약국</span></div>
+        <span class="src">출처 · 국립중앙의료원 응급의료정보 · 갱신 방금 전</span></div>
+      <div class="m u">그럼 낮에는 어느 과로 가야 해?</div>
+      <div class="m ai">소아청소년과를 권장합니다. 평일 진료 중인 기관을 지역별로 보여드릴까요?</div>
+    </div>
+    <div>
+      <ul class="points">
+        <li><span class="n">01</span><p><b>근거 있는 답변</b><span>모든 안내는 국가 공공데이터를 기반으로 하며 출처와 갱신 시점을 함께 표시합니다.</span></p></li>
+        <li><span class="n">02</span><p><b>다음 행동까지</b><span>정보 전달에서 끝나지 않고 전화·길찾기·응급 연결 같은 실제 행동으로 이어줍니다.</span></p></li>
+        <li><span class="n">03</span><p><b>강원도민의 맥락</b><span>도내 시군 단위 생활권, 이동 거리, 응급 의료 여건을 우선으로 응대합니다.</span></p></li>
+        <li><span class="n">04</span><p><b>판단은 전문가에게</b><span>AI는 안내자이며 의료적 최종 판단은 의료 전문가의 몫임을 항상 고지합니다.</span></p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="brand" class="dark" style="border-bottom:0">
+  <div class="sec-hd">
+    <span class="label">03 · Naming &amp; Identity</span>
+    <div><h2>이름이 먼저 건강을<br>이야기하도록</h2><p>‘헬로’처럼 가벼운 인사가 아니라, 의료를 도민과 연결하는 서비스의 역할이 이름에 드러나도록 정리했습니다.</p></div>
+  </div>
+
+  <div class="brand-grid">
+    <div>
+      <p class="label">Naming</p>
+      <div class="parts"><span class="c"></span>Medi <span style="color:#666">+</span> Link <span style="color:#666">+</span> Kangwon</div>
+      <table class="tbl">
+        <tr><th>Medi</th><td>의료 · 건강. 병의원, 질병, 응급 등 서비스가 다루는 모든 영역</td></tr>
+        <tr><th>Link</th><td>연결. 도민 ↔ 의료기관, 질문 ↔ 답변, 정보 ↔ 행동을 잇는 AI 응대</td></tr>
+        <tr><th>Kangwon</th><td>강원특별자치도. 지역 생활권을 책임지는 도민 전용 포털이라는 선언</td></tr>
+        <tr><th>Before</th><td><span class="x">헬로메디강원</span> · 친근하나 서비스 기능이 이름에서 보이지 않음</td></tr>
+        <tr><th>Tone</th><td>친절한 안내자. 가볍지 않게, 그러나 어렵지 않게</td></tr>
+      </table>
+    </div>
+    <div>
+      <p class="label">Symbol · 세포가 이어진 형태</p>
+      <p style="color:#bbb;margin:8px 0 24px">서로 다른 크기의 세포(병의원·질병·응급)가 하나의 형태로 연결되고, 중심의 ‘+’가 의료임을 말합니다. 메타볼 표현은 AI 응대 화면의 모션 모티프로 확장됩니다.</p>
+      <div class="sym-stage">
+        <div class="w"><img src="assets/medilink-symbol.svg" alt="기본 심볼"></div>
+        <div><img src="assets/medilink-symbol-dark.svg" alt="어두운 배경용 심볼"></div>
+        <div class="g"><img src="assets/medilink-symbol-mono.svg" alt="단색 심볼"></div>
+      </div>
+      <p style="color:#9a9a9a;font-size:11px;margin-top:10px">기본(흰 배경) · 어두운 배경(dot 반전) · 단색(32px 이하·인쇄·각인용)</p>
+    </div>
+  </div>
+  <div class="names">
+    <div><p class="label">Lockup · 국문</p><div class="big wm">메디링크 <b>강원</b><small><span class="en">MediLink Kangwon</span> · 국문 우선, 영문 병기</small></div></div>
+    <div><p class="label">Lockup · 영문</p><div class="big"><span class="en">MediLink<br><b>Kangwon</b></span><small>해외·약칭 표기 시 한 줄 또는 두 줄 가능 · 약칭 “메디링크”</small></div></div>
+  </div>
+</section>
+</main>
+
+<footer class="site-ft">
+  <div class="site-ft-l"><a href="#top" class="ft-bi"><img src="assets/medilink-bi-white.svg" alt="메디링크 강원 MediLink Kangwon"></a>
+    <nav class="site-ft-links" aria-label="푸터 메뉴"><a href="../intro-renewal/terms.html">이용약관</a><a href="../intro-renewal/intro-renewal.html">회사소개</a><a href="../intro-renewal/info.html">정보공개</a><a href="../intro-renewal/project.html">사업소개</a><a href="../intro-renewal/directions.html">찾아오시는길</a></nav></div>
+  <div class="site-ft-r"><p>주식회사 코고네트웍스 · 한국글로벌헬스케어사업협동조합 사업 자회사</p><p class="copy"><span class="en">&copy; MediLink Kangwon.</span> All rights reserved.</p></div>
+  <p class="site-ft-note">본 서비스의 모든 정보는 국가 공공데이터를 기반으로 하며, 의료적 판단의 최종 결정은 반드시 의료 전문가와 상의하시기 바랍니다.</p>
+</footer>
+</body>
+</html>

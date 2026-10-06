@@ -1,0 +1,282 @@
+
+/* ════════════════════════════════════════════════════════════════
+   STYLE RENEWAL — Hello.Persona 스타일 체계 준용 (CSS 레벨 재정의)
+   - 마크업·클래스명·콘텐츠 레이아웃(그리드/배치) 유지, 값만 재정의
+   - 포인트 컬러: 글자 #004EA2 / 면·선·버튼 #0038C3 / 본문 13px 유지
+   - 이 블록은 기존 <style> 맨 끝에 위치하여 앞선 규칙을 덮어씁니다.
+   ════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('PretendardVariable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* ── 1. 토큰: Hello.Persona 흑백 체계 + 블루 포인트 ── */
+:root {
+  --rn-ink: #090909;          /* HP --ink */
+  --rn-paper: #fff;           /* HP --paper */
+  --rn-gray: #f1f1f1;         /* HP --gray */
+  --rn-muted: #666;           /* HP --muted */
+  --rn-rule: #e5e5e5;         /* HP --rule */
+  --rn-hair: #dedede;
+  --rn-accent: #0038C3;        /* 블루(면·선·버튼): border, background, fill */
+  --rn-accent-text: #004EA2;   /* 블루(글자): 새 블루는 글자에 쓰기에 강해 기존 블루 유지 */
+  --rn-accent-bg: #E9EEFA;    /* 마커·연한 면 */
+  --rn-accent-on-dark: #8DB9F0; /* 잉크 면 위 포인트 텍스트 (대비 확보) */
+  --rn-body: 13px;            /* 본문 크기 — 일괄 변경 시 이 값만 수정 (HP 기준 16px) */
+  --rn-gutter: 40px;
+}
+
+/* ── 2. 베이스: Pretendard · 본문 13px 유지 · 제목 weight 500 ── */
+html, body {
+  font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: var(--rn-body);
+  line-height: 1.5;
+  color: var(--rn-ink);
+  background: var(--rn-paper) !important;
+}
+html { background: #000 !important; } /* HP: 오버스크롤 영역을 푸터색에 맞춤 */
+/* 원본의 html:not(:has(.wrap)) body{height:100%} 가 body 높이를 뷰포트로 고정 → 본문 높이만큼 확장 */
+html:not(:has(.wrap)), html:not(:has(.wrap)) body { height: auto !important; max-height: none !important; }
+:focus-visible { outline: 2px solid var(--rn-ink); outline-offset: 3px; }
+
+/* ── 3. 히어로: 그라데이션 제거, 하단 1px 잉크 라인 ── */
+.hero {
+  background: var(--rn-paper);
+  border-bottom: 1px solid var(--rn-ink);
+  padding: 72px var(--rn-gutter) 64px;
+}
+.hero-title {
+  font-size: clamp(34px, 5.2vw, 56px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -.045em;
+  color: var(--rn-ink);
+  margin-bottom: 24px;
+}
+.hero-lead {
+  font-size: clamp(16px, 2.2vw, 20px);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -.03em;
+  color: var(--rn-ink);
+  margin-bottom: 16px;
+}
+.hero-lead em {
+  color: var(--rn-accent-text);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  animation: none;
+}
+.hero-desc {
+  font-size: var(--rn-body);
+  color: var(--rn-muted);
+  max-width: 640px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+/* ── 4. 섹션 헤더: 상단 1px 잉크 룰 + 에디토리얼 타이틀 ── */
+.main { padding-top: 0; padding-bottom: 96px; gap: 0 !important; }
+.section {
+  padding: 56px 0 64px;
+  border-top: 1px solid var(--rn-ink);
+}
+.section:first-child { border-top: 0; }
+.section-hd { margin-bottom: 32px; }
+.section-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  color: var(--rn-accent-text);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -.04em;
+  color: var(--rn-ink);
+  margin-bottom: 12px;
+  max-width: 880px;
+}
+.section-desc {
+  font-size: var(--rn-body);
+  line-height: 1.7;
+  color: var(--rn-muted);
+  max-width: 720px;
+}
+.why-kicker {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  color: var(--rn-muted);
+}
+
+/* ── 5. 공통 카드면: 라운드 0 · 회색 면 · 호버 시 잉크 반전 ── */
+.eco-diagram,
+.layer-table,
+.deck-foot { border-radius: 0; }
+
+.eco-node,
+.why-steps li,
+.why-need li,
+.anchor-in-card {
+  background: var(--rn-gray);
+  border-radius: 0;
+  transition: background .2s, color .2s;
+}
+.eco-node:hover,
+.why-steps li:hover,
+.why-need li:hover,
+.anchor-in-card:hover {
+  background: var(--rn-ink);
+  color: var(--rn-paper);
+}
+.eco-node:hover .eco-cat,
+.why-steps li:hover span,
+.anchor-in-card:hover .why-kicker { color: var(--rn-accent-on-dark); }
+.eco-node:hover .eco-nm,
+.why-steps li:hover strong,
+.why-need li:hover strong,
+.anchor-in-card:hover strong { color: var(--rn-paper); }
+.why-steps li:hover p,
+.why-need li:hover span { color: #d4d4d4; }
+
+/* ── 6. 01 · 생태계 다이어그램 ── */
+.eco-diagram { background: var(--rn-paper); border: 1px solid var(--rn-hair); }
+.eco-spoke { background: var(--rn-hair); }
+.eco-hub {
+  border-radius: 0;
+  background: var(--rn-ink);
+  color: var(--rn-paper);
+  box-shadow: none;
+}
+.eco-hub strong { font-weight: 500; letter-spacing: -.03em; }
+.eco-hub span { font-weight: 500; opacity: 1; color: var(--rn-accent-on-dark); }
+.eco-node { padding: 14px 10px; }
+.eco-node::after { border-radius: 0; background: var(--rn-ink); width: 7px; height: 7px; }
+.eco-cat { font-weight: 500; letter-spacing: .06em; color: var(--rn-accent-text); }
+.eco-nm  { font-weight: 500; letter-spacing: -.02em; color: var(--rn-ink); }
+
+/* ── 7. 02 · Why: 3 → 1 → 5 ── */
+.why-steps li, .why-need li { padding: 18px 20px; }
+.why-steps span { font-weight: 500; color: var(--rn-accent-text); }
+.why-steps strong { font-weight: 500; letter-spacing: -.03em; color: var(--rn-ink); }
+.why-steps p { color: var(--rn-muted); }
+.why-need strong { font-weight: 500; letter-spacing: -.02em; color: var(--rn-ink); }
+.why-need span { color: var(--rn-muted); }
+.why-mid { color: var(--rn-ink); }
+.why-issue {
+  border-radius: 0;
+  background: var(--rn-ink);
+  color: var(--rn-paper);
+}
+.why-issue span { font-weight: 500; opacity: 1; color: var(--rn-accent-on-dark); }
+.why-issue strong { font-weight: 500; letter-spacing: .04em; }
+
+/* ── 8. 강조 문장 ── */
+.deck-foot {
+  background: var(--rn-paper);
+  border: 0;
+  border-top: 1px solid var(--rn-rule);
+  margin-top: 40px;
+  padding: 32px 0 0;
+  font-weight: 500;
+  letter-spacing: -.04em;
+  color: var(--rn-ink);
+}
+.deck-foot em { color: var(--rn-ink); background: linear-gradient(180deg, transparent 58%, var(--rn-accent-bg) 58%); }
+
+/* ── 9. 03 · Anchor: 입력 → AXDX → 제안 ── */
+.anchor-in-card strong { font-weight: 500; letter-spacing: -.03em; color: var(--rn-ink); }
+.anchor-core {
+  border-radius: 0;
+  background: var(--rn-accent);   /* 페이지 유일의 블루 면 */
+  color: var(--rn-paper);
+}
+.anchor-core-hd { border-bottom-color: rgba(255,255,255,.4); }
+.anchor-core-hd span { font-weight: 500; opacity: 1; }
+.anchor-core-hd strong { font-weight: 500; }
+.anchor-core li { font-weight: 500; border-bottom-color: rgba(255,255,255,.25); }
+.anchor-core li span { font-weight: 500; opacity: .85; }
+.anchor-out {
+  border-radius: 0;
+  background: var(--rn-ink);
+  color: var(--rn-paper);
+}
+.anchor-out .why-kicker { color: var(--rn-accent-on-dark); }
+.anchor-out > strong { font-weight: 500; letter-spacing: -.04em; }
+.anchor-out li { font-weight: 400; color: #e5e5e5; }
+.anchor-out li::before { border-radius: 0; background: var(--rn-accent-on-dark); }
+
+/* ── 10. 04 · Layer table: 1px 룰 표 ── */
+.layer-table { background: var(--rn-paper); border: 0; border-top: 1px solid var(--rn-ink); border-bottom: 1px solid var(--rn-ink); padding: 8px 0 4px; }
+.layer-head, .layer-row { border-top-color: var(--rn-rule); }
+.layer-head { border-top: 0; }
+.layer-head-l, .layer-caps { color: var(--rn-muted); font-weight: 500; }
+.layer-title { font-weight: 500; letter-spacing: -.03em; color: var(--rn-ink); }
+.layer-title em { border-radius: 0; font-weight: 500; background: var(--rn-ink); color: var(--rn-paper); }
+.layer-copy p { color: var(--rn-muted); }
+.layer-dots i { border-radius: 0; width: 10px; height: 10px; background: var(--rn-rule); }
+.layer-dots i.on { background: var(--rn-accent); }
+
+/* ── 11. 푸터: HP footer 컴포넌트 스타일 준용 (공통 컴포넌트로 교체 예정) ──
+   구성: [좌] 서비스 레이블·메인카피 / 메뉴   [우] 사업자 표기 / 카피라이트   [하단] 고지 문구 */
+.site-ft {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  padding: 140px 48px 48px;
+  background: #000;
+  color: #f5f5f5;
+  font-size: 13px;
+  text-align: left;
+}
+.site-ft p { font-size: 13px; line-height: 1.7; color: #f5f5f5; }
+.site-ft-l, .site-ft-r { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+.site-ft-r { align-items: flex-end; text-align: right; }
+.site-ft-links { display: flex; flex-wrap: wrap; gap: 20px; }
+.site-ft-links a { color: #f5f5f5; text-decoration: none; white-space: nowrap; }
+.site-ft-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.site-ft a:focus-visible { outline: 2px solid #f5f5f5; outline-offset: 4px; }
+.site-ft .copy { margin-top: 0; font-size: 11px; color: #a2a2a2; }
+.site-ft-note {
+  grid-column: 1 / -1;
+  border-top: 1px solid #333;
+  padding-top: 28px;
+  font-size: 11px !important;
+  color: #a2a2a2 !important;
+}
+
+/* ── 12. 반응형 (기존 900/680 분기점 유지) ── */
+@media (max-width: 900px) {
+  .layer-dots i, .layer-dots i.on { width: auto; height: auto; background: none; }
+  .layer-dots i::before { border-radius: 0; background: var(--rn-rule); }
+  .layer-dots i.on::before { background: var(--rn-accent); }
+  .layer-dots i::after { color: var(--rn-muted); font-style: normal; }
+  .layer-dots i.on::after { color: var(--rn-accent-text); }
+  .section { padding: 40px 0 48px; }
+}
+@media (max-width: 680px) {
+  .hero { padding: 48px 20px 40px; }
+  .site-ft { display: block; padding: 72px 24px max(24px, env(safe-area-inset-bottom)); }
+  .site-ft-l, .site-ft-r { gap: 16px; }
+  .site-ft-r { align-items: flex-start; text-align: left; margin-top: 32px; }
+  .site-ft-links { gap: 12px 18px; }
+  .site-ft-note { margin-top: 48px; }
+  .deck-foot { padding: 24px 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eco-node, .why-steps li, .why-need li, .anchor-in-card { transition: none; }
+}
+
+/* 메디링크 강원 BI (footer) */
+.ft-bi { display: inline-block; line-height: 0; }
+.ft-bi img { display: block; height: 40px; width: auto; }
+.site-ft .copy { font-family: 'Montserrat', 'Pretendard', sans-serif; letter-spacing: -.01em; }
