@@ -1,0 +1,157 @@
+/* ════════════════════════════════════════════════════════════════
+   메디링크 강원 — 메인(index.do) 스타일 전용 오버라이드 레이어
+   Hello.Persona 스타일 체계 준용
+
+   - 적용 방법: landing.css, medical_header.css 다음에 이 파일 1개만 추가 (HTML·JS 변경 없음)
+   - 범위: color / background / border / radius / shadow / font-weight / letter-spacing / transition
+           레이아웃(display·grid·position·width·padding·font-size 등)은 건드리지 않음
+           JS 토글 클래스(.is_open / .is_active / hidden) 그대로 동작
+   - 블루: 글자 #004EA2 / 면·선·버튼 #0038C3  (일괄 변경 시 아래 토큰만 수정)
+   - 응급 연락처: 119만 레드 면, 상담 번호(1339·1577-1000)는 흰 외곽선. 효과(글로우·반짝임) 제거
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 토큰: 기존 변수 재정의 ── */
+:root {
+  --rn-ink: #090909;
+  --rn-gray: #f1f1f1;
+  --rn-rule: #e5e5e5;
+  --rn-hair: #dedede;
+  --rn-muted: #666;
+  --rn-fill: #0038C3;        /* 블루(면·선·버튼) */
+  --rn-text: #004EA2;        /* 블루(글자) */
+  --rn-fill-bg: #E9EEFA;
+
+  /* landing.css */
+  --color-black: #090909;
+  --color-text: #090909;
+  --color-muted: #666;
+  --color-line: #dedede;
+  --color-soft: #f1f1f1;
+  --color-section: #f1f1f1;
+  --color-green: #0038C3;       /* 기존 포인트(면) → 새 블루 */
+  --color-green-dark: #090909;  /* hover → 잉크 반전 */
+  --color-hover: transparent;
+  --color-focus: rgba(9, 9, 9, .2);
+  --color-shadow: transparent;
+  --color-emergency: #E5202E;       /* 119: 유일한 레드 면 */
+  --color-emergency-dark: #B5121F;
+
+  /* medical_header.css */
+  --gm-text: #090909;
+  --gm-muted: #666;
+  --gm-line: #090909;
+  --gm-soft: #e5e5e5;
+  --gm-blue: #004EA2;
+  --gm-focus: rgba(9, 9, 9, .2);
+}
+
+/* ── 2. 베이스 ── */
+body { color: var(--rn-ink); letter-spacing: -.04em; }
+.section_label, .service_en, .footer_copy { font-family: 'Montserrat', 'Pretendard', sans-serif; letter-spacing: .08em; font-weight: 500; }
+.footer_copy { letter-spacing: -.01em; }
+
+/* ── 3. 헤더 ── */
+.gm_nav a { font-weight: 500; }
+.gm_header.is_overlay .gm_nav a { color: rgba(255,255,255,.75); }
+.gm_header.is_overlay .gm_nav a:hover { color: #fff; box-shadow: inset 0 -1px 0 #fff; }
+@media (max-width: 768px) {
+  .gm_nav { box-shadow: none; border-bottom: 1px solid var(--rn-ink); }
+  .gm_nav a, .gm_header.is_overlay .gm_nav a { font-weight: 500; }
+  .gm_nav a:hover, .gm_header.is_overlay .gm_nav a:hover { color: #fff; background: var(--rn-ink); box-shadow: none; }
+}
+
+/* ── 4. 히어로 ── */
+.hero_title { letter-spacing: -.06em; }
+.option_btn { border-radius: 0; font-weight: 500; border-color: rgba(255,255,255,.45); }
+.option_btn:hover, .option_btn.is_open { border-color: #fff; color: var(--rn-ink); background: #fff; }
+
+/* 드롭다운 패널: 흰 면 + 1px 잉크, 그림자 없음 */
+.option_panel { border: 1px solid var(--rn-ink); border-radius: 0; box-shadow: none; }
+.panel_head strong { font-weight: 500; }
+.panel_back button, .panel_label { font-weight: 500; }
+.panel_back button { color: var(--rn-text); }
+.panel_all { border-radius: 0; color: var(--rn-text); background: var(--rn-fill-bg); font-weight: 500; }
+.panel_all:hover { color: #fff; background: var(--rn-fill); }
+.panel_item { border-radius: 0; }
+.panel_item:hover { background: var(--rn-ink); }
+.panel_search input { border-radius: 0; border-color: var(--rn-hair); background: #fff; }
+.panel_search input:focus { border-color: var(--rn-ink); }
+.category_btn { border-radius: 0; border-color: var(--rn-hair); font-weight: 500; }
+.category_btn:hover, .category_btn.is_active { border-color: var(--rn-ink); background: var(--rn-ink); }
+.symptom_list { border-top-color: var(--rn-ink); }
+.symptom_item:hover { color: var(--rn-text); background: var(--rn-gray); }
+
+/* 선택 태그 · 검색 */
+.selected_tag { border-radius: 0; background: var(--rn-fill); }
+.selected_tag button { border-radius: 0; background: rgba(255,255,255,.2); }
+.search_field { border-bottom-color: rgba(255,255,255,.7); }
+.search_icon { color: #fff; }
+.search_btn { border-radius: 0; background: var(--rn-fill); }
+.search_btn:hover { background: var(--rn-ink); }
+
+/* 응급 연락처: 위계 정리
+   - 119(응급·화재·구조)만 레드 면 → 시선이 한 곳에 모이도록
+   - 1339(응급의료 상담) · 1577-1000(건강보험 상담)은 흰 1px 외곽선 → 상담 번호는 '응급' 레드에서 분리
+   - 글로우·반짝임·맥동 효과 제거, 각진 면 */
+.emergency_link { border-radius: 0; box-shadow: none; animation: none; }
+.emergency_link::before { display: none; }
+.emergency_link:hover { box-shadow: none; transform: none; }
+.emergency_link:not(.emergency_sub) { background: var(--color-emergency); border-color: var(--color-emergency); }
+.emergency_link:not(.emergency_sub):hover { background: var(--color-emergency-dark); border-color: var(--color-emergency-dark); }
+.emergency_sub { background: transparent; border-color: rgba(255,255,255,.55); }
+.emergency_sub:hover { background: #fff; border-color: #fff; color: var(--rn-ink); }
+.emergency_link span { font-weight: 500; }
+.emergency_link strong { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* ── 5. 의료 서비스 (리스트) ── */
+.service_wrap { background: #fff; }
+.section_title { letter-spacing: -.05em; }
+.service_item { border-top-color: var(--rn-rule); transition: background .2s, color .2s; }
+.service_item:first-child { border-top-color: var(--rn-ink); }
+.service_item:last-child { border-bottom-color: var(--rn-ink); }
+.service_icon { border: 1px solid var(--rn-ink); color: var(--rn-ink); }
+.service_arrow { border-radius: 0; border-color: var(--rn-hair); }
+.service_item:hover { background: var(--rn-ink); color: #fff; }
+.service_item:hover .service_desc, .service_item:hover .service_en { color: #bbb; }
+.service_item:hover .service_icon { color: var(--rn-ink); background: #fff; border-color: #fff; }
+.service_item:hover .service_arrow { color: #fff; border-color: var(--rn-fill); background: var(--rn-fill); }
+
+/* ── 6. 생활 의료 (예방접종 · 약국) ── */
+.about_wrap { background: var(--rn-gray); }
+.info_card { border-color: var(--rn-ink); }
+.info_card:first-of-type { border: 0; border-top: 1px solid var(--rn-ink); border-bottom: 1px solid var(--rn-ink); border-right: 1px solid var(--rn-ink); background: #fff; }
+.info_card:first-of-type:hover { color: #fff; background: var(--rn-ink); }
+.info_card:first-of-type:hover p, .info_card:first-of-type:hover > .section_label { color: #bbb; }
+.info_card:first-of-type:hover .info_icon { color: #fff; border-color: #fff; }
+.info_card:first-of-type:hover .info_arrow { border-color: #fff; }
+.info_card:last-child { background: var(--rn-fill); border-top: 1px solid var(--rn-ink); border-bottom: 1px solid var(--rn-ink); }
+.info_card:last-child:hover { background: var(--rn-ink); }
+.info_icon { border: 1px solid var(--rn-ink); color: var(--rn-ink); }
+.info_card:last-child .info_icon { border-color: rgba(255,255,255,.6); }
+.info_arrow { border-radius: 0; border-color: var(--rn-ink); }
+.info_card:last-child .info_arrow { border-color: rgba(255,255,255,.6); }
+.about_visual { border-top: 1px solid var(--rn-ink); border-bottom: 1px solid var(--rn-ink); }
+
+/* ── 7. 공지 · FAQ ── */
+.notice_wrap { background: #fff; }
+.board_head h3 { font-weight: 500; letter-spacing: -.04em; }
+.board_list { border-top-color: var(--rn-ink); }
+.new_badge { border-radius: 0; background: var(--rn-fill); font-family: 'Montserrat', sans-serif; font-weight: 600; letter-spacing: .04em; }
+.notice_row, .faq_row { border-bottom-color: var(--rn-rule); }
+.notice_row span, .faq_row span:first-child { font-weight: 500; }
+.notice_row:hover, .faq_row:hover { color: var(--rn-text); background: var(--rn-gray); }
+
+/* ── 8. 푸터: 공통 푸터 스타일 (블랙) ── */
+.footer_wrap { border-top: 0; background: #000; color: #fff; }
+.footer_bi { display: block; height: 40px; width: auto; }
+.footer_brand span { color: #bbb; }
+.footer_nav a { color: #bbb; }
+.footer_nav a:hover { color: #fff; }
+.footer_copy { color: #888; }
+
+@media (prefers-reduced-motion: reduce) {
+  .service_item, .info_card, .option_btn, .search_btn { transition: none !important; }
+}
+
+/* ── 9. [버그 수정 · 선택 적용] 모바일에서 검색 영역이 화면 밖으로 넘치는 기존 현상 (그리드 항목 최소폭) ── */
+.hero_content > * { min-width: 0; }

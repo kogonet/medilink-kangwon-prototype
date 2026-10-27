@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>찾아오시는 길 | 메디링크 강원</title>
+<link rel="stylesheet" href="proto.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="hero"><div class="hero-inner"><h1 class="hero-title">찾아오시는 길</h1><p class="hero-lead">주식회사 코고네트웍스</p><p class="hero-desc">강원특별자치도 원주시 지정면 기업도시로 200, 213-4호(의료기기종합지원센터)</p></div></div>
+<main class="main">
+<section class="section"><div class="map" role="img" aria-label="지도 영역"></div>
+<div class="where"><h2>오시는 곳</h2>
+<dl class="kv"><div><dt>주소</dt><dd id="addr">강원특별자치도 원주시 지정면 기업도시로 200, 213-4호(의료기기종합지원센터)</dd></div><div><dt>건물</dt><dd>의료기기종합지원센터</dd></div><div><dt>호실</dt><dd>213-4호</dd></div><div><dt>우편</dt><dd>26354</dd></div></dl>
+<div class="actions">
+<a class="button is-primary" href="https://www.google.com/maps/search/?api=1&amp;query=%EA%B0%95%EC%9B%90%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%9B%90%EC%A3%BC%EC%8B%9C%20%EC%A7%80%EC%A0%95%EB%A9%B4%20%EA%B8%B0%EC%97%85%EB%8F%84%EC%8B%9C%EB%A1%9C%20200%2C%20213-4%ED%98%B8%28%EC%9D%98%EB%A3%8C%EA%B8%B0%EA%B8%B0%EC%A2%85%ED%95%A9%EC%A7%80%EC%9B%90%EC%84%BC%ED%84%B0%29" target="_blank" rel="noopener">구글맵에서 보기 <span aria-hidden="true">↗</span></a>
+<a class="button" href="https://www.google.com/maps/dir/?api=1&amp;destination=%EA%B0%95%EC%9B%90%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%9B%90%EC%A3%BC%EC%8B%9C%20%EC%A7%80%EC%A0%95%EB%A9%B4%20%EA%B8%B0%EC%97%85%EB%8F%84%EC%8B%9C%EB%A1%9C%20200%2C%20213-4%ED%98%B8%28%EC%9D%98%EB%A3%8C%EA%B8%B0%EA%B8%B0%EC%A2%85%ED%95%A9%EC%A7%80%EC%9B%90%EC%84%BC%ED%84%B0%29" target="_blank" rel="noopener">길찾기 <span aria-hidden="true">↗</span></a>
+<button class="button" type="button" id="copy">주소 복사</button>
+</div></div></section>
+</main>
+<footer class="site-ft">
+  <div class="site-ft-l">
+    <a class="ft-bi" href="../medilink-kangwon/index.html"><img src="assets/medilink-bi-white.svg" alt="메디링크 강원 MediLink Kangwon"></a>
+    <nav class="site-ft-links" aria-label="푸터 메뉴"><a href="terms.html">이용약관</a><a href="intro-renewal.html">회사소개</a><a href="info.html">정보공개</a><a href="project.html">사업소개</a><a href="directions.html">찾아오시는길</a></nav>
+  </div>
+  <div class="site-ft-r">
+    <p>주식회사 코고네트웍스 · 한국글로벌헬스케어사업협동조합 사업 자회사</p>
+    <p class="copy">&copy; MediLink Kangwon. All rights reserved.</p>
+  </div>
+  <p class="site-ft-note">본 서비스의 모든 정보는 국가 공공데이터를 기반으로 하며, 의료적 판단의 최종 결정은 반드시 의료 전문가와 상의하시기 바랍니다.</p>
+</footer>
+<script>
+document.getElementById('copy').addEventListener('click', function () {
+  var btn = this, text = document.getElementById('addr').textContent;
+  function done() { btn.textContent = '복사되었습니다'; setTimeout(function () { btn.textContent = '주소 복사'; }, 1600); }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done, function () { select(); });
+  } else { select(); }
+  function select() {
+    var r = document.createRange(); r.selectNodeContents(document.getElementById('addr'));
+    var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+  }
+});
+</script>
+</body>
+</html>

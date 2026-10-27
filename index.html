@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>메디링크 강원 · 프로토타입</title>
+<style>
+@font-face{font-family:'Pretendard';src:url('medilink-kangwon/PretendardVariable.woff2') format('woff2-variations');font-weight:45 920}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard',sans-serif;font-size:13px;letter-spacing:-.04em;color:#090909;background:#fff;padding:56px 40px}
+header{display:flex;align-items:center;gap:20px;padding-bottom:32px;border-bottom:1px solid #090909}
+header img{height:44px}
+header p{color:#666}
+h2{font-size:11px;letter-spacing:.08em;color:#666;font-weight:500;margin:40px 0 12px}
+ul{list-style:none;border-top:1px solid #090909}
+li a{display:grid;grid-template-columns:260px 1fr;gap:20px;padding:16px 4px;border-bottom:1px solid #e5e5e5;color:inherit;text-decoration:none}
+li a:hover{background:#090909;color:#fff}
+li b{font-weight:500;font-size:15px}
+li span{color:#666}
+li a:hover span{color:#bbb}
+@media(max-width:640px){body{padding:32px 16px}li a{grid-template-columns:1fr;gap:4px}}
+</style>
+</head>
+<body>
+<header><img src="medilink-kangwon/assets/medilink-bi.svg" alt="메디링크 강원 MediLink Kangwon"><p>리뉴얼 프로토타입 · 개발 전달용 (설명은 README.md)</p></header>
+<h2>MAIN · 개발 연동 화면 (스타일 레이어)</h2>
+<ul>
+<li><a href="main-renewal/index.html"><b>메인 index.do</b><span>main-restyle.css · 히어로 영상 자리는 그레이</span></a></li>
+</ul>
+<h2>FOOTER MENU · 하단 메뉴 페이지</h2>
+<ul>
+<li><a href="intro-renewal/intro-renewal.html"><b>회사소개</b><span>renewal-layer.css (원본 마크업 + 스타일 레이어)</span></a></li>
+<li><a href="intro-renewal/terms.html"><b>이용약관</b><span>proto.css</span></a></li>
+<li><a href="intro-renewal/info.html"><b>정보공개</b><span>proto.css</span></a></li>
+<li><a href="intro-renewal/project.html"><b>사업소개</b><span>proto.css · 원형 다이어그램</span></a></li>
+<li><a href="intro-renewal/directions.html"><b>찾아오시는길</b><span>proto.css · 지도 영역 그레이</span></a></li>
+</ul>
+<h2>SERVICE · 의료 서비스 상세 (스타일 레이어)</h2>
+<ul>
+<li><a href="medical-service-restyle/medical-service-restyle.css"><b>응급실 LIVE · 의료기관 정보</b><span>erLive.do, hospitalList.do에 추가하는 CSS (단독 화면 없음)</span></a></li>
+</ul>
+<h2>BRAND</h2>
+<ul>
+<li><a href="medilink-kangwon/index.html"><b>메디링크 강원 브랜드</b><span>네이밍 · 심볼 · BI 소개</span></a></li>
+<li><a href="medilink-kangwon/assets/medilink-bi-sheet.png"><b>BI · 심볼 에셋 시트</b><span>assets/*.svg</span></a></li>
+</ul>
+</body>
+</html>
