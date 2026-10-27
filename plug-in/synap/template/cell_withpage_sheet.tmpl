@@ -1,0 +1,37 @@
+<!-- TMPL : css_pool.tmpl -->
+<TMPL_include "css_pool.tmpl">
+<!-- BLOCK : IE_COMPATIBLE -->
+<TMPL_block "IE_COMPATIBLE">8</TMPL_block>
+<!-- BLOCK : header -->
+<TMPL_block "header">
+	<!-- CALL : cell_CSS -->
+	<TMPL_call "cell_CSS"><TMPL_if global_css><style type="text/css"><TMPL_var global_css></style></TMPL_if>
+	<!-- CALL : withPageCellSheetScript -->
+  <!-- RAW : initCustom --> 
+	<script type="text/javascript">var sheetIndex = <TMPL_var sheetId>;</script>
+	<script type="text/javascript" src="jquery-3.7.0.min.js"></script>
+	<script type="text/javascript" src="config.js"></script>
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript" src="browser_check.js"></script>
+	<script type="text/javascript" src="wm.js"></script>
+	<script type="text/javascript" src="cell_body.js"></script>
+
+	<script type="text/javascript">
+		var chart_startIdx = <TMPL_var chart.startIndex>;
+		var chart_endIdx = <TMPL_var chart.endIndex>;
+		var chart_svgPath = '<TMPL_var chart.fileName>';
+
+		localSynap.updateChartInfo(chart_startIdx, chart_endIdx, chart_svgPath);
+	</script>
+</TMPL_block>
+<!-- BLOCK : bodyAttribute -->
+<TMPL_block "bodyAttribute"></TMPL_block>
+<!-- BLOCK : body -->
+<TMPL_block "body">
+	<!-- RAW : container -->
+	<div id="container">
+		<TMPL_var content>
+	</div>
+</TMPL_block>
+<!-- TMPL : base.tmpl -->
+<TMPL_include "base.tmpl">

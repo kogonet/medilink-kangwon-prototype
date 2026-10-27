@@ -1,0 +1,15 @@
+<!-- 건강정보 (health_info). 칸: head summaryTitle summary overviewTitle overview tabs
+     출처·진단 아님 안내(foot)는 안전 안내 칸이라 넣지 않는다 — 시스템이 블록 끝에 붙인다 -->
+<div class="pb-card pb-card--health">
+  <div class="pb-card__head">
+    <span class="pb-badge">건강정보</span>
+    <div class="pb-card__title" data-ab-slot="head"></div>
+  </div>
+  <div class="pb-card__summary-box" data-ab-if="summary">
+    <div data-ab-slot="summaryTitle"></div>
+    <div data-ab-slot="summary"></div>
+  </div>
+  <div data-ab-slot="overviewTitle"></div>
+  <div data-ab-slot="overview"></div>
+  <div class="pb-card__tabs" data-ab-slot="tabs"></div>
+</div>

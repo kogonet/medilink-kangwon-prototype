@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="ko" lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"<TMPL_if IN_SET(fileType, "ppt", "pptx")> xmlns:p="urn:schemas-microsoft-com:office:powerpoint" xmlns:oa="urn:schemas-microsoft-com:office:activation"</TMPL_if><TMPL_if IN_SET(fileType, "doc", "docx", "hwp", "ndoc")> xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml" xmlns:st1="urn:schemas-microsoft-com:office:smarttags"</TMPL_if>>
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+		<meta content="<TMPL_var generator>" name="GENERATOR"/>
+		<TMPL_if title>
+		<title><TMPL_var HTMLESCAPE(title)></title>
+		</TMPL_if>
+		<TMPL_if info>
+			<TMPL_if info.title>
+		<meta name="TITLE" content="<TMPL_var info.title>"/>
+			</TMPL_if>
+			<TMPL_if info.author>
+		<meta name="AUTHOR" content="<TMPL_var info.author>"/>
+			</TMPL_if>
+			<TMPL_if info.subject>
+		<meta name="SUBJECT" content="<TMPL_var info.subject>"/>
+			</TMPL_if>
+			<TMPL_if info.keywords>
+		<meta name="KEYWORDS" content="<TMPL_var info.keywords>"/>
+			</TMPL_if>
+			<TMPL_if info.comments>
+		<meta name="COMMENTS" content="<TMPL_var info.comments>"/>
+			</TMPL_if>
+		</TMPL_if>
+		<style type="text/css">
+			v\:shape,v\:shapetype,v\:formulas,v\:fill,v\:f,v\:handles,v\:h,v\:stroke,v\:line,v\:path,v\:textpath,v\:textbox,v\:group,v\:image,v\:rect,v\:imagedata,v\:arc,v\:curve,v\:oval,v\:polyline,v\:roundrect {
+				behavior: url(#default#VML);
+			}
+			o\:* {
+				behavior: url(#default#VML);
+			}
+<TMPL_if IN_SET(fileType, "ppt", "pptx")>
+			p\:* {
+				behavior: url(#default#VML);
+			}
+			body {
+				-webkit-text-size-adjust: none;
+			}
+</TMPL_if>
+<TMPL_if IN_SET(fileType, "doc", "docx", "hwp2k", "hwp97", "ndoc")>
+			w\:* {
+				behavior: url(#default#VML);
+			}
+</TMPL_if>
+body,div,p{margin:0;padding:0}
+body{font-family:<TMPL_if IN_SET(fileType, "txt")>Malgun Gothic,'맑은 고딕',</TMPL_if>Dotum,'돋움',Helvetica,AppleSDGothicNeo,sans-serif;font-size:12px;color:#222;}
+		</style>
+		<TMPL_var style>
+		<TMPL_call "header">
+		<script>var jsValue = "<TMPL_var jsValue>"; </script>
+	</head>
+	<body <TMPL_call "bodyAttribute">>
+		<TMPL_call "body">
+	</body>
+</html>

@@ -1,0 +1,21 @@
+<TMPL_include "css_pool.tmpl">
+<TMPL_block "IE_COMPATIBLE">8</TMPL_block>
+<TMPL_block "header">
+    <TMPL_call "word_CSS">
+    <style type="text/css">
+      <TMPL_var global_css>
+    </style>
+		<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/jquery-3.7.0.min.js"></script>
+		<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/spin.min.js"></script>
+		<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/config.js"></script>
+		<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/common.js"></script>
+		<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/browser_check.js"></script>
+		<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/wm.js"></script>
+		<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/word_body.js"></script>
+</TMPL_block>
+<TMPL_block "bodyAttribute">class="containBg"</TMPL_block>
+<TMPL_block "body">
+			<div id="content_body"></div>
+			<div id="hidden_section"></div>
+</TMPL_block>
+<TMPL_include "base.tmpl">

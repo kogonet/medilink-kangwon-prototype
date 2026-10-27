@@ -1,0 +1,70 @@
+﻿@charset "UTF-8";
+
+/*
+-------------------------------------------------
+-------------------------------------------------
+Sub Style Sheet
+Version : 1.0
+Author : CME
+First update : 2023. 02. 23.
+Last update : 2023. 00. 00.
+-------------------------------------------------
+-------------------------------------------------
+*/
+
+
+/********** animation **********/
+@keyframes section1_bg_1{
+    0% {
+        background-image:url(../images/main/bg_section1.png);
+    }
+    100% {
+        background-image:url(../images/main/bg_section1_on.png);
+    }
+}
+
+@keyframes section1_bg_2{
+    0% {
+        background-image:url(../images/main/bg_section1_on.png);
+    }
+    100% {
+        background-image:url(../images/main/bg_section1.png);
+    }
+}
+
+@keyframes section2_bg_1{
+    100% {
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes section2_bg_2{
+    0% {
+        background:url(../images/main/bg_section2_02.png)no-repeat center center / cover;
+    }
+    100% {
+        background:url(../images/main/bg_section2_02_on.png)no-repeat center center / cover;
+    }
+}
+
+@keyframes section3_bg_1{
+    100% {
+        background-position:top 1790px center;
+    }
+}
+
+@keyframes section3_bg_2{
+    100% {
+        background-position:top -1790px center;
+    }
+}
+
+@keyframes section5_bg_1{
+    0% { 
+        opacity: 0.3
+    }
+    100% {
+        opacity: 1
+    }
+}
+/********** //animation **********/

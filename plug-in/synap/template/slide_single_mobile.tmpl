@@ -1,0 +1,15 @@
+<TMPL_include "css_pool.tmpl">
+<TMPL_block "IE_COMPATIBLE">7</TMPL_block>
+<TMPL_block "header">
+</TMPL_block>
+<TMPL_block "bodyAttribute">style="margin:0;"</TMPL_block>
+<TMPL_block "body">
+	<div id="contentWrap" class="containBg" style="width:100%;position:relative;">
+		<TMPL_foreach contents as content>
+			<div id="slide_<TMPL_var content.index>_wrap" style="width:<TMPL_var slide_width>pt;height:<TMPL_var slide_height>pt;margin:10px auto;">
+			<TMPL_var content.slide>
+			</div>
+		</TMPL_foreach>
+		</div>
+</TMPL_block>
+<TMPL_include "base.tmpl">

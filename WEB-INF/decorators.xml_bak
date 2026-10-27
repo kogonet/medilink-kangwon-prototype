@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<decorators>
+	<excludes>
+		<pattern>*javascript*</pattern>
+		<!-- 관리자 예외 -->
+		<pattern>/admmgr/index.do*</pattern>
+		<pattern>/admmgr/member/login.do*</pattern>
+		<!-- <pattern>/admmgr/member/logout.do*</pattern> -->
+		<pattern>/front/main/*.*</pattern>
+		<pattern>/front/business/noticeAppView.do</pattern>
+
+		<!-- 시스템 공통 예외 -->
+		<pattern>/*/*Proc.do*</pattern>
+		<pattern>/*/*Pop.do*</pattern>
+
+	</excludes>
+	
+	<!-- 관리자 페이지-->
+	<decorator name="레이어" page="/WEB-INF/jsp/decorators/default_layer.jsp">
+		<pattern>/admmgr/*Layer*.do</pattern>
+	</decorator>
+	<decorator name="레이어2" page="/WEB-INF/jsp/decorators/default_layer2.jsp">
+		<pattern>/admmgr/*Layer2*.do</pattern>
+	</decorator>	
+	<decorator name="관리자" page="/WEB-INF/jsp/decorators/default_admmgr.jsp">
+		<pattern>/admmgr/*.*</pattern>
+	</decorator>
+	<!-- // 관리자 페이지-->
+	
+	<!-- 사용자 페이지-->
+	<decorator name="사용자" page="/WEB-INF/jsp/decorators/default_front.jsp">
+		<pattern>/front/*.*</pattern>
+	</decorator>
+	<!-- //사용자 페이지-->
+	
+</decorators>

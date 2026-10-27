@@ -1,0 +1,80 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
+<%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
+<%
+/**************************************************
+ * default_medical.jsp
+ * @desc    : 강원 메디컬 AI 사용자 데코레이터 (/front/medical/*.*, /index.do)
+ *            기존 _sidebar.jspf(좌측 사이드바)를 대체하는 공통 헤더.
+ *            좌측 강원메디컬 AI 로고 / 우측 의료 서비스·공지사항·FAQ (docs/gangwon_ai_v2/index.html 헤더 기준)
+ *            - 페이지 head 에 <meta name="gm-header" content="overlay"> 가 있으면 히어로 위 투명 헤더(메인)
+ *            - 없으면 흰 배경 헤더 + 서브페이지 레이아웃(gm_layout_solid)
+ *            스타일: /common/front/kor/css/medical_header.css
+ **************************************************/
+%>
+<c:set var="gmHeader"><decorator:getProperty property="meta.gm-header" default="solid"/></c:set>
+<c:set var="gmOverlay" value="${gmHeader eq 'overlay'}"/>
+<c:set var="gmHome" value="${gmOverlay ? '' : '/front/medical/index.do'}"/>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><decorator:title default="강원메디컬 AI"/></title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<decorator:head/>
+<link rel="stylesheet" href="/common/front/kor/css/medical_header.css">
+</head>
+<body class="gm_layout_${gmOverlay ? 'overlay' : 'solid'} <decorator:getProperty property="body.class"/>">
+
+<!-- ====================== 헤더 ====================== -->
+<header class="gm_header${gmOverlay ? ' is_overlay' : ''}" id="gmHeader">
+	<div class="gm_header_inner">
+		<a class="gm_brand" href="${gmOverlay ? '#top' : '/front/medical/index.do'}" aria-label="강원메디컬 AI 홈">
+			<img class="gm_brand_logo" src="/common/front/kor/images/강원로고가로.png" alt="강원메디컬 AI">
+		</a>
+		<nav class="gm_nav" id="gmNav" aria-label="주요 메뉴">
+			<a href="${gmHome}#services">의료 서비스</a>
+			<%-- 공지사항/FAQ 전용 페이지 제작 전까지 메인 공지사항·FAQ 영역으로 연결 --%>
+			<a href="${gmHome}#notice">공지사항</a>
+			<a href="${gmHome}#notice">FAQ</a>
+		</nav>
+		<button class="gm_menu_btn" id="gmMenuBtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="gmNav">
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+				<path d="M4 5h16M4 12h16M4 19h16"/>
+			</svg>
+		</button>
+	</div>
+</header>
+<!-- //헤더 -->
+
+<decorator:body/>
+
+<script>
+(function() {
+	var header = document.getElementById('gmHeader');
+	var btn = document.getElementById('gmMenuBtn');
+	if (!header || !btn) return;
+	function setMenu(open) {
+		header.classList.toggle('is_open', open);
+		btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+		btn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+	}
+	btn.addEventListener('click', function(event) {
+		event.stopPropagation();
+		setMenu(!header.classList.contains('is_open'));
+	});
+	document.getElementById('gmNav').addEventListener('click', function(event) {
+		if (event.target.closest('a')) setMenu(false);
+	});
+	document.addEventListener('click', function(event) {
+		if (!header.contains(event.target)) setMenu(false);
+	});
+	document.addEventListener('keydown', function(event) {
+		if (event.key === 'Escape') setMenu(false);
+	});
+})();
+</script>
+</body>
+</html>

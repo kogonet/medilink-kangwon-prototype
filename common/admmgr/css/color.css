@@ -1,0 +1,160 @@
+@charset "UTF-8";
+/*
+-------------------------------------------------
+-------------------------------------------------
+Sub Style Sheet
+Version : 1.0
+Author : LSK
+First update : 2024. 05. 27.
+Last update : 2024. 00. 00.
+-------------------------------------------------
+-------------------------------------------------
+*/
+
+:root{
+    /* 기본 */
+    --bg-color: #fff;
+    --bg-color01: #fff;
+    --bg-color02: #f0f4f8;
+    --bg-color04: #fff;
+    --bg-color05: #f5f7f7;
+    --bg-color06: #fff;
+    --bg-color07: #fff;
+    --bg-color08: #fafafc;
+    --bg-color09: #F1F5FE;
+    --bg-color10: #f1f5ff;
+    --bg-color11: #C1C2C4;
+    --bg-color12: #f7f8f8;
+    --bg-color13: #6d7892;
+    --bg-color14: #97a0b6;
+    --bg-color15: #fff;
+
+    --txt-color: #000;
+    --txt-color02: #666;
+    --txt-color03: #666666;
+    --txt-color04: #043660;
+    --txt-color05: #283993;
+    --txt-color06: #133a8a;
+    --txt-color07: #364a63;
+    --txt-color08: #6d7892;
+    --txt-color09: #666;
+    --txt-color10: #999;
+    --txt-color11: #717880;
+
+    --bd-color01:#89BDE4;
+    --bd-color02:#c4d1de;
+    --bd-color03:#bdC2C6;
+    --bd-color04:#bdc3c7;
+    --bd-color05:#d9dddf;
+    --bd-color06:#d9dcde;
+    --bd-color07: #e2e2e2;
+    --bd-color08: #87AED9;
+    --bd-color09: #043660;
+    --bd-color10: #133AB1;
+    --bd-color11: #e5e9f2;
+
+    --img-url01: url(/common/admmgr/images/icon/ico_search_b.png);
+    --img-url02: url(/common/admmgr/images/layout_n/ico_select_g.png);
+    --img-url03: url(/common/admmgr/images/layout_n/ico_cal_g.png);
+
+    /* 라이트 */
+  body[data-theme="light"]{
+    --bg-color: #fff;
+    --bg-color01: #fff;
+    --bg-color02: #f0f4f8;
+    --bg-color04: #fff;
+    --bg-color05: #f5f7f7;
+    --bg-color06: #fff;
+    --bg-color07: #fff;
+    --bg-color08: #fafafc;
+    --bg-color09: #F1F5FE;
+    --bg-color10: #f1f5ff;
+    --bg-color11: #C1C2C4;
+    --bg-color12: #f7f8f8;
+    --bg-color13: #6d7892;
+    --bg-color14: #97a0b6;
+    --bg-color15: #fff;
+
+    --txt-color: #000;
+    --txt-color02: #1C1C1E;
+    --txt-color03: #666666;
+    --txt-color04: #043660;
+    --txt-color05: #283993;
+    --txt-color06: #133a8a;
+    --txt-color07: #364a63;
+    --txt-color08: #6d7892;
+    --txt-color09: #fff;
+    --txt-color10: #999;
+    --txt-color11: #717880;
+
+    --bd-color01:#89BDE4;
+    --bd-color02:#c4d1de;
+    --bd-color03:#bdC2C6;
+    --bd-color04:#bdc3c7;
+    --bd-color05:#d9dddf;
+    --bd-color06:#d9dcde;
+    --bd-color07: #e2e2e2;
+    --bd-color08: #87AED9;
+    --bd-color09: #043660;
+    --bd-color10: #133AB1;
+    --bd-color11: #e5e9f2;
+
+
+    --img-url01: url(/common/admmgr/images/icon/ico_search_b.png);
+    --img-url02: url(/common/admmgr/images/layout_n/ico_select_d.png);
+    --img-url03: url(/common/admmgr/images/layout_n/ico_cal_g.png);
+
+  }
+
+  /* 다크 */
+  body[data-theme="dark"]{
+    --bg-color: transform;
+    --bg-color01: #1C1C1E;
+    --bg-color02: #363639;
+    --bg-color03: #363639;
+    --bg-color04: transparent;
+    --bg-color05: #3d4244;
+    --bg-color06: #1e1f21;
+    --bg-color07: #363639;
+    --bg-color08: #1C1C1E;
+    --bg-color09: #313537;
+    --bg-color10: #363639;
+    --bg-color11: #363639;
+    --bg-color12: #48484A;
+    --bg-color13: #4a4f52;
+    --bg-color14: #393d3f;
+    --bg-color15: #1e1f21;
+    
+
+    --txt-color: #fff;
+    --txt-color02: #fff;
+    --txt-color03: #fff;
+    --txt-color04: #fff;
+    --txt-color05: #fff;
+    --txt-color06: #fff;
+    --txt-color07: #fff;
+    --txt-color08: #fff;
+    --txt-color09: #fff;
+    --txt-color10: #5d5c5c;
+    --txt-color11: #fff;
+
+    --bd-color01: #8E8E93;
+    --bd-color02: #8E8E93;
+    --bd-color03: #414648;
+    --bd-color04:#414648;
+    --bd-color05:#d9dddf;
+    --bd-color06:#363639;
+    --bd-color07: #363639;
+    --bd-color08: #414648;
+    --bd-color09: #8E8E93;
+    --bd-color10: #2395ff;
+    --bd-color11: #414648;
+
+
+    --img-url01: url(/common/admmgr/images/icon/ico_search_w.png);
+    --img-url02: url(/common/admmgr/images/layout_n/ico_select_d.png);
+    --img-url03: url(/common/admmgr/images/layout_n/ico_cal_d.png);
+
+    }
+
+}

@@ -1,0 +1,25 @@
+/*
+ * 예시 퍼블리셔 CSS (상담4 답변, 2026-10-16).
+ * 퍼블리셔 템플릿으로 그린 블록은 section.ab[data-publisher] 이다. 선택자는 이 아래로 한정하는 것을 권장한다.
+ * 칸 내용: .ab__part[data-slot][data-kind], 표: table[data-role="list-table"], 버튼: [data-action="route" | "detail"]
+ */
+.kp-answer-card__body .ab[data-publisher] { margin: 0 0 16px; }
+.ab[data-publisher] .pb-card { padding: 16px 18px; border: 1px solid #DCE3F3; border-radius: 14px; background: #FBFCFF; }
+.ab[data-publisher] .pb-card__head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+.ab[data-publisher] .pb-badge { flex: none; padding: 2px 10px; border-radius: 999px; background: #002789; color: #fff; font-size: 12px; font-weight: 700; line-height: 22px; }
+.ab[data-publisher] .pb-card__head .ab__part p,
+.ab[data-publisher] .pb-card__head h3 { margin: 0; }
+.ab[data-publisher] .pb-card__title h3 { font-size: 16px; }
+.ab[data-publisher] .pb-card__summary p { margin: 0 0 8px; font-size: 14px; }
+.ab[data-publisher] .pb-card__hint, .ab[data-publisher] .pb-card__note { padding: 6px 10px; border-radius: 8px; background: #FFF9DB; font-size: 13px; }
+.ab[data-publisher] .pb-card__table table { margin: 6px 0 10px; }
+.ab[data-publisher] .pb-card__table thead th { background: #E7ECFA; }
+.ab[data-publisher] .pb-card__more { font-size: 13px; }
+.ab[data-publisher] .pb-card__foot { margin-top: 6px; padding-top: 8px; border-top: 1px dashed #DCE3F3; color: #5A6A8C; font-size: 12.5px; }
+.ab[data-publisher] .pb-card__foot p { margin: 0; }
+.ab[data-publisher] .pb-card__info ul { margin: 4px 0 10px; }
+.ab[data-publisher] .pb-card__summary-box { margin: 4px 0 10px; padding: 10px 14px; border-left: 4px solid #3B5BDB; border-radius: 0 10px 10px 0; background: #EEF2FF; }
+.ab[data-publisher] .pb-card__summary-box p { margin: 0 0 4px; }
+.ab[data-publisher] [data-action="route"],
+.ab[data-publisher] [data-action="detail"] { border-color: #3B5BDB; }
+.ab[data-publisher] > .ab__part[data-protected] { margin: 8px 2px 0; color: #5A6A8C; font-size: 12.5px; }

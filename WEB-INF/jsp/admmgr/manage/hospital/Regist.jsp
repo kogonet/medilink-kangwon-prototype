@@ -1,0 +1,158 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="str" uri="http://customTag.com/jsp/str"%>
+<%
+/**************************************************
+ * @desc    : 의료기관 정보 관리 - 등록/수정
+ **************************************************/
+%>
+<head>
+	<script type="text/javascript">
+		function fn_Regist(){
+			if( $("#ykiho").val().trim() == "" ){
+				alert("요양기호를 입력해주세요.");
+				$("#ykiho").focus();
+				return false;
+			}
+			if( $("#yadmNm").val().trim() == "" ){
+				alert("병원명을 입력해주세요.");
+				$("#yadmNm").focus();
+				return false;
+			}
+			$("#frm").attr("action","<c:url value='/admmgr/manage/hospital/RegistProc.do'/>").submit();
+		}
+		//목록
+		function fn_List(){
+			$("#frm").attr("action","<c:url value='/admmgr/manage/hospital/List.do'/>").submit();
+		}
+		//주소로 좌표 재검색
+		function fn_GeocodeLookup(){
+			var addr = $("#addr").val().trim();
+			if( addr == "" ){
+				alert("주소를 먼저 입력해주세요.");
+				return false;
+			}
+			$.ajax({
+				type: "POST",
+				url: "<c:url value='/admmgr/manage/geocode/LookupProc.do'/>",
+				data: { addr: addr },
+				dataType: "json",
+				success: function(data){
+					if( data.result == "success" ){
+						$("#ypos").val(data.lat);
+						$("#xpos").val(data.lon);
+						alert("좌표를 찾았습니다. 필요 시 값을 직접 수정한 뒤 저장하세요.");
+					} else {
+						alert("좌표를 찾지 못했습니다. 직접 입력해주세요.");
+					}
+				},
+				error: function(){
+					alert("좌표 조회 중 오류가 발생했습니다.");
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+<form id="frm" name="frm" method="POST">
+	<input type="hidden" id="rnum" name="rnum" value="<c:out value="${rMap.rnum}"/>"/>
+	<!-- sub_contents_wrap -->
+	<div class="sub_contents_wrap">
+		<!--sub_contents_area-->
+		<div class="sub_contents_area">
+
+			<h4 class="sub_tit_h4"></h4>
+
+			<div class="table_header">
+				<h4 class="sub_tit_h4 fix"><em>의료기관 정보 ${(not empty rMap.rnum)?'수정':'등록'}</em>
+				<span><b class="ico_point">&nbsp;</b> 는 필수 입력사항 입니다.</span></h4>
+			</div>
+
+			<div class="n_table_sty01 n_view01 mt10">
+				<table cellspacing="0" cellpadding="0" border="0" summary="의료기관 정보 등록" class="tbl_ty2">
+					<colgroup>
+						<col width="20%">
+						<col width="30%">
+						<col width="20%">
+						<col width="30%">
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>요양기호(ykiho) <em class="point">&nbsp;</em></th>
+							<td colspan="3">
+								<input type="text" id="ykiho" name="ykiho" class="form_text" style="width:calc(100% - 20px);" value="<c:out value="${rMap.ykiho}"/>" placeholder="암호화된 요양기관기호를 입력하세요"/>
+							</td>
+						</tr>
+						<tr>
+							<th>병원명 <em class="point">&nbsp;</em></th>
+							<td>
+								<input type="text" id="yadmNm" name="yadmNm" class="form_text" style="width:calc(100% - 20px);" value="<c:out value="${rMap.yadmNm}"/>"/>
+							</td>
+							<th>종별</th>
+							<td>
+								<input type="text" id="clCdNm" name="clCdNm" class="form_text" style="width:calc(100% - 20px);" value="<c:out value="${rMap.clCdNm}"/>"/>
+							</td>
+						</tr>
+						<tr>
+							<th>주소</th>
+							<td colspan="3">
+								<input type="text" id="addr" name="addr" class="form_text" style="width:calc(100% - 20px);" value="<c:out value="${rMap.addr}"/>"/>
+							</td>
+						</tr>
+						<tr>
+							<th>전화번호</th>
+							<td>
+								<input type="text" id="telno" name="telno" class="form_text" style="width:calc(100% - 20px);" value="<c:out value="${rMap.telno}"/>"/>
+							</td>
+							<th>개설일자</th>
+							<td>
+								<input type="text" id="estbDd" name="estbDd" class="form_text" style="width:calc(100% - 20px);" value="<c:out value="${rMap.estbDd}"/>" placeholder="YYYYMMDD"/>
+							</td>
+						</tr>
+						<tr>
+							<th>홈페이지</th>
+							<td>
+								<input type="text" id="hospUrl" name="hospUrl" class="form_text" style="width:calc(100% - 20px);" value="<c:out value="${rMap.hospUrl}"/>"/>
+							</td>
+							<th>의사총수</th>
+							<td>
+								<input type="text" id="drTotCnt" name="drTotCnt" class="form_text" style="width:calc(100% - 20px);" value="<c:out value="${rMap.drTotCnt}"/>"/>
+							</td>
+						</tr>
+						<tr>
+							<th>운영시간</th>
+							<td colspan="3">
+								<input type="time" id="openTime" name="openTime" class="form_text" style="width:140px;" value="<c:out value="${empty rMap ? '09:00' : rMap.openTime}"/>"/>
+								~
+								<input type="time" id="closeTime" name="closeTime" class="form_text" style="width:140px;" value="<c:out value="${empty rMap ? '18:00' : rMap.closeTime}"/>"/>
+							</td>
+						</tr>
+						<tr>
+							<th>좌표(위도/경도)</th>
+							<td colspan="3">
+								위도 <input type="text" id="ypos" name="ypos" class="form_text" style="width:150px;" value="<c:out value="${rMap.YPos}"/>" placeholder="자동 지오코딩"/>
+								&nbsp;경도 <input type="text" id="xpos" name="xpos" class="form_text" style="width:150px;" value="<c:out value="${rMap.XPos}"/>" placeholder="자동 지오코딩"/>
+								<a class="btn_n_add" href="javascript:void(0);" onclick="javascript:fn_GeocodeLookup();"><span>주소로 좌표 재검색</span></a>
+								<p style="margin-top:5px;font-size:12px;color:#888;">비워두면 저장 시 주소 기반으로 자동 지오코딩됩니다. 값을 입력하면 그 값이 그대로 저장되며, 이후 저장 시에도 자동으로 재계산되지 않습니다.</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="page_btn_wrap jc_between mt20">
+				<div class="lft"></div>
+				<div class="rgt">
+					<a class="btn_n_save" href="javascript:void(0);" onclick="javascript:fn_Regist();"><span>저장</span></a>
+					<a class="btn_n_list" href="javascript:void(0);" onclick="javascript:fn_List();"><span>목록</span></a>
+				</div>
+			</div>
+
+		</div>
+		<!-- // sub_contents_area -->
+	</div>
+	<!-- // sub_contents_wrap -->
+</form>
+</body>

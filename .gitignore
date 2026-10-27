@@ -1,0 +1,11 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+/WEB-INF/config/llm_server_key
+/WEB-INF/config/config.properties
+/WEB-INF/config/config.properties_*
+/common/niceid/checkplus_join.jsp
+/common/niceid/checkplus_findId.jsp
+/common/niceid/checkplus_findPw.jsp
+/WEB-INF/jsp/common/niceid/checkplus_success.jsp

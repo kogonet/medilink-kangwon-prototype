@@ -1,0 +1,47 @@
+<TMPL_include "css_pool.tmpl">
+<TMPL_block "IE_COMPATIBLE">8</TMPL_block>
+<!-- HEADER BLOCK START -->
+<TMPL_block "header">
+	<TMPL_call "cell_CSS"><TMPL_if global_css><style type="text/css"><TMPL_var global_css></style></TMPL_if>
+	<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/jquery-3.7.0.min.js"></script>
+	<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/config.js"></script>
+	<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/common.js"></script>
+	<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/browser_check.js"></script>
+	<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/cell_body.js"></script>
+
+	<script type="text/javascript">
+		var chart_startIdx = <TMPL_var chart.startIndex>;
+		var chart_endIdx = <TMPL_var chart.endIndex>;
+		var chart_svgPath = '<TMPL_var chart.fileName>';
+
+		localSynap.updateChartInfo(chart_startIdx, chart_endIdx, chart_svgPath);
+	</script>
+</TMPL_block>
+<!-- HEADER BLOCK END -->
+<!-- BODYATTR BLOCK START -->
+<TMPL_block "bodyAttribute">class="containBgSingle"</TMPL_block>
+<!-- BODYATTR BLOCK END -->
+<!-- BODY BLOCK START -->
+<TMPL_block "body">
+	<div id="contentWrap" >
+		<div id="content" style="margin:20px;">
+	<TMPL_foreach contents as content>
+			<h1>
+			<center><TMPL_var content.title></center>
+			</h1>
+		<br />
+		<TMPL_if (mode eq "htm")>
+			<TMPL_var content.html>
+		</TMPL_if>
+		<TMPL_if (mode eq "xhtml")>
+			<TMPL_var content.xhtml>
+		</TMPL_if>
+		<TMPL_if !DEFINED(content.__LAST__)>
+			<p class="pagebreaker" contenteditable="false">&#160;</p>
+		</TMPL_if>
+	</TMPL_foreach>
+	</div>	
+	</div>
+</TMPL_block>
+<!-- BODY BLOCK END-->
+<TMPL_include "base.tmpl">

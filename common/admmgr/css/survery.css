@@ -1,0 +1,64 @@
+@charset "UTF-8";
+/*
+-------------------------------------------------
+-------------------------------------------------
+Survery Style Sheet
+Version : 1.0
+Author : LSK
+First update : 2024. 11. 11.
+-------------------------------------------------
+-------------------------------------------------
+*/
+
+/* 서베이 : 약관동의 */
+.agree_wrap{border: 1px solid #cbcbcb;box-sizing: border-box;}
+.agree_txt{overflow: auto;height: 360px;padding: 0px 50px;margin: 10px 0;box-sizing: border-box;}
+.agree_txt .p_txt{margin-top: 30px;line-height: 2;}
+.agree_radio{display: flex;padding: 20px 50px;border-top: 1px solid #cbcbcb;background-color: #373f4d;justify-content: space-between;box-sizing: border-box;}
+.agree_radio .agree_radio_txt{color: #fff;letter-spacing: -0.5px;font-size: 16px;font-weight: 400;line-height: 1;align-self: center;}
+.agree_radio .radio_wrap{align-self: center;}
+.agree_radio .check_wrap03 > label > [type=checkbox] + span{color:#fff;}
+
+/* 서베이  : 등록 */
+.survey_wrap{border-top: 2px solid #000;box-sizing: border-box;margin-top: 20px;}
+.survey_top{display: flex;padding: 25px 25px 25px 30px;background-color: #fafafa;border-bottom: 1px solid #cdcdcd;box-sizing: border-box;gap: 10px 15px;}
+.survey_top .survey_num{color: #0a4a9b;letter-spacing: -0.5px;font-size: 13px;font-weight: 500;line-height: 1;}
+.survey_top .survey_q{flex: 1;margin-top: -3px;}
+.survey_top .survey_q > span{display: block;color: #000;letter-spacing: -0.5px;font-size: 12px;font-weight: 500;line-height: 1.6;}
+.survey_top .survey_q > em{display: block;position: relative;color: #0a4a9b;letter-spacing: -0.25px;font-size: 13px;font-weight: 400;line-height: 1.5;padding-left: 26px;margin-top: 10px;}
+.survey_top .survey_q > em:before{display:block;position:absolute;top: 1px;left: 0;width: 18px;height: 18px;background:url(/common/admmgr/images/icon/ico_noti01.png)no-repeat;content:'';}
+
+/* 서베이 : 등록 요소 */
+.survey_bott{display: flex;padding: 9px 30px;background-color: #fff;border-bottom: 1px solid #cdcdcd;box-sizing: border-box;min-height: 65px;}
+.survey_bott .radio_wrap02{margin: 10px 0;padding-left: 60px;}
+.survey_bott .check_wrap02{margin: 10px 0;padding-left: 60px;}
+.survey_bott .check_wrap02 > label > [type=checkbox] + .type02{display:flex;align-items: center;gap: 15px;flex: 1;}
+.survey_bott .radio_wrap02{display: flex;gap: 10px 30px;flex-wrap: wrap;}
+.survey_bott .radio_wrap02 > label{display: flex;align-self: center;line-height: 1;cursor: pointer;}
+.survey_bott .radio_wrap02 > label > [type=radio]{display: block;width: 16px;height: 16px;background: url(/common/admmgr/images/icon/ico_radio02_off.png)no-repeat left center / 16px auto; -webkit-appearance: none;-webkit-box-shadow: none;-moz-box-shadow: none;margin-right: 8px;cursor:pointer;align-self: center;line-height: 1;}
+.survey_bott .radio_wrap02 > label > [type=radio]:checked{background: url(/common/admmgr/images/icon/ico_radio02_on.png)no-repeat left center / 16px auto;}
+.survey_bott .radio_wrap02 > label > [type=radio] + span{display: block;color: #000;letter-spacing: -0.5px;font-size: 14px;font-weight: 400;line-height: 1;align-self: center;}
+.survey_bott .radio_wrap02.type02 > label{flex:0 100%;}
+
+.survey_bott .check_wrap02{display: flex;gap: 10px 30px;flex-wrap: wrap;}
+.survey_bott .check_wrap02 > label{display: flex;align-self: center;line-height: 1;}
+.survey_bott .check_wrap02 > label > [type=checkbox]{display: block;width: 16px;height: 16px;background: url(/common/admmgr/images/icon/ico_check_off.png)no-repeat left center / 16px; -webkit-appearance: none;-webkit-box-shadow: none;-moz-box-shadow: none;margin-right: 8px;cursor:pointer;align-self: center;line-height: 1;}
+.survey_bott .check_wrap02 > label > [type=checkbox]:checked{background: url(/common/admmgr/images/icon/ico_check_on.png)no-repeat left center;}
+.survey_bott .check_wrap02 > label > [type=checkbox] + span{display: block;color: #000;letter-spacing: -0.5px;font-size: 12px;font-weight: 400;line-height: 1;align-self: center;}
+.survey_bott .check_wrap02.type02 > label{flex:0 100%;}
+
+
+/* 서베이  : 캡차 */
+.capt_wrap .capt_img{display: flex;align-items: center;}
+.capt_wrap .capt_img img{width: auto; height:30px;}
+
+.capt_wrap .capt_img a{display:inline-flex;color: #0a4a9b;letter-spacing: -0.25px;background-color: #fff; font-size: 12px;font-weight: 500;line-height: 1;}
+.capt_wrap .capt_img .btn_reset02{display:inline-flex; height:30px; padding:0 20px; border: 1px solid #0a4a9b; color:#0a4a9b; text-decoration:none; align-items:center; box-sizing:border-box;}
+.capt_wrap .capt_img .btn_reset02 > span:before{width: 20px;height: 20px;background:url(/common/admmgr/images/icon/ico_reset02.png)no-repeat left center;}
+.capt_wrap .capt_img .btn_list > span:before{width: 18px;height: 18px;background:url(/common/admmgr/images/icon/ico_call.png)no-repeat left center;}
+
+.capt_wrap .capt_input{display: flex;align-items: center;margin-top: 4px;}
+.capt_wrap .capt_input .input_text02{width: 270px;padding: 0 15px;border: 1px solid #cbcbcb;color: #222;letter-spacing: -0.25px;background-color: #fff;min-height: 32px;box-sizing: border-box;flex: 0 270px;font-size: 15px;font-weight: 400;line-height: 1;}
+.capt_wrap .capt_input .input_text02::placeholder{color:#878787;}
+.capt_wrap .capt_input .btn_black{display: inline-flex;padding: 0 25px;border: 0;color: #cbcbcb;letter-spacing: -0.5px;text-align: center;min-height: 45px;font-size: 15px;font-weight: 400;line-height: 1;background-color: #373f4d;min-height: 30px;min-width: 105px;box-sizing: border-box;word-break: keep-all;}
+.capt_wrap .capt_input .sub_input_txt{color: #0a4a9b;letter-spacing: -0.5px;margin-left: 10px;font-size: 15px;line-height: 1;align-self: center;}

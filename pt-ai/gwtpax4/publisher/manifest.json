@@ -1,0 +1,11 @@
+{
+  "name": "예시 퍼블리셔 템플릿",
+  "version": "2026-10-16",
+  "blocks": {
+    "facility-list": "blocks/facility-list.html",
+    "nearby-list": "blocks/nearby-list.html",
+    "hospital-card": "blocks/hospital-card.html",
+    "health-info": "blocks/health-info.html"
+  },
+  "css": ["publisher.css"]
+}

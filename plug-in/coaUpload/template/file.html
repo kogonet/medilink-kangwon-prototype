@@ -1,0 +1,19 @@
+<li id="{{coa_file_id}}" class="coa_file fix">
+  <div style="position:relative;">
+	  <span class="tit_no">
+		  <input type="checkbox" class="coa_file_cehck" value="{{file_key}}" />
+	  </span>
+
+	  <div class="fix" style="float:left; width:94%;">
+		  <span class="tit_name"><em style="background-image: url({{img_src}}/ico_disk.gif)">{{file_name}}</em></span> 
+		
+		  <span class="tit_size">
+			  <span id='{{coa_loded_id}}'>0</span>
+			  <span>/</span>
+			  <strong id='{{coa_total_id}}'>{{file_size}}</strong>
+		  </span>
+	  </div>
+
+	  <div id='{{coa_progress_id}}' style='position: absolute; background:#25A0DC; width: 0%; height:5px; top:36px; left:0; z-index:3;'></div>
+  </div>
+</li>

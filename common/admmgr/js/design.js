@@ -1,0 +1,507 @@
+/*-------------------------------------------------
+Content Java Script Jquery
+Version : 1.0
+Author :
+Last update : 2021. 00. 00.
+-------------------------------------------------*/
+
+$(document).ready(function() {
+    $('.btn_lft_menu > .close').click(function() {
+        $('.content_wrap').removeClass('open');
+        $('.content_wrap').addClass('close');
+        
+        $.ajax({
+            url: "/admmgr/member/openYnUpdateAjax.do",
+            type: "POST",
+            data: {"openYn":"close"},
+            success: function (response) {
+            },
+            error: function (error) {
+            	alert(error);
+            }
+        });
+        
+    });
+
+    $('.btn_lft_menu > .open').click(function() {
+        $('.content_wrap').removeClass('close');
+        $('.content_wrap').addClass('open');
+        
+        $.ajax({
+            url: "/admmgr/member/openYnUpdateAjax.do",
+            type: "POST",
+            data: {"openYn":"open"},
+            success: function (response) {
+            },
+            error: function (error) {
+            	alert(error);
+            }
+        });
+        
+    });
+
+    $('.etc_sec_top').click(function () {
+        $(this).parent().removeClass("on");
+        $(this).next().stop().slideUp(300);
+        if (!$(this).next().is(":visible")) {
+            $(this).next().stop().slideDown(300);
+            $(this).parent().addClass("on");
+        }
+    });
+    
+    $('.etc_list > .type02 > a').click(function () {
+        $(this).parent().prev().removeClass("on");
+        $(this).parent().addClass("on");
+        $(this).parent().parent().parent().addClass("type02");
+        $(this).parent().parent().parent().removeClass("type01");
+        
+    });
+    $('.etc_list > .type01 > a').click(function () {
+        $(this).parent().next().removeClass("on");
+        $(this).parent().addClass("on");
+        $(this).parent().parent().parent().addClass("type01");
+        $(this).parent().parent().parent().removeClass("type02");
+    });
+
+
+
+
+    
+});
+
+
+
+$(document).ready(function() {
+    // 로컬 스토리지에서 테마 값 불러오기
+    let theme = localStorage.getItem('theme');
+
+    // 저장된 테마가 있으면 적용
+    if (theme) {
+        applyTheme(theme);
+    } else {
+        // 저장된 테마가 없을 경우 기본 테마 설정
+        theme = $('#theme').val() || 'light'; // 기본값은 'light'
+        applyTheme(theme);
+
+        // 기본 테마를 로컬 스토리지에 저장
+        localStorage.setItem('theme', theme);
+    }
+
+    // 시스템 테마 설정이 변경될 때 테마를 다시 적용
+//    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+//        applySystemTheme();
+//    });
+//
+//    // 페이지가 로드되었을 때 시스템 테마를 적용
+//    applySystemTheme();
+
+    // lnb 추가
+    $('.lft_sub_menu_ul > li > .btn_dept ').on('click', function () {
+        //$(this).closest('li').toggleClass('on');
+        // $(this).closest('li').siblings('li').removeClass('on').find(' .sec_ul ').slideUp();
+
+    	var classNm = $(this).closest('li')[0].className;
+    	
+    	let menuId = $(this).next()[0].id;
+    	let onClass = JSON.parse(localStorage.getItem("onClass")) || [];
+    	
+    	// 메뉴가 열려 있을 때 닫기
+    	if(classNm.indexOf("on") > -1) {
+    		$(this).closest('li').removeClass("on");
+    		
+    		// localStorage에서 해당 menuId 제거
+            onClass = onClass.filter(id => id !== menuId);
+            localStorage.setItem("onClass", JSON.stringify(onClass));
+    		
+    	// 메뉴가 닫혀 있을 때 열기
+    	} else {
+    		$(this).closest('li').addClass("on");
+    		
+    		if (!onClass.includes(menuId)) {
+                onClass.push(menuId);
+                localStorage.setItem("onClass", JSON.stringify(onClass));
+            }
+    	}
+    	
+    });
+
+});
+
+function default_menu() {
+	
+	fn_top(); //초기 실행 및 유지
+	
+	//탑메뉴 세션
+	$('.lft_sub_menu_ul a').click(function() {		
+		
+	    var clickedUrl = $(this).attr('href');							// 클릭된 메뉴의 URL 가져오기
+	    var clickedMenuName = $(this).text(); 							// 클릭된 메뉴의 코드정보 가져오기	    
+	    var clickedMenuCode = $(this).attr("id");						// 클릭된 ID 정보 가져오기
+	    
+	    var MenuCodeArr = clickedMenuCode.split('_');	    
+	    var MenuTab = MenuCodeArr[0];	    
+	    var MenuCode = MenuCodeArr[1];
+	    var MenuValue = MenuCodeArr[2];
+	    var MenuUrl = clickedUrl;
+	    var AjaxUrl = "";	   
+	    
+	    if( MenuCode != "008000000000000" ) {
+	    	    
+		    if( MenuTab == "leftmenu1" ) {
+		    	
+		    	if( MenuValue == "0" ) {
+			    	
+		    		AjaxUrl = "/admmgr/menu/tab3N.do";
+		    		
+		    	} else {
+		    		
+		    		AjaxUrl = "/admmgr/menu/tab3N.do";
+		    		
+		    	}
+		    	
+		    	
+		    } else if( MenuTab == "leftmenu2" ) {
+		    	
+		    	if( MenuValue == "0" ) {
+			    	
+		    		AjaxUrl = "/admmgr/menu/tab3N.do";
+		    		
+		    	} else {
+		    		
+		    		AjaxUrl = "/admmgr/menu/tab2.do";
+		    		
+		    	}
+		    	
+		    	
+		    } else if( MenuTab == "leftmenu3" ) {
+		    	
+		    	if( MenuValue == "0" ) {
+		    	
+		    		AjaxUrl = "/admmgr/menu/tab3N.do";
+		    		
+		    	} else {
+		    		
+		    		AjaxUrl = "/admmgr/menu/tab3Y.do";
+		    		
+		    	}	    	
+		    	
+		    } else if( MenuTab == "leftmenu4" ) {
+		    	
+		    	if( MenuValue == "0" ) {
+			    	
+		    		AjaxUrl = "/admmgr/menu/tab3N.do";
+		    		
+		    	} else {
+		    		
+		    		AjaxUrl = "/admmgr/menu/tab3Y.do";
+		    		
+		    	}	    	
+		    	
+		    } else if( MenuTab == "leftmenu5" ) {
+		    	
+		    	if( MenuValue == "0" ) {
+			    	
+		    		AjaxUrl = "/admmgr/menu/tab3N.do";
+		    		
+		    	} else {
+		    		
+		    		AjaxUrl = "/admmgr/menu/tab3Y.do";
+		    		
+		    	}	    	
+		    	
+		    }
+		    
+			$.ajax({
+				url : AjaxUrl ,
+				type : "POST",
+				data : {
+					"menu_cd" : MenuCode ,
+					"menu_url" : MenuUrl
+				},
+				success : menu_result_ok
+			});
+		
+	    } else {
+	    	
+			$.ajax({
+				url : AjaxUrl ,
+				type : "POST",
+				data : {
+					"menu_cd" : MenuCode ,
+					"menu_url" : MenuUrl
+				},
+				success : menu_result_ok
+			});	    	
+	    	
+	    }
+	    
+	});
+	
+	$(document).on('click', '.draggable_click', function() {
+		
+	    var clickedUrl = $(this).attr('href');									// 클릭된 메뉴의 URL 가져오기
+	    var clickedMenuCode = $(this).attr("id").replace("draggable_","");      // 클릭된 ID 정보 가져오기        
+
+		$.ajax({
+			url : "/admmgr/menu/tab_update2.do" ,
+			type : "POST",
+			data : {
+				"now_url" : clickedUrl ,
+				"menu_code" : clickedMenuCode
+			},
+			success : setting_menu_list
+		});	    
+	
+	    
+	});
+	
+	function menu_result_ok( result ) {
+		
+		if (result == 'Y') {
+			
+			fn_top();
+			
+		}
+		
+	}
+	
+	// top 메뉴에 마지막 클릭된 메뉴 이름 표시
+	function fn_top(){
+		
+		var now_url = window.location.href;
+		
+		$.ajax({
+			url : "/admmgr/menu/tab_update.do" ,
+			type : "POST",
+			data : {
+				"now_url" : now_url
+			},
+			success : setting_menu_list
+		});
+	}
+	
+	// 메뉴 세팅
+	function setting_menu_list( result ) {
+		
+	    var innerHtml = result;
+		
+	    //메뉴 초기화
+	    $('.tab_wrap > ul').children().remove();
+	    	
+	    //메뉴 새로 생성
+	    $('.tab_wrap > ul').append(innerHtml);
+
+
+        $('.tab_wrap > ul').children('li').removeClass('on');
+       
+	    
+		
+	}	
+
+	//메뉴 삭제
+	$(document).on('click', '.btn_del', function() {
+						
+		var tabcode = $(this).find(".ico_close").attr("id").replace( "tabcode_" ,"" );
+		
+		$.ajax({
+			url : "/admmgr/menu/tab_delete.do" ,
+			type : "POST",
+			data : {
+				"menu_cd" : tabcode
+			},
+			success : setting_menu_list
+		});	
+		
+	});
+}
+
+// 테마 적용 함수
+function applyTheme(theme) {
+    $('body').attr('data-theme', theme);
+    $('#etc_mode').removeClass('type01 type02').addClass(theme === 'light' ? 'type02' : 'type01');
+    
+    $('#etc_mode .etc_list li').removeClass('on');
+    $('#etc_mode .etc_list .' + (theme === 'light' ? 'type02' : 'type01')).addClass('on');
+}
+
+//다크 테마 적용 함수
+function themeDark() {
+	const theme = "dark";
+	
+    applyTheme('dark');
+    localStorage.setItem('theme', 'dark');
+    updateTheme(theme);
+}
+
+//라이트 테마 적용 함수
+function themeLight() {
+	const theme = "light";
+	
+    applyTheme('light');
+    localStorage.setItem('theme', 'light');
+    updateTheme(theme);
+}
+
+//session theme 업데이트
+function updateTheme(theme) {
+	$.ajax({
+		type : 'post',
+		url : '/admmgr/member/themeUpdateAjax.do',
+		data : {theme : theme},
+		success : function(data) {
+			if(data === "OK") {
+				//console.log("성공");
+			}else {
+				alert("실패");
+			}
+		},
+		error : function(request, status, error) {
+			alert("처리 중 오류가 발생되었습니다.\nerror:"+error+"request:"+request+"status:"+status);
+		}
+	})
+}
+
+// 시스템 테마 적용 함수
+function applySystemTheme() {
+    var isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (isDarkMode) {
+        applyTheme('dark');
+    } else {
+        applyTheme('light');
+    }
+}
+
+
+
+
+//화면 확대, 축소
+let nowZoom = 100; // 현재 비율
+
+// 화면크기 축소
+function zoomOut() {
+    nowZoom = nowZoom - 10;
+
+    // 화면크기 최대 축소율 70%
+    if (nowZoom <= 70) {
+        nowZoom = 70;
+    }
+    zooms();
+}
+
+// 화면크기 확대
+function zoomIn() {
+    nowZoom = nowZoom + 10;
+
+    // 화면크기 최대 확대율 150%
+    if (nowZoom >= 150) {
+        nowZoom = 150;
+    }
+    zooms();
+}
+
+// 원래 화면크기도 되돌아가기
+function zoomReset() {
+    nowZoom = 100;
+    zooms();
+}
+
+function zooms() {
+    document.body.style.zoom = nowZoom + "%";
+
+    // 화면 축소율이 70% 일때 클릭하면 alert창
+    $('.zoomout').one('click', function () {
+        if (nowZoom == 70) {
+            alert("더 이상 축소할 수 없습니다.");
+        }
+    });
+
+    // 화면 확대율이 150% 일때 클릭하면 alert창
+    $('.zoomin').one('click', function () {
+        if (nowZoom == 150) {
+            alert("더 이상 확대할 수 없습니다.");
+        }
+    });
+}
+
+
+var doc = document.documentElement;
+
+        // 전체화면 설정
+        function openFullScreenMode() {
+            if (doc.requestFullscreen) {
+                doc.requestFullscreen();
+            } else if (doc.webkitRequestFullscreen) {
+                doc.webkitRequestFullscreen();
+            } else if (doc.mozRequestFullScreen) {
+                doc.mozRequestFullScreen();
+            } else if (doc.msRequestFullscreen) {
+                doc.msRequestFullscreen();
+            }
+            $('.fullscreen').hide();
+            $('.close-fullscreen').show();
+        }
+
+        // 전체화면 해제
+        function closeFullScreenMode() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+            $('.fullscreen').show();
+            $('.close-fullscreen').hide();
+        }
+
+        // 전체화면 토글 기능
+        function toggleFullScreenMode() {
+            if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+                closeFullScreenMode();
+            } else {
+                openFullScreenMode();
+            }
+        }
+
+        $(document).ready(function() {
+            $('.fullscreen-toggle').on('click', toggleFullScreenMode);
+        });
+
+
+    $(document).ready(function () {
+        $('.tooltip_icon').on('click', function (event) {
+            event.preventDefault(); // 기본 동작(리로딩) 방지
+            const $tooltipInner = $(this).siblings('.tooltip_inner');
+            $tooltipInner.show();
+        });
+
+        $('.tooltip_close').on('click', function (event) {
+            event.preventDefault(); // 기본 동작(리로딩) 방지
+            $(this).parent('.tooltip_inner').hide();
+        });
+
+        // 문서 클릭 시 다른 툴팁 모두 닫기
+        $(document).on('click', function (event) {
+            if (!$(event.target).closest('.tooltip').length) {
+                $('.tooltip_inner').hide(); // 모든 툴팁을 닫음
+            }
+        });
+
+        // 탭 스크립트
+        /*$(' .tab_h a ').on({ "click" : function(){
+            var $acTab = $(this).attr("href"); 
+            
+            $( this ).parents('.tab_section').find('.tab_cnt ').hide(); 		
+            $( this ).parent(' li ').addClass('on').siblings('li').removeClass('on');
+            $( $acTab ).show();
+            return false;	
+            }
+          });*/
+          
+    });
+       
+
+    

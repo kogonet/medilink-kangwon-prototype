@@ -1,0 +1,48 @@
+﻿# Font map file : encoding UTF-8
+#
+# Format:
+# <font families>,<file name>
+#
+# Field Descriptions:
+# <font families> -> A colon separated list of font names
+#                 -> _FALLBACK_DEFAULT : default fallback font 
+#                 -> _FALLBACK_KO : korean fallback font 
+#                 -> _FALLBACK_EN : english fallback font 
+#                 -> _FALLBACK_JP : japan fallback font 
+#                 -> _FALLBACK_CN : chinese fallback font 
+# <file name>     -> The filename of the font
+#
+#
+
+###############################################
+# Free License Fonts Settings
+###############################################
+
+_FALLBACK_DEFAULT,NanumGothic.ttf,NanumGothic
+_FALLBACK_KO,NanumGothic.ttf,NanumGothic
+_FALLBACK_EN,NanumGothic.ttf,NanumGothic
+_FALLBACK_JP,SourceHanSans-Light.otf
+_FALLBACK_CN,SourceHanSansSC-Light.otf
+_FALLBACK_SYMBOL,xits-math.ttf
+_FALLBACK_0000_FFFF,DroidSansFallback.ttf
+
+# Common fonts
+나눔고딕:맑은 고딕:NanumGothic,NanumGothic.ttf
+DroidSansFallback,DroidSansFallback.ttf
+XITS Math,xits-math.ttf
+
+# Japanese fonts
+ＭＳ 明朝:MS Mincho,SourceHanSans-Light.otf
+ＭＳ Ｐ明朝:MS PMincho:MS UI PMincho:IPAPMincho,SourceHanSans-Light.otf
+ＭＳ ゴシック:MS Gothic,SourceHanSans-Light.otf
+ＭＳ Ｐゴシック:MS PGothic:MS UI Gothic:IPAPGothic,SourceHanSans-Light.otf
+MS UI Gothic,SourceHanSans-Light.otf
+メイリオ:Meiryo,SourceHanSans-Light.otf
+Meiryo UI,SourceHanSans-Light.otf
+游ゴシック:Yu Gothic,SourceHanSans-Light.otf
+游明朝:Yu Mincho,SourceHanSans-Light.otf
+
+# Chinese fonts
+宋体:SimSun,SourceHanSansSC-Light.otf
+黑体:SimHei,SourceHanSansSC-Light.otf
+楷体:KaiTi,SourceHanSansSC-Light.otf

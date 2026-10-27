@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- 강원도 18개 시군구 지역필터 버튼 (공용 include) - pf_btn 클래스/구조는 참고소스 그대로 진행 HDH --%>
+<button class="pf_btn on" onclick="MedicalAIMap.setGugun(null,this)">전체</button>
+<button class="pf_btn" data-gugun="춘천시" onclick="MedicalAIMap.setGugun('춘천시',this)">춘천</button>
+<button class="pf_btn" data-gugun="원주시" onclick="MedicalAIMap.setGugun('원주시',this)">원주</button>
+<button class="pf_btn" data-gugun="강릉시" onclick="MedicalAIMap.setGugun('강릉시',this)">강릉</button>
+<button class="pf_btn" data-gugun="동해시" onclick="MedicalAIMap.setGugun('동해시',this)">동해</button>
+<button class="pf_btn" data-gugun="태백시" onclick="MedicalAIMap.setGugun('태백시',this)">태백</button>
+<button class="pf_btn" data-gugun="속초시" onclick="MedicalAIMap.setGugun('속초시',this)">속초</button>
+<button class="pf_btn" data-gugun="삼척시" onclick="MedicalAIMap.setGugun('삼척시',this)">삼척</button>
+<button class="pf_btn" data-gugun="홍천군" onclick="MedicalAIMap.setGugun('홍천군',this)">홍천</button>
+<button class="pf_btn" data-gugun="횡성군" onclick="MedicalAIMap.setGugun('횡성군',this)">횡성</button>
+<button class="pf_btn" data-gugun="영월군" onclick="MedicalAIMap.setGugun('영월군',this)">영월</button>
+<button class="pf_btn" data-gugun="평창군" onclick="MedicalAIMap.setGugun('평창군',this)">평창</button>
+<button class="pf_btn" data-gugun="정선군" onclick="MedicalAIMap.setGugun('정선군',this)">정선</button>
+<button class="pf_btn" data-gugun="철원군" onclick="MedicalAIMap.setGugun('철원군',this)">철원</button>
+<button class="pf_btn" data-gugun="화천군" onclick="MedicalAIMap.setGugun('화천군',this)">화천</button>
+<button class="pf_btn" data-gugun="양구군" onclick="MedicalAIMap.setGugun('양구군',this)">양구</button>
+<button class="pf_btn" data-gugun="인제군" onclick="MedicalAIMap.setGugun('인제군',this)">인제</button>
+<button class="pf_btn" data-gugun="고성군" onclick="MedicalAIMap.setGugun('고성군',this)">고성</button>
+<button class="pf_btn" data-gugun="양양군" onclick="MedicalAIMap.setGugun('양양군',this)">양양</button>

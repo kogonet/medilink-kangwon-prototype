@@ -1,0 +1,122 @@
+
+/* 공통 사용자 로고 설정
+ * background
+ *     none: 보이지 않음
+ *     url(이미지URL): 설정한 URL이 나타납니다.
+ *     이미지 사이즈는 너비는 92px, 높이는 12px를 권장합니다.
+ *     해당하는 이미지보다 큰 이미지를 사용하는 경우, 이미지 크기에 맞게 width와 height를 조정하시면 됩니다.
+ *     로고 위치를 조정할 경우 margin(margin-top, margin-left, margin-right)을 조정하여 사용하시면 됩니다.
+ *     권장하는 사이즈 보다 작을 시에 no-repeat; 를 추가하면 로고 이미지가 반복되지 않습니다.
+*/
+.wrap__logo {
+	background: none;
+}
+
+/* 모바일 모드 사용자 로고 설정
+ * background
+ *     none: 보이지 않음
+ *     url(이미지URL): 설정한 URL이 나타납니다.
+ *     이미지 사이즈는 너비는 45px, 높이는 8px를 권장합니다.
+ *     해당하는 이미지보다 큰 이미지를 사용하는 경우, 이미지 크기에 맞게 width와 height를 조정하시면 됩니다.
+ *     로고 위치를 조정할 경우 margin(margin-top, margin-left, margin-right)을 조정하여 사용하시면 됩니다.
+ *     권장하는 사이즈 보다 작을 시에 no-repeat; 를 추가하면 로고 이미지가 반복되지 않습니다.
+*/
+@media screen and (max-width: 768px) {
+	.wrap__logo {
+		background: none;
+	}
+}
+
+/* HTML(Cell, Word 포맷 한정)의 경우 .html .wrap__logo에 지정해야 적용됩니다.*/
+.html .wrap__logo {
+	background: none;
+}
+
+/* 문서명 폰트 설정
+ * 문서명 폰트의 크기를 조정할 수 있습니다.
+*/
+.wrap__title {
+	font-size: 15px;
+}
+
+/* 상단 헤더 배경색 설정 */
+.wrap__header {
+    background-color : #303030;
+}
+
+/* 페이지 / 시트 이동 입력창 배경색 설정 */
+.page__input, .header-tablist__input{
+	background-color: #333333 !important;
+}
+
+/* 썸네일 영역의 배경색 변경
+ * 썸네일 영역의 배경색을 설정할 수 있습니다.
+*/
+.wrap__thumbnail {
+	background-color: #ffffff;
+}
+
+/* 썸네일 번호 색상 변경
+ * 썸네일 번호의 색상이나 크기를 설정할 수 있습니다.
+*/
+.thumb__span {
+	color: #bcbcbc;
+	font-size: 15px;
+}
+
+/* 선택한 썸네일의 테두리색 설정
+ * 선택한 썸네일의 테두리색을 설정할 수 있습니다.
+*/
+.thumb__focus {
+	border: 4px solid #ececec;
+}
+
+/* 문서 영역의 어두운 배경색 설정
+ * 문서 영역의 어두운 배경색을 설정할 수 있습니다.
+*/
+body, .wrap__contents {
+	background-color: #202020;
+}
+
+/* 문서 영역의 밝은 배경색 설정
+ * 문서 영역의 밝은 배경색을 설정할 수 있습니다.
+*/
+.wrap__contents--bgcolor-light {
+	background-color: #bfbfbf; 
+}
+
+/* 모바일 모드, 태블릿 모드의 컨트롤바를 제거
+ * 제거하기를 원하지 않는다면, 아래의 내용을 지우면 됩니다.
+*/
+#mobile-controlbar {
+	display: none;
+}
+
+@media screen and (max-width: 768px) {
+	/* 모바일 모드의 상단 헤더 전체화면 버튼 제거
+	 * 제거하기를 원하지 않는다면, 아래의 내용을 지우면 됩니다.
+	*/
+	#fullscreen {
+		display: none;
+	}
+	
+	/* 모바일 모드의 상단 헤더 더보기 버튼 제거
+	 * 제거하기를 원하지 않는다면, 아래의 내용을 지우면 됩니다.
+	*/
+	#more {
+		display: none;
+	}
+}
+
+/* HTML(Cell, Word 포맷 한정) 스킨에서 모바일 모드의 상단 전체화면 버튼 제거
+ * 제거하기를 원하지 않는다면, 아래의 내용을 지우면 됩니다.
+ */
+.html #fullscreen {
+	display: none;
+}
+/* HTML(Cell, Word 포맷 한정) 스킨에서 모바일 모드의 상단 더보기 버튼 제거
+ * 제거하기를 원하지 않는다면, 아래의 내용을 지우면 됩니다.
+ */
+.html #more {
+	display: none;
+}

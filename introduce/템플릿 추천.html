@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>메디링크 강원 — 템플릿 추천</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;height:100%}</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="design_canvas.jsx"></script>
+<script type="text/babel" src="tpl-shared.jsx"></script>
+<script type="text/babel" src="tpl-a.jsx"></script>
+<script type="text/babel" src="tpl-b.jsx"></script>
+<script type="text/babel" src="tpl-c.jsx"></script>
+<script type="text/babel">
+const W = 1920, H = 1080;
+function App() {
+  return (
+    <DesignCanvas>
+      <DCSection id="a" title="A · Clinical Grid  —  추천 ★" subtitle="화이트 + 네이비 + 메디컬 블루 1색. 그리드·괘선 중심의 정부지원사업/B2G 표준형. 가장 신뢰감 있고 인쇄·PDF에 강함.">
+        <DCArtboard id="a1" label="표지" width={W} height={H}><TACover /></DCArtboard>
+        <DCArtboard id="a2" label="해결할 문제" width={W} height={H}><TAProblem /></DCArtboard>
+        <DCArtboard id="a3" label="응급실 LIVE" width={W} height={H}><TAEmergency /></DCArtboard>
+      </DCSection>
+      <DCSection id="b" title="B · Midnight Signal" subtitle="딥 네이비 + 시안 신호색 + 코랄 경보색. 데이터·실시간성을 강조하는 테크 피칭형. 화면 발표(무대/IR)에 최적.">
+        <DCArtboard id="b1" label="표지" width={W} height={H}><TBCover /></DCArtboard>
+        <DCArtboard id="b2" label="해결할 문제" width={W} height={H}><TBProblem /></DCArtboard>
+        <DCArtboard id="b3" label="응급실 LIVE" width={W} height={H}><TBEmergency /></DCArtboard>
+      </DCSection>
+      <DCSection id="c" title="C · Gangwon Care" subtitle="웜 페이퍼 + 포레스트 그린 + 명조 헤드라인. 도민·어르신 중심의 공공서비스 감성형. 사진이 주인공.">
+        <DCArtboard id="c1" label="표지" width={W} height={H}><TCCover /></DCArtboard>
+        <DCArtboard id="c2" label="해결할 문제" width={W} height={H}><TCProblem /></DCArtboard>
+        <DCArtboard id="c3" label="응급실 LIVE" width={W} height={H}><TCEmergency /></DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

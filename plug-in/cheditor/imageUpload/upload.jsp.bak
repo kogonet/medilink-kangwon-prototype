@@ -1,0 +1,103 @@
+<%@page import="org.apache.poi.util.SystemOutLogger"%>
+<%@page import="com.ubireport.common.org.apache.xerces.impl.xs.identity.Selector.Matcher"%>
+<%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.io.*" %>
+<%@ page import="java.util.Calendar" %>
+<%@ page import="com.oreilly.servlet.*" %>
+<%@ page import="com.oreilly.servlet.multipart.*" %>
+
+<%
+int fileSizeLimit = 50 * 1000 * 1000;
+String encoding = "utf-8";
+
+//현재일자정보 추출
+Calendar cal = Calendar.getInstance();
+String dateString = "";
+dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+dateString = dateString.replaceAll("-", "\\/");
+
+//저장경로 : 프로퍼티
+final String UPLOAD_DIRECTORY = com.ctit.helper.PropertiesUtil.getProperty("Globals.FilePath")+"editor";
+final String UPLOAD_URL       = com.ctit.helper.PropertiesUtil.getProperty("Globals.ServerUrl");
+
+System.out.println("----------------Editor UPLOAD_DIRECTORY["+UPLOAD_DIRECTORY+"]");
+//업로드 디렉토리
+//String SAVE_DIR = "C:/1.DEV/KEA/4.Workspace/CENTUM/CTIT-Shhosp/src/main/webapp/_upload/" + dateString;
+//String SAVE_DIR = "C:/1.DEV/KEA/4.Workspace/CTIT-Shhosp/src/main/webapp/_upload/editor/"+dateString;
+String SAVE_DIR = UPLOAD_DIRECTORY+"/"+dateString+"/";
+String SAVE_URL = "http://222.99.200.41:58080/_upload/editor/"+dateString+"/";
+System.out.println("----------------Editor SAVE_DIR["+SAVE_DIR+"]");
+try{
+
+	File saveDir = new File(SAVE_DIR);
+    if( !saveDir.exists() ){
+    	saveDir.mkdirs();
+    }
+
+	long fileSize = 0;
+    String saveFileName = null;
+    MultipartRequest mRequest = new MultipartRequest(request, SAVE_DIR, fileSizeLimit, encoding, new DefaultFileRenamePolicy());
+
+    saveFileName = mRequest.getFilesystemName("file");
+    //saveFileName = "20201016172559_sbgguxvp.jpg";
+
+    File file = mRequest.getFile("file");
+    if( file == null ){
+        throw new Exception("-ERR: No File");
+    }
+
+    fileSize = file.length();
+    if (fileSize < 1) {
+        throw new Exception("-ERR: File Size 0");
+    }
+
+    String rData = String.format("{\"fileUrl\":\"%s%s\", \"filePath\":\"%s%s\", \"fileName\":\"%s\", \"fileSize\":\"%d\"}",
+    		SAVE_URL, saveFileName, SAVE_DIR, saveFileName, saveFileName, fileSize);
+    out.println(rData);
+
+} catch(Exception e) {
+	System.out.println("----------------Editor ERROR>>"+e);
+    out.println(e.getMessage());
+}
+%>
+
+<%--
+<%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.io.*" %>
+<%@ page import="com.oreilly.servlet.*" %>
+<%@ page import="com.oreilly.servlet.multipart.*" %>
+<%@ include file="config.jsp" %>
+
+<%
+int fileSizeLimit = 50 * 1000 * 1000;
+String encoding = "utf-8";
+
+try {
+    long fileSize = 0;
+    String saveFileName = null;
+    MultipartRequest mRequest = new MultipartRequest(request, SAVE_DIR, fileSizeLimit, encoding, new DefaultFileRenamePolicy());
+
+    saveFileName = mRequest.getFilesystemName("file");
+    File file = mRequest.getFile("file");
+
+    if (file == null) {
+        throw new Exception("-ERR: No File");
+    }
+
+    fileSize = file.length();
+
+    if (fileSize < 1) {
+        throw new Exception("-ERR: File Size 0");
+    }
+
+    File sFile = new File(SAVE_DIR + saveFileName);
+	System.out.println(sFile);
+    String rData = String.format("{\"fileUrl\":\"%s%s\", \"filePath\":\"%s%s\", \"fileName\":\"%s\", \"fileSize\":\"%d\"}",
+                            SAVE_URL, saveFileName, SAVE_DIR, saveFileName, saveFileName, fileSize);
+    out.println(rData);
+    System.out.println(rData);
+
+} catch(Exception e) {
+    out.println(e.getMessage());
+}
+%> --%>

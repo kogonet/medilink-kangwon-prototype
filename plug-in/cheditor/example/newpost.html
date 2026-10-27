@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CHEditor Demo</title>
+<meta charset="UTF-8">
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<script type="text/javascript" src="../cheditor.js"></script>
+</head>
+<body>
+<h2 style="text-align: center">CHEditor Demo</h2>
+
+<script type="text/javascript">
+
+function doSubmit (theform)
+{
+    alert(myeditor.outputBodyHTML());
+    return false;
+}
+function showImageInfo() {
+    var data = myeditor.getImages();
+    if (data == null) {
+        alert('No Image');
+        return;
+    }
+    for (var i=0; i<data.length; i++) {
+        var str = 'IMG URL: ' + data[i].fileUrl + "\n";
+        str += 'IMG PATH: ' + data[i].filePath + "\n";
+        str += 'IMG NAME: ' + data[i].origName + "\n";
+        str += 'SAVE NAME: ' + data[i].fileName + "\n";
+        str += 'IMG SIZE: ' + data[i].width + ' X ' + data[i].height + "\n";
+        str += 'FILE ISZE: ' + data[i].fileSize;
+        alert(str);
+    }
+}
+</script>
+
+<div style="width:80%; margin: 0 auto">
+    <form method="post" name="theform" onsubmit="return doSubmit(this)">
+    <textarea id="fm_post" name="fm_write"></textarea>
+	<script type="text/javascript">
+		var myeditor = new cheditor();
+		myeditor.config.editorHeight = '300px';
+		myeditor.config.editorWidth = '100%';
+		myeditor.inputForm = 'fm_post';
+		myeditor.run();
+	</script>
+    <div style="text-align: center; margin-top: 20px">
+        <input type="submit" value="TEXT" />
+        <input type="button" value="IMG_INFO" onclick="showImageInfo()" />
+    </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+.reset_css_form{margin:0 auto; line-height:1.4; padding:10px; width:556px; color:#333; text-align:justify; font-size: 12px; white-space: -moz-pre-wrap; /* Mozilla, since 1999 */ white-space: -pre-wrap; /* Opera 4-6 */ white-space: -o-pre-wrap; /* Opera 7 */ word-wrap: break-word; /* Internet Explorer 5.5+ */ overflow:hidden;}
+.reset_css_form a{margin:0; padding:0;  font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form address{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form blockquote{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form br{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form fieldset{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form legend{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form label{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form input{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form select{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form textarea{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form button{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form table{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form caption{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form cite{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form code{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form dl{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form dt{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form dd{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form h1{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form h2{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form h3{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form h4{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form h5{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form h6{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form p{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form b{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form div{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form iframe{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form ul{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form ol{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form li{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form hr{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form form{margin:0; padding:0; font-size: 12px; color:#333; font-family: "돋움", dotum, Verdana, Arial, sans-serif; line-height:1.4;}
+.reset_css_form a{color:#333; text-decoration:none;}
+.reset_css_form a:link{color:#333; text-decoration:none;}
+.reset_css_form a:visited {color:#333; text-decoration:none;}
+.reset_css_form a:active{color:#333; text-decoration:underline;}
+.reset_css_form a:hover{color:#333; text-decoration:underline;}
+.reset_css_form img{margin: 0; padding: 0; border: 0;}
+.reset_css_form div{margin: 0; padding: 0; border: 0;}
+.reset_css_form hr {clear:both; display: none; list-style: none; position: absolute; top: 0; left: 0; width:0; height:0; margin: 0; padding: 0; border: 0; background: none; font:0/0; line-height: 0; visibility:hidden;}
+.reset_css_form ul{list-style:none; }
+.reset_css_form ol{list-style:none; }
+.reset_css_form li{list-style:none; }
+.reset_css_form hr {clear:both; display: none; list-style: none; position: absolute; top: 0; left: 0; width:0; height:0; margin: 0; padding: 0; border: 0; background: none; font:0/0; line-height: 0; visibility:hidden;}
+.reset_css_form fieldset {border:none;}
+.reset_css_form input{vertical-align: middle;}
+.reset_css_form input{color:#333; font-size:100%; vertical-align:middle; }
+.reset_css_form select {color:#333; font-size:100%; vertical-align:middle; }
+.reset_css_form table {border-collapse:collapse; border-spacing:0; line-height: 1.4; font-size: 12px;}
+.reset_css_form caption {display: none; list-style: none; position: absolute; top: 0; left: 0; width:0; height:0; margin: 0; padding: 0; border: 0; background: none; font:0/0; line-height: 0; visibility:hidden;}
+.reset_css_form th{margin: 0; padding: 0; font-size: 12px; line-height: 1.4;}
+.reset_css_form td{margin: 0; padding: 0; font-size: 12px; line-height: 1.4;}
+.reset_css_form table a{color:#333; text-decoration:none; }
+.reset_css_form table a:link{color:#333; text-decoration:none; }
+.reset_css_form table a:visited {color:#333; text-decoration:none; }
+.reset_css_form table a:active{color:#333; text-decoration: underline; }
+.reset_css_form table a:hover{color:#333; text-decoration: underline; }

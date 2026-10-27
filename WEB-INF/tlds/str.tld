@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd ">
+	<tlib-version>0.0</tlib-version>
+	<short-name>c2r</short-name>
+	<uri>http://customTag.com/jsp/str</uri>
+	<!-- 시스템공통:사이트코드 -->
+	<function>
+		<description>시스템공통:사이트코드</description>
+		<name>getSiteList</name>
+		<function-class>def.admmgr.manage.admSiteCode</function-class>
+		<function-signature>java.util.List getSiteList()</function-signature>
+	</function>
+	<function>
+		<description>공통코드 selectbox 만들기</description>
+		<name>makeCodeSelectBoxForAlias</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.lang.String makeCodeSelectBoxForAlias(java.lang.String,java.lang.String,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>공통코드 selectbox 만들기</description>
+		<name>makeCodeSelectBoxForPtCode</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.lang.String makeCodeSelectBoxForPtCode(java.lang.String,java.lang.String,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>공통코드 radiobox 만들기</description>
+		<name>makeCodeRadioBoxForAlias</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.lang.String makeCodeRadioBoxForAlias(java.lang.String,java.lang.String,java.lang.String,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>공통코드 radiobox 만들기</description>
+		<name>makeCodeRadioBoxForPtCode</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.lang.String makeCodeRadioBoxForPtCode(java.lang.String,java.lang.String,java.lang.String,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>공통코드 radiobox 만들기</description>
+		<name>makeCodeRadioBoxForPtCodeWithClass</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.lang.String makeCodeRadioBoxForPtCodeWithClass(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>공통코드 List 만들기</description>
+		<name>makeCodeListForPtCode</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.util.List makeCodeListForPtCode(java.lang.String,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>공통코드 정보 추출</description>
+		<name>getCodeInfo</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.util.HashMap getCodeInfo(java.lang.String,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>공통코드 코드명 추출</description>
+		<name>getCodeName</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.lang.String getCodeName(java.lang.String,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>권한 List 만들기</description>
+		<name>makeAuthList</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.util.List makeAuthList(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>파일 List 만들기</description>
+		<name>makeFileList</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.util.List makeFileList(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>아이콘 List 만들기</description>
+		<name>makeIconList</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.util.List makeIconList(java.lang.String,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>파일 List 만들기</description>
+		<name>makeKaiFileList</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.util.List makeKaiFileList(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>배너 Map 만들기</description>
+		<name>makeBannerMap</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.util.List makeBannerMap(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>배너 List 만들기</description>
+		<name>makeBannerList</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.util.List makeBannerList(java.lang.String)</function-signature>
+	</function>
+	<!-- 메뉴관련 -->
+	<function>
+		<description>Front Menu Depth1 List</description>
+		<name>getListFrontMenuDepth1</name>
+		<function-class>com.ctit.helper.CustomTag</function-class>
+		<function-signature>java.util.List getListFrontMenuDepth1()</function-signature>
+	</function>
+	<function>
+		<description>Front Menu Child List</description>
+		<name>getListFrontMenuChild</name>
+		<function-class>com.ctit.helper.CustomTag</function-class>
+		<function-signature>java.util.List getListFrontMenuChild(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>Front Menu Now Map</description>
+		<name>getMapFrontMenuNow</name>
+		<function-class>com.ctit.helper.CustomTag</function-class>
+		<function-signature>java.util.List getMapFrontMenuNow(java.lang.String,java.lang.String)</function-signature>
+	</function>
+	<!-- 관리자 세션 관련 -->
+	<function>
+		<description>Admin Session UserInfo Map</description>
+		<name>getMapAdminUserInfo</name>
+		<function-class>com.ctit.helper.CustomTag</function-class>
+		<function-signature>java.util.Map getMapAdminUserInfo(javax.servlet.http.HttpServletRequest)</function-signature>
+	</function>
+	<!-- 특수문자 Reverse : (R&amp;amp;amp;D) > (R&D) -->
+	<function>
+		<description>Reverse XSS To String</description>
+		<name>getReverseXSS</name>
+		<function-class>com.ctit.helper.CustomTag</function-class>
+		<function-signature>java.lang.String getReverseXSS(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>개행문자 -> BR태그로 변환</description>
+		<name>CvtNewlineToBr</name>
+		<function-class>com.ctit.helper.CCode</function-class>
+		<function-signature>java.util.List CvtNewlineToBr(java.lang.String)</function-signature>
+	</function>
+	<!-- 설문조사 -->
+	<function>
+		<description>설문 조사 그룹 LIST</description>
+		<name>makeSurveyGroupList</name>
+		<function-class>def.admmgr.manage.admSurvey</function-class>
+		<function-signature>java.util.List SurveyGroupList(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>설문 조사 문항 LIST</description>
+		<name>makeSurveyQuestList</name>
+		<function-class>def.admmgr.manage.admSurvey</function-class>
+		<function-signature>java.util.List SurveyQuestList(java.lang.String,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>설문 조사 항목 LIST</description>
+		<name>makeSurveyCatgyList</name>
+		<function-class>def.admmgr.manage.admSurvey</function-class>
+		<function-signature>java.util.List SurveyCatgyList(java.lang.String,java.lang.String,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>설문 조사 답변 LIST</description>
+		<name>makeSurveyAnswerList</name>
+		<function-class>def.admmgr.manage.admSurvey</function-class>
+		<function-signature>java.util.List SurveyAnswerList(java.lang.String,java.lang.String,java.lang.String,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>설문 조사 기타입력정보 LIST</description>
+		<name>makeSurveyEctList</name>
+		<function-class>def.admmgr.manage.admSurvey</function-class>
+		<function-signature>java.util.List SurveyEctList(java.lang.String,java.lang.String,java.lang.String,java.lang.String)</function-signature>
+	</function>
+</taglib>

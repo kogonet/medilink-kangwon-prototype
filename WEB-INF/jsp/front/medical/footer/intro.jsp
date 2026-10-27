@@ -1,0 +1,293 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>회사 소개 | 메디링크 강원</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/common/front/kor/css/style.css">
+<link rel="stylesheet" href="/common/front/kor/css/footer.css">
+</head>
+<body>
+<div class="wrap">
+	<div class="main_area">
+
+		<div class="tab_panel on" id="panel-intro">
+		<div class="tp_nav">
+			<div class="tp_nav_inner">
+				<div class="tp_nav_row">
+					<div class="tp_nav_title">
+						<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">
+							<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+							<polyline points="9 22 9 12 15 12 15 22" />
+						</svg>
+						회사 소개
+					</div>
+					<div class="tp_nav_actions">
+						<a class="tp_nav_back" href="/front/medical/index.do">
+							<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6" /></svg>
+							<span>처음으로</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="page_scroll">
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-title">주식회사 코고네트웍스</h1>
+    <p class="hero-lead">메디컬 헬스케어 중소기업의 개별 역량을 엮어 <em>새로운 가치를 만들어 냅니다</em></p>
+    <p class="hero-desc">
+      한국글로벌헬스케어사업협동조합이 100% 지분을 가진 사업 자회사로서,
+      임상·의료 IT·의료기기·데이터 플랫폼·사업운영 역량을 하나의 실행 제안으로 묶습니다.
+    </p>
+  </div>
+</div>
+
+<main class="main">
+
+  <section class="section">
+    <div class="section-hd">
+      <div class="section-eyebrow">COMPANY · ECOSYSTEM</div>
+      <div class="section-title">KOGO NETWORKS</div>
+      <div class="section-desc">중소기업중앙회 산하 전국조합인 한국글로벌헬스케어사업협동조합의 사업 자회사로, 임상·의료 IT·의료기기·데이터 플랫폼·사업운영 역량을 하나의 실행 제안으로 묶습니다.</div>
+    </div>
+
+    <div class="eco-diagram" aria-label="KOGHA 생태계 다이어그램">
+      <div class="eco-stage">
+        <span class="eco-spoke" style="--deg:0deg" aria-hidden="true"></span>
+        <span class="eco-spoke" style="--deg:60deg" aria-hidden="true"></span>
+        <span class="eco-spoke" style="--deg:120deg" aria-hidden="true"></span>
+        <span class="eco-spoke" style="--deg:180deg" aria-hidden="true"></span>
+        <span class="eco-spoke" style="--deg:240deg" aria-hidden="true"></span>
+        <span class="eco-spoke" style="--deg:300deg" aria-hidden="true"></span>
+
+        <div class="eco-hub">
+          <strong>KOGO</strong>
+          <span>NETWORKS</span>
+        </div>
+
+        <article class="eco-node" style="--deg:0deg">
+          <div class="eco-cat">CLINICAL</div>
+          <div class="eco-nm">의료기관·임상</div>
+        </article>
+        <article class="eco-node" style="--deg:60deg">
+          <div class="eco-cat">MEDICAL IT</div>
+          <div class="eco-nm">의료 IT</div>
+        </article>
+        <article class="eco-node" style="--deg:120deg">
+          <div class="eco-cat">MEDICAL DEVICE</div>
+          <div class="eco-nm">의료기기</div>
+        </article>
+        <article class="eco-node" style="--deg:180deg">
+          <div class="eco-cat">IT · DATA</div>
+          <div class="eco-nm">IT·데이터 플랫폼</div>
+        </article>
+        <article class="eco-node" style="--deg:240deg">
+          <div class="eco-cat">WELLNESS</div>
+          <div class="eco-nm">헬스·뷰티</div>
+        </article>
+        <article class="eco-node" style="--deg:300deg">
+          <div class="eco-cat">BUSINESS</div>
+          <div class="eco-nm">사업·운영 지원</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-hd">
+      <div class="section-eyebrow">WHY AN ECOSYSTEM</div>
+      <div class="section-title">복잡한 문제는 하나의 식으로만 풀리지는 않습니다</div>
+      <div class="section-desc">그럼에도 고객이 원하는 것은 여러 공급사가 아니라, 다양한 역량이 하나의 흐름으로 작동하는 해법입니다.</div>
+    </div>
+
+    <div class="why-board">
+      <div class="why-left">
+        <div class="why-kicker">CUSTOMER REALITY</div>
+        <ol class="why-steps">
+          <li>
+            <span>01</span>
+            <div>
+              <strong>의료공급 공백</strong>
+              <p>지역·기관별 접근성의 차이</p>
+            </div>
+          </li>
+          <li>
+            <span>02</span>
+            <div>
+              <strong>데이터 분절</strong>
+              <p>임상·운영·수요 데이터의 단절</p>
+            </div>
+          </li>
+          <li>
+            <span>03</span>
+            <div>
+              <strong>도입 장벽</strong>
+              <p>기술과 현장 운영 사이의 간극</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="why-mid">
+        <svg class="why-arr" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+        </svg>
+        <div class="why-issue">
+          <span>COMPLEX</span>
+          <strong>ISSUE</strong>
+        </div>
+        <svg class="why-arr" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+        </svg>
+      </div>
+
+      <div class="why-right">
+        <div class="why-kicker">REQUIRED ECOSYSTEM</div>
+        <ul class="why-need">
+          <li><strong>임상</strong><span>현장 문제 정의와 의료적 타당성</span></li>
+          <li><strong>의료 IT·데이터</strong><span>연결·분석·의사결정 지원</span></li>
+          <li><strong>의료기기</strong><span>측정·진단·현장 접점</span></li>
+          <li><strong>운영·공공</strong><span>실증·도입·지속 운영</span></li>
+          <li><strong>시장·사업</strong><span>고객·수익·확산 모델</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="deck-foot">복합성은 공급사 수가 아니라, <em>역량 간 연결</em>의 문제입니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-hd">
+      <div class="section-eyebrow">KOGO AS AN ANCHOR</div>
+      <div class="section-title">코고는 복잡한 생태계를 하나의 사업으로 모델링합니다</div>
+      <div class="section-desc">해결해야 하는 문제 기반으로, 보유 역량을 도입 가능한 구조와 역할로 다시 설계합니다.</div>
+    </div>
+
+    <div class="anchor-board">
+      <div class="anchor-in">
+        <div class="anchor-in-card">
+          <div class="why-kicker">CUSTOMER CHALLENGE</div>
+          <strong>고객의 문제·목표·제약</strong>
+        </div>
+        <div class="anchor-in-card">
+          <div class="why-kicker">KOGHA CAPABILITIES</div>
+          <strong>임상·기술·제품·운영 역량</strong>
+        </div>
+      </div>
+
+      <svg class="why-arr" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+      </svg>
+
+      <div class="anchor-core">
+        <div class="anchor-core-hd">
+          <span>AXDX</span>
+          <strong>BUSINESS MODELING</strong>
+        </div>
+        <ol>
+          <li><span>01</span>과제 정의</li>
+          <li><span>02</span>파트너 조합</li>
+          <li><span>03</span>운영·수익 설계</li>
+          <li><span>04</span>제안·실행 PM</li>
+        </ol>
+      </div>
+
+      <svg class="why-arr" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+      </svg>
+
+      <div class="anchor-out">
+        <div class="why-kicker">ONE BUSINESS PROPOSAL</div>
+        <strong>통합 사업 제안</strong>
+        <ul>
+          <li>하나의 책임 구조</li>
+          <li>하나의 도입 경로</li>
+          <li>하나의 사업 언어</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="deck-foot">고객에게는 <em>하나의 창구</em>, 복잡한 생태계에는 명확한 솔루션</p>
+  </section>
+
+  <section class="section">
+    <div class="section-hd">
+      <div class="section-eyebrow">COMMERCIALIZATION LAYER</div>
+      <div class="section-title">메디컬 헬스케어 중소기업의 개별 역량을 엮어 새로운 가치를 만들어 냅니다</div>
+      <div class="section-desc">KOGO NETWORKS BUSINESS MODEL로 역량 클러스터를 묶어 실행합니다.</div>
+    </div>
+
+    <div class="layer-table">
+      <div class="layer-head">
+        <div class="layer-head-l">KOGO NETWORKS BUSINESS MODEL</div>
+        <div class="layer-caps" aria-hidden="true">
+          <span>CLINICAL</span>
+          <span>MEDICAL IT</span>
+          <span>DEVICE</span>
+          <span>IT·DATA</span>
+          <span>WELLNESS</span>
+          <span>BUSINESS</span>
+        </div>
+      </div>
+
+      <div class="layer-row">
+        <div class="layer-copy">
+          <div class="layer-title">MARKETING AX <em>공개 서비스</em></div>
+          <p>카드결제·이동 데이터 기반 1차 의료기관 수요 분석·시뮬레이션</p>
+        </div>
+        <div class="layer-dots" aria-label="CLINICAL, MEDICAL IT, IT·DATA, BUSINESS">
+          <i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i>
+        </div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-copy">
+          <div class="layer-title">메디컬 AX 플랫폼</div>
+          <p>지역·기관 단위 의료 AX 사업모델 · 강원TP 실증 제안 중</p>
+        </div>
+        <div class="layer-dots" aria-label="CLINICAL, MEDICAL IT, DEVICE, IT·DATA, BUSINESS">
+          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i>
+        </div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-copy">
+          <div class="layer-title">의료취약지 원격협진</div>
+          <p>임상·의료 IT·의료기기 역량을 결합한 원격협진 모델</p>
+        </div>
+        <div class="layer-dots" aria-label="CLINICAL, MEDICAL IT, DEVICE">
+          <i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i>
+        </div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-copy">
+          <div class="layer-title">AX 메디컬 투어리즘</div>
+          <p>임상·웰니스·마케팅·글로벌 네트워크를 하나의 여정으로 연결</p>
+        </div>
+        <div class="layer-dots" aria-label="CLINICAL, WELLNESS, BUSINESS">
+          <i class="on"></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<footer class="site-ft">
+  <p>메디링크 강원 · 회사 소개<br>
+  주식회사 코고네트웍스 · 한국글로벌헬스케어사업협동조합 사업 자회사<br>
+  본 서비스의 모든 정보는 국가 공공데이터를 기반으로 하며, 의료적 판단의 최종 결정은 반드시 의료 전문가와 상의하시기 바랍니다.</p>
+  <p class="copy">&copy; MediLink Kangwon. All rights reserved.</p>
+</footer>
+
+		</div>
+		</div>
+
+	</div>
+</div>
+</body>
+</html>

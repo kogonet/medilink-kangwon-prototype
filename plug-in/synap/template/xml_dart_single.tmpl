@@ -1,0 +1,50 @@
+<TMPL_block "IE_COMPATIBLE">8</TMPL_block>
+<TMPL_block "header">
+    <style type="text/css">
+            .containBgSingle{background-color: #ffffff;}
+            #content_body{margin: 20px;}
+            body{margin-left:20px; width:640px; font-size:12pt; font-family:DartNBSP, "바탕", Batang; word-break:break-all; -webkit-text-size-adjust: 100%;}
+            table {table-layout:fixed; font-size:11pt; font-family:DartNBSP, "굴림", Gulim; border-collapse:collapse; border-style:solid; border-color:black; color:#000000; margin-bottom:6px; display:inline-table;}
+            table.nb {border-style:none;}
+            thead > tr > td {font-size:11pt; line-height:1.6em; font-family:DartNBSP, "굴림", Gulim; background-color:#dcdcdc; border-color:gray; padding:2px 4px 0px 4px;}
+            th {font-size:11pt; line-height:1.6em; font-family:DartNBSP, "굴림", Gulim; font-weight:normal; background-color:#dcdcdc; border-color:gray; padding:2px 4px 0px 4px;}
+            td {font-size:11pt; line-height:1.6em; font-family:DartNBSP, "굴림", Gulim; border-color:gray; padding:2px 4px 0px 4px;}
+            p {font-size:12pt; line-height:1.6em; font-family:DartNBSP, "바탕", Batang; color:#000000; margin:0px;}
+            body > p {font-size:12pt; line-height:1.6em; font-family:DartNBSP, "바탕", Batang; text-align:justify; color:#000000; margin:0px;}
+            th > p {font-size:11pt; line-height:1.6em; font-family:DartNBSP, "굴림", Gulim;}
+            td > p {font-size:11pt; line-height:1.6em; font-family:DartNBSP, "굴림", Gulim;}
+            p.table-group {font-size:11pt; font-family:DartNBSP, "굴림", Gulim; text-align:center;}
+            p.img-caption {font-size:12pt; font-family:DartNBSP, "굴림", Gulim; text-align:center; color:#324a58;}
+            p.part {font-size:20pt; line-height:1.6em; font-family:DartNBSP, "바탕", Batang; text-align:center; color:#0000ff; font-weight:bold; white-space:nowrap;}
+            p.section-1, p.body, p.toc {font-size:18pt; line-height:1.6em; font-family:DartNBSP, "바탕", Batang; text-align:center; color:#0000ff; font-weight:bold; white-space:nowrap;}
+            p.section-2 {font-size:16pt; line-height:1.6em; font-family:DartNBSP, "바탕", Batang; text-align:left; color:#0000ff; font-weight:bold; white-space:nowrap;}
+            p.section-3 {font-size:14pt; line-height:1.6em; font-family:DartNBSP, "바탕", Batang; text-align:left; color:#0000ff;}
+            p.section-4 {font-size:14pt; line-height:1.6em; font-family:DartNBSP, "바탕", Batang; text-align:left; color:#0000ff;}
+            p.section-5 {font-size:12pt; line-height:1.6em; font-family:DartNBSP, "바탕", Batang; text-align:left; color:#0000ff;}
+            p.section-6 {font-size:12pt; line-height:1.6em; font-family:DartNBSP, "바탕", Batang; text-align:left; color:#0000ff;}
+            p.cover-title {font-size:28pt; line-height:1.6em; font-family:DartNBSP, "바탕", Batang; text-align:center; color:#0000ff; font-weight:bold; white-space:nowrap;}
+            p.correction {font-size:28pt; line-height:1.6em; font-family:DartNBSP, "바탕", Batang; text-align:center; color:#0000ff; font-weight:bold; white-space:nowrap;}
+            p.description {font-size:12pt; line-height:1.6em; font-family:DartNBSP, "바탕", Batang; text-align:left; color:#324a58;}
+            p.pgbrk {height:24px;}
+            span.highlight {background-color:#ffff00;}
+            div.not-supported {border:1px solid #b0b0b0; text-align:center; overflow:hidden; color:#b0b0b0;}
+            @font-face {font-family:DartNBSP; src:local('Tahoma Bold'); unicode-range:U+00A0;}
+    </style>
+        <script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/jquery-3.7.0.min.js"></script>
+        <script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/config.js"></script>
+        <script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/common.js"></script>
+        <script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/browser_check.js"></script>
+        <script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/wm.js"></script>
+        <script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/xmldart_body.js"></script>
+</TMPL_block>
+<TMPL_block "bodyAttribute">
+        <TMPL_if (jsValue eq "")>
+                id="container" class="containBgSingle"
+        <TMPL_else>
+                id="container" class="containBgSingle" style="visibility: hidden;"
+        </TMPL_if>
+</TMPL_block>
+<TMPL_block "body">
+	<TMPL_var content>
+</TMPL_block>
+<TMPL_include "base.tmpl">

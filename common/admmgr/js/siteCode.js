@@ -1,0 +1,421 @@
+﻿/**************************************************
+ * siteCode.js
+ * @desc   : 사이트 코드 관리
+ * @author : MOOK
+ * @since  : 2019.12.28
+ * @version:1.0
+ * @see
+ * <pre>
+ * << 개정이력(Modification Information) >>
+ *   수정일      	  수정자        수정내용
+ *   ------------------------------------------
+ *   2019.12.28   MOOK        최초 생성(소스정비)
+ * </pre>
+ **************************************************/
+var tbodyHtml = "";
+var siteCode = {
+	//imgPath : G_Util.getContextPath()+"/common/admmgr/images",
+	imgPath : "/common/admmgr/images",
+	select : function( oThis, siteCd, depth ){
+
+		//선택버튼이 존재한다면,
+		if( oThis != null ){
+			//해당 테이블 내의 아이콘을 정상화 한다.
+			$("#siteCode_"+(Number(depth) - 1)+" .select_icon").each(function(idx,obj){
+				$(obj).attr("src",siteCode.imgPath+"/sub_common/icon_accept.gif");
+			});
+			//해당 버튼만 아이콘을 변경한다.
+			$(oThis).find("img").attr("src",siteCode.imgPath+"/sub_common/action_forward.gif");
+		}
+		/*
+		//마지막 Depth일때
+		if( Number(depth) == 4){
+			return;
+		}
+		*/
+		//하위 테이블 초기화
+		var real_depth = Number(depth) - 1;
+		for( var i = 3, j = real_depth; i > j; i-- ){
+			$("#siteCode_"+i).attr("siteCd", "");
+			$("#siteCode_"+i+" tbody").html("");
+		}
+
+		//해당 테이블에 코드 설정
+		//$("#siteCode_"+depth).attr("siteCd", siteCd);
+
+		//조회  Ajax
+		$.ajax({
+			url     : "siteCodeSelect.do",
+			type    : "POST",
+			//data    : {"siteCd":siteCd,"depth":depth},
+			data    : {},
+			success : function(data){ siteCode.selectResult(data,depth); }
+		});
+
+	},
+	selectResult : function(data, depth){
+		console.log("selectResult");
+		//선택시 다음 Table에 값을 할당하기 위해 +1을 해준다.
+		var select_depth = depth+1;
+		
+		//TR html
+		var html = "<tr siteCd='{siteCd}'>";
+		html += "<td class='tx_a_left'><span onclick='siteCode.modifyClick( this );'>{siteNm}</span></td>";	//코드명
+		/*html += "<td><img src='"+siteCode.imgPath+"/sub_common/cog.gif' alt='설정' onclick='FrameLayer.open( \"./siteCodeLayer.do\",500,320,\"no\",{\"siteCd\":\"{siteCd}\"});'/></td>";*/	 //설정
+		html += "<td><img src='"+siteCode.imgPath+"/sub_common/action_stop.gif' onclick='siteCode.remove( this );' alt='삭제' /></td>";											             //삭제
+		html += "<td onclick='siteCode.select2( this, \"{siteCd}\","+select_depth+" );'><img src='"+siteCode.imgPath+"/sub_common/icon_accept.gif' class='select_icon' alt='선택' /></td>";	 //선택
+		html += "</tr>";
+
+		var data_arr = $.parseJSON(data);
+		//console.log(data_arr);
+		var cache_html = "";	//table에 Append하기 전에 현재 변수에 캐쉬한다.
+		for( var i = 0, j = data_arr.length; i < j; i++){
+			var json = data_arr[i];
+			var new_html = html.replace("{siteNm}",json.siteNm).replaceAll("{siteCd}",json.siteCd);
+			cache_html += new_html;
+		}
+		//해당 테이블에 Append한다.
+		$("#siteCode_"+depth+" tbody").append(cache_html);
+		
+		tbodyHtml = cache_html;
+	},
+	select2 : function( oThis, siteCd, depth ){
+
+		//선택버튼이 존재한다면,
+		if( oThis != null ){
+			//해당 테이블 내의 아이콘을 정상화 한다.
+			$("#siteCode_"+(Number(depth) - 1)+" .select_icon").each(function(idx,obj){
+				$(obj).attr("src",siteCode.imgPath+"/sub_common/icon_accept.gif");
+			});
+			//해당 버튼만 아이콘을 변경한다.
+			$(oThis).find("img").attr("src",siteCode.imgPath+"/sub_common/action_forward.gif");
+		}
+		/*
+		//마지막 Depth일때
+		if( Number(depth) == 4){
+			return;
+		}
+		*/
+		//하위 테이블 초기화
+		var real_depth = Number(depth) - 1;
+		for( var i = 3, j = real_depth; i > j; i-- ){
+			$("#siteCode_"+i).attr("siteCd", "");
+			$("#siteCode_"+i+" tbody").html("");
+		}
+
+		//해당 테이블에 코드 설정
+		//$("#siteCode_"+depth).attr("siteCd", siteCd);
+
+		//조회  Ajax
+		$.ajax({
+			url     : "siteCodeSelect2.do",
+			type    : "POST",
+			data    : {"siteCd":siteCd},
+			success : function(data){ siteCode.selectResult2(data,depth); },
+			error	: function(request,status,error){
+				alert("처리 중 오류가 발생되었습니다.\nerror:"+error+"request:"+request+"status:"+status);
+			}
+		});
+
+	},
+	selectResult2 : function(data, depth){
+		
+		//TR html
+		var html = "<tr siteCd='{siteCd}'>";
+		html += "<td class='tx_a_left'><span onclick='siteCode.modifyClick( this );'>{siteNm}</span></td>";	//코드명
+		/*html += "<td><img src='"+siteCode.imgPath+"/sub_common/cog.gif' alt='설정' onclick='FrameLayer.open( \"./siteCodeLayer.do\",500,320,\"no\",{\"siteCd\":\"{siteCd}\"});'/></td>";*/	 //설정
+		html += "<td><img src='"+siteCode.imgPath+"/sub_common/action_stop.gif' onclick='siteCode.remove( this );' alt='삭제' /></td>";											             //삭제
+		html += "<td onclick='siteCode.select2( this, \"{siteCd}\","+depth+" );'><img src='"+siteCode.imgPath+"/sub_common/icon_accept.gif' class='select_icon' alt='선택' /></td>";	 //선택
+		html += "</tr>";
+		
+		var data_arr = $.parseJSON(data);
+		//console.log(data_arr);
+		var rData = data_arr.codeList[0];
+		
+		//해당 테이블에 Append한다.
+		$("#siteCode_"+depth+" tbody").append(tbodyHtml);
+		
+		var rSiteCode = rData.SITE_CD;
+		var rSiteNm = rData.SITE_NM;
+		var rUrl = rData.URL;
+		
+		$("#viewBody #siteCd").text(rSiteCode);
+		$("#viewBody #siteNm").text(rSiteNm);
+		$("#viewBody #url").val(rUrl);
+		
+		$(".btn_n_add").show();
+		
+	},
+	add : function(oThis){
+		var table = $(oThis).parents("table");				//테이블 개체
+		var depth = Number(table.attr("id").split('_')[1]);	//단계
+		var siteNm = oThis.value;							//코드 명
+
+		//유효성
+		if( !siteNm.trim()){
+			alert("코드를 입력해주세요.");
+			return;
+		}
+		//console.log("{ 'siteNm': '"+siteCd_NM+"', 'siteCd': '"+siteCd+"', 'depth': '"+depth+"' }");
+		//등록  Ajax
+		$.ajax({
+			url     : "siteCodeAppend.do",
+			type    : "POST",
+			data    : {"siteNm":siteNm,"depth":depth},
+			success : function(data){ siteCode.selectResult(data, depth); }
+		});
+		//input을 text로 변경
+		oThis.blur();
+	},
+	addClick : function(oThis){
+		var input_html = "<input type='text' htip='Enter키: 등록, ESC키: 취소' onkeydown='siteCode.keyCheck(event,\"add\")'/> ";
+		var txt_html = "<span onclick='siteCode.addClick(this);'>이곳을 클릭하여 새로운 코드를 등록하세요.</span>";
+		//Add
+		$(oThis).parent().html(input_html).find("input").eq(0).htip("show").focus().bind("blur",function(evt){
+			//텍스트 처리
+			var td = $(evt.currentTarget).parent();
+			$(td).html(txt_html);
+		});
+	},
+	remove : function(oThis){
+		if( !confirm("정말 삭제하시겠습니까?")) return;
+
+		var tr = $(oThis).parents("tr");
+		var siteCd = tr.attr("siteCd");
+
+		//삭제  Ajax
+		$.ajax({
+			url     : "siteCodeRemove.do",
+			type    : "POST",
+			data    : {"siteCd":siteCd},
+			success : function(data){
+				//선택 유무
+				var choice = (tr.find("td:last img").eq(0).attr("src").indexOf("icon_accept") == -1) ? "Y":"N";
+
+				//하위 테이블 초기화
+				if( choice == "Y"){
+
+					//하위 테이블 초기화
+					var depth = Number(tr.parents("table").attr("id").split("_")[1]);
+					for( var i = 3, j = depth; i > j; i--){
+						$("#siteCode_"+i).attr("siteCd", "");
+						$("#siteCode_"+i+" tbody").html("");
+					}
+				}
+				//TR삭제
+				tr.remove();
+				
+				// 선택 되어있는 것이 삭제 될 때
+				if($("#viewBody #siteCd").text() === siteCd) {
+					$("#viewBody #siteCd").text("");
+					$("#viewBody #siteNm").text("");
+					$("#viewBody #url").val("");
+					
+					$(".btn_n_add").hide();
+				}
+				
+			}
+		});
+	},
+	modifyClick : function(oThis){
+		var tr = $(oThis).parents("tr");	//Tr 개체
+		var siteCd = tr.attr("siteCd");			//코드
+		var siteNm = $(oThis).text();		//코드 명
+
+		//TD html
+		var html = "<td class='bd_line_right bd_line_left' colspan='4'>";
+		html += "<input type='text' htip='Enter키: 수정, ESC키: 취소' onkeydown='siteCode.keyCheck( event, \"modify\" )' value='"+siteNm+"' />";
+		html += "</td>";
+
+		//해당 TR선택 유무
+		var choice = (tr.find("td:last img").eq(0).attr("src").indexOf("icon_accept") == -1) ? "Y":"N";
+		tr.attr("choice", choice);
+
+		//TD변경
+		tr.html(html).find("input").eq(0).htip("show").focus().bind("blur",function(evt){
+			var data = {"siteCd":siteCd,"siteNm":siteNm};
+			var input = evt.currentTarget;
+			siteCode.modifyResult(input, data);
+		});
+	},
+	modify : function(oThis){
+		var tr = $(oThis).parents("tr");	//Tr 개체
+		var siteCd = tr.attr("siteCd");		//코드
+		var siteNm = oThis.value;			//코드 명
+		if( !siteNm ){
+			alert("수정할 코드명을 입력해주세요.");
+			return;
+		}
+		//수정  Ajax
+		$.ajax({
+			url     : "siteCodeModify.do",
+			type    : "POST",
+			data    : {"siteCd":siteCd,"siteNm":siteNm},
+			success : function(data){ siteCode.modifyResult(oThis, data); }
+		});
+	},
+	modifyResult : function(oThis, data){
+		var tr = $(oThis).parents("tr");			//Tr 개체
+		var table = $(tr).parents("table");			//Table 개체
+		var depth = table.attr("id").split("_")[1];	//Depth
+		var select_depth = Number(depth)+1;			//선택되었을때 전달할 Depth
+		var choice = tr.attr("choice");				//선택 유무
+		var icon_src = (choice == "Y") ? "action_forward":"icon_accept";
+		tr.removeAttr("choice");
+
+		var json = null;
+		if( $.type(data) == "string") json = $.parseJSON(data);
+		else json = data;
+
+		//TR html
+		var html = "<td class='tx_a_left'><span onclick='siteCode.modifyClick( this );'>{siteNm}</span></td>";	//코드명
+		/*html += "<td><img src='"+siteCode.imgPath+"/sub_common/cog.gif' alt='설정' onclick='FrameLayer.open( \"./siteCodeLayer.do\",500,320,\"no\",{\"siteCd\":\"{siteCd}\"});'/></td>";*/	//설정
+		html += "<td><img src='"+siteCode.imgPath+"/sub_common/action_stop.gif' onclick='siteCode.remove( this );' alt='삭제' /></td>";				                                    //삭제
+		html += "<td onclick='siteCode.select( this, \"{siteCd}\", {DEPTH} );'><img src='"+siteCode.imgPath+"/sub_common/"+icon_src+".gif' class='select_icon' alt='선택' /></td>";	    //선택
+
+		//html replace
+		var new_html = html.replace("{siteNm}", json.siteNm).replaceAll("{siteCd}", json.siteCd).replace("{DEPTH}", select_depth);
+
+		//html 변경
+		tr.html(new_html);
+
+		tbodyHtml = $("#siteCode_1 tbody").html();
+		
+		
+		// info
+		$("#viewBody #siteNm").text(json.siteNm);
+		$(".btn_n_add").show();
+		
+	},
+	keyCheck : function(evt, type){
+		var keyCode = $(evt).keyCode();
+		var target = evt.currentTarget || evt.target || evt.srcElement;
+
+		if( keyCode == "13"){
+			//ToolTip 사라지기
+			$(target).htip("hide");
+			//등록
+			if( type == "add" ){
+				siteCode.add(target);
+			//수정
+			}else if( type == "modify" ){
+				siteCode.modify(target);
+			}
+
+		}else if( keyCode == "27" ){
+			//취소
+			target.blur();
+		}
+	},
+	move : function(type, depth){
+		$("#siteCode_"+depth+" img.select_icon").each(function(idx, obj){
+			if( $(obj).attr("src").indexOf("icon_accept") == -1 ){
+				//Up
+				if( type == "up") siteCode.up(obj, depth);
+				//Down
+				else siteCode.down(obj, depth);
+			}
+		});
+	},
+	up : function(obj, depth){
+		var tr = $(obj).parents("tr");
+		if( tr.index() == 0 ){
+			alert("더이상, 상단으로 이동할 수 없습니다.");
+		}else{
+			var siteCd = tr.attr("siteCd");
+			$.ajax({
+				url     : "siteCodeMove.do",
+				type    : "POST",
+				data    : {"siteCd":siteCd,"depth":depth,"type":"up"},
+				success : function(){
+					tr.insertBefore(tr.prev());
+				}
+			});
+		}
+	},
+	down : function(obj, depth){
+		var tr = $(obj).parents("tr");
+		var table = $(tr).parents("table");
+		var rowLength = $(table).rowLength();
+
+		if( tr.index() >= rowLength - 3){
+			alert("더이상, 하단으로 이동할 수 없습니다.");
+		}else{
+			var siteCd = tr.attr("siteCd");
+			$.ajax({
+				url     : "siteCodeMove.do",
+				type    : "POST",
+				data    : {"siteCd":siteCd,"depth":depth,"type":"down"},
+				success : function(){
+					tr.insertAfter(tr.next());
+				}
+			});
+		}
+	},
+	sortChk : function(oThis, depth){
+		//정렬순서 변경 체크
+		if($(oThis).is(":checked")){
+			if($("#siteCode_"+Number(depth)+" > tbody > tr").length == 0){
+				alert("변경 할 목록이 없습니다.");
+				$(oThis).prop("checked", false);
+				return false;
+			}
+			siteCode.uiChangeProc(oThis, depth, true, false);
+		}else{
+			siteCode.uiChangeProc(oThis, depth, false, true);
+		}
+
+		//체크버튼을 loop하여 다른버튼들이 체크되어져있다면 체크 취소
+		$(".depthChgChk").each(function(idx){
+			if($(this).is(":checked") && $(this).attr("id") != $(oThis).attr("id")){
+				$(this).prop("checked", false);
+				//체크 취소에 대한 UI변경을 하되 siteCode.select는 호출하지 않기위해 마지막 변수로 false 전달
+				siteCode.uiChangeProc(this, (idx+1), false, false);
+			}
+		});
+	},
+	uiChangeProc : function(oThis, depth, boolChk, boolselect){
+		//전렬순서 변경 체크에 따른 UI 변경
+		if(boolChk){
+			//table의 tr 목록을 drag and drop 가능 한 ol 태그로 복사 후 tr 요소 삭제
+			$("#siteCode_"+Number(depth)+" > tbody > tr").each(function(idx,obj){
+				var strHtml = "";
+				strHtml += "<li code='"+$(this).attr("sitecd")+"'>";
+				strHtml += "<input type='hidden' name='li_siteCode' value='"+$(this).attr("sitecd")+"'/>";
+				strHtml += "<span style='text-align:center;'>"+$(this).children("td").children("span").text()+"</span>";
+				strHtml += "</li>";
+				$("#siteCodeSort_"+depth).append(strHtml);
+			});
+			siteCode.tableSet(true, depth);
+		}else{
+			//체크 취소 시 siteCode.select 호출로 tr 목록 재생성
+			//boolselect은 다른 메뉴의 정렬순서 변경 중복체크를 막기 위해 true 일때만 tr목록 조회
+			if(boolselect) siteCode.select(null,$("#rootCode").val(),depth);
+			siteCode.tableSet(false, depth);
+		}
+	},
+	tableSet : function(chkYn, depth){
+		//정렬순서 변경 체크에 따라 table 요소 세팅
+		//설정, 삭제, 선택 문구와 tfoot, tbody 가리기
+		if(chkYn){
+			$("#siteCode_"+depth+" > thead > tr > th").eq(0).attr("colspan", 4);
+			$("#siteCode_"+depth+" > thead > tr > th").eq(1).hide();
+			$("#siteCode_"+depth+" > thead > tr > th").eq(2).hide();
+			$("#siteCode_"+depth+" > thead > tr > th").eq(3).hide();
+
+			$("#siteCode_"+depth+" > tbody").hide();
+			$("#siteCode_"+depth+" > tfoot").hide();
+		}else{
+			//설정, 삭제, 선택 문구와 tfoot, tbody 표시하기
+			$("#siteCodeSort_"+depth+" > li").remove();
+			$("#siteCode_"+depth+" > thead > tr > th").eq(0).attr("colspan", 1);
+			$("#siteCode_"+depth+" > thead > tr > th").eq(1).show();
+			$("#siteCode_"+depth+" > thead > tr > th").eq(2).show();
+			$("#siteCode_"+depth+" > thead > tr > th").eq(3).show();
+
+			$("#siteCode_"+depth+" > tbody").show();
+			$("#siteCode_"+depth+" > tfoot").show();
+
+		}
+	}
+}

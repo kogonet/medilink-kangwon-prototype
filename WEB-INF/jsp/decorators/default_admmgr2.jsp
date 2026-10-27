@@ -1,0 +1,909 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
+<%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page import="com.ctit.base.CBase"%>
+<%@ page import="com.ctit.base.MenuCode"%>
+<%@ page import="com.ctit.helper.Session"%>
+<%@ page import="com.ctit.vo.UserAdminVO"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.ctit.vo.MenuCodeVO"%>
+<%
+/**************************************************
+ * @desc    : 레이아웃-관리자
+ **************************************************/
+%>
+<%	
+
+Long currentTime = (Long) session.getAttribute("Current_Time");
+
+String userNm      = "";
+String nowTime     = "";
+String nowUri      = "";
+String ContextPath = "";
+String userMenuCd  = "";
+String authCd      = "";
+String lastLoginDt = "";
+
+String menuCd1 = "";	String menuCd2 = "";	String menuCd3 = "";	String menuCd4 = "";	String menuCd5 = "";
+String menuNm1 = "";	String menuNm2 = "";	String menuNm3 = "";	String menuNm4 = "";	String menuNm5 = "";
+
+Map<String, Object> Admin_AllMenuMap = (Map<String, Object>)request.getSession().getAttribute("Admin_AllMenuMap");
+List<MenuCodeVO> menuList1 = null;
+List<MenuCodeVO> menuList2 = null;
+List<MenuCodeVO> menuList3 = null;
+List<MenuCodeVO> menuList4 = null;
+List<MenuCodeVO> menuList5 = null;
+
+	// 관리자 정보	
+	/* UserAdminVO user = Session.userReload(request, response); */
+	UserAdminVO user = (UserAdminVO) request.getSession().getAttribute("User_Admin");
+	//[1]세션 체크
+	if( user == null ){
+		out.println("<link type=\"text/css\" rel=\"stylesheet\" href=\"" + request.getContextPath() + "/common/admmgr/css/default.css\"/>");
+		out.println("<link type=\"text/css\" rel=\"stylesheet\" href=\"" + request.getContextPath() + "/common/css/jquery-ui.css\">");
+		out.println("<link type=\"text/css\" rel=\"stylesheet\" href=\"" + request.getContextPath() + "/common/admmgr/css/loading.css\"/>");
+		out.println("<link type=\"text/css\" rel=\"stylesheet\" href=\"" + request.getContextPath() + "/common/css/dtree.css\"/>");
+		out.println("<script type=\"text/javascript\">");
+		out.println("window.onload = function() {");
+		out.println("document.body.innerHTML += '<div class=\"popup_wrap\" id=\"expirationSession\" style=\"display:block;\">" +
+		            "<div class=\"popup_dim\"></div>" +
+		            "<div class=\"popup_inner\">" +
+		            "<div class=\"popup_header\"></div>" +
+		            "<div class=\"popup_content\">" +
+		            "<div class=\"con_txt\">" +
+		            "로그인 세션이 종료 되었습니다.<br>다시 로그인해 주세요." +
+		            "</div>" +
+		            "</div>" +
+		            "<div class=\"btn_area\">" +
+		            "<a href=\"javascript:void(0);\" onclick=\"location.href=\\'" + request.getContextPath() + "/admmgr/member/login.do\\';\" class=\"btn_pop_sty0\"><span>확인</span></a>" +
+		            "</div>" +
+		            "</div>" +
+		            "</div>';"); 
+		out.println("};");
+		out.println("</script>");
+
+
+
+
+
+
+
+		/* out.println("<script type=\"text/javascript\">");
+		out.println("alert(\"로그인 세션이 종료 되었습니다.\\n다시 로그인해 주세요.\"); location.href='"+request.getContextPath()+"/admmgr/member/login.do';");
+		out.println("</script>"); */
+		return;
+	}			
+	
+	request.setAttribute("authCd", user.authCd);
+	
+	userNm      = user.userNm;
+	nowTime     = new SimpleDateFormat("yyyy-MM-dd E요일").format(new Date());
+	nowUri      = request.getRequestURI();
+	ContextPath = request.getContextPath();
+	userMenuCd  = user.menuCd;
+	authCd      = user.authCd;
+	lastLoginDt = user.lastLoginDt;
+	if(lastLoginDt != null && !"".equals(lastLoginDt)){
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date lastLoginDate = fm.parse(lastLoginDt);
+		lastLoginDt = fm.format(lastLoginDate);
+	}
+	
+	//[2] nowUri에서 ContextPath 제거
+	nowUri = nowUri.replaceAll(ContextPath,"");
+	
+	//[3]Depth별 메뉴 정의
+	menuCd1 = "";	menuCd2 = "";	menuCd3 = "";	menuCd4 = "";	menuCd5 = "";
+	menuNm1 = "";	menuNm2 = "";	menuNm3 = "";	menuNm4 = "";	menuNm5 = "";			
+	
+	menuList1 = (List<MenuCodeVO>)Admin_AllMenuMap.get(authCd);
+	menuList2 = null;
+	menuList3 = null;
+	menuList4 = null;
+	menuList5 = null;
+	boolean bSameUrl = false;
+
+	for (MenuCodeVO menuVO1 : menuList1) {
+	    if ("1".equals(menuVO1.DEPTH)) {
+	        bSameUrl = MenuCode.getCheckSameURI(menuVO1, nowUri);
+	        if (bSameUrl) {
+	            menuCd1 = menuVO1.MENU_CD;
+	            menuNm1 = menuVO1.MENU_NM;
+	            menuList2 = menuVO1.ChildList;
+	            for (MenuCodeVO menuVO2 : menuVO1.ChildList) {
+	                bSameUrl = MenuCode.getCheckSameURI(menuVO2, nowUri);
+	                if (bSameUrl) {
+	                    menuCd2 = menuVO2.MENU_CD;
+	                    menuNm2 = menuVO2.MENU_NM;
+	                    menuList3 = menuVO2.ChildList;
+	                    for (MenuCodeVO menuVO3 : menuVO2.ChildList) {
+	                        bSameUrl = MenuCode.getCheckSameURI(menuVO3, nowUri);
+	                        if (bSameUrl) {
+	                            menuCd3 = menuVO3.MENU_CD;
+	                            menuNm3 = menuVO3.MENU_NM;
+	                            menuList4 = menuVO3.ChildList;
+	                            for (MenuCodeVO menuVO4 : menuVO3.ChildList) {
+	                                bSameUrl = MenuCode.getCheckSameURI(menuVO4, nowUri);
+	                                if (bSameUrl) {
+	                                    menuCd4 = menuVO4.MENU_CD;
+	                                    menuNm4 = menuVO4.MENU_NM;
+	                                    menuList5 = menuVO4.ChildList;
+	                                    for (MenuCodeVO menuVO5 : menuVO4.ChildList) {
+	                                        bSameUrl = MenuCode.getCheckSameURI(menuVO5, nowUri);
+	                                        if (bSameUrl) {
+	                                            menuCd5 = menuVO5.MENU_CD;
+	                                            menuNm5 = menuVO5.MENU_NM;
+	                                        }
+	                                    }
+	                                }
+	                            }
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	    }
+	}
+		
+%>
+<c:set var="userNm" value="<%=userNm%>"/>
+<c:set var="nowTime" value="<%=nowTime%>"/>
+<c:set var="lastLoginDt" value="<%=lastLoginDt%>" />
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="robots" content="noindex">
+	<title>센텀인터넷 CMS시스템</title>
+	<link rel="shortcut icon" href="<c:url value='/common/admmgr/images/ico/favicon.ico'/>"/>
+	<link rel="icon" href="<c:url value='/common/admmgr/images/ico/favicon.ico'/>"/>
+	<link type="text/css" rel="stylesheet" href="<c:url value='/common/admmgr/css/default.css'/>"/>
+	<link type="text/css" rel="stylesheet" href="<c:url value='/common/css/jquery-ui.css'/>">
+	<link type="text/css" rel="stylesheet" href="<c:url value='/common/admmgr/css/loading.css'/>"/>
+	<link type="text/css" rel="stylesheet" href="<c:url value='/common/css/dtree.css'/>"/>
+	<script type="text/javascript" src="<c:url value='/common/admmgr/js/jquery.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/common/admmgr/js/jquery-migrate.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/common/admmgr/js/design.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/common/admmgr/js/common.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/common/js/input_chk.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/common/js/dtree.js'/>"></script>
+	<script type="text/javascript" src="./common/js/dtree.js"></script>
+	<script type="text/javascript" src="<c:url value='/common/admmgr/js/CommonUtil.c3r-custom.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/common/admmgr/js/calendar.js'/>"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+	<script type="text/javascript">
+		//sessionStorage.setItem("contextPath","${pageContext.request.contextPath}");
+		//function fn_GetPageContext(){
+		//	return sessionStorage.getItem("contextPath");
+		//}
+		
+		// interval함수 id
+		var intervalId = null;
+		
+		var current_time = <%= currentTime %>;
+		
+		// 세션 만료시간 구하기
+		var endTime = new Date(<%= session.getAttribute("expirationTimeMillis") %>);
+		
+		// 유효시간 타이머 
+		function checkLoginTimer() {
+			var now = new Date();
+			var diff = endTime - now;
+			// 남은 시간이 0이 되는 경우
+			if(diff <= 0) {
+				// interval 종료
+				clearInterval(intervalId);
+				$("#expirationSession").show();
+				/* alert("접속시간이 종료되었습니다.\n다시 로그인해주세요.");
+				location.href = "<c:url value='/admmgr/member/logout.do'/>"; */
+			}
+			var diffDays = Math.floor(diff / (1000*60*60*24));
+			diff -= diffDays * (1000*60*60*24);
+			var diffHours = Math.floor(diff / (1000*60*60));
+			diff -= diffHours * (1000*60*60);
+			var diffMins = Math.floor(diff / (1000*60));
+			diff -= diffMins * (1000*60);
+			var diffSec = Math.floor(diff / 1000);
+			var text = '';
+			text += diffHours.toString().padStart(2, "0");
+			text += " : ";
+			text += diffMins.toString().padStart(2, "0");
+			text += " : ";
+			text += diffSec.toString().padStart(2, "0");
+			$("#countdown").text(text);
+		}
+		window.onload = function() {
+			intervalId = setInterval(checkLoginTimer, 1000);
+		}
+		// 로그인 만료시간 연장버튼
+		function resetLoginTime() {
+			// 로그인 세션 연장 
+			$.ajax({
+				type : "POST",
+				url  : "/admmgr/member/adminSessionResetAjax.do",
+				dataType : "text",
+				success : function(data){
+					if(data == "OK") {
+						$('#resetLoginTime .con_txt').text("로그인 시간이 연장되었습니다.");
+					}else {
+						$('resetLoginTime .con_txt').text("처리 중 오류가 발생되었습니다.");
+					}
+					$('#resetLoginTime').show();
+				},
+				error : function(request,status,error){
+					onebtnchk=0;
+					alert("처리 중 오류가 발생되었습니다.\nerror:"+error+"request:"+request+"status:"+status);
+				}
+			});
+		}
+		
+		function fn_Logout(){
+			sessionStorage.removeItem("flag");
+			sessionStorage.removeItem("clickedMenus");
+			location.href = "<c:url value='/admmgr/member/logout.do'/>";
+		}
+		function fn_ValidateSearchDate(startId,endId){
+			var sStart = $("#"+startId).val();
+			var sEnd   = $("#"+endId).val();
+			if( sStart != "" && sStart != undefined && sEnd != "" && sEnd != undefined ){
+				//시작날짜가 종료날짜보다 이후인 경우
+				if( Number(sStart.replaceAll("-","")) > Number(sEnd.replaceAll("-","")) ){
+					alert("시작일자가 종료일자보다 미래일 수 없습니다.");
+					return false;
+				}else{
+					return true;
+				}
+			}
+			return true;
+		}
+		$(document).ready(function(){
+			default_menu();
+			fn_IpAddress();
+			$('.btn_pop_sty0').click(function() {
+				$('.popup_wrap').hide();
+			});
+			$('.btn_pop_sty1').click(function() {
+				$('.popup_wrap').hide();
+			});
+
+			//테마
+			var theme = "";
+			theme = <%= session.getAttribute("theme") %>
+			console.log("theme : " + theme);
+
+			if(theme == "01") {
+				themeDark();
+			}else {
+				themeLight();
+			}
+
+		});
+		
+		// keydown 이벤트를 사용하여 ESC와 Enter 키 감지
+		$(document).on('keydown', function(event) {
+		    // 열려있는 팝업 (display가 'none'이 아닌 팝업을 찾음)
+		    const visiblePopup = $('.popup_wrap:visible');
+
+		    if (visiblePopup.length) { // 하나 이상의 팝업이 열려있는 경우
+		        // ESC 키를 눌렀을 때 팝업 숨기기
+		        if (event.key === 'Escape') {
+		            visiblePopup.hide(); // 보이는 팝업 숨김
+		        }
+
+		        // Enter 키를 눌렀을 때 특정 동작 수행
+		        if (event.key === 'Enter') {
+		        	visiblePopup.find('.btn_pop_sty0').trigger('click');
+		        }
+		    }
+		});
+
+		function fn_fileViewer(fileNm){
+			var obj = {};
+			obj["fileNm"] = fileNm;
+			console.log(obj);
+			var innerHtml = "";
+			$.ajax({
+				type : "POST",
+				url  : "/admmgr/fileView.do",
+				data : obj,
+				dataType : "json",
+				success : function(data){
+					console.log(data);
+					console.log(data.length);
+						if(data.length > 0){
+							for(var i=0;i<data.length;i++){
+								window.open("/plug-in/synap_skin/doc.html?fn=" + data[i]["FILE_NM"] + "&rs=/_upload/synap" + data[i]["SUBSTRING_VIEWER_PATH"], "_blank");
+							}
+						}else{
+							innerHtml += "";
+						}
+					},
+				error : function(request,status,error){
+					alert("처리 중 오류가 발생되었습니다.\nerror:"+error+"request:"+request+"status:"+status);
+				}
+			});
+		}
+
+		function fn_IpAddress() {
+			$.ajax({
+		        url: 'https://api.ip.pe.kr/',
+		        type: 'POST', // 요청 메소드에 맞게 변경
+		        success: function(Data) {
+		        	$('#ipAddress').text(Data);
+		        }
+
+		    });
+
+		}
+		
+		//관리자 모드 / 일반 모드
+		function fn_Setting(){
+			let setting = <%= session.getAttribute("Setting") %>;
+			
+			$.ajax({
+				type : "POST",
+				url  : "/admmgr/member/settingAjax.do",
+				dataType : "text",
+				success : function(data){
+					location.reload();
+				},
+				error : function(request,status,error){
+					alert("처리 중 오류가 발생되었습니다.\nerror:"+error+"request:"+request+"status:"+status);
+				}
+			});
+		}
+		function fn_Reflash(){
+			location.reload();
+			
+		}
+	</script>
+	<decorator:head/>
+</head>
+<body data-theme="light">
+	<!-- body_wrap -->
+	<div class="body_wrap">
+		<!-- common_wrap -->
+		<div class="common_wrap">	
+			<!-- header_wrap -->
+			<div class="header_wrap">
+				
+				<!-- 로고 -->
+                <div class="top_logo">
+                    <img src="/common/admmgr/images/sub_common/logo_snudh_w.svg" alt="" class="logo_photo">
+					<p class="logo_name">서울대학교치과병원</p>
+                </div>
+				<!-- // 로고 -->
+				
+				<!-- top_rgt_wrap -->
+                <div class="top_rgt_wrap">
+
+                    <div class="top_ip"><span>접속아이피 : <em id="ipAddress"></em></span></div>
+                    
+					<div class="top_time">
+                        <p>자동 로그아웃 남은시간 : <span id="countdown"></p>
+						<a href="javascript:void(0);" onclick="javascript:$('#resetLoginTimeConfirm').show();"  id="log_ext">연장</a>
+                    </div>
+
+                    <ul class="top_rgt">
+                        <li>
+                        	<%-- <c:choose>
+                        		<c:when test="${authCd eq '001000000'}"> --%>
+		                        	<a href="javascript:void(0);" onclick="javascript:$('#settingConfirm').show();"><img src="../../../common/admmgr/images/layout_n/ico_set.png" alt="옵션"></a>
+	                        	<%-- </c:when>
+	                        	<c:otherwise>
+	                        		<a href="#"><img src="../../../common/admmgr/images/layout_n/ico_set.png" alt="옵션"></a>
+	                        	</c:otherwise>
+                        	</c:choose> --%>
+                       	</li>
+
+
+						<!-- 일반모드 사이트맵 노출 -->
+							<c:choose>
+								<c:when test="${Setting eq true}">
+								</c:when>
+								<c:otherwise>
+									<li><a href="javascript:void(0);" onclick="javascript:$('#sitemap_wrap').show();"><img src="../../../common/admmgr/images/layout_n/ico_sm.png" alt="메뉴"></a></li>			
+								</c:otherwise>
+							</c:choose>
+						<li><a href="javascript:void(0);" onclick="javascript:$('#logoutConfirm').show();"><img src="../../../common/admmgr/images/layout_n/ico_logout.png" alt="로그아웃"></a></li>
+                    </ul>
+
+                    <div class="top_etc_btn">
+                        <div id="etc_mode" class="top_etc_sec etc_mode type02">
+                            <a href="javascript:void(0);" class="etc_sec_top"><span>밝기모드</span></a>
+                            <ul class="etc_list">
+                                <li class="type01"><a href="javascript:themeDark();"><img src="../../../common/admmgr/images/layout_n/ico_d_mode.png" alt=""></a></li>
+                                <li class="on type02"><a href="javascript:themeLight();"><img src="../../../common/admmgr/images/layout_n/ico_w_mode.png" alt=""></a></li>
+                            </ul>
+                        </div>
+						<div id="etc_text" class="top_etc_sec etc_text type01">
+							<a href="javascript:void(0);" class="etc_sec_top"><span>A</span></a>
+							<div class="range_box_wrap" style="display: none;">
+								<div class="range_box">
+									<button id="zoomOut">축소</button>
+									<label for="range1_1">
+										<input type="range" id="zoomRange" min="80" max="120" step="10" value="100">
+									</label>
+									<button id="zoomIn">확대</button>
+									<span id="currentZoom">100%</span>
+								</div>
+							</div>
+						
+						</div>
+                    </div>
+
+					<script>
+							const zoomRange = document.getElementById('zoomRange');
+							const zoomInButton = document.getElementById('zoomIn');
+							const zoomOutButton = document.getElementById('zoomOut');
+							const currentZoom = document.getElementById('currentZoom');
+
+							// 화면 크기 조정 함수
+							function updateZoom() {
+							document.body.style.zoom = zoomRange.value + '%';
+							currentZoom.textContent = zoomRange.value + '%'; // 확대 크기 업데이트
+							}
+
+							// 버튼 클릭 시 확대/축소
+							zoomInButton.addEventListener('click', function() {
+							if (zoomRange.value < 200) {
+							zoomRange.value = parseInt(zoomRange.value) + 10; // 10% 확대
+							updateZoom();
+							}
+							});
+
+							zoomOutButton.addEventListener('click', function() {
+							if (zoomRange.value > 50) {
+							zoomRange.value = parseInt(zoomRange.value) - 10; // 10% 축소
+							updateZoom();
+							}
+							});
+
+							// 슬라이더 값 변경 시 화면 크기 업데이트
+							zoomRange.addEventListener('input', updateZoom);
+					</script>
+
+                    <a href="javascript:void(0);" class="top_btn_full fullscreen-toggle">
+						<img src="/common/admmgr/images/icon/ico_full.svg" class="fullscreen"/>
+						<img src="/common/admmgr/images/icon/ico_small.svg" class="close-fullscreen" style="display: none;"/>
+					</a>
+                </div>
+				<!-- // top_rgt_wrap -->
+
+            </div>
+			<!-- // header_wrap -->
+
+			<!-- content_wrap -->
+			<div class="content_wrap open">
+				<!-- lft_wrap -->
+				<div class="lft_wrap">
+					<input type="hidden" id="flag_view" value="Y">
+					<div class="lft_top_wrap">
+                        <p class="lft_info">
+							<span>ad</span>
+							<em><c:out value="${userNm}" /></em>
+							<c:choose>
+								<c:when test="${Setting eq true}">
+									<em style="font-size: 12px;"><c:out value="※ 관리자 모드" /></em>								
+								</c:when>
+								<c:otherwise>
+									<em style="font-size: 12px;"><c:out value="※ 일반 모드" /></em>
+								</c:otherwise>
+							</c:choose>
+							<%-- <c:out value="${nowTime}" /> --%>
+						</p>
+                        <ul class="lft_info_btn">
+                            <li class="btn_lft_regi"><a href="javascript:void(0);"><img src="../../../common/admmgr/images/layout_n/ico_write.png"></a></li>
+                            <li class="btn_lft_menu">
+                                <a href="javascript:void(0);" class="close"></a>
+                                <a href="javascript:void(0);" class="open"></a>
+                            </li>
+                        </ul>
+                    </div>
+					<!-- lft_menu_wrap -->
+					<div class="lft_menu_wrap">
+
+						<!-- GNB -->
+						<ul class="lft_sub_menu_ul">
+							<%
+								int menuCnt = 1;
+								String classOn = "";
+								boolean setting = (boolean) request.getSession().getAttribute("Setting");
+								
+								//for( MenuCodeVO menuVO1 : MenuCode.AdminMenuVO ){
+								for( MenuCodeVO menuVO1 : (List<MenuCodeVO>)Admin_AllMenuMap.get(authCd) ){
+									
+									if(setting) { //마스터 모드
+										if(!menuVO1.MENU_ROLE.equals("01")) {
+											continue;
+										}
+									}else { //일반 모드
+										if(!menuVO1.MENU_ROLE.equals("02")) {
+											continue;
+										}
+									}
+									
+									classOn = "";
+									if( menuCd1.equals(menuVO1.MENU_CD) ){ 
+										classOn = " on";
+									}
+									if( !"Y".equals(menuVO1.OPEN_YN) )				continue;
+									if( userMenuCd.indexOf(menuVO1.MENU_CD) == -1 )	continue;
+									out.println("<li class='lv1_"+menuCnt+classOn+"'>");
+									out.println("<a href='"+ContextPath+menuVO1.URL+"' id='leftmenu1_" + menuVO1.MENU_CD +"_" + menuVO1.ChildList.size() + "'><span>"+menuVO1.MENU_NM+"</span></a>");
+									if( menuVO1.ChildList != null && menuVO1.ChildList.size() > 0 ){
+										out.println("<ul class='sec_ul'>");
+										for( MenuCodeVO menuVO2 : menuVO1.ChildList ){
+											classOn = "";
+											if( menuCd2.equals(menuVO2.MENU_CD) ){
+												classOn = "class='on'";
+											}
+											if( !"Y".equals(menuVO2.OPEN_YN) )				continue;
+											if( userMenuCd.indexOf(menuVO2.MENU_CD) == -1 )	continue;
+											out.println("<li "+classOn+">");
+											out.println("<a href='"+ContextPath+menuVO2.URL+"' id='leftmenu2_" + menuVO2.MENU_CD +"_" + menuVO2.ChildList.size() + "'><span>"+menuVO2.MENU_NM+"</span></a>");												
+											if( menuVO2.ChildList != null && menuVO2.ChildList.size() > 0 ){
+												out.println("<ul class='tir_ul'>");													
+												for( MenuCodeVO menuVO3 : menuVO2.ChildList ){
+													classOn = "";
+													if( menuCd3.equals(menuVO3.MENU_CD) ){
+														classOn = "class='on'";
+													}
+													if( !"Y".equals(menuVO3.OPEN_YN) )				continue;
+													if( userMenuCd.indexOf(menuVO3.MENU_CD) == -1 )	continue;
+													out.println("<li "+classOn+"><a href='"+ContextPath+menuVO3.URL+"' id='leftmenu3_" + menuVO3.MENU_CD +"_" + menuVO3.ChildList.size() + "'><span>"+menuVO3.MENU_NM+"</span></a>");
+													
+													if( menuVO3.ChildList != null && menuVO3.ChildList.size() > 0 ){
+														out.println("<ul class='four_ul'>");
+														
+														for( MenuCodeVO menuVO4 : menuVO3.ChildList ){
+															classOn = "";
+															if( menuCd4.equals(menuVO4.MENU_CD) ){
+																classOn = "class='on'";
+															}
+															if( !"Y".equals(menuVO4.OPEN_YN) )				continue;
+															if( userMenuCd.indexOf(menuVO4.MENU_CD) == -1 )	continue;
+															out.println("<li "+classOn+"><a href='"+ContextPath+menuVO4.URL+"' id='leftmenu4_" + menuVO4.MENU_CD +"_" + menuVO4.ChildList.size() + "'><span>"+menuVO4.MENU_NM+"</span></a>");
+															
+															if( menuVO4.ChildList != null && menuVO4.ChildList.size() > 0 ){
+																out.println("<ul class='five_ul'>");
+																
+																for( MenuCodeVO menuVO5 : menuVO4.ChildList ){
+																	classOn = "";
+																	if( menuCd5.equals(menuVO5.MENU_CD) ){
+																		classOn = "class='on'";
+																	}
+																	if( !"Y".equals(menuVO5.OPEN_YN) )				continue;
+																	if( userMenuCd.indexOf(menuVO5.MENU_CD) == -1 )	continue;
+																	out.println("<li "+classOn+"><a href='"+ContextPath+menuVO5.URL+"' id='leftmenu5_" + menuVO5.MENU_CD +"_" + menuVO5.ChildList.size() + "'><span>"+menuVO5.MENU_NM+"</span></a></li>");
+																}
+																out.println("</ul>");
+															}
+															out.println("</li>");
+														}
+														out.println("</ul>");
+													}
+													out.println("</li>");
+												}
+												out.println("</ul>");
+											}
+											out.println("</li>");
+										}
+										out.println("</ul>");
+									}
+									out.println("</li>");
+									menuCnt++;
+								}
+							%>
+						</ul>
+						<!-- // GNB -->
+
+						<!-- GNB ICO -->
+						<ul class="lft_menu_ico">
+							<li class="lv1_1"><a href="#"></a></li>
+							<li class="lv1_2"><a href="#"></a></li>
+							<li class="lv1_3"><a href="#"></a></li>
+							<li class="lv1_4"><a href="#"></a></li>
+						</ul>
+
+					</div>
+					<!-- // lft_menu_wrap -->
+
+
+				</div>
+				<!-- // lft_wrap -->
+
+				<!-- rit_wrap -->
+				<div class="rit_wrap">
+
+					<!-- tab_wrap -->
+					<div class="top_tab_wrap">
+						<button class="tab_nav_left " onclick="scrollTabs(-100)"><span>왼쪽</span></button>
+						<div class="tab_wrap">
+							<ul class="tab">
+								<li>
+									<a href="/admmgr/main/dashboard1.do" class=""><span class="ic_chart">Dashboard</span></a>
+								</li>
+							</ul>
+						</div>
+						<button class="tab_nav_right" onclick="scrollTabs(100)"><span>오른쪽</span></button>
+						
+						<!-- tab_etc_menu -->
+						<div class="tab_etc_menu">
+                            <button class="btn_detail" onclick="javascript:$('#menu_list').toggle();">상세보기</button>
+                            <ul class="menu_list" id="menu_list" style="display: none;">
+                                <li class="on">
+                                    <a href="#">Items1 - 10</a>
+                                    <ul class="dep2_list">
+                                        <li><a href="#">Dashboard</a></li>
+                                        <li><a href="#">사용자 메뉴 관리</a></li>
+                                        <li><a href="#">시스템 로그</a></li>
+                                        <li><a href="#">시스템 메뉴 관리</a></li>
+                                        <li><a href="#">관리자 메뉴 관리</a></li>
+                                        <li><a href="#">메뉴 관리</a></li>
+                                        <li><a href="#">로그 관리</a></li>
+                                        <li><a href="#">게시판 속성 관리</a></li>
+                                        <li><a href="#">메뉴 관리</a></li>
+                                        <li><a href="#">게시판 속성 관리</a></li>
+                                    </ul>
+                                </li>
+                                <li class="">
+                                    <a href="#">Items11 - 20</a>
+                                    <ul class="dep2_list">
+                                        <li><a href="#">Items11</a></li>
+                                        <li><a href="#">Items12</a></li>
+                                        <li><a href="#">Items13</a></li>
+                                        <li><a href="#">Items14</a></li>
+                                        <li><a href="#">Items15</a></li>
+                                        <li><a href="#">Items16</a></li>
+                                        <li><a href="#">Items17</a></li>
+                                        <li><a href="#">Items18</a></li>
+                                        <li><a href="#">Items19</a></li>
+                                        <li><a href="#">Items20</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+						<!-- tab_etc_menu -->
+
+					</div>
+                    <!-- // tab_wrap -->
+
+					<script>
+                        // 탭 이동 스크립트
+                        function scrollTabs(distance) {
+                            const tabsWrapper = document.querySelector('.tab_wrap');
+                            tabsWrapper.scrollBy({ left: distance, behavior: 'smooth' });
+                        }
+                        // function scrollToCenter(element) {
+                        //     const tabsWrapper = document.querySelector('.tab_con');
+                        //     const tabsWrapperWidth = tabsWrapper.offsetWidth;
+                        //     const elementWidth = element.offsetWidth;
+                        //     const elementLeft = element.offsetLeft;
+
+                        //     // 중앙으로 맞추기 위해 스크롤할 거리 계산
+                        //     const scrollPosition = elementLeft - (tabsWrapperWidth / 2) + (elementWidth / 2);
+                            
+                        //     tabsWrapper.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+                        // }
+                    </script>
+
+					<!-- 본문 : work_wrap -->
+					<div class="work_wrap">
+						<div class="work_wrap_inner">
+
+						<!-- 타이틀 -->
+						<h2 class="sub_tit_h2">
+							<span id="title">
+							<%
+							if( !"".equals(menuNm5) ){
+								out.println(menuNm5);
+							}else{ 
+								if( !"".equals(menuNm4) ){
+								out.println(menuNm4);
+								}else{
+									if( !"".equals(menuNm3) ){
+										out.println(menuNm3);
+									}else{
+										if( !"".equals(menuNm2) ){
+											out.println(menuNm2);
+										}else{
+											out.println(menuNm1);
+										}
+									}
+								}
+							}
+
+							%>
+						</span>
+						</h2>
+						<!-- 타이틀 -->
+						
+
+							<decorator:body/>
+						</div>
+                    </div>
+                    <!-- // 본문 : work_wrap -->
+
+					<!-- footer_wrap  -->
+					<div class="footer_wrap">
+						<span>COPYRIGHT(C) 2024 CMS. ALL RIGHTS RESERVED.</span>
+					</div>
+					<!-- footer_wrap  -->
+					
+				</div>
+				<!-- rit_wrap -->
+									
+			</div>
+			<!-- // content_wrap -->
+
+			<!-- 로그인 연장 팝업 -->
+			<div class="popup_wrap" id="resetLoginTimeConfirm" style="display:none;">
+				<div class="popup_dim"></div>
+				<div class="popup_inner">
+					<div class="popup_header"></div>
+					<div class="popup_content">
+						<div class="con_txt">
+							로그인 시간을 연장하시겠습니까?
+						</div>
+						
+					</div>
+					<div class="btn_area">
+						<a href="javascript:void(0);" onclick="javascript:resetLoginTime();" class="btn_pop_sty0"><span>확인</span></a>
+						<a href="javascript:void(0);" class="btn_pop_sty1 popClose"><span>취소</span></a>
+					</div>
+				</div>
+			</div>
+			<!-- // 팝업 -->
+			<!-- 로그인 연장 팝업 -->
+			<div class="popup_wrap" id="resetLoginTime" style="display:none;">
+				<div class="popup_dim"></div>
+				<div class="popup_inner">
+					<div class="popup_header"></div>
+					<div class="popup_content">
+						<div class="con_txt">
+						</div>
+					</div>
+					<div class="btn_area">
+						<a href="javascript:void(0);" onclick="javascript:fn_Reflash();" class="btn_pop_sty0"><span>확인</span></a>
+					</div>
+				</div>
+			</div>
+			<!-- // 팝업 -->
+			<!-- 로그아웃 팝업 -->
+			<div class="popup_wrap" id="logoutConfirm" style="display:none;">
+				<div class="popup_dim"></div>
+				<div class="popup_inner">
+					<div class="popup_header"></div>
+					<div class="popup_content">
+						<div class="con_txt">
+							로그아웃 하시겠습니까?
+						</div>
+					</div>
+					<div class="btn_area">
+						<a href="javascript:void(0);" onclick="javascript:fn_Logout();" class="btn_pop_sty0"><span>확인</span></a>
+						<a href="javascript:void(0);" class="btn_pop_sty1 popClose"><span>취소</span></a>
+					</div>
+				</div>
+			</div>
+			<!-- // 팝업 -->
+			<!-- 세션만료 로그아웃 팝업 -->
+			<div class="popup_wrap" id="expirationSession" style="display:none;">
+				<div class="popup_dim"></div>
+				<div class="popup_inner">
+					<div class="popup_header"></div>
+					<div class="popup_content">
+						<div class="con_txt">
+							접속시간이 종료 되었습니다.<br>다시 로그인해 주세요.
+						</div>
+					</div>
+					<div class="btn_area">
+						<a href="javascript:void(0);" onclick="javascript:fn_Logout();" class="btn_pop_sty0"><span>확인</span></a>
+					</div>
+				</div>
+			</div>
+			<!-- // 팝업 -->
+			<!-- 모드변경 팝업 -->
+			<div class="popup_wrap" id="settingConfirm" style="display:none;">
+				<div class="popup_dim"></div>
+				<div class="popup_inner">
+					<div class="popup_header"></div>
+					<div class="popup_content">
+						<div class="con_txt">
+							<c:choose>
+								<c:when test="${sessionScope.Setting == false}">
+									<strong>관리자</strong> 모드로 변경하시겠습니까?
+								</c:when>
+								<c:when test="${sessionScope.Setting == true}">
+									<strong>일반</strong> 모드로 변경하시겠습니까?
+								</c:when>
+							</c:choose>
+						</div>
+					</div>
+					<div class="btn_area">
+						<a href="javascript:void(0);" onclick="javascript:fn_Setting();" class="btn_pop_sty0"><span>확인</span></a>
+						<a href="javascript:void(0);" class="btn_pop_sty1 popClose"><span>취소</span></a>
+					</div>
+				</div>
+			</div>
+			<!-- // 팝업 -->
+			<!-- 사이트맵 -->
+			<div class="sitemap_wrap" style="display:none;" id="sitemap_wrap">
+				<div class="sitemap_inner">
+					<div class="sitemap_tit"><p>사이트 맵</p><a href="javascript:void(0);" onclick="javascript:$('#sitemap_wrap').hide();" class="sitemap_close"></a></div>
+					<div class="sitemap_con">
+						<ul class="sitemap_menu">
+							<li class="lv1_1 on">
+								<a href="/admmgr/main/dashboard1.do" id="leftmenu1_008000000000000_0"><span>대시보드</span></a>
+							</li>
+							<li class="lv1_2">
+								<a href="/admmgr/member/userBasicList.do" id="leftmenu1_003000000000000_2"><span>회원 관리회원</span></a>
+								<ul class="sec_ul">
+									<li>
+										<a href="/admmgr/member/userBasicList.do" id="leftmenu2_003001000000000_0"><span>일반 회원</span></a>
+									</li>
+									<li>
+										<a href="/admmgr/member/withDrawList.do" id="leftmenu2_003002000000000_0"><span>탈퇴 회원</span></a>
+									</li>
+								</ul>
+							</li>
+							<li class="lv1_3">
+								<a href="/admmgr/manage/contsList.do" id="leftmenu1_004000000000000_2"><span>컨텐츠 관리</span></a>
+								<ul class="sec_ul">
+									<li>
+										<a href="/admmgr/manage/contsList.do" id="leftmenu2_004001000000000_0"><span>컨텐츠 관리</span></a>
+									</li>
+									<li>
+										<a href="/admmgr/manage/bannerList.do" id="leftmenu2_004002000000000_0"><span>배너 관리</span></a>
+									</li>
+								</ul>
+							</li>
+							<li class="lv1_4">
+								<a href="" id="leftmenu1_007000000000000_7"><span>게시판 관리</span></a>
+								<ul class="sec_ul">
+									<li>
+										<a href="" id="leftmenu2_007001000000000_0"><span>공지사항</span></a>
+									</li>
+									<li>
+										<a href="" id="leftmenu2_007002000000000_0"><span>자유게시판</span></a>
+									</li>
+									<li>
+										<a href="" id="leftmenu2_007003000000000_0"><span>갤러리</span></a>
+									</li>
+									<li>
+										<a href="" id="leftmenu2_007004000000000_0"><span>동영상게시판</span></a>
+									</li>
+									<li>
+										<a href="" id="leftmenu2_007005000000000_0"><span>Q&amp;A 게시판</span></a>
+									</li>
+									<li>
+										<a href="" id="leftmenu2_007006000000000_0"><span>뉴스레터</span></a>
+									</li>
+									<li>
+										<a href="" id="leftmenu2_007007000000000_0"><span>언론보도</span></a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<!-- // common_wrap -->
+
+	</div>
+	<!-- //  body_wrap -->
+</body>
+</html>

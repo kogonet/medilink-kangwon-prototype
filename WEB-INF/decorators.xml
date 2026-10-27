@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<decorators>
+	<excludes>
+		<pattern>*javascript*</pattern>
+		<!-- 관리자 예외 -->
+		<pattern>/admmgr/index.do*</pattern>
+		<pattern>/admmgr/member/login.do*</pattern>
+		<!-- <pattern>/admmgr/member/logout.do*</pattern> -->
+		<!-- 2026-09-28 /front/medical/*.* 는 default_medical 데코레이터 적용. iframe/설정 페이지만 예외 -->
+		<pattern>/front/medical/clinicSearch.do*</pattern>
+		<pattern>/front/medical/setting.do*</pattern>
+
+		<!-- 시스템 공통 예외 -->
+		<pattern>/*/*Proc.do*</pattern>
+		<pattern>/*/*Pop.do*</pattern>
+
+	</excludes>
+	
+	<!-- 관리자 페이지-->
+	<decorator name="레이어" page="/WEB-INF/jsp/decorators/default_layer.jsp">
+		<pattern>/admmgr/*Layer*.do</pattern>
+	</decorator>
+	<decorator name="레이어2" page="/WEB-INF/jsp/decorators/default_layer2.jsp">
+		<pattern>/admmgr/*Layer2*.do</pattern>
+	</decorator>	
+	<decorator name="관리자" page="/WEB-INF/jsp/decorators/default_admmgr.jsp">
+		<pattern>/admmgr/*.*</pattern>
+	</decorator>
+	<!-- // 관리자 페이지-->
+	
+	<!-- 강원 메디컬 AI 페이지 (2026-09-28, 기존 _sidebar.jspf 대체 공통 헤더) -->
+	<!-- 2026-09-30 메인/서브 헤더 분리: 정확히 일치하는 패턴(index)이 와일드카드보다 우선 -->
+	<decorator name="메디컬" page="/WEB-INF/jsp/decorators/default_medical.jsp">
+		<pattern>/index.do</pattern>
+		<pattern>/front/medical/index.do</pattern>
+	</decorator>
+	<decorator name="메디컬서브" page="/WEB-INF/jsp/decorators/default_medical_sub.jsp">
+		<pattern>/front/medical/*.*</pattern>
+	</decorator>
+	<!-- //강원 메디컬 AI 페이지 -->
+
+	
+</decorators>

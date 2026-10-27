@@ -1,0 +1,103 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="str" uri="http://customTag.com/jsp/str"%>
+<%
+/**************************************************
+ * @desc    : 의료기관 정보 관리 - 상세
+ **************************************************/
+%>
+<head>
+	<script type="text/javascript">
+		function fn_Regist(){
+			$("#frm").attr("action","<c:url value='/admmgr/manage/hospital/Regist.do'/>").submit();
+		}
+		//삭제
+		function fn_Delete(){
+			if( confirm("삭제하겠습니까?") ){
+				$("#frm").attr("action","<c:url value='/admmgr/manage/hospital/DeleteProc.do'/>").submit();
+			}
+		}
+		//목록
+		function fn_List(){
+			$("#frm").attr("action","<c:url value='/admmgr/manage/hospital/List.do'/>").submit();
+		}
+	</script>
+</head>
+<body>
+<form id="frm" name="frm" method="GET">
+	<input type="hidden" id="rnum" name="rnum" value="<c:out value="${rMap.rnum}"/>"/>
+	<input type="hidden" id="chk" name="chk" value="<c:out value="${rMap.rnum}"/>"/>
+	<!-- sub_contents_wrap -->
+	<div class="sub_contents_wrap">
+		<!--sub_contents_area-->
+		<div class="sub_contents_area">
+
+			<h4 class="sub_tit_h4 fix"></h4>
+
+			<div class="table_header">
+				<h6 class="sub_tit_h6">의료기관 정보 상세</h6>
+			</div>
+
+			<div class="table_wrap n_table_sty01 n_view01 mt10">
+				<table cellspacing="0" cellpadding="0" border="0" summary="의료기관 정보 상세" class="tbl_ty2">
+					<colgroup>
+						<col width="20%">
+						<col width="30%">
+						<col width="20%">
+						<col width="30%">
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>요양기호(ykiho)</th>
+							<td colspan="3"><c:out value="${rMap.ykiho}"/></td>
+						</tr>
+						<tr>
+							<th>병원명</th>
+							<td><c:out value="${rMap.yadmNm}"/></td>
+							<th>종별</th>
+							<td><c:out value="${rMap.clCdNm}"/></td>
+						</tr>
+						<tr>
+							<th>주소</th>
+							<td colspan="3"><c:out value="${rMap.addr}"/></td>
+						</tr>
+						<tr>
+							<th>전화번호</th>
+							<td><c:out value="${rMap.telno}"/></td>
+							<th>개설일자</th>
+							<td><c:out value="${rMap.estbDd}"/></td>
+						</tr>
+						<tr>
+							<th>홈페이지</th>
+							<td><c:out value="${rMap.hospUrl}"/></td>
+							<th>의사총수</th>
+							<td><c:out value="${rMap.drTotCnt}"/></td>
+						</tr>
+						<tr>
+							<th>운영시간</th>
+							<td colspan="3"><c:out value="${rMap.openTime}"/> ~ <c:out value="${rMap.closeTime}"/></td>
+						</tr>
+						<tr>
+							<th>좌표(위도/경도)</th>
+							<td colspan="3"><c:out value="${rMap.YPos}"/> / <c:out value="${rMap.XPos}"/></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="page_btn_wrap jc_between mt20">
+				<div class="lft"></div>
+				<div class="rgt">
+					<a class="btn_n_modi" href="javascript:void(0);" onclick="javascript:fn_Regist();"><span>수정</span></a>
+					<a class="btn_n_del" href="javascript:void(0);" onclick="javascript:fn_Delete();"><span>삭제</span></a>
+					<a class="btn_n_list" href="javascript:void(0);" onclick="javascript:fn_List();"><span>목록</span></a>
+				</div>
+			</div>
+		</div>
+		<!--sub_contents_area-->
+	</div>
+	<!-- //sub_contents_wrap -->
+</form>
+</body>

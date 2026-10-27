@@ -1,0 +1,30 @@
+<TMPL_include "css_pool.tmpl">
+<TMPL_block "IE_COMPATIBLE">7</TMPL_block>
+<TMPL_block "header">
+<script type="text/javascript">var imgLoadedList = new Array();</script>
+<style type="text/css">
+	.slide {
+		position: relative;
+		border: 1px solid gray;
+		overflow: hidden;
+		clip: rect(0%, 101%, 101%, 0%);
+	}
+</style>
+<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/jquery-3.7.0.min.js"></script>
+<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/config.js"></script>
+<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/common.js"></script>
+<script type="text/javascript" src="<TMPL_var HTMLESCAPE(prefix)>.files/browser_check.js"></script>
+</TMPL_block>
+<TMPL_block "bodyAttribute">style="margin:0;"</TMPL_block>
+<TMPL_block "body">
+	<div id="container" class="containBg" style="top: 0px; bottom: 0px; overflow: auto;">
+		<div id="contentWrap" class="containBg" style="width:100%;position:relative;">
+		<TMPL_foreach contents as content>
+			<div id="slide_<TMPL_var content.index>_wrap" style="width:<TMPL_var slide_width>pt;height:<TMPL_var slide_height>pt;margin:10px auto;">
+			<TMPL_var content.slide>
+			</div>
+		</TMPL_foreach>
+		</div>
+	</div>
+</TMPL_block>
+<TMPL_include "base.tmpl">

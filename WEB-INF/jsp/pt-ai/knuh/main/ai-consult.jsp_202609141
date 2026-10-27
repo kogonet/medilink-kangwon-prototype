@@ -1,0 +1,2128 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html>
+<html lang="ko" class="kp-ai">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>강원메디컬 · AI 상담</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="${ptAiWebPath}/common/css/ai-consult.css">
+</head>
+
+<body class="kp-ai">
+
+  <div class="kp-aurora" aria-hidden="true">
+    <div class="kp-flow-blob kp-flow-blob--blue1"></div>
+    <div class="kp-flow-blob kp-flow-blob--blue2"></div>
+    <div class="kp-flow-blob kp-flow-blob--teal"></div>
+    <div class="kp-flow-blob kp-flow-blob--green1"></div>
+    <div class="kp-flow-blob kp-flow-blob--green2"></div>
+  </div>
+
+  <div class="kp-app">
+
+    <!-- <header class="kp-header"> … </header> -->
+
+    <div id="kp-body" class="kp-body">
+      <div id="scrim" class="kp-scrim" hidden></div>
+
+      <main id="main" class="kp-main kp-main--panel">
+        <a href="#" class="kp-back-home" id="btn-back-home" aria-label="홈 화면으로 돌아가기">
+          <svg class="kp-svg kp-svg--20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6" /></svg>
+        </a>
+
+        <!-- ════ 홈 화면 ════ -->
+        <div class="kp-empty">
+          <div class="kp-empty__inner">
+            <div class="kp-empty__badge" aria-hidden="true">
+              <img src="${ptAiWebPath}/common/images/gangwon.png" alt="강원대학교병원">
+            </div>
+            <h1 class="kp-empty__title">강원대학교병원 AI가 진료·병원 이용에 관한 정보를 안내해 드립니다.</h1>
+            <div class="kp-guide-slide">
+              <div class="kp-guide-slide__frame">
+                <button type="button" class="kp-guide-slide__nav kp-guide-slide__nav--prev" id="guide-slide-prev" aria-label="이전 슬라이드" disabled>
+                  <svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M15 18l-6-6 6-6" /></svg>
+                </button>
+                <div class="kp-guide-slide__viewport" id="guide-slide-viewport">
+                  <div class="kp-guide-slide__track">
+
+                    <!-- ★ 마이서비스 패널 (첫 번째 카드) -->
+                    <%--
+                    <article class="kp-guide-panel kp-guide-panel--auth" style="display:none">
+
+                      <div id="kp-auth-loggedin" class="kp-guide-panel--status">
+                        <span class="kp-guide-panel__status-bg" aria-hidden="true">
+                          <span class="kp-guide-panel__status-bg__orb kp-guide-panel__status-bg__orb--a"></span>
+                          <span class="kp-guide-panel__status-bg__orb kp-guide-panel__status-bg__orb--b"></span>
+                          <span class="kp-guide-panel__status-bg__orb kp-guide-panel__status-bg__orb--c"></span>
+                          <span class="kp-guide-panel__status-bg__line"></span>
+                          <span class="kp-guide-panel__status-bg__ring"></span>
+                        </span>
+                        <div class="kp-guide-panel__status-logo" aria-hidden="true">
+                          <img src="${ptAiWebPath}/common/images/ci.png" alt="">
+                        </div>
+                        <p class="kp-guide-panel__status-text">
+                          <strong>회원님</strong><br>
+                          진료 예약 현황을<br>알려 드립니다.
+                        </p>
+
+                        <div class="kp-guide-panel__actions">
+                          <button type="button" class="kp-guide-panel__btn" id="btn-my-health" data-query="마이페이지" data-answer-type="tpl-my-page">마이페이지</button>
+                          <!-- <button type="button" class="kp-guide-panel__btn" id="btn-my-info" data-query="회원정보 관리">회원정보 관리</button> -->
+                        </div>
+                      </div>
+
+                    </article>
+                      --%>
+                    <!-- ★ 마이서비스 패널 끝 -->
+
+                    <!-- ★ 의료진 소개 카드 -->
+                    <article class="kp-guide-panel kp-guide-panel--doctor">
+                      <div class="kp-guide-panel__doctor-hero">
+                        <div class="kp-guide-panel__doctor-badge" aria-hidden="true">
+                          <!-- <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            <path d="M21 21v-2a4 4 0 0 0-3-3.87"/>
+                          </svg> -->
+                          <img src="${ptAiWebPath}/common/images/doctor2.svg" alt="">
+                        </div>
+                      </div>
+                      <h3 class="kp-guide-panel__title">의료진 소개</h3>
+                      <p class="kp-guide-panel__desc">각 진료과 전문의와 풍부한 임상 경험의 의료진을 소개합니다.</p>
+                      <div class="kp-guide-panel__body">
+                        <ul class="kp-guide-panel__list">
+                          <li>진료과별 전문의 안내</li>
+                          <li>담당 의료진 상세 프로필</li>
+                          <li>전문클리닉 의료진 소개</li>
+                        </ul>
+                      </div>
+                      <div class="kp-guide-panel__actions">
+                        <a href="#" class="kp-guide-panel__btn--go">진료과 및 의료진 소개</a>
+                      </div>
+                    </article>
+                    <!-- ★ 의료진 소개 카드 끝 -->
+
+                    <!-- ★ 진료예약 카드 -->
+                    <!-- <article class="kp-guide-panel kp-guide-panel--info">
+                      <h3 class="kp-guide-panel__title">진료예약</h3>
+                      <p class="kp-guide-panel__desc">예약, 변경, 취소, 준비사항 안내</p>
+                      <ol class="kp-guide-panel__list">
+                        <li>진료 예약 방법</li>
+                        <li>준비사항 안내</li>
+                        <li>예약 변경·취소 안내</li>
+                      </ol>
+                      <div class="kp-guide-panel__actions">
+                        <button type="button" class="kp-guide-panel__btn" data-query="외래 진료 예약 방법을 알려줘">외래 예약</button>
+                        <button type="button" class="kp-guide-panel__btn" data-query="재진 예약 방법을 알려줘">재진 예약</button>
+                        <button type="button" class="kp-guide-panel__btn" data-query="예약 변경과 취소 방법을 알려줘">예약 변경·취소</button>
+                      </div>
+                    </article> -->
+
+                    <!-- ★ 진료안내 카드 -->
+                    <article class="kp-guide-panel kp-guide-panel--info">
+                      <h3 class="kp-guide-panel__title">진료안내</h3>
+                      <p class="kp-guide-panel__desc">외래진료, 진료절차, 건강검진</p>
+                      <ol class="kp-guide-panel__list">
+                        <li>외래진료 안내</li>
+                        <li>복용약 처방 안내</li>
+                        <li>검사실 및 예약 안내</li>
+                      </ol>
+                      <div class="kp-guide-panel__actions">
+                        <button type="button" class="kp-guide-panel__btn" data-query="외래진료 안내를 알려줘">외래진료 안내</button>
+                        <button type="button" class="kp-guide-panel__btn" data-query="복용약 처방 안내를 알려줘">복용약 처방 안내</button>
+                        <button type="button" class="kp-guide-panel__btn" data-query="검사실 및 예약 안내를 알려줘">검사실 및 예약 안내</button>
+                      </div>
+                    </article>
+
+                    <!-- ★ 병원안내 카드 -->
+                    <article class="kp-guide-panel kp-guide-panel--info">
+                      <h3 class="kp-guide-panel__title">병원안내</h3>
+                      <p class="kp-guide-panel__desc">병원이용, 층별, 오시는길 안내</p>
+                      <ol class="kp-guide-panel__list">
+                        <li>오시는길 안내</li>
+                        <li>입원 절차 및 준비사항</li>
+                        <li>건강검진 안내</li>
+                      </ol>
+                      <div class="kp-guide-panel__actions">
+                        <button type="button" class="kp-guide-panel__btn" data-query="병원 이용 안내를 알려줘">병원이용</button>
+                        <button type="button" class="kp-guide-panel__btn" data-query="입원 절차와 준비사항을 알려줘">입원 안내</button>
+                        <button type="button" class="kp-guide-panel__btn" data-query="건강검진 안내를 알려줘">건강검진 안내</button>
+                      </div>
+                    </article>
+
+                    <!-- ★ 서류발급안내 카드 -->
+                    <article class="kp-guide-panel kp-guide-panel--info">
+                      <h3 class="kp-guide-panel__title">서류발급안내</h3>
+                      <p class="kp-guide-panel__desc">의무기록, 의료영상발급 안내</p>
+                      <ol class="kp-guide-panel__list">
+                        <li>의무기록 발급 방법</li>
+                        <li>의료영상 발급 방법</li>
+                        <li>진단서·제증명 발급</li>
+                      </ol>
+                      <div class="kp-guide-panel__actions">
+                        <button type="button" class="kp-guide-panel__btn" data-query="의무기록 발급 방법을 알려줘">의무기록 발급</button>
+                        <button type="button" class="kp-guide-panel__btn" data-query="의료영상 발급 방법을 알려줘">의료영상 발급</button>
+                        <button type="button" class="kp-guide-panel__btn" data-query="진단서와 제증명 발급 방법을 알려줘">진단서 발급</button>
+                      </div>
+                    </article>
+
+                  </div>
+                </div>
+                <button type="button" class="kp-guide-slide__nav kp-guide-slide__nav--next" id="guide-slide-next" aria-label="다음 슬라이드">
+                  <svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M9 18l6-6-6-6" /></svg>
+                </button>
+              </div>
+              <div class="kp-guide-slide__controls">
+                <div class="kp-guide-slide__dots" id="guide-slide-dots" role="tablist" aria-label="안내 슬라이드"></div>
+              </div>
+            </div>
+            
+
+            <div class="kp-empty__composer">
+              <p class="kp-empty__disclaimer">AI가 생성한 답변으로, 부정확하거나 사실과 다른 내용이 포함될 수 있습니다.</p>
+              <div class="kp-composer kp-composer--big">
+                <div class="kp-composer__body">
+                  <div class="kp-composer__field">
+                    <textarea rows="1" class="kp-composer__input" placeholder="진료 예약·의료진·병원 이용 등 강원대학교병원에 관한 무엇이든 물어보세요."></textarea>
+                  </div>
+                  <div class="kp-composer__chips">
+                    <a href="https://www.youtube.com/channel/UCeHlWcD6OPFLi7Jw2Pop_0Q" class="kp-composer-chip" target="_blank" rel="noopener noreferrer">
+                      <span class="kp-composer-chip__ico" aria-hidden="true">
+                        <img src="${ptAiWebPath}/common/images/youtube.svg" alt="">
+                      </span>
+                      <span class="kp-composer-chip__text">유튜브 채널</span>
+                    </a>
+                    <a href="https://blog.naver.com/knuhprt" class="kp-composer-chip" target="_blank" rel="noopener noreferrer">
+                      <span class="kp-composer-chip__ico" aria-hidden="true">
+                        <img src="${ptAiWebPath}/common/images/nblog.svg" alt="">
+                      </span>
+                      <span class="kp-composer-chip__text">블로그</span>
+                    </a>
+                    <a href="https://www.instagram.com/knuh_insta" class="kp-composer-chip" target="_blank" rel="noopener noreferrer">
+                      <span class="kp-composer-chip__ico" aria-hidden="true">
+                        <img src="${ptAiWebPath}/common/images/insta.svg" alt="">
+                      </span>
+                      <span class="kp-composer-chip__text">인스타그램</span>
+                    </a>
+                  </div>
+                </div>
+                <button type="button" class="kp-composer__send" disabled aria-label="전송">
+                  <svg class="kp-svg kp-svg--20 kp-composer__icon kp-composer__icon--send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h13M13 6l6 6-6 6" /></svg>
+                  <svg class="kp-svg kp-svg--20 kp-composer__icon kp-composer__icon--stop" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="6" y="6" width="12" height="12" rx="1.5" fill="currentColor" /></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="kp-shortcuts kp-shortcuts--row">
+              <a href="https://www.knuh.or.kr/main/main.asp" class="kp-shortcut" target="_blank" rel="noopener noreferrer">
+                <span class="kp-shortcut__ico kp-shortcut__ico--logo" aria-hidden="true">
+                  <img class="kp-shortcut__ico-img kp-shortcut__ico-img--logo kp-shortcut__ico-img--kpta" src="${ptAiWebPath}/common/images/ci.png" alt="">
+                </span>
+                <span class="kp-shortcut__text">강원대학교병원 홈페이지</span>
+                <span class="kp-shortcut__arrow" aria-hidden="true">
+                  <svg class="kp-svg kp-svg--14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 6 6 6-6 6" /></svg>
+                </span>
+              </a>
+              <%--
+              <a href="#" class="kp-shortcut" target="_blank" rel="noopener noreferrer">
+                <span class="kp-shortcut__ico" aria-hidden="true">
+                  <img class="kp-shortcut__ico-img kp-shortcut__ico-img--tone kp-shortcut__ico-img--login" src="${ptAiWebPath}/common/images/login.svg" alt="">
+                </span>
+                <span class="kp-shortcut__text">온라인 진료 예약</span>
+                <span class="kp-shortcut__arrow" aria-hidden="true">
+                  <svg class="kp-svg kp-svg--14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 6 6 6-6 6" /></svg>
+                </span>
+              </a>
+              <a href="#" class="kp-shortcut" target="_blank" rel="noopener noreferrer">
+                <span class="kp-shortcut__ico" aria-hidden="true">
+                  <img class="kp-shortcut__ico-img kp-shortcut__ico-img--tone kp-shortcut__ico-img--file" src="${ptAiWebPath}/common/images/file.svg" alt="">
+                </span>
+                <span class="kp-shortcut__text">증명서 발급</span>
+                <span class="kp-shortcut__arrow" aria-hidden="true">
+                  <svg class="kp-svg kp-svg--14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 6 6 6-6 6" /></svg>
+                </span>
+              </a>
+              <a href="#" class="kp-shortcut" target="_blank" rel="noopener noreferrer">
+                <span class="kp-shortcut__ico" aria-hidden="true">
+                  <img class="kp-shortcut__ico-img kp-shortcut__ico-img--tone kp-shortcut__ico-img--file" src="${ptAiWebPath}/common/images/file.svg" alt="">
+                </span>
+                <span class="kp-shortcut__text">비급여 진료비 안내</span>
+                <span class="kp-shortcut__arrow" aria-hidden="true">
+                  <svg class="kp-svg kp-svg--14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 6 6 6-6 6" /></svg>
+                </span>
+              </a>
+               --%>
+            </div>
+          </div>
+        </div>
+        <!-- ════ 홈 화면 끝 ════ -->
+
+
+        <!-- ════ 채팅 화면 (기존) ════ -->
+        <div class="kp-chat" id="chat">
+          <div class="kp-scroll" id="chat-scroll"></div>
+          <div class="kp-dock">
+            <div class="kp-dock__inner">
+              <div class="kp-composer kp-composer--big kp-composer--dock">
+                <div class="kp-composer__body">
+                  <div class="kp-composer__field">
+                    <textarea rows="1" class="kp-composer__input" id="dock-input" placeholder="궁금한 내용을 입력해 주세요." aria-label="질문 입력"></textarea>
+                  </div>
+                  <div class="kp-composer__chips">
+                    <button type="button" class="kp-composer-chip kp-composer-chip--home" id="dock-btn-home" aria-label="홈 화면으로 돌아가기">
+                      <span class="kp-composer-chip__ico" aria-hidden="true">
+                        <svg class="kp-svg kp-svg--16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>
+                      </span>
+                    </button>
+                    <!--
+                    <a href="https://www.youtube.com/channel/UCeHlWcD6OPFLi7Jw2Pop_0Q" class="kp-composer-chip" target="_blank" rel="noopener noreferrer">
+                      <span class="kp-composer-chip__ico" aria-hidden="true">
+                        <img src="${ptAiWebPath}/common/images/youtube.svg" alt="">
+                      </span>
+                      <span class="kp-composer-chip__text">유튜브 채널</span>
+                    </a>
+                    <a href="https://blog.naver.com/knuhprt" class="kp-composer-chip" target="_blank" rel="noopener noreferrer">
+                      <span class="kp-composer-chip__ico" aria-hidden="true">
+                        <img src="${ptAiWebPath}/common/images/nblog.svg" alt="">
+                      </span>
+                      <span class="kp-composer-chip__text">블로그</span>
+                    </a>
+                    <a href="https://www.instagram.com/knuh_insta" class="kp-composer-chip" target="_blank" rel="noopener noreferrer">
+                      <span class="kp-composer-chip__ico" aria-hidden="true">
+                        <img src="${ptAiWebPath}/common/images/insta.svg" alt="">
+                      </span>
+                      <span class="kp-composer-chip__text">인스타그램</span>
+                    </a>
+                    -->
+                  </div>
+                </div>
+                <button type="button" class="kp-composer__send" id="dock-send" disabled aria-label="전송">
+                  <svg class="kp-svg kp-svg--20 kp-composer__icon kp-composer__icon--send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h13M13 6l6 6-6 6" /></svg>
+                  <svg class="kp-svg kp-svg--20 kp-composer__icon kp-composer__icon--stop" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="6" y="6" width="12" height="12" rx="1.5" fill="currentColor" /></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ════ 채팅 화면 끝 ════ -->
+
+        <template id="tpl-answer-license">
+          <p class="kp-answer-card__lead">면허신고확인서는 보건의료인 면허신고센터에서 직접 출력될 수 있습니다.</p>
+          <section class="kp-answer-card__section">
+            <h3 class="kp-answer-card__h"><span class="kp-answer-card__bullet" aria-hidden="true">▶</span> 출력 방법</h3>
+            <ul class="kp-answer-card__list">
+              <li>보건의료인 면허신고센터(license.kohl.or.kr)에 로그인합니다.</li>
+              <li>상단 메뉴 '면허신고 &gt; 신고결과 확인'으로 이동합니다.</li>
+              <li>신고 완료 내역에서 '면허신고확인서 출력' 버튼을 클릭합니다.</li>
+              <li>PDF로 저장하거나 프린터로 바로 출력할 수 있습니다.</li>
+            </ul>
+          </section>
+          <section class="kp-answer-card__section">
+            <h3 class="kp-answer-card__h"><span class="kp-answer-card__bullet" aria-hidden="true">▶</span> 더 알아보기</h3>
+            <div class="kp-answer-card__links">
+              <a href="#" class="kp-answer-row" role="button">
+                <span class="kp-answer-row__ico" aria-hidden="true"><svg class="kp-svg kp-svg--16" viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="#kp-icon-link" /></svg></span>
+                <span class="kp-answer-row__text">보건의료인 면허신고센터 바로가기</span>
+                <span class="kp-answer-row__go">바로가기</span>
+              </a>
+              <a href="#" class="kp-answer-row" role="button">
+                <span class="kp-answer-row__ico" aria-hidden="true"><svg class="kp-svg kp-svg--16" viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="#kp-icon-link" /></svg></span>
+                <span class="kp-answer-row__text">면허신고 안내 페이지</span>
+                <span class="kp-answer-row__go">바로가기</span>
+              </a>
+            </div>
+          </section>
+        </template>
+
+        <template id="tpl-answer-refund">
+          <p class="kp-answer-card__lead">보수교육비 환불 정책은 다음과 같습니다.</p>
+          <section class="kp-answer-card__section">
+            <h3 class="kp-answer-card__h"><span class="kp-answer-card__bullet" aria-hidden="true">▶</span> 환불 안내</h3>
+            <ul class="kp-answer-card__list">
+              <li>회비 및 보수교육비의 환불 기간, 금액, 불가 사유 등 규정은 아래 '회비와 보수교육비 규정' 별표 참고</li>
+              <li>보수교육비 환불 신청은 '홈페이지 - KPTA교육센터 - 결제현황 및 회비납부'에서 신청</li>
+              <li>회비 환불 신청은 '홈페이지 - 고객지원 - 회원민원 - 회비교육비'에서 신청</li>
+              <li>회비 환불은 납부한 보수교육비와 함께 환불</li>
+              <li>환불 승인 완료일로부터 카드결제는 3~4일(카드사 처리기간) 가상계좌는 1~2주일 소요</li>
+            </ul>
+          </section>
+          <section class="kp-answer-card__section">
+            <h3 class="kp-answer-card__h"><span class="kp-answer-card__bullet" aria-hidden="true">▶</span> 더 알아보기</h3>
+            <div class="kp-answer-card__links">
+              <a href="#" class="kp-answer-row" role="button">
+                <span class="kp-answer-row__ico" aria-hidden="true"><svg class="kp-svg kp-svg--16" viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="#kp-icon-link" /></svg></span>
+                <span class="kp-answer-row__text">중앙회 공지사항의 환불 규정 안내</span>
+                <span class="kp-answer-row__go">바로가기</span>
+              </a>
+              <a href="#" class="kp-answer-row" role="button">
+                <span class="kp-answer-row__ico" aria-hidden="true"><svg class="kp-svg kp-svg--16" viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="#kp-icon-link" /></svg></span>
+                <span class="kp-answer-row__text">보수교육비 환불 신청</span>
+                <span class="kp-answer-row__go">바로가기</span>
+              </a>
+            </div>
+          </section>
+          <p class="kp-answer-card__note">※ 회비와 보수교육비 규정에 따른 환불 기준 별표</p>
+          <div class="kp-answer-card__table-wrap">
+            <table class="kp-refund-table">
+              <thead>
+                <tr>
+                  <th scope="col">구분</th>
+                  <th scope="col">취소 및 환불 기간</th>
+                  <th scope="col">환불 금액</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">연회비</th>
+                  <td>납부 후 보수교육을 진행하지 않은 경우에 한하여 납부일로부터 30일 이내</td>
+                  <td>전액 환불</td>
+                </tr>
+                <tr>
+                  <th scope="row" rowspan="6">보수교육비</th>
+                  <td>현장 보수교육 사전 접수기간</td>
+                  <td>전액 환불</td>
+                </tr>
+                <tr>
+                  <td>현장 보수교육 사전 접수마감~현장보수교육 전일</td>
+                  <td>90% 환불</td>
+                </tr>
+                <tr>
+                  <td>현장 보수교육 당일 이후</td>
+                  <td>80% 환불</td>
+                </tr>
+                <tr>
+                  <td>사이버 보수교육</td>
+                  <td>90% 환불(납부 30일 이내, 교육 신청 단계인 경우)</td>
+                </tr>
+                <tr>
+                  <td>일부 이수</td>
+                  <td>환불 불가</td>
+                </tr>
+                <tr>
+                  <td>차기 연도</td>
+                  <td>환불 불가</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </template>
+
+        <template id="tpl-answer-member-status">
+          <section class="kp-answer-card__section">
+            <h3 class="kp-answer-card__h"><span class="kp-answer-card__bullet" aria-hidden="true">▶</span> 물리치료사 보수교육 기준</h3>
+            <ul class="kp-answer-card__list">
+              <li><strong>이수시간:</strong> 연간 8시간 이상 이수(8시간 미만은 미이수 처리).</li>
+              <li><strong>보충교육:</strong> 미이수 또는 유예로 발생한 시간은 보충 보수교육으로 이수합니다.</li>
+              <li><strong>이월 불가:</strong> 전년도 미이수·유예분을 다음 연도로 이월해 인정하지 않습니다.</li>
+            </ul>
+          </section>
+          <section class="kp-answer-card__section">
+            <h3 class="kp-answer-card__h"><span class="kp-answer-card__bullet" aria-hidden="true">▶</span> 회원 납부 · 이수 현황</h3>
+            <dl class="kp-member-summary">
+              <div class="kp-member-summary__row">
+                <dt>회원명</dt>
+                <dd>홍길동</dd>
+              </div>
+              <div class="kp-member-summary__row">
+                <dt>면허번호</dt>
+                <dd>123456</dd>
+              </div>
+              <div class="kp-member-summary__row">
+                <dt>조회 기준 년도</dt>
+                <dd>2026년</dd>
+              </div>
+              <div class="kp-member-summary__row">
+                <dt>협회비 납부 현황</dt>
+                <dd><span class="kp-member-summary__val--warn">70,000원 (미납)</span></dd>
+              </div>
+              <div class="kp-member-summary__row">
+                <dt>2026년 이수 여부</dt>
+                <dd><span class="kp-member-summary__val--warn">미이수</span></dd>
+              </div>
+            </dl>
+          </section>
+        </template>
+
+        <!-- 마이페이지 템플릿 -->
+        <template id="tpl-my-health">
+
+          <!-- 예약확인 -->
+          <section class="kp-answer-card__section">
+            <h3 class="kp-answer-card__h"><span class="kp-answer-card__bullet" aria-hidden="true">▶</span> 예약확인</h3>
+            <div class="kp-answer-card__table-wrap--fit">
+              <table class="kp-rsv-table">
+                <thead>
+                  <tr>
+                    <th>일자 · 시간</th>
+                    <th>진료과</th>
+                    <th>의료진</th>
+                    <th>현황</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="kp-rsv-row--upcoming" data-rsv-datetime="2026.06.20 (토) 10:00" data-rsv-dept="척추센터 · 신경외과" data-rsv-doctor="김철수 교수">
+                    <td>2026.06.20 (토) 10:00</td>
+                    <td>척추센터 · 신경외과</td>
+                    <td>김철수 교수</td>
+                    <td><span class="kp-rsv-badge kp-rsv-badge--upcoming">방문예정</span></td>
+                  </tr>
+                  <tr>
+                    <td>2026.05.15 (수) 14:30</td>
+                    <td>신경외과</td>
+                    <td>김철수 교수</td>
+                    <td><span class="kp-rsv-badge kp-rsv-badge--done">진료완료</span></td>
+                  </tr>
+                  <tr>
+                    <td>2026.04.03 (목) 09:00</td>
+                    <td>영상의학과</td>
+                    <td>이영희 과장</td>
+                    <td><span class="kp-rsv-badge kp-rsv-badge--done">진료완료</span></td>
+                  </tr>
+                  <tr>
+                    <td>2026.03.10 (월) 11:00</td>
+                    <td>신경외과</td>
+                    <td>김철수 교수</td>
+                    <td><span class="kp-rsv-badge kp-rsv-badge--done">진료완료</span></td>
+                  </tr>
+                  <tr>
+                    <td>2026.02.14 (토) 13:00</td>
+                    <td>재활의학과</td>
+                    <td>박지원 과장</td>
+                    <td><span class="kp-rsv-badge kp-rsv-badge--done">진료완료</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- 고객의 소리 -->
+          <section class="kp-answer-card__section">
+            <h3 class="kp-answer-card__h"><span class="kp-answer-card__bullet" aria-hidden="true">▶</span> 고객의 소리</h3>
+            <div class="kp-board-list">
+              <div class="kp-board-item">
+                <button type="button" class="kp-board-item__head" aria-expanded="false">
+                  <span>
+                    <span class="kp-board-item__title">주차 공간 확대를 요청드립니다</span>
+                    <span class="kp-board-item__meta">답변일 2026.06.10</span>
+                  </span>
+                  <span style="display:flex;align-items:center;gap:8px;">
+                    <span class="kp-board-item__status kp-board-item__status--done">답변완료</span>
+                    <span class="kp-board-item__chev" aria-hidden="true"></span>
+                  </span>
+                </button>
+                <div class="kp-board-item__body" hidden>
+                  안녕하세요, 강원대학교병원입니다. 고객님의 소중한 의견 감사드립니다. 주차장 증설 공사가 내년 상반기 착공 예정이며, 완공 전까지 병원 인근 공영주차장을 안내해 드릴 예정입니다. 불편을 드려 대단히 죄송합니다.
+                </div>
+              </div>
+              <div class="kp-board-item">
+                <button type="button" class="kp-board-item__head kp-board-item__head--pending" aria-expanded="false">
+                  <span>
+                    <span class="kp-board-item__title">외래 대기시간 개선을 건의합니다</span>
+                    <span class="kp-board-item__meta">2026.06.05 접수</span>
+                  </span>
+                  <span style="display:flex;align-items:center;gap:8px;">
+                    <span class="kp-board-item__status kp-board-item__status--pending">미답변</span>
+                    <span class="kp-board-item__chev" aria-hidden="true"></span>
+                  </span>
+                </button>
+              </div>
+              <div class="kp-board-item">
+                <button type="button" class="kp-board-item__head" aria-expanded="false">
+                  <span>
+                    <span class="kp-board-item__title">식당 메뉴 다양화를 건의합니다</span>
+                    <span class="kp-board-item__meta">답변일 2026.05.28</span>
+                  </span>
+                  <span style="display:flex;align-items:center;gap:8px;">
+                    <span class="kp-board-item__status kp-board-item__status--done">답변완료</span>
+                    <span class="kp-board-item__chev" aria-hidden="true"></span>
+                  </span>
+                </button>
+                <div class="kp-board-item__body" hidden>
+                  고객님의 소중한 의견 감사합니다. 영양팀과 협의하여 주 1회 특선 메뉴를 추가 제공하고, 계절 메뉴를 정기적으로 교체하는 방향으로 개선을 추진하고 있습니다. 앞으로도 많은 관심 부탁드립니다.
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 병문안 편지 -->
+          <section class="kp-answer-card__section">
+            <h3 class="kp-answer-card__h"><span class="kp-answer-card__bullet" aria-hidden="true">▶</span> 병문안 편지</h3>
+            <div class="kp-letter-tabs">
+              <button type="button" class="kp-letter-tab is-active" data-ltab="recv">수신</button>
+              <button type="button" class="kp-letter-tab" data-ltab="send">발신</button>
+            </div>
+            <div class="kp-letter-list" data-lpanel="recv">
+              <div class="kp-letter-item">
+                <span class="kp-letter-item__title">빠른 쾌유를 빕니다! 힘내세요 응원합니다</span>
+                <span class="kp-letter-item__from">박민준</span>
+                <span class="kp-letter-item__date">2026.06.12</span>
+              </div>
+              <div class="kp-letter-item">
+                <span class="kp-letter-item__title">항상 응원하고 있어요, 얼른 나으세요</span>
+                <span class="kp-letter-item__from">이수진</span>
+                <span class="kp-letter-item__date">2026.06.11</span>
+              </div>
+              <div class="kp-letter-item">
+                <span class="kp-letter-item__title">곧 건강하게 퇴원하실 거예요!</span>
+                <span class="kp-letter-item__from">정유나</span>
+                <span class="kp-letter-item__date">2026.06.09</span>
+              </div>
+            </div>
+            <div class="kp-letter-list" data-lpanel="send" hidden>
+              <div class="kp-letter-item">
+                <span class="kp-letter-item__title">아버지 잘 지내고 계신지요, 걱정됩니다</span>
+                <span class="kp-letter-item__from">홍길순</span>
+                <span class="kp-letter-item__date">2026.06.13</span>
+              </div>
+              <div class="kp-letter-item">
+                <span class="kp-letter-item__title">병원 음식은 입에 맞으세요?</span>
+                <span class="kp-letter-item__from">홍길남</span>
+                <span class="kp-letter-item__date">2026.06.10</span>
+              </div>
+            </div>
+          </section>
+
+        </template>
+
+        <!-- 회원정보 관리 템플릿 -->
+        <template id="tpl-my-info">
+
+          <!-- 회원정보 수정 -->
+          <section class="kp-answer-card__section">
+            <h3 class="kp-answer-card__h"><span class="kp-answer-card__bullet" aria-hidden="true">▶</span> 회원정보 수정</h3>
+            <div class="kp-auth-form">
+              <div>
+                <label class="kp-info-form__label" for="info-email">이메일</label>
+                <input type="email" class="kp-auth-screen__input" id="info-email" placeholder="이메일" value="hong****@example.com" autocomplete="email">
+              </div>
+              <div>
+                <label class="kp-info-form__label" for="info-name">성명</label>
+                <input type="text" class="kp-auth-screen__input" id="info-name" placeholder="성명" value="홍길동" autocomplete="name">
+              </div>
+              <div>
+                <label class="kp-info-form__label" for="info-pw">비밀번호 변경</label>
+                <input type="password" class="kp-auth-screen__input" id="info-pw" placeholder="새 비밀번호" autocomplete="new-password">
+              </div>
+              <div>
+                <label class="kp-info-form__label" for="info-pw-check">비밀번호 확인</label>
+                <input type="password" class="kp-auth-screen__input" id="info-pw-check" placeholder="새 비밀번호 확인" autocomplete="new-password">
+              </div>
+              <button type="button" class="kp-rsv-modal__opt-btn" id="btn-info-submit">수정 완료</button>
+            </div>
+          </section>
+
+          <!-- 회원탈퇴 -->
+          <section class="kp-answer-card__section">
+            <h3 class="kp-answer-card__h"><span class="kp-answer-card__bullet" aria-hidden="true">▶</span> 회원탈퇴</h3>
+            <p class="kp-answer-card__para">탈퇴 사유를 선택해 주세요. (복수 선택 가능)</p>
+            <div class="kp-withdraw-list">
+              <label class="kp-withdraw-item">
+                <input type="checkbox" class="kp-withdraw-item__check">
+                <span class="kp-withdraw-item__text">더 이상 이용하지 않아서</span>
+              </label>
+              <label class="kp-withdraw-item">
+                <input type="checkbox" class="kp-withdraw-item__check">
+                <span class="kp-withdraw-item__text">개인정보 보호를 위해</span>
+              </label>
+              <label class="kp-withdraw-item">
+                <input type="checkbox" class="kp-withdraw-item__check">
+                <span class="kp-withdraw-item__text">서비스가 불만족스러워서</span>
+              </label>
+              <label class="kp-withdraw-item">
+                <input type="checkbox" class="kp-withdraw-item__check">
+                <span class="kp-withdraw-item__text">자주 사용하지 않아서</span>
+              </label>
+              <label class="kp-withdraw-item">
+                <input type="checkbox" class="kp-withdraw-item__check">
+                <span class="kp-withdraw-item__text">다른 병원을 이용해서</span>
+              </label>
+              <label class="kp-withdraw-item">
+                <input type="checkbox" class="kp-withdraw-item__check">
+                <span class="kp-withdraw-item__text">기타</span>
+              </label>
+            </div>
+            <button type="button" style="margin-bottom: 10px;" class="kp-rsv-modal__opt-btn kp-rsv-modal__opt-btn--cancel" id="btn-withdraw-submit">회원탈퇴</button>
+            <p class="kp-answer-card__note">※ 탈퇴 시 모든 예약 정보 및 개인정보가 삭제되며 복구가 불가능합니다.</p>
+          </section>
+
+        </template>
+
+      </main>
+
+      <button type="button" class="kp-panel-toggle" id="btn-panel" aria-controls="panel" aria-expanded="false" aria-label="빠른검색 열기">
+        <svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-3.2-3.2" /></svg>
+        <span class="kp-panel-toggle__label">빠른검색</span>
+      </button>
+
+      <aside id="panel" class="kp-panel" aria-hidden="true">
+        <div class="kp-panel__head">
+          <div class="kp-panel__heading">
+            <svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.2-3.2" /></svg>
+            <h2>빠른검색</h2>
+          </div>
+          <button type="button" class="kp-iconbtn" id="btn-panel-close" aria-label="패널 닫기">
+            <svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18" /></svg>
+          </button>
+        </div>
+
+        <div class="kp-tabs" role="tablist">
+          <button type="button" class="kp-tab is-active" role="tab" aria-selected="true" data-panel="panel-dept">진료과</button>
+          <!--
+          <button type="button" class="kp-tab" role="tab" aria-selected="false" data-panel="panel-center">전문센터</button>
+          <button type="button" class="kp-tab" role="tab" aria-selected="false" data-panel="panel-clinic">클리닉</button>
+          <button type="button" class="kp-tab" role="tab" aria-selected="false" data-panel="panel-rsv">진료안내</button>
+          <button type="button" class="kp-tab" role="tab" aria-selected="false" data-panel="panel-hospital">병원이용</button>
+          <button type="button" class="kp-tab" role="tab" aria-selected="false" data-panel="panel-health">건강정보</button>
+          <button type="button" class="kp-tab" role="tab" aria-selected="false" data-panel="panel-about">병원소개</button>
+          -->
+        </div>
+
+        <div class="kp-panel__body">
+
+          <!-- ══ 진료과 아코디언 ══ -->
+          <div class="kp-acc-group" id="acc-dept">
+            <div class="kp-acc-card">
+              <section class="kp-acc">
+                <button type="button" class="kp-acc__head" aria-expanded="false">
+                  <span class="kp-acc__label">
+                    <span class="kp-acc__ico-wrap kp-acc__ico-wrap--dept" aria-hidden="true">
+                      <svg class="kp-acc__ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="8" cy="4.5" r="2.5"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/>
+                      </svg>
+                    </span>
+                    진료과
+                  </span>
+                  <span class="kp-acc__meta">
+                    <span class="kp-acc__badge">38</span>
+                    <span class="kp-acc__chev" aria-hidden="true"><svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+                  </span>
+                </button>
+                <div class="kp-acc__list">
+                  <div class="kp-acc__inner kp-acc__inner--grid">
+                    <div class="kp-acc__grid kp-acc__grid--scroll">
+                      <button type="button" class="kp-acc__grid-btn" data-query="가정의학과를 진료하는 병원목록을 보여줘">가정의학과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="감염내과를 진료하는 병원목록을 보여줘">감염내과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="구강외과 치과를 진료하는 병원목록을 보여줘">구강외과/치과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="내분비내과를 진료하는 병원목록을 보여줘">내분비내과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="마취통증의학과 통증클리닉를 진료하는 병원목록을 보여줘">마취통증의학과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="비뇨의학과를 진료하는 병원목록을 보여줘">비뇨의학과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="산부인과를 진료하는 병원목록을 보여줘">산부인과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="성형외과를 진료하는 병원목록을 보여줘">성형외과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아성형외과를 진료하는 병원목록을 보여줘">소아성형외과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아비뇨의학과를 진료하는 병원목록을 보여줘">소아비뇨의학과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아신경외과를 진료하는 병원목록을 보여줘">소아신경외과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아안과를 진료하는 병원목록을 보여줘">소아안과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아외과를 진료하는 병원목록을 보여줘">소아외과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아이비인후과를 진료하는 병원목록을 보여줘">소아이비인후과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아정신건강의학과를 진료하는 병원목록을 보여줘">소아정신건강의학과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아청소년과를 진료하는 병원목록을 보여줘">소아청소년과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아피부과를 진료하는 병원목록을 보여줘">소아피부과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아흉부외과를 진료하는 병원목록을 보여줘">소아흉부외과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소화기내과를 진료하는 병원목록을 보여줘">소화기내과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="신경과를 진료하는 병원목록을 보여줘">신경과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="신경외과를 진료하는 병원목록을 보여줘">신경외과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="신장내과를 진료하는 병원목록을 보여줘">신장내과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="심장내과를 진료하는 병원목록을 보여줘">심장내과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="심장외과를 진료하는 병원목록을 보여줘">심장외과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="안과를 진료하는 병원목록을 보여줘">안과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="알레르기내과를 진료하는 병원목록을 보여줘">알레르기내과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="영상의학과를 진료하는 병원목록을 보여줘">영상의학과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="예방의학과를 진료하는 병원목록을 보여줘">예방의학과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="외과를 진료하는 병원목록을 보여줘">외과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="응급의학과를 진료하는 병원목록을 보여줘">응급의학과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="이비인후과를 진료하는 병원목록을 보여줘">이비인후과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="입원의학센터를 진료하는 병원목록을 보여줘">입원의학센터</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="재활의학과를 진료하는 병원목록을 보여줘">재활의학과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="정신건강의학과를 진료하는 병원목록을 보여줘">정신건강의학과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="정형외과를 진료하는 병원목록을 보여줘">정형외과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="중환자의학과를 진료하는 병원목록을 보여줘">중환자의학과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="진단검사의학과를 진료하는 병원목록을 보여줘">진단검사의학과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="피부과를 진료하는 병원목록을 보여줘">피부과</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="호흡기내과를 진료하는 병원목록을 보여줘">호흡기내과</button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <%-- 진료과 외 탭 비활성화
+          <!-- ══ 전문센터 아코디언 ══ -->
+          <div class="kp-acc-group" id="acc-center">
+            <div class="kp-acc-card">
+              <section class="kp-acc">
+                <button type="button" class="kp-acc__head" aria-expanded="false">
+                  <span class="kp-acc__label">
+                    <span class="kp-acc__ico-wrap kp-acc__ico-wrap--center" aria-hidden="true">
+                      <svg class="kp-acc__ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="12" height="10" rx="1"/><path d="M5 4V3a3 3 0 0 1 6 0v1"/><path d="M8 8v4M6 10h4"/>
+                      </svg>
+                    </span>
+                    전문센터
+                  </span>
+                  <span class="kp-acc__meta">
+                    <span class="kp-acc__badge">12</span>
+                    <span class="kp-acc__chev" aria-hidden="true"><svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+                  </span>
+                </button>
+                <div class="kp-acc__list">
+                  <div class="kp-acc__inner kp-acc__inner--grid">
+                    <div class="kp-acc__grid">
+                      <button type="button" class="kp-acc__grid-btn" data-query="권역응급의료센터 안내를 알려줘">권역응급의료센터</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="권역외상센터 안내를 알려줘">권역외상센터</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="강원지역암센터 안내를 알려줘">강원지역암센터</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="심뇌혈관질환센터 안내를 알려줘">심뇌혈관질환센터</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="어린이병원 안내를 알려줘">어린이병원</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="재활의학센터 안내를 알려줘">재활의학센터</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="인공신장센터 안내를 알려줘">인공신장센터</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="완화의료센터 안내를 알려줘">완화의료센터</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="건강증진센터 안내를 알려줘">건강증진센터</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="로봇수술센터 안내를 알려줘">로봇수술센터</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="융합의학센터 안내를 알려줘">융합의학센터</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="어린이병원 소아청소년과 안내를 알려줘">어린이병원<br>소아청소년과</button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <!-- ══ 클리닉 아코디언 ══ -->
+          <div class="kp-acc-group" id="acc-clinic">
+            <div class="kp-acc-card">
+              <section class="kp-acc">
+                <button type="button" class="kp-acc__head" aria-expanded="false">
+                  <span class="kp-acc__label">
+                    <span class="kp-acc__ico-wrap kp-acc__ico-wrap--clinic" aria-hidden="true">
+                      <svg class="kp-acc__ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="8" cy="5" r="2.5"/><path d="M8 7.5v2.5"/><circle cx="8" cy="11.5" r="1.5"/><path d="M10 11.5h1.5a2 2 0 0 0 0-4H10"/>
+                      </svg>
+                    </span>
+                    클리닉
+                  </span>
+                  <span class="kp-acc__meta">
+                    <span class="kp-acc__badge">54</span>
+                    <span class="kp-acc__chev" aria-hidden="true"><svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+                  </span>
+                </button>
+                <div class="kp-acc__list">
+                  <div class="kp-acc__inner kp-acc__inner--grid">
+                    <div class="kp-acc__grid kp-acc__grid--scroll">
+                      <button type="button" class="kp-acc__grid-btn" data-query="간암 및 간질환클리닉 안내를 알려줘">간암 및 간질환클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="갑상선 두경부 암 클리닉 안내를 알려줘">갑상선 두경부 암 클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="건강검진클리닉 안내를 알려줘">건강검진클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="금연클리닉 안내를 알려줘">금연클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="기억장애 클리닉 안내를 알려줘">기억장애 클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="노년 클리닉 안내를 알려줘">노년 클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="뇌졸중 클리닉 안내를 알려줘">뇌졸중 클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="눈성형 클리닉 안내를 알려줘">눈성형 클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="대사증후군클리닉 안내를 알려줘">대사증후군클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="대장암클리닉 안내를 알려줘">대장암클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="대장항문클리닉 안내를 알려줘">대장항문클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="두통 어지럼증 클리닉 안내를 알려줘">두통 어지럼증 클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="만성피로클리닉 안내를 알려줘">만성피로클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="변비 및 과민성장증후군클리닉 안내를 알려줘">변비·과민성장증후군클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="복강경클리닉 안내를 알려줘">복강경클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="부인과내시경클리닉 안내를 알려줘">부인과내시경클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="부정맥 클리닉 안내를 알려줘">부정맥 클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="비뇨기 암클리닉 안내를 알려줘">비뇨기 암클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="비만클리닉 안내를 알려줘">비만클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="상부소화관종양클리닉 안내를 알려줘">상부소화관종양클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="성인예방접종클리닉 안내를 알려줘">성인예방접종클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아감염클리닉 안내를 알려줘">소아감염클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아미성년클리닉 안내를 알려줘">소아미성년클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아비뇨의학클리닉 안내를 알려줘">소아비뇨의학클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아신경발달클리닉 안내를 알려줘">소아신경발달클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아심장클리닉 안내를 알려줘">소아심장클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아알레르기피부 클리닉 안내를 알려줘">소아알레르기피부 클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아외과클리닉 안내를 알려줘">소아외과클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아위장관 내시경 클리닉 안내를 알려줘">소아위장관(내시경)클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아위장관클리닉 안내를 알려줘">소아위장관클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아이비인후과클리닉 안내를 알려줘">소아이비인후과클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아청소년 측만증 클리닉 안내를 알려줘">소아청소년 측만증 클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아피부클리닉 안내를 알려줘">소아피부클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아혈액종양클리닉 안내를 알려줘">소아혈액종양클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="소아호흡기알레르기클리닉 안내를 알려줘">소아호흡기알레르기클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="수면 신경과 클리닉 안내를 알려줘">수면(신경과)클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="수면 정신건강의학과 클리닉 안내를 알려줘">수면(정신건강의학과)클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="신생아 미숙아클리닉 안내를 알려줘">신생아/미숙아클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="여성암클리닉 안내를 알려줘">여성암클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="염증성 장질환 클리닉 안내를 알려줘">염증성 장질환 클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="위암클리닉 안내를 알려줘">위암클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="유방 맘모톰 클리닉 안내를 알려줘">유방 맘모톰 클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="유방암클리닉 안내를 알려줘">유방암클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="음성클리닉 안내를 알려줘">음성클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="척추클리닉 안내를 알려줘">척추클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="태아정밀진단클리닉 안내를 알려줘">태아정밀진단클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="통증완화클리닉 안내를 알려줘">통증완화클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="통증클리닉 안내를 알려줘">통증클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="팔 다리 혈관클리닉 안내를 알려줘">팔/다리 혈관클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="포스트코로나클리닉 안내를 알려줘">포스트코로나클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="피부종양 클리닉 안내를 알려줘">피부종양 클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="필러보톡스 클리닉 안내를 알려줘">필러보톡스 클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="해외여행클리닉 안내를 알려줘">해외여행클리닉</button>
+                      <button type="button" class="kp-acc__grid-btn" data-query="혈관및인터벤션클리닉 안내를 알려줘">혈관및인터벤션클리닉</button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <!-- ══ 진료예약 아코디언 ══ -->
+          <div class="kp-acc-group" id="acc-rsv">
+            <div class="kp-acc-card">
+              <section class="kp-acc">
+                <button type="button" class="kp-acc__head" aria-expanded="false">
+                  <span class="kp-acc__label">
+                    <span class="kp-acc__ico-wrap kp-acc__ico-wrap--license" aria-hidden="true"><img class="kp-acc__ico" src="${ptAiWebPath}/common/images/id-badge-2.svg" alt=""></span>
+                    진료 예약
+                  </span>
+                  <span class="kp-acc__meta">
+                    <span class="kp-acc__badge">5</span>
+                    <span class="kp-acc__chev" aria-hidden="true"><svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+                  </span>
+                </button>
+                <div class="kp-acc__list">
+                  <div class="kp-acc__inner">
+                    <button type="button" class="kp-qitem" data-query="외래 진료 예약 방법을 알려줘"><span class="kp-qitem__text">외래 진료 예약 방법</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="재진 예약 방법을 알려줘"><span class="kp-qitem__text">재진 예약 방법</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="예약 변경과 취소 방법을 알려줘"><span class="kp-qitem__text">예약 변경·취소 안내</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="진료과 선택 및 담당의 안내를 알려줘"><span class="kp-qitem__text">진료과 선택 및 담당의 안내</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="진료시간표를 알려줘"><span class="kp-qitem__text">진료시간표 확인</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <!-- ══ 병원이용 아코디언 ══ -->
+          <div class="kp-acc-group" id="acc-hospital">
+            <div class="kp-acc-card">
+              <section class="kp-acc">
+                <button type="button" class="kp-acc__head" aria-expanded="false">
+                  <span class="kp-acc__label">
+                    <span class="kp-acc__ico-wrap kp-acc__ico-wrap--edu" aria-hidden="true"><img class="kp-acc__ico" src="${ptAiWebPath}/common/images/vocabulary.svg" alt=""></span>
+                    병원 이용
+                  </span>
+                  <span class="kp-acc__meta">
+                    <span class="kp-acc__badge">6</span>
+                    <span class="kp-acc__chev" aria-hidden="true"><svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+                  </span>
+                </button>
+                <div class="kp-acc__list">
+                  <div class="kp-acc__inner">
+                    <button type="button" class="kp-qitem" data-query="진료 접수 및 검사 예약 방법을 알려줘"><span class="kp-qitem__text">진료 접수 및 검사 예약 방법</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="응급진료 안내를 알려줘"><span class="kp-qitem__text">응급진료 안내 (365일 24시간)</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="입원 절차와 준비사항을 알려줘"><span class="kp-qitem__text">입원 절차 및 준비사항</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="퇴원 절차를 알려줘"><span class="kp-qitem__text">퇴원 절차</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="진단서와 제증명 발급 방법을 알려줘"><span class="kp-qitem__text">진단서·제증명 발급 방법</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="비급여 진료비 안내를 알려줘"><span class="kp-qitem__text">비급여 진료비 안내</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <!-- ══ 건강정보 아코디언 ══ -->
+          <div class="kp-acc-group" id="acc-health">
+            <div class="kp-acc-card">
+              <section class="kp-acc">
+                <button type="button" class="kp-acc__head" aria-expanded="false">
+                  <span class="kp-acc__label">
+                    <span class="kp-acc__ico-wrap kp-acc__ico-wrap--fee" aria-hidden="true"><img class="kp-acc__ico" src="${ptAiWebPath}/common/images/wallet.svg" alt=""></span>
+                    건강정보
+                  </span>
+                  <span class="kp-acc__meta">
+                    <span class="kp-acc__badge">4</span>
+                    <span class="kp-acc__chev" aria-hidden="true"><svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+                  </span>
+                </button>
+                <div class="kp-acc__list">
+                  <div class="kp-acc__inner">
+                    <button type="button" class="kp-qitem" data-query="강원대학교병원 의학 칼럼을 알려줘"><span class="kp-qitem__text">의학 칼럼</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="건강정보 콘텐츠를 알려줘"><span class="kp-qitem__text">건강정보 콘텐츠</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="자주 묻는 질문을 알려줘"><span class="kp-qitem__text">자주 묻는 질문 (FAQ)</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="방송과 영상 자료를 알려줘"><span class="kp-qitem__text">방송·영상 자료</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <!-- ══ 병원소개 아코디언 ══ -->
+          <div class="kp-acc-group" id="acc-about">
+            <div class="kp-acc-card">
+              <section class="kp-acc">
+                <button type="button" class="kp-acc__head" aria-expanded="false">
+                  <span class="kp-acc__label">
+                    <span class="kp-acc__ico-wrap kp-acc__ico-wrap--site" aria-hidden="true"><img class="kp-acc__ico" src="${ptAiWebPath}/common/images/browser-check.svg" alt=""></span>
+                    병원소개
+                  </span>
+                  <span class="kp-acc__meta">
+                    <span class="kp-acc__badge">5</span>
+                    <span class="kp-acc__chev" aria-hidden="true"><svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+                  </span>
+                </button>
+                <div class="kp-acc__list">
+                  <div class="kp-acc__inner">
+                    <button type="button" class="kp-qitem" data-query="강원대학교병원 소개를 알려줘"><span class="kp-qitem__text">인사말 및 병원 소개</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="강원대학교병원 연혁을 알려줘"><span class="kp-qitem__text">병원 연혁</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="사회공헌과 후원 안내를 알려줘"><span class="kp-qitem__text">사회공헌·후원 안내</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="공지사항을 알려줘"><span class="kp-qitem__text">공지사항</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                    <button type="button" class="kp-qitem" data-query="채용 안내를 알려줘"><span class="kp-qitem__text">채용 안내</span><span class="kp-qitem__arrow"><svg class="kp-svg kp-svg--15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+          --%>
+
+        </div>
+
+      </aside>
+    </div>
+
+  </div>
+
+  <!-- 예약 변경 모달 -->
+  <div id="kp-rsv-modal" class="kp-rsv-modal" hidden role="dialog" aria-modal="true" aria-labelledby="kp-rsv-modal-title">
+    <div class="kp-rsv-modal__backdrop"></div>
+    <div class="kp-rsv-modal__dialog">
+      <div class="kp-rsv-modal__head">
+        <h3 class="kp-rsv-modal__title" id="kp-rsv-modal-title">예약 정보 변경</h3>
+        <button type="button" class="kp-iconbtn" id="btn-rsv-modal-close" aria-label="닫기">
+          <svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
+      </div>
+      <div class="kp-rsv-modal__current">
+        <!-- 일자 / 시간 -->
+        <div class="kp-rsv-modal__field">
+          <div class="kp-rsv-modal__field-row">
+            <div style="flex:1.4">
+              <label class="kp-rsv-modal__field-label" for="kp-rsv-modal-date">일자</label>
+              <select id="kp-rsv-modal-date" class="kp-rsv-modal__select">
+                <option value="2026.06.20">2026.06.20 (토)</option>
+                <option value="2026.06.22">2026.06.22 (월)</option>
+                <option value="2026.06.23">2026.06.23 (화)</option>
+                <option value="2026.06.24">2026.06.24 (수)</option>
+                <option value="2026.06.25">2026.06.25 (목)</option>
+                <option value="2026.06.26">2026.06.26 (금)</option>
+                <option value="2026.06.27">2026.06.27 (토)</option>
+                <option value="2026.06.30">2026.06.30 (화)</option>
+                <option value="2026.07.01">2026.07.01 (수)</option>
+                <option value="2026.07.02">2026.07.02 (목)</option>
+                <option value="2026.07.03">2026.07.03 (금)</option>
+                <option value="2026.07.04">2026.07.04 (토)</option>
+              </select>
+            </div>
+            <div style="flex:1">
+              <label class="kp-rsv-modal__field-label" for="kp-rsv-modal-time">시간</label>
+              <select id="kp-rsv-modal-time" class="kp-rsv-modal__select">
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- 진료과 -->
+        <div class="kp-rsv-modal__field">
+          <label class="kp-rsv-modal__field-label" for="kp-rsv-modal-dept">진료과</label>
+          <select id="kp-rsv-modal-dept" class="kp-rsv-modal__select">
+            <option value="척추센터 · 신경외과">척추센터 · 신경외과</option>
+            <option value="신경외과">신경외과</option>
+            <option value="영상의학과">영상의학과</option>
+            <option value="재활의학과">재활의학과</option>
+            <option value="정형외과">정형외과</option>
+            <option value="관절센터">관절센터</option>
+          </select>
+        </div>
+        <!-- 의료진 -->
+        <div class="kp-rsv-modal__field">
+          <label class="kp-rsv-modal__field-label" for="kp-rsv-modal-doctor">의료진</label>
+          <select id="kp-rsv-modal-doctor" class="kp-rsv-modal__select">
+            <option value="김철수 교수">김철수 교수</option>
+            <option value="이영희 과장">이영희 과장</option>
+            <option value="박지원 과장">박지원 과장</option>
+            <option value="최민호 원장">최민호 원장</option>
+            <option value="정수연 과장">정수연 과장</option>
+          </select>
+        </div>
+      </div>
+      <div class="kp-rsv-modal__options">
+        <button type="button" class="kp-rsv-modal__opt-btn">변경 완료</button>
+        <button type="button" class="kp-rsv-modal__opt-btn kp-rsv-modal__opt-btn--cancel">예약 취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 의료진 소개 레이어 팝업 -->
+  <div id="kp-doctor-modal" class="kp-doctor-modal" hidden role="dialog" aria-modal="true" aria-labelledby="kp-doctor-modal-title">
+    <div class="kp-doctor-modal__backdrop"></div>
+    <div class="kp-doctor-modal__dialog">
+
+      <!-- 헤더 -->
+      <div class="kp-doctor-modal__head">
+        <h3 class="kp-doctor-modal__title" id="kp-doctor-modal-title">
+          <span class="kp-doctor-modal__title-ico" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </span>
+          의료진 소개
+        </h3>
+        <button type="button" class="kp-iconbtn" id="btn-doctor-modal-close" aria-label="닫기">
+          <svg class="kp-svg kp-svg--18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+
+      <!-- 탭 -->
+      <div class="kp-doctor-modal__tabs" role="tablist">
+        <button type="button" class="kp-doctor-modal__tab is-active" role="tab" aria-selected="true"  data-dtab="dept">진료과</button>
+        <button type="button" class="kp-doctor-modal__tab" role="tab" aria-selected="false" data-dtab="center">전문센터</button>
+        <button type="button" class="kp-doctor-modal__tab" role="tab" aria-selected="false" data-dtab="clinic">클리닉</button>
+      </div>
+
+      <!-- 사이드바 + 콘텐츠 바디 -->
+      <div class="kp-doctor-modal__body">
+
+        <!-- 좌측 진료과 사이드바 -->
+        <div id="dept_sidebar">
+          <div class="dept_search_wrap">
+            <input type="text" id="dept_search_input" placeholder="진료과 검색" autocomplete="off" spellcheck="false">
+          </div>
+          <!-- 진료과 목록 -->
+          <ul class="dept_list" data-dpanel="dept">
+            <li class="dept_list_item" data-dept="가정의학과">가정의학과</li>
+            <li class="dept_list_item" data-dept="감염내과">감염내과</li>
+            <li class="dept_list_item" data-dept="치과">구강외과/치과</li>
+            <li class="dept_list_item" data-dept="내분비내과">내분비내과</li>
+            <li class="dept_list_item" data-dept="류마티스내과">류마티스내과</li>
+            <li class="dept_list_item" data-dept="마취통증의학과">마취통증의학과/통증클리닉</li>
+            <li class="dept_list_item" data-dept="방사선종양학과">방사선종양학과</li>
+            <li class="dept_list_item" data-dept="병리과">병리과</li>
+            <li class="dept_list_item" data-dept="비뇨의학과">비뇨의학과</li>
+            <li class="dept_list_item" data-dept="산부인과">산부인과</li>
+            <li class="dept_list_item" data-dept="성형외과">성형외과</li>
+            <li class="dept_list_item" data-dept="소아성형외과">소아성형외과</li>
+            <li class="dept_list_item" data-dept="소아비뇨의학과">소아비뇨의학과</li>
+            <li class="dept_list_item" data-dept="소아신경외과">소아신경외과</li>
+            <li class="dept_list_item" data-dept="소아안과">소아안과</li>
+            <li class="dept_list_item" data-dept="소아외과">소아외과</li>
+            <li class="dept_list_item" data-dept="소아이비인후과">소아이비인후과</li>
+            <li class="dept_list_item" data-dept="소아정신건강의학과">소아정신건강의학과</li>
+            <li class="dept_list_item" data-dept="소아청소년과">소아청소년과</li>
+            <li class="dept_list_item" data-dept="소아피부과">소아피부과</li>
+            <li class="dept_list_item" data-dept="소아흉부외과">소아흉부외과</li>
+            <li class="dept_list_item" data-dept="소화기내과">소화기내과</li>
+            <li class="dept_list_item" data-dept="신경과">신경과</li>
+            <li class="dept_list_item" data-dept="신경외과">신경외과</li>
+            <li class="dept_list_item" data-dept="신장내과">신장내과</li>
+            <li class="dept_list_item" data-dept="심장내과">심장내과</li>
+            <li class="dept_list_item" data-dept="심장외과">심장외과</li>
+            <li class="dept_list_item" data-dept="심장혈관흉부외과">심장혈관흉부외과</li>
+            <li class="dept_list_item" data-dept="안과">안과</li>
+            <li class="dept_list_item" data-dept="알레르기내과">알레르기내과</li>
+            <li class="dept_list_item" data-dept="영상의학과">영상의학과</li>
+            <li class="dept_list_item" data-dept="예방의학과">예방의학과</li>
+            <li class="dept_list_item" data-dept="외과">외과</li>
+            <li class="dept_list_item" data-dept="응급의학과">응급의학과</li>
+            <li class="dept_list_item" data-dept="이비인후과">이비인후과</li>
+            <li class="dept_list_item" data-dept="입원의학센터">입원의학센터</li>
+            <li class="dept_list_item" data-dept="재활의학과">재활의학과</li>
+            <li class="dept_list_item" data-dept="재활의학과(노인센터)">재활의학과(노인센터)</li>
+            <li class="dept_list_item" data-dept="정신건강의학과">정신건강의학과</li>
+            <li class="dept_list_item" data-dept="정형외과">정형외과</li>
+            <li class="dept_list_item" data-dept="중환자의학과">중환자의학과</li>
+            <li class="dept_list_item" data-dept="진단검사의학과">진단검사의학과</li>
+            <li class="dept_list_item" data-dept="피부과">피부과</li>
+            <li class="dept_list_item" data-dept="핵의학과">핵의학과</li>
+            <li class="dept_list_item" data-dept="혈액종양내과">혈액종양내과</li>
+            <li class="dept_list_item" data-dept="호흡기내과">호흡기내과</li>
+          </ul>
+          <!-- 전문센터 목록 -->
+          <ul class="dept_list" data-dpanel="center" hidden>
+            <li class="dept_list_item" data-dept="권역응급의료센터">권역응급의료센터</li>
+            <li class="dept_list_item" data-dept="권역외상센터">권역외상센터</li>
+            <li class="dept_list_item" data-dept="강원지역암센터">강원지역암센터</li>
+            <li class="dept_list_item" data-dept="심뇌혈관질환센터">심뇌혈관질환센터</li>
+            <li class="dept_list_item" data-dept="어린이병원">어린이병원</li>
+            <li class="dept_list_item" data-dept="재활의학센터">재활의학센터</li>
+            <li class="dept_list_item" data-dept="인공신장센터">인공신장센터</li>
+            <li class="dept_list_item" data-dept="완화의료센터">완화의료센터</li>
+            <li class="dept_list_item" data-dept="건강증진센터">건강증진센터</li>
+            <li class="dept_list_item" data-dept="로봇수술센터">로봇수술센터</li>
+            <li class="dept_list_item" data-dept="융합의학센터">융합의학센터</li>
+            <li class="dept_list_item" data-dept="소아청소년과(어린이병원)">어린이병원 소아청소년과</li>
+          </ul>
+          <!-- 클리닉 목록 -->
+          <ul class="dept_list" data-dpanel="clinic" hidden>
+            <li class="dept_list_item" data-dept="간암및간질환클리닉">간암 및 간질환클리닉</li>
+            <li class="dept_list_item" data-dept="갑상선두경부암클리닉">갑상선 두경부 암 클리닉</li>
+            <li class="dept_list_item" data-dept="건강검진클리닉">건강검진클리닉</li>
+            <li class="dept_list_item" data-dept="금연클리닉">금연클리닉</li>
+            <li class="dept_list_item" data-dept="기억장애클리닉">기억장애 클리닉</li>
+            <li class="dept_list_item" data-dept="노년클리닉">노년 클리닉</li>
+            <li class="dept_list_item" data-dept="뇌졸중클리닉">뇌졸중 클리닉</li>
+            <li class="dept_list_item" data-dept="눈성형클리닉">눈성형 클리닉</li>
+            <li class="dept_list_item" data-dept="대사증후군클리닉">대사증후군클리닉</li>
+            <li class="dept_list_item" data-dept="대장암클리닉">대장암클리닉</li>
+            <li class="dept_list_item" data-dept="대장항문클리닉">대장항문클리닉</li>
+            <li class="dept_list_item" data-dept="두통어지럼증클리닉">두통 어지럼증 클리닉</li>
+            <li class="dept_list_item" data-dept="만성피로클리닉">만성피로클리닉</li>
+            <li class="dept_list_item" data-dept="변비과민성장증후군클리닉">변비 및 과민성장증후군클리닉</li>
+            <li class="dept_list_item" data-dept="복강경클리닉">복강경클리닉</li>
+            <li class="dept_list_item" data-dept="부인과내시경클리닉">부인과내시경클리닉</li>
+            <li class="dept_list_item" data-dept="부정맥클리닉">부정맥 클리닉</li>
+            <li class="dept_list_item" data-dept="비뇨기암클리닉">비뇨기 암클리닉</li>
+            <li class="dept_list_item" data-dept="비만클리닉">비만클리닉</li>
+            <li class="dept_list_item" data-dept="상부소화관종양클리닉">상부소화관종양클리닉</li>
+            <li class="dept_list_item" data-dept="성인예방접종클리닉">성인예방접종클리닉</li>
+            <li class="dept_list_item" data-dept="소아감염클리닉">소아감염클리닉</li>
+            <li class="dept_list_item" data-dept="소아미성년클리닉">소아미성년클리닉</li>
+            <li class="dept_list_item" data-dept="소아비뇨의학클리닉">소아비뇨의학클리닉</li>
+            <li class="dept_list_item" data-dept="소아신경발달클리닉">소아신경발달클리닉</li>
+            <li class="dept_list_item" data-dept="소아심장클리닉">소아심장클리닉</li>
+            <li class="dept_list_item" data-dept="소아알레르기피부클리닉">소아알레르기피부 클리닉</li>
+            <li class="dept_list_item" data-dept="소아외과클리닉">소아외과클리닉</li>
+            <li class="dept_list_item" data-dept="소아위장관내시경클리닉">소아위장관(내시경)클리닉</li>
+            <li class="dept_list_item" data-dept="소아위장관클리닉">소아위장관클리닉</li>
+            <li class="dept_list_item" data-dept="소아이비인후과클리닉">소아이비인후과클리닉</li>
+            <li class="dept_list_item" data-dept="소아청소년측만증클리닉">소아청소년 측만증 클리닉</li>
+            <li class="dept_list_item" data-dept="소아피부클리닉">소아피부클리닉</li>
+            <li class="dept_list_item" data-dept="소아혈액종양클리닉">소아혈액종양클리닉</li>
+            <li class="dept_list_item" data-dept="소아호흡기알레르기클리닉">소아호흡기알레르기클리닉</li>
+            <li class="dept_list_item" data-dept="수면신경과클리닉">수면(신경과)클리닉</li>
+            <li class="dept_list_item" data-dept="수면정신건강의학과클리닉">수면(정신건강의학과)클리닉</li>
+            <li class="dept_list_item" data-dept="신생아미숙아클리닉">신생아/미숙아클리닉</li>
+            <li class="dept_list_item" data-dept="여성암클리닉">여성암클리닉</li>
+            <li class="dept_list_item" data-dept="염증성장질환클리닉">염증성 장질환 클리닉</li>
+            <li class="dept_list_item" data-dept="위암클리닉">위암클리닉</li>
+            <li class="dept_list_item" data-dept="유방맘모톰클리닉">유방 맘모톰 클리닉</li>
+            <li class="dept_list_item" data-dept="유방암클리닉">유방암클리닉</li>
+            <li class="dept_list_item" data-dept="음성클리닉">음성클리닉</li>
+            <li class="dept_list_item" data-dept="척추클리닉">척추클리닉</li>
+            <li class="dept_list_item" data-dept="태아정밀진단클리닉">태아정밀진단클리닉</li>
+            <li class="dept_list_item" data-dept="통증완화클리닉">통증완화클리닉</li>
+            <li class="dept_list_item" data-dept="통증클리닉">통증클리닉</li>
+            <li class="dept_list_item" data-dept="팔다리혈관클리닉">팔/다리 혈관클리닉</li>
+            <li class="dept_list_item" data-dept="포스트코로나클리닉">포스트코로나클리닉</li>
+            <li class="dept_list_item" data-dept="피부종양클리닉">피부종양 클리닉</li>
+            <li class="dept_list_item" data-dept="필러보톡스클리닉">필러보톡스실리프팅 클리닉</li>
+            <li class="dept_list_item" data-dept="해외여행클리닉">해외여행클리닉</li>
+            <li class="dept_list_item" data-dept="혈관인터벤션클리닉">혈관및인터벤션클리닉</li>
+          </ul>
+          <p class="dept_no_result" hidden>검색 결과가 없습니다</p>
+        </div>
+
+        <!-- 우측 의료진 카드 영역 -->
+        <div class="kp-doctor-modal__staff" id="kp-doctor-staff">
+          <div class="kp-doctor-modal__staff-ph">
+            <span class="kp-doctor-modal__staff-ph-ico" aria-hidden="true">
+              <!-- <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              </svg> -->
+              <img src="${ptAiWebPath}/common/images/doctor.svg" alt="">
+            </span>
+            <p>진료과·전문센터·클리닉을 선택하시면<br>의료진 소개를 확인할 수 있습니다.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 공통 아이콘 심볼 -->
+  <svg class="kp-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="kp-icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="9" width="11" height="11" rx="2" />
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+      </symbol>
+      <symbol id="kp-icon-thumb-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3z" />
+        <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+      </symbol>
+      <symbol id="kp-icon-thumb-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3z" />
+        <path d="M17 14V2" />
+      </symbol>
+      <symbol id="kp-icon-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+      </symbol>
+      <symbol id="kp-icon-youtube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 8l6 4-6 4V8z" />
+        <rect x="3" y="6" width="18" height="12" rx="3" />
+      </symbol>
+      <symbol id="kp-icon-band" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M9.5 8.5h5v7h-5z" />
+        <path d="M12 8.5v7" />
+      </symbol>
+      <symbol id="kp-icon-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 20V6l8-3 8 3v14" />
+        <path d="M9 20v-6h6v6" />
+        <path d="M9 10h.01M15 10h.01M9 14h.01M15 14h.01" />
+      </symbol>
+      <symbol id="kp-icon-certificate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 4h10v14H7z" />
+        <path d="M9 8h6M9 12h4" />
+        <circle cx="17" cy="17" r="3" />
+        <path d="m15.5 17 1 1 2-2" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ── 마이서비스 패널 로직 ── -->
+  <script>
+    (function () {
+      var main = document.getElementById('main');
+      var chatScroll = document.getElementById('chat-scroll');
+
+      /*
+       * 버튼 → 템플릿 매핑 패턴 (기존 kp-guide-panel__btn 흐름과 동일)
+       * 버튼 클릭 → kp-main--chat 전환 → #chat-answer-body에 해당 템플릿 주입
+       */
+      function injectTemplate(tplId, pillText) {
+        var turnTpl = document.getElementById('tpl-chat-turn');
+        var localTpl = document.getElementById(tplId);
+        if (!turnTpl || !localTpl || !chatScroll) return;
+
+        var fragment = turnTpl.content.cloneNode(true);
+        var thread = fragment.querySelector('[data-role="thread"]');
+        var pill = fragment.querySelector('[data-role="query-pill"]');
+        var body = fragment.querySelector('[data-role="answer-body"]');
+        if (!thread || !pill || !body) return;
+
+        pill.textContent = pillText;
+        body.appendChild(localTpl.content.cloneNode(true));
+        chatScroll.appendChild(fragment);
+
+        if (window.PT_AI_AVATAR && typeof window.PT_AI_AVATAR.applyToThread === 'function') {
+          window.PT_AI_AVATAR.applyToThread(thread);
+        }
+        main.classList.add('kp-main--chat');
+        requestAnimationFrame(function () {
+          chatScroll.scrollTop = chatScroll.scrollHeight;
+        });
+      }
+
+      function runTemplateChat(tplId, pillText) {
+        if (!document.getElementById(tplId)) return;
+        if (window.PT_AI_CHAT && typeof window.PT_AI_CHAT.startChat === 'function') {
+          window.PT_AI_CHAT.startChat(pillText, tplId);
+          return;
+        }
+        injectTemplate(tplId, pillText);
+      }
+
+      /* chat 영역 이벤트 위임 — 템플릿 주입 후 동적으로 생성되는 버튼 처리 */
+      document.getElementById('chat').addEventListener('click', function (e) {
+        var t = e.target;
+
+        /* 예약확인 — 방문예정 행 클릭 시 예약 변경 모달 열기 */
+        var rsvRow = t.closest('.kp-rsv-row--upcoming');
+        if (rsvRow) {
+          var dtParts = (rsvRow.dataset.rsvDatetime || '').split(' ');
+          document.getElementById('kp-rsv-modal-date').value   = dtParts[0] || '';
+          document.getElementById('kp-rsv-modal-time').value   = dtParts[2] || '';
+          document.getElementById('kp-rsv-modal-dept').value   = rsvRow.dataset.rsvDept || '';
+          document.getElementById('kp-rsv-modal-doctor').value = rsvRow.dataset.rsvDoctor || '';
+          document.getElementById('kp-rsv-modal').hidden = false;
+        }
+
+        /* 고객의 소리 — 게시판 행 클릭 시 답변 토글 (미답변 제외) */
+        var boardHead = t.closest('.kp-board-item__head');
+        if (boardHead && !boardHead.classList.contains('kp-board-item__head--pending')) {
+          var expanded = boardHead.getAttribute('aria-expanded') === 'true';
+          boardHead.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+          var body = boardHead.parentElement.querySelector('.kp-board-item__body');
+          if (body) body.hidden = expanded;
+        }
+
+        /* 병문안 편지 — 수신/발신 탭 전환 */
+        var letterTab = t.closest('.kp-letter-tab');
+        if (letterTab) {
+          var ltKey = letterTab.dataset.ltab;
+          var letterWrap = letterTab.closest('.kp-answer-card__section');
+          if (!letterWrap) return;
+          letterWrap.querySelectorAll('.kp-letter-tab').forEach(function (btn) {
+            btn.classList.toggle('is-active', btn.dataset.ltab === ltKey);
+          });
+          letterWrap.querySelectorAll('[data-lpanel]').forEach(function (panel) {
+            panel.hidden = panel.dataset.lpanel !== ltKey;
+          });
+        }
+      });
+
+      /* 마이페이지 버튼 → include된 tpl-my-page 주입 */
+      document.getElementById('btn-my-health').addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        runTemplateChat('tpl-my-page', '마이페이지');
+      });
+
+      /* 회원정보 관리 버튼 → tpl-my-info 주입 */
+      var btnMyInfo = document.getElementById('btn-my-info');
+      if (btnMyInfo) {
+        btnMyInfo.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          runTemplateChat('tpl-my-info', '회원정보 관리');
+        });
+      }
+
+      /* 예약 변경 모달 닫기 */
+      function closeRsvModal() {
+        document.getElementById('kp-rsv-modal').hidden = true;
+      }
+      document.getElementById('btn-rsv-modal-close').addEventListener('click', closeRsvModal);
+      document.querySelector('.kp-rsv-modal__backdrop').addEventListener('click', closeRsvModal);
+    }());
+  </script>
+
+  <!-- ── 의료진 소개 모달 로직 ── -->
+  <script>
+  (function () {
+    var modal      = document.getElementById('kp-doctor-modal');
+    var staffArea  = document.getElementById('kp-doctor-staff');
+    var btnClose   = document.getElementById('btn-doctor-modal-close');
+    var backdrop   = modal.querySelector('.kp-doctor-modal__backdrop');
+
+    /* ── 강원대학교병원 의료진 데이터 ── */
+    var DOCTOR_DATA = {
+      '가정의학과': [
+        { name: '양정희', position: '전문의', tags: ['만성질환', '금연', '건강증진'], photo: '가정의학과-양정희.jpg' },
+        { name: '고유라',  position: '전문의', tags: ['피로', '비만', '성인병'], photo: '가정의학과-고유라.jpg' },
+        { name: '김선미', position: '전문의', tags: ['일차의료', '비만', '대사증후군'], photo: '가정의학과-김선미.jpg' },
+        { name: '강석훈', position: '전문의', tags: ['고혈압', '당뇨', '비만'], photo: '가정의학과-강석훈.jpg' },
+        { name: '임인혁', position: '전문의', tags: ['만성질환', '금연', '노인병'], photo: '가정의학과-임인혁.jpg' }
+      ],
+      '감염내과': [
+        { name: '오원섭', position: '전문의', tags: ['감염질환', '패혈증', '에이즈'], photo: '감염내과-오원섭.png' },
+        { name: '전용덕', position: '전문의', tags: ['감염질환', '패혈증', '원인불명열'], photo: '감염내과-전용덕.jpg' },
+        { name: '김창협', position: '전문의', tags: ['감염질환', '패혈증', '매독'], photo: '감염내과-김창협.jpg' }
+      ],
+      '내분비내과': [
+        { name: '김상욱', position: '전문의', tags: ['당뇨병', '희귀내분비질환'], photo: '내분비내과-김상욱.jpg' },
+        { name: '조은희', position: '전문의', tags: ['당뇨병', '골다공증', '고지혈증'], photo: '내분비내과-조은희.png' },
+        { name: '최동섭', position: '전문의', tags: ['당뇨병', '내분비질환'], photo: '내분비내과-최동섭.jpg' }
+      ],
+      '류마티스내과': [
+        { name: '문기원', position: '전문의', tags: ['류마티스관절염', '통풍', '루푸스'], photo: '류마티스내과-문기원.jpg' },
+        { name: '도현수', position: '전문의', tags: ['류마티스관절염', '강직성척추염', '통풍'], photo: '류마티스내과-도현수.jpg' }
+      ],
+      '마취통증의학과': [
+        { name: '손희정', position: '전문의', tags: ['일반마취', '기도관리'], photo: '마취통증의학과-손희정.jpg' },
+        { name: '강성식', position: '전문의', tags: ['심폐마취', '정형외과마취', '중환자의학'], photo: '마취통증의학과-강성식.jpg' },
+        { name: '허진',   position: '전문의', tags: ['전신마취', '부위마취', '수술통증관리'], photo: '마취통증의학과-허진.jpg' },
+        { name: '황병문', position: '전문의', tags: ['복합부위통증', '암성통증', '대상포진후신경통'], photo: '마취통증의학과-황병문.jpg' },
+        { name: '김민수', position: '전문의', tags: ['요통', '경부통', '척추질환'], photo: '마취통증의학과-김민수.jpg' },
+        { name: '이혜정', position: '전문의', tags: ['일반마취', '정맥마취', '중환자의학'], photo: '마취통증-이혜정.jpg' },
+        { name: '백지원', position: '전문의', tags: ['전신마취', '부위마취', '수술통증관리'], photo: '마취통증의학과-백지원.jpg' }
+      ],
+      '방사선종양학과': [
+        { name: '정누리현', position: '전문의', tags: ['폐암', '전립선암', '방광암'], photo: '방사선종양학과-정누리현.png' },
+        { name: '이수민',  position: '전문의', tags: ['두경부암', '폐암', '뇌종양'], photo: '방사선종양학과-이수민.jpg' },
+        { name: '고민지',  position: '전문의', tags: ['유방암', '자궁경부암', '전이암'], photo: '방사선종양학과-고민지.jpg' },
+        { name: '이민식',  position: '의학물리', tags: ['의학물리'], photo: '방사선종양학과-이민식.png' },
+        { name: '신준봉',  position: '의학물리', tags: ['의학물리'], photo: '방사선종양학과-신준봉.jpg' }
+      ],
+      '병리과': [
+        { name: '강구',   position: '전문의', tags: ['외과병리', '세포병리', '뇌졸중'], photo: '병리과-강구.jpg' },
+        { name: '이승구', position: '전문의', tags: ['외과병리', '세포병리', '분자병리'], photo: '병리과-이승구.jpg' },
+        { name: '류영준', position: '전문의', tags: ['심폐병리', '정형외과병리', '산부인과병리'], photo: '병리과-류영준.jpg' }
+      ],
+      '비뇨의학과': [
+        { name: '김정현', position: '전문의', tags: ['전립선암', '신장암', '방광암'], photo: '비뇨의학과-김정현.jpg' },
+        { name: '이상욱', position: '전문의', tags: ['요실금', '과민성방광', '신경인성방광'], photo: '비뇨의학과-이상욱.jpg' },
+        { name: '박홍주', position: '전문의', tags: ['전립선암', '요실금', '요로결석'], photo: '비뇨의학과-박홍주.jpg' },
+        { name: '안한종', position: '전문의', tags: ['전립선비대증', '전립선암'], photo: '비뇨의학과-안한종.jpg' }
+      ],
+      '산부인과': [
+        { name: '황종윤', position: '전문의', tags: ['고위험임신', '로봇수술', '복강경수술'], photo: '산부인과-황종윤.png' },
+        { name: '이향아', position: '전문의', tags: ['불임', '갱년기', '골다공증'], photo: '산부인과-이향아.jpg' },
+        { name: '나성훈', position: '전문의', tags: ['고위험임신', '초음파', '골반내시경수술'], photo: '산부인과-나성훈.jpg' },
+        { name: '안태규', position: '전문의', tags: ['고위험태아의학', '초음파', '골반내시경수술'], photo: '산부인과-안태규.jpg' },
+        { name: '이세진', position: '전문의', tags: ['고위험태아의학', '초음파', '골반내시경수술'], photo: '산부인과-이세진.jpg' },
+        { name: '백민현', position: '전문의', tags: ['부인암', '로봇수술', '자궁근종'], photo: '산부인과-백민현.jpg' }
+      ],
+      '성형외과': [
+        { name: '이상열', position: '전문의', tags: ['안면부기형', '피부종양', '화상'], photo: '성형외과-이상열.jpg' },
+        { name: '성건용', position: '전문의', tags: ['화상', '선천성기형', '흉터'], photo: '성형외과-성건용.png' },
+        { name: '방치영', position: '전문의', tags: ['안면부기형', '안면부종양', '화상'], photo: '성형외과-방치영.jpg' }
+      ],
+      '소아청소년과': [
+        { name: '홍지나', position: '전문의', tags: ['소아소화기질환', '간담도질환', '소아영양'], photo: '소아청소년과-홍지나.jpg' },
+        { name: '김은선', position: '전문의', tags: ['신생아', '미숙아'], photo: '소아청소년과-김은선.jpg' },
+        { name: '박진성', position: '전문의', tags: ['소아천식', '소아알레르기', '아토피'], photo: '소아청소년과-박진성.jpg' },
+        { name: '조기현', position: '전문의', tags: ['신생아', '미숙아'], photo: '소아청소년과-조기현.jpg' },
+        { name: '조희승', position: '전문의', tags: ['신생아호흡곤란', '기관지폐형성이상'], photo: '소아청소년과-조희승.jpg' },
+        { name: '이용희', position: '전문의', tags: ['소아감염', '불명열', '결핵'], photo: '소아청소년과-이용희.jpg' },
+        { name: '조상원', position: '전문의', tags: ['소아입원전담'], photo: '소아청소년과-조상원.jpg' },
+        { name: '김혜민', position: '전문의', tags: ['소아응급질환'], photo: '소아청소년과-김혜민.jpg' },
+        { name: '김희섭', position: '전문의', tags: ['신생아감염', '미숙아호흡곤란'], photo: '소아청소년과-김희섭.jpg' },
+        { name: '신희영', position: '전문의', tags: ['소아혈액질환', '소아혈액암', '소아고형종양'], photo: '소아청소년과-신희영.jpg' },
+        { name: '박양',   position: '전문의', tags: ['아토피', '소아천식', '알레르기비염'], photo: '소아청소년과-박양.jpg' },
+        { name: '장희진', position: '전문의', tags: ['신생아', '미숙아', '호흡곤란증후군'], photo: '소아청소년과-장희진.png' },
+        { name: '임영내', position: '전문의', tags: ['소아응급질환'], photo: '소아청소년과-임영내.jpg' },
+        { name: '윤철규', position: '전문의', tags: ['소아응급'], photo: '소아청소년과-윤철규.jpg' },
+        { name: '황용승', position: '전문의', tags: ['뇌전증', '두통', '발달장애'], photo: '소아청소년과-황용승.jpg' },
+        { name: '김병일', position: '전문의', tags: ['신생아중환자', '신생아학'], photo: '소아청소년과-김병일.jpg' },
+        { name: '김호성', position: '전문의', tags: ['소아심장'], photo: '소아청소년과-김호성.jpg' },
+        { name: '채수안', position: '전문의', tags: ['소아뇌전증', '소아신경질환'], photo: '소아청소년과-채수안.jpg' }
+      ],
+      '소아흉부외과': [
+        { name: '류세민', position: '전문의', tags: ['심장수술', '대동맥수술', '판막수술'], photo: '소아흉부외과-류세민.png' }
+      ],
+      '소화기내과': [
+        { name: '이성준', position: '전문의', tags: ['소화기질환', '염증성장질환'], photo: '소화기내과-이성준.png' },
+        { name: '강창돈', position: '전문의', tags: ['소화기질환'], photo: '소화기내과-강창돈.jpg' },
+        { name: '박성철', position: '전문의', tags: ['위장관질환', '염증성장질환', '치료내시경'], photo: '소화기내과-박성철.jpg' },
+        { name: '박진명', position: '전문의', tags: ['췌장', '담도', '담낭'], photo: '소화기내과-박진명.jpg' },
+        { name: '남승주', position: '전문의', tags: ['위장관질환', '염증성장질환', '치료내시경'], photo: '소화기내과-남승주.png' },
+        { name: '김태석', position: '전문의', tags: ['간암', '간염', '지방간'], photo: '소화기내과-김태석.jpg' },
+        { name: '이상훈', position: '전문의', tags: ['위장관질환'], photo: '소화기내과-이상훈.jpg' },
+        { name: '김지현', position: '전문의', tags: ['상부위장관', '하부위장관', '치료내시경'], photo: '소화기내과-김지현.png' },
+        { name: '이정호', position: '전문의', tags: ['상부위장관', '하부위장관질환'], photo: '소화기내과-이정호.jpg' },
+        { name: '정영화', position: '전문의', tags: ['간암', '간염', '간경변증'], photo: '소화기내과-정영화.jpg' },
+        { name: '장성훈', position: '전문의', tags: ['췌장', '담도', '담낭질환'], photo: '소화기내과-장성훈.jpg' },
+        { name: '강중희', position: '전문의', tags: ['상부위장관', '하부위장관질환'], photo: '소화기내과-강중희.jpg' },
+        { name: '최대희', position: '전문의', tags: ['간염', '간암', '지방간'], photo: '소화기내과-최대희.jpg' }
+      ],
+      '신경과': [
+        { name: '김성훈', position: '전문의', tags: ['말초신경', '근육병', '뇌졸중'], photo: '신경과-김성훈.jpg' },
+        { name: '이승환', position: '전문의', tags: ['파킨슨병', '치매', '뇌졸중'], photo: '신경과-이승환.jpg' },
+        { name: '김성헌', position: '전문의', tags: ['뇌혈관질환', '뇌전증'] },
+        { name: '박병수', position: '전문의', tags: ['뇌졸중', '신경중재의학', '뇌전증'], photo: '신경과-박병수.jpg' },
+        { name: '오충근', position: '전문의', tags: ['신경과질환'], photo: '신경과-오충근.jpg' }
+      ],
+      '신경외과': [
+        { name: '박승우', position: '전문의', tags: ['퇴행성척추질환', '뇌종양', '기능신경외과'], photo: '신경외과-박승우.jpg' },
+        { name: '김충효', position: '전문의', tags: ['척추질환', '목·허리디스크', '척추협착증'], photo: '신경외과-김충효.jpg' },
+        { name: '김지하', position: '전문의', tags: ['추간판탈출증', '척추협착증', '척추골절'], photo: '신경외과-김지하.jpg' },
+        { name: '이승진', position: '전문의', tags: ['뇌동맥류', '뇌혈관기형', '모야모야병'], photo: '신경외과-이승진.jpg' },
+        { name: '김인경', position: '전문의', tags: ['뇌종양', '소아신경외과', '뇌기능'], photo: '신경외과-김인경.jpg' },
+        { name: '전효섭', position: '전문의', tags: ['뇌동맥류', '뇌혈관기형', '뇌출혈'], photo: '신경외과-전효섭.jpg' },
+        { name: '안준형', position: '전문의', tags: ['뇌동맥류', '뇌혈관기형', '뇌출혈'], photo: '신경외과-안준형.jpg' }
+      ],
+      '신장내과': [
+        { name: '백현정', position: '전문의', tags: ['고혈압', '만성신질환', '사구체신염'], photo: '신장내과-백현정.jpg' },
+        { name: '박지인', position: '전문의', tags: ['만성콩팥병', '급성신손상', '사구체신염'], photo: '신장내과-박지인.jpg' },
+        { name: '이선화', position: '전문의', tags: ['만성콩팥병', '사구체신염', '신증후군'], photo: '신장내과-이선화.jpg' },
+        { name: '손성민', position: '전문의', tags: ['신장내과'], photo: '신장내과-손성민.jpg' },
+      ],
+      '심장내과': [
+        { name: '조병렬', position: '전문의', tags: ['고혈압', '협심증', '심근경색'], photo: '심장내과-조병렬.jpg' },
+        { name: '김용훈', position: '전문의', tags: ['심근경색', '협심증', '부정맥'], photo: '심장내과-김용훈.jpg' },
+        { name: '이봉기', position: '전문의', tags: ['협심증', '심근경색', '선천성심장질환'], photo: '심장내과-이봉기.jpg' },
+        { name: '류동열', position: '전문의', tags: ['고혈압', '허혈성심질환', '심부전'], photo: '심장내과-류동열.jpg' },
+        { name: '허애영', position: '전문의', tags: ['심근경색', '협심증', '심장판막질환'], photo: '심장내과-허애영.jpg' },
+        { name: '천광진', position: '전문의', tags: ['부정맥', '심방세동', '조기수축'], photo: '심장내과-천광진.jpg' }
+      ],
+      '심장외과': [
+        { name: '신윤철', position: '전문의', tags: ['심장판막질환', '관상동맥질환', '대동맥질환'], photo: '심장외과-신윤철.jpg' }
+      ],
+      '심장혈관흉부외과': [
+        { name: '조성준', position: '전문의', tags: ['폐및흉부질환', '하지정맥류', '중환자의학'], photo: '심장혈관흉부외과-조성준.jpg' },
+        { name: '류세민', position: '전문의', tags: ['심장수술', '대동맥수술', '혈관수술'], photo: '심장혈관흉부외과-류세민.png' },
+        { name: '박성민', position: '전문의', tags: ['흉부질환', '혈관질환'], photo: '심장혈관흉부외과-박성민.jpg' }
+      ],
+      '안과': [
+        { name: '송지은', position: '전문의', tags: ['녹내장', '백내장', '노안'], photo: '안과-송지은.png' },
+        { name: '이주하', position: '전문의', tags: ['사시', '약시', '굴절이상'], photo: '안과-이주하.jpg' },
+        { name: '정영훈', position: '전문의', tags: ['황반질환', '망막질환', '백내장'], photo: '안과-정영훈.jpg' },
+        { name: '김성호', position: '전문의', tags: ['황반질환', '망막질환', '포도막염'], photo: '안과-김성호.jpg' }
+      ],
+      '알레르기내과': [
+        { name: '권재우', position: '전문의', tags: ['기관지천식', '알레르기비염', '만성기침'], photo: '알레르기내과-권재우.png' },
+        { name: '김주영', position: '전문의', tags: ['기관지천식', '알레르기비염', '두드러기'], photo: '알레르기내과-김주영.jpg' }
+      ],
+      '영상의학과': [
+        { name: '한헌',   position: '전문의', tags: ['흉부질환', '폐암'], photo: '영상의학과-한헌.jpg' },
+        { name: '김삼수', position: '전문의', tags: ['신경계질환', '두경부질환', '척추질환'], photo: '영상의학과-김삼수.jpg' },
+        { name: '전용환', position: '전문의', tags: ['위장관질환', '간질환', '비뇨생식기'], photo: '영상의학과-전용환.jpg' },
+        { name: '양고은', position: '전문의', tags: ['유방질환', '갑상선질환'], photo: '영상의학과-양고은.jpg' },
+        { name: '오하연', position: '전문의', tags: ['유방', '갑상선질환'], photo: '영상의학과-오하연.jpg' },
+        { name: '최우석', position: '전문의', tags: ['신경두경부', '척추영상의학'], photo: '알레르기내과-최우석.jpg' }
+      ],
+      '예방의학과': [
+        { name: '조희숙', position: '전문의', tags: ['예방의학'], photo: '예방의학과-조희숙.png' },
+        { name: '이혜진', position: '전문의', tags: ['예방의학'], photo: '예방의학과-이혜진.jpg' },
+        { name: '박유경', position: '전문의', tags: ['예방의학'], photo: '예방의학과-박유경.png' },
+        { name: '문지영', position: '전문의', tags: ['보건학', '지역사회보건', '건강증진'], photo: '예방의학과-문지영.png' },
+        { name: '손정인', position: '전문의', tags: ['예방의학'], photo: '예방의학과 손정인.png' },
+        { name: '주영수', position: '전문의', tags: ['예방의학'], photo: '예방의학과-주영수.jpg' }
+      ],
+      '외과': [
+        { name: '채기봉', position: '전문의', tags: ['외과'], photo: '외과-채기봉.jpg' },
+        { name: '박승배', position: '전문의', tags: ['위암', '위궤양', '외과적위질환'], photo: '외과-박승배.jpg' },
+        { name: '김양희', position: '전문의', tags: ['유방암', '유방통', '유방검진'], photo: '외과-김양희.jpg' },
+        { name: '홍성권', position: '전문의', tags: ['췌장암', '담도암', '간암'], photo: '외과-홍성권.jpg' },
+        { name: '문석배', position: '전문의', tags: ['소아외과', '선천성기형', '담도폐쇄증'], photo: '외과-문석배.png' },
+        { name: '최상지', position: '전문의', tags: ['대장암', '직장암', '항문질환'], photo: '외과-최상지.jpg' },
+        { name: '김환수', position: '전문의', tags: ['유방암', '갑상선질환', '부신질환'], photo: '외과-김환수.jpg' },
+        { name: '이광진', position: '전문의', tags: ['하지정맥류', '혈관질환', '투석접근'], photo: '외과-이광진.png' }
+      ],
+      '응급의학과': [
+        { name: '문중범', position: '전문의', tags: ['소생의학', '외상학'], photo: '응급의학과-문중범.jpg' },
+        { name: '옥택근', position: '전문의', tags: ['소생의학', '외상학', '독성학'], photo: '응급의학과-옥택근.jpg' },
+        { name: '신명철', position: '전문의', tags: ['소생의학', '외상학', '독성학'], photo: '응급의학과-신명철.jpg' },
+        { name: '지호진', position: '전문의', tags: ['응급의학'], photo: '응급의학과-지호진.jpg' },
+        { name: '박은석', position: '전문의', tags: ['응급의학'], photo: '응급의학과-박은석.jpg' },
+        { name: '안효용', position: '전문의', tags: ['응급의학'], photo: '응급의학과-안효용.jpg' },
+        { name: '이준형', position: '전문의', tags: ['응급의학'], photo: '응급의학과-이준형.jpg' },
+        { name: '조현석', position: '전문의', tags: ['소아응급'], photo: '응급의학과-조현석.png' },
+        { name: '김용원', position: '전문의', tags: ['응급의학'], photo: '응급의학과-김용원.jpg' },
+        { name: '김재광', position: '전문의', tags: ['응급의학'], photo: '응급의학과-김재광.jpg' }
+      ],
+      '이비인후과': [
+        { name: '남의철', position: '전문의', tags: ['이명', '난청', '어지럼증'], photo: '이비인후과-남의철.png' },
+        { name: '원준연', position: '전문의', tags: ['알레르기비염', '만성비염', '부비동염'], photo: '이비인후과-원준연.png' },
+        { name: '김태수', position: '전문의', tags: ['중이염', '어지러움', '난청'], photo: '이비인후과-김태수.png' },
+        { name: '이우현', position: '전문의', tags: ['코골이', '수면무호흡', '알레르기비염'], photo: '이비인후과-이우현.png' },
+        { name: '유윤종', position: '전문의', tags: ['갑상선암', '후두암', '구강암'], photo: '이비인후과-유윤종.png' },
+        { name: '진영주', position: '전문의', tags: ['성대결절', '갑상선암', '음성장애'], photo: '이비인후과-진영주.jpg' }
+      ],
+      '입원의학센터': [
+        { name: '이상훈', position: '전문의', tags: ['위장관질환'], photo: '입원의학센터-이상훈.jpg' },
+        { name: '류동열', position: '전문의', tags: ['고혈압', '허혈성심질환', '심부전'], photo: '입원의학센터-류동열.jpg' },
+        { name: '임인혁', position: '전문의', tags: ['만성질환', '금연', '노인병'], photo: '입원의학센터-임인혁.jpg' },
+        { name: '조상원', position: '전문의', tags: ['일반소아청소년과'], photo: '입원의학센터-조상원.png' },
+        { name: '홍순택', position: '전문의', tags: ['내과계급성입원질환'], photo: '입원의학센터-홍순택.jpg' },
+        { name: '차용준', position: '전문의', tags: ['입원전담'], photo: '입원의학센터-차용준.jpg' }
+      ],
+      '재활의학과': [
+        { name: '백소라', position: '전문의', tags: ['통증', '근골격계재활', '심장재활'], photo: '재활의학과-백소라.jpg' },
+        { name: '박희원', position: '전문의', tags: ['소아뇌성마비', '뇌졸중재활', '근골격계재활'], photo: '재활의학과-박희원.jpg' },
+        { name: '이건재', position: '전문의', tags: ['뇌졸중', '척수손상', '뇌성마비'], photo: '재활의학과-이건재.jpg' }
+      ],
+      '정신건강의학과': [
+        { name: '이강욱', position: '전문의', tags: ['우울장애', '불안장애', '강박장애'], photo: '정신건강의학과-이강욱.jpg' },
+        { name: '박종익', position: '전문의', tags: ['소아청소년정신과', '우울장애', '조현병'], photo: '정신건강의학과-박종익.jpg' },
+        { name: '주진형', position: '전문의', tags: ['치매', '노인정신질환'], photo: '정신건강의학과-주진형.jpg' },
+        { name: '황준원', position: '전문의', tags: ['소아정신과', '자폐성장애', '발달성언어장애'], photo: '정신건강의학과-황준원.jpg' },
+        { name: '송유진', position: '전문의', tags: ['우울장애', '양극성장애', '알코올사용장애'], photo: '정신건강의학과-송유진.jpg' },
+        { name: '견영기', position: '전문의', tags: ['우울장애', '불안장애', '외상후스트레스'], photo: '정신건강의학과-견영기.jpg' }
+      ],
+      '정형외과': [
+        { name: '남우동', position: '전문의', tags: ['척추질환', '척추외상', '관절염'], photo: '정형외과-남우동.jpg' },
+        { name: '홍철기', position: '전문의', tags: ['요추디스크', '척추관협착증', '경추디스크'], photo: '정형외과-홍철기.jpg' },
+        { name: '김지언', position: '전문의', tags: ['오십견', '회전근개파열', '어깨관절'], photo: '정형외과-김지언.jpg' },
+        { name: '고한석', position: '전문의', tags: ['고관절', '무릎'], photo: '정형외과-고한석.jpg' },
+        { name: '김남엽', position: '전문의', tags: ['척추시술', '최소침습척추수술', '척추측만증'], photo: '정형외과-김남엽.jpg' },
+        { name: '이기병', position: '전문의', tags: ['무릎'], photo: '정형외과-이기병.png' },
+        { name: '최수중', position: '전문의', tags: ['수부질환', '미세수술'], photo: '정형외과-최수중.jpg' }
+      ],
+      '중환자의학과': [
+        { name: '문다해', position: '전문의', tags: ['중환자의학', '감염성폐질환'], photo: '중환자의학과-문다해.jpg' },
+        { name: '권오범', position: '전문의', tags: ['감염성폐질환', '중환자의학'], photo: '중환자의학과-권오범.jpg' },
+        { name: '조성준', position: '전문의', tags: ['호흡부전', '패혈증', '신부전'], photo: '중환자의학과-조성준.jpg' },
+        { name: '진재용', position: '전문의', tags: ['중환자실전담'], photo: '중환자의학과-진재용.jpg' },
+        { name: '한선숙', position: '전문의', tags: ['간질성폐질환', '비결핵항산균', '중환자의학'], photo: '중환자의학과-한선숙.jpg' },
+        { name: '방영학', position: '전문의', tags: ['중환자의학'], photo: '중환자의학과-방영학.jpg' },
+        { name: '손경준', position: '전문의', tags: ['중환자의학'], photo: '중환자의학과-손경준.jpg' },
+        { name: '전재현', position: '전문의', tags: ['중환자의학', '중환자감염', '패혈증'], photo: '중환자의학과-전재현.jpg' }
+      ],
+      '진단검사의학과': [
+        { name: '유숙원', position: '전문의', tags: ['혈액질환', '감염질환', '유전'], photo: '진단검사의학과-유숙원.jpg' },
+        { name: '육희정', position: '전문의', tags: ['진단혈액', '수혈의학', '분자유전'], photo: '진단검사의학과-육희정.jpg' },
+        { name: '김영기', position: '전문의', tags: ['임상화학', '요검사학'], photo: '진단검사의학과-김영기.jpg' }
+      ],
+      '치과': [
+        { name: '김정모', position: '전문의', tags: ['구강외과', '턱·얼굴외상', '구강종양'], photo: '치과-김정모.jpg' }
+      ],
+      '피부과': [
+        { name: '허영',   position: '전문의', tags: ['건선', '아토피피부염', '중증질환'], photo: '피부과-허영.jpg' },
+        { name: '민준홍', position: '전문의', tags: ['피부과질환', '여드름', '습진'], photo: '피부과-민준홍.jpg' },
+        { name: '황규광', position: '전문의', tags: ['피부암', '피부외과', '켈로이드'], photo: '피부과-황규광.jpg' }
+      ],
+      '핵의학과': [
+        { name: '이경한', position: '전문의', tags: ['핵의학'], photo: '핵의학과-이경한.jpg' }
+      ],
+      '혈액종양내과': [
+        { name: '송서영', position: '전문의', tags: ['폐암', '유방암', '항암치료'], photo: '혈액종양내과-송서영.jpg' },
+        { name: '이희영', position: '전문의', tags: ['대장암', '부인암', '항암치료'], photo: '혈액종양내과-이희영.jpg' },
+        { name: '임규형', position: '전문의', tags: ['위암', '대장암', '췌담도암'], photo: '혈액종양내과-임규형.jpg' },
+        { name: '장희령', position: '전문의', tags: ['혈액질환', '혈액종양', '림프종'], photo: '혈액종양내과-장희령.jpg' }
+      ],
+      '호흡기내과': [
+        { name: '이승준',  position: '전문의', tags: ['감염성폐질환', '만성기도질환'], photo: '호흡기내과-이승준.jpg' },
+        { name: '김우진',  position: '전문의', tags: ['기관지천식', '만성폐쇄성폐질환', '폐암'], photo: '호흡기내과-김우진.png' },
+        { name: '한선숙',  position: '전문의', tags: ['간질성폐질환', '폐결핵', '중환자의학'], photo: '호흡기내과-한선숙.jpg' },
+        { name: '홍윤기',  position: '전문의', tags: ['폐암', '만성폐쇄성폐질환'], photo: '호흡기내과-홍윤기.jpg' },
+        { name: '문다해',  position: '전문의', tags: ['감염성폐질환', '중환자의학'], photo: '호흡기내과-문다해.jpg' },
+        { name: '허연정',  position: '전문의', tags: ['기도질환', '폐암'], photo: '호흡기내과-허연정.jpg' },
+        { name: '권오범',  position: '전문의', tags: ['감염성폐질환', '중환자의학'], photo: '호흡기내과-권오범.jpg' }
+      ],
+      /* ── 소아과 계열 (해당 진료과와 의료진 동일) ── */
+      '소아성형외과': [
+        { name: '이상열', position: '전문의', tags: ['안면부기형', '피부종양', '화상'], photo: '성형외과-이상열.jpg' },
+        { name: '성건용', position: '전문의', tags: ['화상', '선천성기형', '흉터'], photo: '성형외과-성건용.png' },
+        { name: '방치영', position: '전문의', tags: ['안면부기형', '안면부종양', '화상'], photo: '성형외과-방치영.jpg' }
+      ],
+      '소아비뇨의학과': [
+        { name: '김정현', position: '전문의', tags: ['전립선암', '신장암', '방광암'], photo: '비뇨의학과-김정현.jpg' },
+        { name: '이상욱', position: '전문의', tags: ['요실금', '과민성방광', '신경인성방광'], photo: '비뇨의학과-이상욱.jpg' },
+        { name: '박홍주', position: '전문의', tags: ['전립선암', '요실금', '요로결석'], photo: '비뇨의학과-박홍주.jpg' },
+        { name: '안한종', position: '전문의', tags: ['전립선비대증', '전립선암'], photo: '비뇨의학과-안한종.jpg' }
+      ],
+      '소아신경외과': [
+        { name: '박승우', position: '전문의', tags: ['퇴행성척추질환', '뇌종양', '기능신경외과'], photo: '신경외과-박승우.jpg' },
+        { name: '김충효', position: '전문의', tags: ['척추질환', '목·허리디스크', '척추협착증'], photo: '신경외과-김충효.jpg' },
+        { name: '김지하', position: '전문의', tags: ['추간판탈출증', '척추협착증', '척추골절'], photo: '신경외과-김지하.jpg' },
+        { name: '이승진', position: '전문의', tags: ['뇌동맥류', '뇌혈관기형', '모야모야병'], photo: '신경외과-이승진.jpg' },
+        { name: '김인경', position: '전문의', tags: ['뇌종양', '소아신경외과', '뇌기능'], photo: '신경외과-김인경.jpg' },
+        { name: '전효섭', position: '전문의', tags: ['뇌동맥류', '뇌혈관기형', '뇌출혈'], photo: '신경외과-전효섭.jpg' },
+        { name: '안준형', position: '전문의', tags: ['뇌동맥류', '뇌혈관기형', '뇌출혈'], photo: '신경외과-안준형.jpg' }
+      ],
+      '소아안과': [
+        { name: '송지은', position: '전문의', tags: ['녹내장', '백내장', '노안'], photo: '안과-송지은.png' },
+        { name: '이주하', position: '전문의', tags: ['사시', '약시', '굴절이상'], photo: '안과-이주하.jpg' },
+        { name: '정영훈', position: '전문의', tags: ['황반질환', '망막질환', '백내장'], photo: '안과-정영훈.jpg' },
+        { name: '김성호', position: '전문의', tags: ['황반질환', '망막질환', '포도막염'], photo: '안과-김성호.jpg' }
+      ],
+      '소아외과': [
+        { name: '채기봉', position: '전문의', tags: ['외과'], photo: '외과-채기봉.jpg' },
+        { name: '박승배', position: '전문의', tags: ['위암', '위궤양', '외과적위질환'], photo: '외과-박승배.jpg' },
+        { name: '김양희', position: '전문의', tags: ['유방암', '유방통', '유방검진'], photo: '외과-김양희.jpg' },
+        { name: '홍성권', position: '전문의', tags: ['췌장암', '담도암', '간암'], photo: '외과-홍성권.jpg' },
+        { name: '문석배', position: '전문의', tags: ['소아외과', '선천성기형', '담도폐쇄증'], photo: '외과-문석배.png' },
+        { name: '최상지', position: '전문의', tags: ['대장암', '직장암', '항문질환'], photo: '외과-최상지.jpg' },
+        { name: '김환수', position: '전문의', tags: ['유방암', '갑상선질환', '부신질환'], photo: '외과-김환수.jpg' },
+        { name: '이광진', position: '전문의', tags: ['하지정맥류', '혈관질환', '투석접근'], photo: '외과-이광진.png' }
+      ],
+      '소아이비인후과': [
+        { name: '남의철', position: '전문의', tags: ['이명', '난청', '어지럼증'], photo: '이비인후과-남의철.png' },
+        { name: '원준연', position: '전문의', tags: ['알레르기비염', '만성비염', '부비동염'], photo: '이비인후과-원준연.png' },
+        { name: '김태수', position: '전문의', tags: ['중이염', '어지러움', '난청'], photo: '이비인후과-김태수.png' },
+        { name: '이우현', position: '전문의', tags: ['코골이', '수면무호흡', '알레르기비염'], photo: '이비인후과-이우현.png' },
+        { name: '유윤종', position: '전문의', tags: ['갑상선암', '후두암', '구강암'], photo: '이비인후과-유윤종.png' },
+        { name: '진영주', position: '전문의', tags: ['성대결절', '갑상선암', '음성장애'], photo: '이비인후과-진영주.jpg' }
+      ],
+      '소아정신건강의학과': [
+        { name: '황준원', position: '전문의', tags: ['소아정신과', '자폐성장애', '발달성언어장애'], photo: '정신건강의학과-황준원.jpg' }
+      ],
+      '소아피부과': [
+        { name: '허영',   position: '전문의', tags: ['건선', '아토피피부염', '중증질환'], photo: '피부과-허영.jpg' },
+        { name: '민준홍', position: '전문의', tags: ['피부과질환', '여드름', '습진'], photo: '피부과-민준홍.jpg' },
+        { name: '황규광', position: '전문의', tags: ['피부암', '피부외과', '켈로이드'], photo: '피부과-황규광.jpg' }
+      ],
+      '재활의학과(노인센터)': [
+        { name: '박희원', position: '전문의', tags: ['소아뇌성마비', '뇌졸중재활', '근골격계재활'], photo: '재활의학과(노인센터)-박희원.jpg' },
+        { name: '백소라', position: '전문의', tags: ['통증', '근골격계재활', '심장재활'], photo: '재활의학과(노인센터)-백소라.jpg' },
+      ],
+      /* ── 전문센터 (준비중) ── */
+      '권역응급의료센터': [],
+      '권역외상센터': [],
+      '강원지역암센터': [],
+      '심뇌혈관질환센터': [],
+      '어린이병원': [],
+      '재활의학센터': [],
+      '인공신장센터': [],
+      '완화의료센터': [],
+      '건강증진센터': [],
+      '로봇수술센터': [],
+      '융합의학센터': [],
+      '소아청소년과(어린이병원)': [],
+      /* ── 클리닉 (준비중) ── */
+      '간암및간질환클리닉': [],
+      '갑상선두경부암클리닉': [
+        { name: '유윤종', position: '전문의', tags: ['갑상선암', '후두암', '구강암'], photo: '이비인후과-유윤종.png' }
+      ],
+      '건강검진클리닉': [
+        { name: '양정희', position: '전문의', tags: ['만성질환', '금연', '건강증진'], photo: '가정의학과-양정희.jpg' },
+        { name: '고유라',  position: '전문의', tags: ['피로', '비만', '성인병'], photo: '가정의학과-고유라.jpg' },
+        { name: '김선미', position: '전문의', tags: ['일차의료', '비만', '대사증후군'], photo: '가정의학과-김선미.jpg' },
+        { name: '강석훈', position: '전문의', tags: ['고혈압', '당뇨', '비만'], photo: '가정의학과-강석훈.jpg' }
+      ],
+      '금연클리닉': [
+        { name: '양정희', position: '전문의', tags: ['만성질환', '금연', '건강증진'], photo: '가정의학과-양정희.jpg' },
+        { name: '김선미', position: '전문의', tags: ['일차의료', '비만', '대사증후군'], photo: '가정의학과-김선미.jpg' },
+        { name: '임인혁', position: '전문의', tags: ['만성질환', '금연', '노인병'], photo: '가정의학과-임인혁.jpg' }
+      ],
+      '기억장애클리닉': [],
+      '노년클리닉': [],
+      '뇌졸중클리닉': [
+        { name: '김성헌', position: '전문의', tags: ['뇌혈관질환', '뇌전증'], photo: '신경과-김성헌.jpg' }
+      ],
+      '눈성형클리닉': [],
+      '대사증후군클리닉': [
+        { name: '양정희', position: '전문의', tags: ['만성질환', '금연', '건강증진'], photo: '가정의학과-양정희.jpg' },
+        { name: '고유라',  position: '전문의', tags: ['피로', '비만', '성인병'], photo: '가정의학과-고유라.jpg' },
+        { name: '김선미', position: '전문의', tags: ['일차의료', '비만', '대사증후군'], photo: '가정의학과-김선미.jpg' }
+      ],
+      '대장암클리닉': [
+        { name: '최상지', position: '전문의', tags: ['대장암', '직장암', '항문질환'], photo: '외과-최상지.jpg' }
+      ],
+      '대장항문클리닉': [],
+      '두통어지럼증클리닉': [
+        { name: '김성훈', position: '전문의', tags: ['말초신경', '근육병', '뇌졸중'], photo: '신경과-김성훈.jpg' }
+      ],
+      '만성피로클리닉': [
+        { name: '양정희', position: '전문의', tags: ['만성질환', '금연', '건강증진'], photo: '가정의학과-양정희.jpg' },
+        { name: '고유라',  position: '전문의', tags: ['피로', '비만', '성인병'], photo: '가정의학과-고유라.jpg' }
+      ],
+      '변비과민성장증후군클리닉': [],
+      '복강경클리닉': [],
+      '부인과내시경클리닉': [],
+      '부정맥클리닉': [
+        { name: '천광진', position: '전문의', tags: ['부정맥', '심방세동', '조기수축'], photo: '심장내과-천광진.jpg' }
+      ],
+      '비뇨기암클리닉': [],
+      '비만클리닉': [
+        { name: '고유라',  position: '전문의', tags: ['피로', '비만', '성인병'], photo: '가정의학과-고유라.jpg' },
+        { name: '김선미', position: '전문의', tags: ['일차의료', '비만', '대사증후군'], photo: '가정의학과-김선미.jpg' }
+      ],
+      '상부소화관종양클리닉': [],
+      '성인예방접종클리닉': [
+        { name: '김선미', position: '전문의', tags: ['일차의료', '비만', '대사증후군'], photo: '가정의학과-김선미.jpg' }
+      ],
+      '소아감염클리닉': [
+        { name: '이용희', position: '전문의', tags: ['소아감염', '예방접종'], photo: '소아청소년과-이용희.jpg' }
+      ],
+      '소아미성년클리닉': [],
+      '소아비뇨의학클리닉': [
+        { name: '이상욱', position: '전문의', tags: ['요실금', '과민성방광', '신경인성방광'], photo: '비뇨의학과-이상욱.jpg' }
+      ],
+      '소아신경발달클리닉': [],
+      '소아심장클리닉': [],
+      '소아알레르기피부클리닉': [],
+      '소아외과클리닉': [
+        { name: '문석배', position: '전문의', tags: ['소아외과', '선천성기형', '담도폐쇄증'], photo: '외과-문석배.png' }
+      ],
+      '소아위장관내시경클리닉': [],
+      '소아위장관클리닉': [
+        { name: '홍지나', position: '전문의', tags: ['소아소화기질환', '간담도질환', '소아영양'], photo: '소아청소년과-홍지나.jpg' }
+      ],
+      '소아이비인후과클리닉': [
+        { name: '김태수', position: '전문의', tags: ['중이염', '어지러움', '난청'], photo: '이비인후과-김태수.png' },
+        { name: '유윤종', position: '전문의', tags: ['갑상선암', '후두암', '구강암'], photo: '이비인후과-유윤종.png' },
+        { name: '이우현', position: '전문의', tags: ['코골이', '수면무호흡', '알레르기비염'], photo: '이비인후과-이우현.png' },
+        { name: '진영주', position: '전문의', tags: ['성대결절', '갑상선암', '음성장애'], photo: '이비인후과-진영주.jpg' }
+      ],
+      '소아청소년측만증클리닉': [
+        { name: '홍철기', position: '전문의', tags: ['요추디스크', '척추관협착증', '경추디스크'], photo: '정형외과-홍철기.jpg' }
+      ],
+      '소아피부클리닉': [
+        { name: '민준홍', position: '전문의', tags: ['피부과질환', '여드름', '습진'], photo: '피부과-민준홍.jpg' }
+      ],
+      '소아혈액종양클리닉': [
+        { name: '신희영', position: '전문의', tags: ['소아혈액질환', '소아혈액암', '소아고형종양'], photo: '소아청소년과-신희영.jpg' }
+      ],
+      '소아호흡기알레르기클리닉': [
+        { name: '박진성', position: '전문의', tags: ['소아천식', '소아알레르기', '아토피'], photo: '소아청소년과-박진성.jpg' },
+        { name: '박양',   position: '전문의', tags: ['아토피', '소아천식', '알레르기비염'], photo: '소아청소년과-박양.jpg' }
+      ],
+      '수면신경과클리닉': [],
+      '수면정신건강의학과클리닉': [],
+      '신생아미숙아클리닉': [
+        { name: '김은선', position: '전문의', tags: ['신생아', '미숙아'], photo: '소아청소년과-김은선.jpg' },
+        { name: '조기현', position: '전문의', tags: ['신생아', '미숙아'], photo: '소아청소년과-조기현.jpg' },
+        { name: '조희승', position: '전문의', tags: ['신생아호흡곤란', '기관지폐형성이상'], photo: '소아청소년과-조희승.jpg' }
+      ],
+      '여성암클리닉': [
+        { name: '김양희', position: '전문의', tags: ['유방암', '유방통', '유방검진'], photo: '외과-김양희.jpg' },
+        { name: '김환수', position: '전문의', tags: ['유방암', '갑상선질환', '부신질환'], photo: '외과-김환수.jpg' },
+        { name: '유윤종', position: '전문의', tags: ['갑상선암', '후두암', '구강암'], photo: '이비인후과-유윤종.png' },
+        { name: '양고은', position: '전문의', tags: ['유방질환', '갑상선질환'], photo: '영상의학과-양고은.jpg' },
+        { name: '오하연', position: '전문의', tags: ['유방', '갑상선질환'], photo: '영상의학과-오하연.jpg' },
+        { name: '이향아', position: '전문의', tags: ['불임', '갱년기', '골다공증'], photo: '산부인과-이향아.jpg' }
+      ],
+      '염증성장질환클리닉': [],
+      '위암클리닉': [],
+      '유방맘모톰클리닉': [
+        { name: '양고은', position: '전문의', tags: ['유방질환', '갑상선질환'], photo: '영상의학과-양고은.jpg' }
+      ],
+      '유방암클리닉': [
+        { name: '김양희', position: '전문의', tags: ['유방암', '유방통', '유방검진'], photo: '외과-김양희.jpg' }
+      ],
+      '음성클리닉': [
+        { name: '진영주', position: '전문의', tags: ['성대결절', '갑상선암', '음성장애'], photo: '이비인후과-진영주.jpg' }
+      ],
+      '척추클리닉': [
+        { name: '남우동', position: '전문의', tags: ['척추질환', '척추외상', '관절염'], photo: '정형외과-남우동.jpg' },
+        { name: '김지하', position: '전문의', tags: ['추간판탈출증', '척추협착증', '척추골절'], photo: '신경외과-김지하.jpg' },
+        { name: '박승우', position: '전문의', tags: ['퇴행성척추질환', '뇌종양', '기능신경외과'], photo: '신경외과-박승우.jpg' },
+        { name: '김충효', position: '전문의', tags: ['척추질환', '목·허리디스크', '척추협착증'], photo: '신경외과-김충효.jpg' },
+        { name: '김인경', position: '전문의', tags: ['뇌종양', '소아신경외과', '뇌기능'], photo: '신경외과-김인경.jpg' },
+        { name: '홍철기', position: '전문의', tags: ['요추디스크', '척추관협착증', '경추디스크'], photo: '정형외과-홍철기.jpg' },
+        { name: '김성훈', position: '전문의', tags: ['말초신경', '근육병', '뇌졸중'], photo: '신경과-김성훈.jpg' }
+      ],
+      '태아정밀진단클리닉': [
+        { name: '황종윤', position: '전문의', tags: ['고위험임신', '로봇수술', '복강경수술'], photo: '산부인과-황종윤.png' },
+        { name: '나성훈', position: '전문의', tags: ['고위험임신', '초음파', '골반내시경수술'], photo: '산부인과-나성훈.jpg' }
+      ],
+      '통증완화클리닉': [
+        { name: '강석훈', position: '전문의', tags: ['고혈압', '당뇨', '비만'], photo: '가정의학과-강석훈.jpg' }
+      ],
+      '통증클리닉': [
+        { name: '황병문', position: '전문의', tags: ['복합부위통증', '암성통증', '대상포진후신경통'], photo: '마취통증의학과-황병문.jpg' },
+        { name: '김민수', position: '전문의', tags: ['요통', '경부통', '척추질환'], photo: '마취통증의학과-김민수.jpg' }
+      ],
+      '팔다리혈관클리닉': [],
+      '포스트코로나클리닉': [
+        { name: '고유라',  position: '전문의', tags: ['피로', '비만', '성인병'], photo: '가정의학과-고유라.jpg' },
+        { name: '김선미', position: '전문의', tags: ['일차의료', '비만', '대사증후군'], photo: '가정의학과-김선미.jpg' },
+        { name: '강석훈', position: '전문의', tags: ['고혈압', '당뇨', '비만'], photo: '가정의학과-강석훈.jpg' },
+        { name: '임인혁', position: '전문의', tags: ['만성질환', '금연', '노인병'], photo: '가정의학과-임인혁.jpg' }
+      ],
+      '피부종양클리닉': [
+        { name: '방치영', position: '전문의', tags: ['안면부기형', '안면부종양', '화상'], photo: '성형외과-방치영.jpg' }
+      ],
+      '필러보톡스클리닉': [
+        { name: '성건용', position: '전문의', tags: ['화상', '선천성기형', '흉터'], photo: '성형외과-성건용.png' }
+      ],
+      '해외여행클리닉': [
+        { name: '양정희', position: '전문의', tags: ['만성질환', '금연', '건강증진'], photo: '가정의학과-양정희.jpg' },
+        { name: '고유라',  position: '전문의', tags: ['피로', '비만', '성인병'], photo: '가정의학과-고유라.jpg' },
+        { name: '김선미', position: '전문의', tags: ['일차의료', '비만', '대사증후군'], photo: '가정의학과-김선미.jpg' }
+      ],
+      '혈관인터벤션클리닉': [
+        { name: '전용환', position: '전문의', tags: ['위장관질환', '간질환', '비뇨생식기'], photo: '영상의학과-전용환.jpg' }
+      ]
+    };
+
+    /* 아바타 SVG (이미지 없을 때 fallback) */
+    var AVATAR_SVG = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>';
+    var IMG_BASE = '${ptAiWebPath}/common/images/doctor/';
+
+    /* 모달 열기 */
+    function openModal() {
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+
+    var searchInput = document.getElementById('dept_search_input');
+    var noResult    = modal.querySelector('.dept_no_result');
+    var sidebar     = document.getElementById('dept_sidebar');
+
+    /* 모달 닫기 */
+    function closeModal() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+      modal.querySelectorAll('.dept_list_item').forEach(function (i) { i.classList.remove('is-active'); });
+      if (searchInput) { searchInput.value = ''; filterList(''); }
+      renderPlaceholder();
+    }
+
+    /* 플레이스홀더 */
+    function renderPlaceholder() {
+      staffArea.innerHTML =
+        '<div class="kp-doctor-modal__staff-ph">' +
+          '<span class="kp-doctor-modal__staff-ph-ico" aria-hidden="true">' +
+            '<img src="${ptAiWebPath}/common/images/doctor.svg" alt="">' +
+          '</span>' +
+          '<p>진료과·전문센터·클리닉을 선택하시면<br>의료진 소개를 확인할 수 있습니다.</p>' +
+        '</div>';
+    }
+
+    /* 의료진 카드 렌더 */
+    function renderDoctors(deptName) {
+      var list = DOCTOR_DATA[deptName];
+      var html = '<p class="kp-doctor-modal__staff-head">' + deptName + '</p>';
+
+      if (!list || list.length === 0) {
+        html += '<div class="kp-doctor-modal__staff-pending">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>' +
+          '의료진 정보를 준비 중입니다.' +
+        '</div>';
+      } else {
+        html += '<div class="kp-doctor-cards">';
+        list.forEach(function (doc) {
+          var tagHtml = doc.tags.map(function (t) {
+            return '<span class="kp-doctor-card__tag">' + t + '</span>';
+          }).join('');
+          /* 이미지 로드 실패 시 SVG 아바타로 fallback */
+          var photoSrc = IMG_BASE + (doc.photo || (deptName + '-' + doc.name + '.jpg'));
+          var avatarBlock =
+            '<img class="kp-doctor-card__photo" src="' + photoSrc + '" alt="' + doc.name + '" ' +
+              'onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
+            '<div class="kp-doctor-card__avatar" aria-hidden="true" style="display:none">' + AVATAR_SVG + '</div>';
+          html +=
+            '<div class="kp-doctor-card" data-doctor-query="' + doc.name + ' 선생님 소개">' +
+              avatarBlock +
+              '<p class="kp-doctor-card__name">' + doc.name + '</p>' +
+              '<p class="kp-doctor-card__position">' + doc.position + '</p>' +
+              '<div class="kp-doctor-card__tags">' + tagHtml + '</div>' +
+            '</div>';
+        });
+        html += '</div>';
+      }
+      staffArea.innerHTML = html;
+    }
+
+    /* 사이드바 검색 필터 */
+    function filterList(query) {
+      var q = query.replace(/\s/g, '').toLowerCase();
+      var activeList = sidebar.querySelector('.dept_list:not([hidden])');
+      if (!activeList) return;
+      var items = activeList.querySelectorAll('.dept_list_item');
+      var hasVisible = false;
+      items.forEach(function (item) {
+        var text = item.textContent.replace(/\s/g, '').toLowerCase();
+        var visible = !q || text.indexOf(q) !== -1;
+        item.style.display = visible ? '' : 'none';
+        if (visible) hasVisible = true;
+      });
+      if (noResult) noResult.hidden = hasVisible;
+    }
+
+    /* 탭 전환 */
+    modal.querySelectorAll('.kp-doctor-modal__tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var key = tab.dataset.dtab;
+        modal.querySelectorAll('.kp-doctor-modal__tab').forEach(function (t) {
+          t.classList.toggle('is-active', t.dataset.dtab === key);
+          t.setAttribute('aria-selected', t.dataset.dtab === key ? 'true' : 'false');
+        });
+        /* 사이드바 내 list 패널 전환 */
+        sidebar.querySelectorAll('.dept_list[data-dpanel]').forEach(function (p) {
+          p.hidden = p.dataset.dpanel !== key;
+        });
+        /* 탭 변경 시 초기화 */
+        modal.querySelectorAll('.dept_list_item').forEach(function (i) { i.classList.remove('is-active'); });
+        if (searchInput) { searchInput.value = ''; filterList(''); }
+        renderPlaceholder();
+      });
+    });
+
+    /* 사이드바 항목 클릭 → 의료진 표시 */
+    sidebar.addEventListener('click', function (e) {
+      var item = e.target.closest('.dept_list_item');
+      if (!item) return;
+      modal.querySelectorAll('.dept_list_item').forEach(function (i) { i.classList.remove('is-active'); });
+      item.classList.add('is-active');
+      renderDoctors(item.dataset.dept);
+      staffArea.scrollTop = 0;
+    });
+
+    staffArea.addEventListener('click', function (e) {
+      var card = e.target.closest('.kp-doctor-card');
+      if (!card) return;
+      var query = card.dataset.doctorQuery;
+      if (!query) return;
+      closeModal();
+      if (window.PT_AI_CHAT && typeof window.PT_AI_CHAT.startChat === 'function') {
+        window.PT_AI_CHAT.startChat(query);
+      }
+    });
+
+    /* 검색 인풋 */
+    if (searchInput) {
+      searchInput.addEventListener('input', function () {
+        filterList(searchInput.value);
+      });
+    }
+
+    /* 닫기 */
+    btnClose.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', closeModal);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.hidden) closeModal();
+    });
+
+    /* 의료진 소개 카드의 버튼 클릭 → 모달 열기 */
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.kp-guide-panel__btn--go');
+      if (btn) {
+        e.preventDefault();
+        openModal();
+      }
+    });
+  }());
+  </script>
+  <%@ include file="ai-answer-templates.jsp" %>
+
+  <template id="tpl-chat-turn">
+    <div class="kp-thread kp-thread--answer" data-role="thread">
+      <div class="kp-chat-query">
+        <div class="kp-chat-query__group">
+          <div class="kp-answer-card__spark" data-role="user-spark" aria-hidden="true"></div>
+          <span class="kp-chat-query__pill" data-role="query-pill"></span>
+        </div>
+      </div>
+      <div class="kp-answer">
+        <div class="kp-answer-card__spark" data-role="bot-spark" aria-hidden="true"></div>
+        <article class="kp-answer-card" aria-live="polite">
+          <div class="kp-answer-card__body" data-role="answer-body"></div>
+        </article>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    window.PT_AI_BOOT = {
+      ctx: "${ctx}",
+      moduleId: "${ptAiModuleId}",
+      apiBase: "${ptAiApiBase}",
+      tenant: "${ptAiTenant}",
+      chatMode: "${ptAiChatMode}",
+      streamEnabled: ${ptAiStreamEnabled},
+      renderMode: "${ptAiRenderMode}",
+      llmModel: "${ptAiLlmModel}",
+      avatarBot: "${ptAiAvatarBot}",
+      avatarUser: "${ptAiAvatarUser}",
+      queryStreamDelayMs: ${ptAiQueryStreamDelayMs}
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+  <script src="${ctx}/pt-ai/common/js/ai-core.js"></script>
+  <script src="${ptAiWebPath}/common/js/ai-consult.js"></script>
+  <script>
+    // index.jsp(강원 메디컬 AI 검색창) 등 외부에서 ?q=검색어 로 유입 시 자동으로 질문 전송
+    document.addEventListener('DOMContentLoaded', function () {
+      var params = new URLSearchParams(location.search);
+      var q = params.get('q');
+      if (q && window.PT_AI_CHAT && typeof window.PT_AI_CHAT.startChat === 'function') {
+        window.PT_AI_CHAT.startChat(q);
+      }
+    });
+  </script>
+</body>
+
+</html>

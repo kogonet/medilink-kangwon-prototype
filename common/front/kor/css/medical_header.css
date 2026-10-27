@@ -1,0 +1,78 @@
+/**************************************************
+ * medical_header.css
+ * @desc : 강원 메디컬 AI 공통 헤더 (decorators/default_medical.jsp)
+ *         퍼블리싱 docs/gangwon_ai_v2 landing.css 헤더 규칙을 gm_ 접두어로 분리.
+ *         (style.css 의 .brand_logo 등과 클래스 충돌 방지)
+ *         - 기본(solid)  : 서브페이지. 흰 배경 헤더 + 아래 .wrap 이 남은 높이를 채움
+ *         - is_overlay   : 메인(index). 히어로 위 투명 헤더 (meta gm-header=overlay)
+ **************************************************/
+:root { --gm-header-h: 72px; --gm-white: #ffffff; --gm-text: #171a1f; --gm-muted: #727984; --gm-line: #dfe3e8; --gm-soft: #edf2f5; --gm-blue: #1677d2; --gm-hero-muted: rgba(255, 255, 255, .7); --gm-hero-nav: rgba(255, 255, 255, .9); --gm-hero-dim: rgba(3, 8, 15, .34); --gm-hero-line: rgba(255, 255, 255, .16); --gm-hero-solid: rgba(9, 13, 20, .82); --gm-hero-cta: rgba(255, 255, 255, .6); --gm-focus: rgba(22, 119, 210, .25); }
+
+.gm_header { position: relative; z-index: 600; width: 100%; border-bottom: 1px solid var(--gm-line); color: var(--gm-text); background: var(--gm-white); font-family: "Pretendard", "Noto Sans KR", sans-serif; }
+.gm_header * { box-sizing: border-box; }
+.gm_header_inner { display: grid; grid-template-columns: 1fr auto 1fr; height: var(--gm-header-h); align-items: center; column-gap: 24px; width: 100%; padding: 0 40px; }
+.gm_brand { display: inline-flex; align-items: center; justify-self: start; }
+.gm_brand_logo { display: block; width: auto; max-width: none; height: 36px; object-fit: contain; }
+.gm_nav { display: flex; grid-column: 2; align-items: center; gap: 56px; }
+.gm_nav a { color: var(--gm-muted); font-size: 20px; font-weight: 600; text-decoration: none; white-space: nowrap; transition: color .2s; }
+.gm_nav a:hover { color: var(--gm-blue); }
+.gm_cta { display: inline-flex; grid-column: 3; height: 44px; align-items: center; justify-self: end; padding: 0 20px; border: 1px solid var(--gm-blue); border-radius: 999px; color: var(--gm-blue); background: transparent; font-family: inherit; font-size: 16px; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap; cursor: pointer; transition: color .2s, border-color .2s, background .2s; }
+.gm_cta:hover { color: var(--gm-white); background: var(--gm-blue); }
+.gm_cta:focus-visible { outline: 3px solid var(--gm-focus); outline-offset: 3px; }
+.gm_menu_btn { display: none; grid-column: 3; justify-self: end; padding: 0; border: 0; color: inherit; background: transparent; cursor: pointer; }
+.gm_menu_btn svg { display: block; width: 28px; height: 28px; }
+.gm_menu_btn:focus-visible { outline: 3px solid var(--gm-focus); outline-offset: 3px; }
+
+/* ====================== 메인 오버레이 헤더 (index.html .header_wrap 과 동일) ====================== */
+.gm_header.is_overlay { position: fixed; top: 0; left: 0; z-index: 600; border-bottom: 1px solid var(--gm-hero-line); color: var(--gm-white); background: var(--gm-hero-dim); transition: background .3s; }
+.gm_header.is_overlay.is_scrolled { background: var(--gm-hero-solid); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.gm_header.is_overlay .gm_header_inner { height: auto; padding: 24px 40px; }
+.gm_header.is_overlay .gm_brand_logo { height: 40px; }
+.gm_header.is_overlay .gm_nav a { color: var(--gm-hero-nav); }
+.gm_header.is_overlay .gm_nav a:hover { color: var(--gm-white); }
+.gm_header.is_overlay .gm_cta { border-color: var(--gm-hero-cta); color: var(--gm-white); }
+.gm_header.is_overlay .gm_cta:hover { border-color: var(--gm-white); color: var(--gm-text); background: var(--gm-white); }
+
+/* ====================== 서브페이지 레이아웃 (사이드바 제거) ======================
+ * style.css 는 html,body,.wrap 을 100vh 로 고정하므로 body 를 세로 flex 로 바꿔
+ * 헤더 아래 .wrap 이 남은 높이를 채우게 한다. .tab_panel 의 사이드바 여백(left:300px/240px)도 제거.
+ */
+html body.gm_layout_solid { display: flex; flex-direction: column; }
+body.gm_layout_solid > .gm_header { flex: 0 0 auto; }
+html body.gm_layout_solid .wrap { height: auto; max-height: none; min-height: 0; flex: 1 1 auto; }
+body.gm_layout_solid .tab_panel { left: 0 !important; right: 0 !important; }
+
+@media (max-width: 1180px) {
+  .gm_nav { gap: 30px; }
+  .gm_nav a { font-size: 17px; }
+  .gm_cta { height: 40px; padding: 0 16px; font-size: 15px; }
+}
+
+@media (max-width: 1024px) {
+  .gm_header_inner { grid-template-columns: 1fr auto auto; column-gap: 14px; }
+  .gm_cta { grid-column: 2; }
+  .gm_menu_btn { display: block; }
+  .gm_nav { position: absolute; top: 100%; right: 0; left: 0; display: none; grid-column: auto; flex-direction: column; align-items: stretch; gap: 0; border-bottom: 1px solid var(--gm-line); background: var(--gm-white); box-shadow: 0 12px 24px rgba(5, 16, 32, .12); }
+  .gm_header.is_open .gm_nav { display: flex; }
+  .gm_nav a, .gm_header.is_overlay .gm_nav a { padding: 16px 40px; border-top: 1px solid var(--gm-soft); color: var(--gm-text); font-size: 17px; }
+  .gm_nav a:hover, .gm_header.is_overlay .gm_nav a:hover { color: var(--gm-blue); }
+}
+
+@media (max-width: 768px) {
+  :root { --gm-header-h: 60px; }
+  .gm_header_inner { padding: 0 20px; }
+  .gm_header.is_overlay .gm_header_inner { padding: 18px 20px; }
+  .gm_nav a, .gm_header.is_overlay .gm_nav a { padding: 16px 20px; }
+  .gm_cta { height: 36px; padding: 0 13px; font-size: 14px; }
+  .gm_brand_logo { height: 32px; }
+}
+
+@media (max-width: 480px) {
+  .gm_header_inner { column-gap: 10px; }
+  .gm_header.is_overlay .gm_brand_logo { height: 34px; }
+  .gm_cta { height: 34px; padding: 0 11px; font-size: 13px; }
+}
+
+@media (max-width: 359px) {
+  .gm_cta { display: none; }
+}

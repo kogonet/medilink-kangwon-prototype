@@ -1,0 +1,186 @@
+﻿## Global Setting
+
+DEV.Globals.SystemName=\uc13c\ud140\uc778\ud130\ub137
+DEV.Globals.SystemEngName=CTIT
+DEV.Globals.WelcomePage.admin=/admmgr/main/dashboard.do
+DEV.Globals.FilePath=D:/INFECTIOUS_was_upload/
+DEV.Globals.ContentsFilePath=E:/WebApp/CMS/src/main/webapp/download/
+DEV.Globals.FileSize=500000000
+DEV.Globals.ServerUrl=http://127.0.0.1
+DEV.Globals.menu.topCode.front=100000000000000
+DEV.Globals.menu.topCode.admin=000000000000000
+
+## VWorld Geocoding (Address2Coord) - \uc11c\ubc84 \ubc30\uce58\uc6a9 \ud0a4. \ud504\ub860\ud2b8 \ud0c0\uc77c \uc694\uccad\uc6a9 \ud0a4\uc640\ub294 \ubcc4\uac1c.
+DEV.VWorld.GeocodeApiKey=REPLACE_WITH_LOCAL_VALUE
+
+## VWorld \uc9c0\ub3c4 \ud0c0\uc77c \uc694\uccad\uc6a9 \ud0a4 (\ud504\ub860\ud2b8 \ub178\ucd9c) - \uac12 \ud655\uc815 \uc804\uae4c\uc9c0 \uc784\uc2dc \ube44\uc6c0
+DEV.VWorld.TileApiKey=REPLACE_WITH_LOCAL_VALUE
+
+## \uad6d\ub9bd\uc911\uc559\uc758\ub8cc\uc6d0 \uacf5\uacf5\ub370\uc774\ud130\ud3ec\ud138 API (\uacc4\uc815 \ub2e8\uc704 \ud0a4, AED/\uc751\uae09\uc2e4 \uc2e4\uc2dc\uac04 \ubcd1\uc0c1\ud604\ud669 \uacf5\uc6a9)
+## \uc8fc\uc758: \uc774\ubbf8 URL-encode\ub41c \uac12 \uadf8\ub300\ub85c \uc800\uc7a5\ud568(\ud3ec\ud138\uc5d0\uc11c \uc900 \uadf8\ub300\ub85c). \ud638\ucd9c \ucf54\ub4dc\uc5d0\uc11c \ucd94\uac00 \uc778\ucf54\ub529\ud558\uba74 \uae68\uc9d0.
+DEV.NMC.ServiceKey=REPLACE_WITH_LOCAL_VALUE
+
+## GWTPAX AI (llm-01 app-api proxy target)
+DEV.GwtpaxAi.LlmApiBaseUrl=http://1.214.45.90:26030
+DEV.GwtpaxAi.TenantId=gwtpax
+DEV.GwtpaxAi.ModuleId=
+DEV.GwtpaxAi.LlmModel=gemma4:e4b-it-q4_K_M
+DEV.GwtpaxAi.ChatMode=rag
+DEV.GwtpaxAi.StreamEnabled=true
+DEV.GwtpaxAi.RenderMode=markdown
+DEV.GwtpaxAi.QueryStreamDelayMs=10
+DEV.GwtpaxAi.AvatarBot=/pt-ai/knuh/common/images/ci.png
+DEV.GwtpaxAi.AvatarUser=
+DEV.GwtpaxAi.WebPath=/pt-ai/knuh
+## true\uba74 RAG \uc694\uccad\uc5d0 meta.skipRerank=true \ub97c \uc2e4\uc5b4 \ub9ac\ub7ad\ud06c \uc5c6\uc774 \ud558\uc774\ube0c\ub9ac\ub4dc \uac80\uc0c9 \uc21c\uc11c\ub85c \ub2f5\ubcc0 (worker-retrieve \uc218\uc815 \ud544\uc694)
+DEV.GwtpaxAi.SkipRerank=true
+
+## GWTPAX AI 2 (/gwtpax/ai-consult2.do : \uac15\uc6d0 \uc758\ub8cc\uae30\uad00 \uc9c8\ubb38\uc740 DB \uc9c1\uc811\uc751\ub2f5, \uadf8 \uc678\ub294 \uc704\uc640 \uac19\uc740 RAG)
+DEV.GwtpaxAi2.LlmApiBaseUrl=http://1.214.45.90:26030
+DEV.GwtpaxAi2.TenantId=gwtpax
+DEV.GwtpaxAi2.ModuleId=gwtpax2
+DEV.GwtpaxAi2.LlmModel=gemma4:e4b-it-q4_K_M
+DEV.GwtpaxAi2.ChatMode=rag
+DEV.GwtpaxAi2.StreamEnabled=true
+DEV.GwtpaxAi2.RenderMode=markdown
+DEV.GwtpaxAi2.QueryStreamDelayMs=10
+DEV.GwtpaxAi2.AvatarBot=/pt-ai/knuh/common/images/ci.png
+DEV.GwtpaxAi2.AvatarUser=
+DEV.GwtpaxAi2.WebPath=/pt-ai/knuh
+DEV.GwtpaxAi2.FacilityMaxItems=10
+## \uc0c1\uc138 \ud654\uba74 URL \ud15c\ud50c\ub9bf({rnum},{ykiho} \uce58\ud658). \ube44\uc6b0\uba74 detailUrl \ubbf8\uc81c\uacf5.
+## \uae30\uc874 /front/board/hospitalView.do \ub294 P_YKIHO\u2192P_RNUM \ud30c\ub77c\ubbf8\ud130 \ubd88\uc77c\uce58\ub85c \uc870\ud68c\ub418\uc9c0 \uc54a\uc544 \ube44\uc6cc\ub460
+DEV.GwtpaxAi2.HospitalDetailUrl=
+DEV.GwtpaxAi2.PharmacyDetailUrl=
+DEV.GwtpaxAi2.MapUrl=https://map.kakao.com/link/map/{name},{lat},{lon}
+
+## GWTPAX AI 3 (/gwtpax/ai-consult3.do : \ubaa8\ub4e0 \uc9c8\ubb38\uc744 AI(gemma4)\uac00 \ud310\ub2e8\ud574 DB \ub3c4\uad6c\ub97c \uc5ec\ub7ec \ubc88 \ud638\ucd9c, \ubb38\uc11c \uc9c8\ubb38\uc740 RAG)
+DEV.GwtpaxAi3.LlmApiBaseUrl=http://1.214.45.90:26030
+DEV.GwtpaxAi3.TenantId=gwtpax
+DEV.GwtpaxAi3.ModuleId=gwtpax3
+DEV.GwtpaxAi3.LlmModel=gemma4:e4b-it-q4_K_M
+DEV.GwtpaxAi3.ChatMode=rag
+DEV.GwtpaxAi3.StreamEnabled=true
+DEV.GwtpaxAi3.RenderMode=markdown
+DEV.GwtpaxAi3.QueryStreamDelayMs=10
+DEV.GwtpaxAi3.AvatarBot=/pt-ai/gwtpax3/common/images/ci.png
+DEV.GwtpaxAi3.AvatarUser=
+DEV.GwtpaxAi3.WebPath=/pt-ai/gwtpax3
+DEV.GwtpaxAi3.FacilityMaxItems=10
+DEV.GwtpaxAi3.HospitalDetailUrl=
+DEV.GwtpaxAi3.PharmacyDetailUrl=
+DEV.GwtpaxAi3.MapUrl=https://map.kakao.com/link/map/{name},{lat},{lon}
+## \uc5d0\uc774\uc804\ud2b8 \ud310\ub2e8\uc740 Ollama(/api/chat)\ub97c \uc9c1\uc811 \ubd80\ub978\ub2e4 (app-api \uc218\uc815 \uc5c6\uc74c). \ube44\uc6b0\uba74 app-api /v1/chat/agent \uc0ac\uc6a9.
+## 192.168.0.153 = 1.214.45.90:26030 \uc758 \ub0b4\ubd80 \uc11c\ubc84(rocky5090). Ollama \ub294 \uc778\uc99d\uc774 \uc5c6\uc73c\ub2c8 \ub0b4\ubd80\ub9dd \uc8fc\uc18c\ub9cc \uc4f4\ub2e4.
+DEV.GwtpaxAi3.AgentLlmUrl=http://192.168.0.153:26020
+DEV.GwtpaxAi3.AgentModel=gemma4:e4b-it-q4_K_M
+DEV.GwtpaxAi3.AgentMaxSteps=4
+DEV.GwtpaxAi3.AgentTemperature=0.2
+DEV.GwtpaxAi3.AgentLlmTimeoutMs=30000
+DEV.GwtpaxAi3.AgentTotalTimeoutMs=60000
+DEV.GwtpaxAi3.AgentMaxConcurrent=2
+DEV.GwtpaxAi3.AgentMemoryTurns=3
+DEV.GwtpaxAi3.AgentMemoryTtlMin=30
+# AI \uc0c1\ub2f43 \uc791\ub3d9 \uacfc\uc815 \uc2dc\uc5f0 \ud398\uc774\uc9c0 (/gwtpax/ai3-flow.do). \ub0b4\ubd80 \uaddc\uce59\u00b7\ub3c4\uad6c \uac12\uc744 \uadf8\ub300\ub85c \ubcf4\uc5ec \uc8fc\ubbc0\ub85c \ubc1c\ud45c \ub54c\ub9cc Y
+DEV.GwtpaxAi3.FlowEnabled=Y
+# \ubcd1\uc6d0 \ud648\ud398\uc774\uc9c0 \uc790\ub8cc \uac80\uc0c9 (Weaviate, app-api RAG \uc640 \uac19\uc740 \ubb38\uc11c)
+DEV.GwtpaxAi3.WeaviateUrl=http://192.168.0.153:26026
+DEV.GwtpaxAi3.WeaviateApiKey=REPLACE_WITH_LOCAL_VALUE
+DEV.GwtpaxAi3.WeaviateTenant=gwtpax
+# \uac74\uac15\uc815\ubcf4 \ucd9c\ucc98 \ub9c1\ud06c (\uc0ac\uc6a9 \uc548 \ud568: \ud3ec\ud138 \uc0c1\uc138\ub294 POST \ub85c\ub9cc \uc5f4\ub9ac\uace0 \uc8fc\uc18c\ub85c \ub4e4\uc5b4\uac00\uba74 \uba54\uc778\uc73c\ub85c \ub3cc\uc544\uac10, 2026-10-15 \ud655\uc778)
+#DEV.GwtpaxAi3.HealthSourceUrl=https://health.kdca.go.kr/healthinfo/biz/health/gnrlzHealthInfo/gnrlzHealthInfo/gnrlzHealthInfoView.do?cntntsSn={id}
+
+## GWTPAX AI 4 (/gwtpax/ai-consult4.do : 상담3 복사본(2026-10-16), 답변 템플릿 빌더 실험용. 모든 질문을 AI(gemma4)가 판단해 DB 도구를 여러 번 호출, 문서 질문은 RAG)
+DEV.GwtpaxAi4.LlmApiBaseUrl=http://1.214.45.90:26030
+DEV.GwtpaxAi4.TenantId=gwtpax
+DEV.GwtpaxAi4.ModuleId=gwtpax4
+DEV.GwtpaxAi4.LlmModel=gemma4:e4b-it-q4_K_M
+DEV.GwtpaxAi4.ChatMode=rag
+DEV.GwtpaxAi4.StreamEnabled=true
+DEV.GwtpaxAi4.RenderMode=markdown
+DEV.GwtpaxAi4.QueryStreamDelayMs=10
+DEV.GwtpaxAi4.AvatarBot=/pt-ai/gwtpax4/common/images/ci.png
+DEV.GwtpaxAi4.AvatarUser=
+DEV.GwtpaxAi4.WebPath=/pt-ai/gwtpax4
+DEV.GwtpaxAi4.FacilityMaxItems=10
+DEV.GwtpaxAi4.HospitalDetailUrl=
+DEV.GwtpaxAi4.PharmacyDetailUrl=
+DEV.GwtpaxAi4.MapUrl=https://map.kakao.com/link/map/{name},{lat},{lon}
+## 에이전트 판단은 Ollama(/api/chat)를 직접 부른다 (app-api 수정 없음). 비우면 app-api /v1/chat/agent 사용.
+## 192.168.0.153 = 1.214.45.90:26030 의 내부 서버(rocky5090). Ollama 는 인증이 없으니 내부망 주소만 쓴다.
+DEV.GwtpaxAi4.AgentLlmUrl=http://192.168.0.153:26020
+DEV.GwtpaxAi4.AgentModel=gemma4:e4b-it-q4_K_M
+DEV.GwtpaxAi4.AgentMaxSteps=4
+DEV.GwtpaxAi4.AgentTemperature=0.2
+DEV.GwtpaxAi4.AgentLlmTimeoutMs=30000
+DEV.GwtpaxAi4.AgentTotalTimeoutMs=60000
+DEV.GwtpaxAi4.AgentMaxConcurrent=2
+DEV.GwtpaxAi4.AgentMemoryTurns=3
+DEV.GwtpaxAi4.AgentMemoryTtlMin=30
+# AI 상담4 작동 과정 시연 페이지 (/gwtpax/ai4-flow.do). 내부 규칙·도구 값을 그대로 보여 주므로 발표 때만 Y
+DEV.GwtpaxAi4.FlowEnabled=Y
+# 병원 홈페이지 자료 검색 (Weaviate, app-api RAG 와 같은 문서). 키는 직접 넣을 것 (가능하면 읽기 전용 키)
+DEV.GwtpaxAi4.WeaviateUrl=http://192.168.0.153:26026
+DEV.GwtpaxAi4.WeaviateApiKey=REPLACE_WITH_LOCAL_VALUE
+DEV.GwtpaxAi4.WeaviateTenant=gwtpax
+# 건강정보 출처 링크 (사용 안 함: 포털 상세는 POST 로만 열리고 주소로 들어가면 메인으로 돌아감, 2026-10-15 확인)
+#DEV.GwtpaxAi4.HealthSourceUrl=https://health.kdca.go.kr/healthinfo/biz/health/gnrlzHealthInfo/gnrlzHealthInfo/gnrlzHealthInfoView.do?cntntsSn={id}
+
+## GWTPAX AI 5 (/gwtpax/ai-consult5.do : 상담4 복사본(2026-10-22), 진행·AI 글·블록을 순서대로 채팅창에 쌓는 실험용. 값은 AI 4 와 같게 시작)
+DEV.GwtpaxAi5.LlmApiBaseUrl=http://1.214.45.90:26030
+DEV.GwtpaxAi5.TenantId=gwtpax
+DEV.GwtpaxAi5.ModuleId=gwtpax5
+DEV.GwtpaxAi5.LlmModel=gemma4:e4b-it-q4_K_M
+DEV.GwtpaxAi5.ChatMode=rag
+DEV.GwtpaxAi5.StreamEnabled=true
+DEV.GwtpaxAi5.RenderMode=markdown
+DEV.GwtpaxAi5.QueryStreamDelayMs=10
+DEV.GwtpaxAi5.AvatarBot=/pt-ai/gwtpax5/common/images/ci.png
+DEV.GwtpaxAi5.AvatarUser=
+DEV.GwtpaxAi5.WebPath=/pt-ai/gwtpax5
+DEV.GwtpaxAi5.FacilityMaxItems=10
+DEV.GwtpaxAi5.HospitalDetailUrl=
+DEV.GwtpaxAi5.PharmacyDetailUrl=
+DEV.GwtpaxAi5.MapUrl=https://map.kakao.com/link/map/{name},{lat},{lon}
+## 에이전트 판단은 Ollama(/api/chat)를 직접 부른다 (app-api 수정 없음). 비우면 app-api /v1/chat/agent 사용.
+## 192.168.0.153 = 1.214.45.90:26030 의 내부 서버(rocky5090). Ollama 는 인증이 없으니 내부망 주소만 쓴다.
+DEV.GwtpaxAi5.AgentLlmUrl=http://192.168.0.153:26020
+DEV.GwtpaxAi5.AgentModel=gemma4:e4b-it-q4_K_M
+DEV.GwtpaxAi5.AgentMaxSteps=4
+DEV.GwtpaxAi5.AgentTemperature=0.2
+DEV.GwtpaxAi5.AgentLlmTimeoutMs=30000
+DEV.GwtpaxAi5.AgentTotalTimeoutMs=60000
+DEV.GwtpaxAi5.AgentMaxConcurrent=2
+DEV.GwtpaxAi5.AgentMemoryTurns=3
+DEV.GwtpaxAi5.AgentMemoryTtlMin=30
+# AI 상담5 작동 과정 시연 페이지 (/gwtpax/ai5-flow.do). 내부 규칙·도구 값을 그대로 보여 주므로 발표 때만 Y
+DEV.GwtpaxAi5.FlowEnabled=Y
+# 병원 홈페이지 자료 검색 (Weaviate, app-api RAG 와 같은 문서). 키는 직접 넣을 것 (가능하면 읽기 전용 키)
+DEV.GwtpaxAi5.WeaviateUrl=http://192.168.0.153:26026
+DEV.GwtpaxAi5.WeaviateApiKey=REPLACE_WITH_LOCAL_VALUE
+DEV.GwtpaxAi5.WeaviateTenant=gwtpax
+# 문서 검색 hybrid + 리랭크 (dinohelper 의 Infinity 서버, 2026-10-23). EmbedUrl 을 비우면 키워드(BM25)만, RerankUrl 을 비우면 리랭크 안 함
+# EmbedApiKey 는 llm 서버 dinohelper .env 의 EMBED_API_KEY 를 직접 넣을 것
+DEV.GwtpaxAi5.EmbedUrl=http://192.168.0.153:26021
+DEV.GwtpaxAi5.EmbedApiKey=REPLACE_WITH_LOCAL_VALUE
+DEV.GwtpaxAi5.RerankUrl=http://192.168.0.153:26022
+# 0=키워드만, 1=벡터만 (2026-10-23 비교로 0.5)
+DEV.GwtpaxAi5.DocsAlpha=0.5
+# 건강정보 출처 링크 (사용 안 함: 포털 상세는 POST 로만 열리고 주소로 들어가면 메인으로 돌아감, 2026-10-15 확인)
+#DEV.GwtpaxAi5.HealthSourceUrl=https://health.kdca.go.kr/healthinfo/biz/health/gnrlzHealthInfo/gnrlzHealthInfo/gnrlzHealthInfoView.do?cntntsSn={id}
+# 음성 입력 (CLOVA Speech 단문 인식 REST, 2026-10-22). 녹음을 끝낸 뒤 한 번에 인식 (60초 이내)
+# 키는 CLOVA Speech "단문 인식" 도메인의 secret key. 키가 비어 있으면 마이크 버튼이 나오지 않는다
+DEV.GwtpaxAi5.SttEnabled=Y
+DEV.GwtpaxAi5.ClovaSpeechSecretKey=REPLACE_WITH_LOCAL_VALUE
+# 단문 인식 invoke url. 비우면 https://clovaspeech-gw.ncloud.com/recog/v1/stt (도메인 주소만 넣으면 /recog/v1/stt 를 붙인다)
+DEV.GwtpaxAi5.ClovaSpeechInvokeUrl=https://clovaspeech-gw.ncloud.com/recog/v1/stt
+# 녹음 최대 초 (5~60, CLOVA 단문 한도 60초. 30초를 넘기면 nginx client_max_body_size 1MB 기본값에 걸릴 수 있음), 동시 인식 수 (1~20)
+DEV.GwtpaxAi5.SttMaxSec=20
+DEV.GwtpaxAi5.SttMaxConcurrent=3
+
+## Debug SSH
+DEV.Debug.SshHost=192.168.0.156
+DEV.Debug.SshUser=llm-01
+DEV.Debug.SshKeyPath=REPLACE_WITH_LOCAL_VALUE
+DEV.Debug.SshKeyPassphrase=REPLACE_WITH_LOCAL_VALUE
+

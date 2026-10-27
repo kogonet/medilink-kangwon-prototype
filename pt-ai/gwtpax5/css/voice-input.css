@@ -1,0 +1,49 @@
+/* AI 상담5 음성 입력 (CLOVA Speech 단문 인식, 2026-10-22). 버튼은 voice-input.js 가 전송 버튼 앞에 넣는다 */
+.kp-voice-btn { flex: 0 0 auto; align-self: flex-end; margin-bottom: 2px; width: 46px; height: 46px; border: 1.5px solid var(--brand-100); border-radius: 14px; background: #fff; color: var(--brand); display: grid; place-items: center; cursor: pointer; transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.12s ease; }
+
+.kp-voice-btn:not(:disabled):hover { border-color: var(--brand); background: var(--surface-2, #f5f7fb); }
+
+.kp-voice-btn:not(:disabled):active { transform: scale(0.96); }
+
+.kp-voice-btn:disabled { opacity: 0.45; cursor: default; }
+
+.kp-voice-btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+.kp-voice-btn .kp-voice-btn__stop,
+.kp-voice-btn .kp-voice-btn__wait { display: none; }
+
+/* 녹음 중: 빨간 정지 버튼 */
+.kp-voice-btn.is-recording { background: #c0392b; border-color: #c0392b; color: #fff; animation: kp-voice-pulse 1.4s ease-out infinite; }
+
+.kp-voice-btn.is-recording .kp-voice-btn__mic { display: none; }
+
+.kp-voice-btn.is-recording .kp-voice-btn__stop { display: block; }
+
+/* 녹음 중 소리가 들어오면: 깜빡임 대신 말소리 세기(--kp-voice-level 0~1, voice-input.js meter)만큼 테두리가 커진다 */
+.kp-voice-btn.is-recording.is-hearing { animation: none; box-shadow: 0 0 0 calc(2px + var(--kp-voice-level, 0) * 10px) rgba(192, 57, 43, calc(0.18 + var(--kp-voice-level, 0) * 0.27)); transition: box-shadow 0.06s linear; }
+
+.kp-voice-btn.is-recording.is-hearing .kp-voice-btn__stop { transform: scale(calc(1 + var(--kp-voice-level, 0) * 0.2)); transition: transform 0.06s linear; }
+
+/* 마이크 준비·인식 중 */
+.kp-voice-btn.is-waiting .kp-voice-btn__mic { display: none; }
+
+.kp-voice-btn.is-waiting .kp-voice-btn__wait { display: block; animation: kp-voice-spin 0.9s linear infinite; }
+
+@keyframes kp-voice-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(192, 57, 43, 0.45); }
+  100% { box-shadow: 0 0 0 12px rgba(192, 57, 43, 0); }
+}
+
+@keyframes kp-voice-spin { to { transform: rotate(360deg); } }
+
+/* 입력창 위 안내 말풍선 */
+.kp-voice-status { position: absolute; right: 12px; bottom: calc(100% + 8px); z-index: 5; max-width: calc(100% - 24px); padding: 7px 12px; border-radius: 10px; background: #1f2937; color: #fff; font-size: 13px; line-height: 1.4; letter-spacing: -0.02em; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18); pointer-events: none; }
+
+.kp-voice-status[hidden] { display: none; }
+
+.kp-voice-status.is-error { background: #a93226; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kp-voice-btn.is-recording { animation: none; }
+  .kp-voice-btn.is-waiting .kp-voice-btn__wait { animation: none; }
+}

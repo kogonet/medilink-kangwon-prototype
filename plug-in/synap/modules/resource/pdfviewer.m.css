@@ -1,0 +1,24 @@
+@charset "utf-8";
+/* CSS Document */
+
+.content_area {
+	display: inline-block;
+	border: 1px solid #666666;
+}
+
+.pageImage{
+	cursor:text;
+	padding-left: 23px;
+	padding-top:21px;
+	padding-right:23px;
+	padding-bottom:20px;	
+}
+
+.page-element {
+	margin: 0px 0px 10px 0px;
+	display:none;	
+}
+
+#img-center-pane{
+	text-align: center;
+}

@@ -1,0 +1,735 @@
+1@charset "UTF-8";
+
+/*-------------------------------------------------
+Content Style Sheet
+Version : 1.0
+Author : LSK
+Last update : 2024. 02. 13.
+-------------------------------------------------*/
+.sub_wrapper .lft_wrapper{box-shadow:none;}
+.sub_wrapper .lft_wrapper .tit_sub_h1{box-shadow:none;}
+
+.dashboard_wrap{position:relative; left:-230px; width:calc(100% + 230px); height: calc(100vh - 115px);box-sizing: border-box;background-color: #f5f8ff;overflow: auto; border-top:1px solid #ddd; }
+
+
+/* 그리드 */
+.grid-container{display: grid; grid-gap: 12px; grid-template-columns: repeat(12,minmax(0,1fr));  padding:12px; box-sizing:border-box; margin-left:auto; margin-right:auto; }
+.grid_item{position:relative;display:flex;flex-direction:column;background: #fff; box-sizing:border-box;border: 1px solid #cad7e7;border-radius:8px; overflow:hidden;}
+.grid_item.empty{background:none; border:none; box-shadow:none;}
+.grid_header{ padding:12px 20px 0;}
+.grid_content{padding:20px; box-sizing:border-box;}
+
+.grid_item.col2{grid-column:span 2;}
+.grid_item.col3{grid-column:span 3;}
+.grid_item.col4{grid-column:span 4;}
+.grid_item.col5{grid-column:span 5;}
+.grid_item.col6{grid-column:span 6;}
+.grid_item.col7{grid-column:span 7;}
+.grid_item.col8{grid-column:span 8;}
+.grid_item.col9{grid-column:span 9;}
+.grid_item.col10{grid-column:span 10;}
+.grid_item.col11{grid-column:span 11;}
+.grid_item.col12{grid-column:span 12;}
+
+.grid_item.row2{grid-row:span 2;}
+.grid_item.row3{grid-row:span 3;}
+.grid_item.row4{grid-row:span 4;}
+.grid_item.row5{grid-row:span 5;}
+.grid_item.row6{grid-row:span 6;}
+.grid_item.row7{grid-row:span 7;}
+.grid_item.row8{grid-row:span 8;}
+.grid_item.row9{grid-row:span 9;}
+.grid_item.row10{grid-row:span 10;}
+.grid_item.row11{grid-row:span 11;}
+.grid_item.row12{grid-row:span 12;}
+
+
+/* 지도 */
+.dashboard_wrap .main_map{position:relative; }
+.dashboard_wrap .main_map > .innr{position:relative;width:580px;height: 790px;background:url(/BB/images/dashboard/bg_main_map01.png) no-repeat center 0;}
+
+
+/* 지도  : 마커 */
+.map_pnt > li{position:absolute; } 
+.map_pnt a {display:flex;position:relative;height: 34px;border:1px solid #359aff;background:#fff;line-height: 34px;border-radius:0 0 10px 0;box-sizing:border-box;align-content: flex-start;} 
+.map_pnt a:after{display:block;position:absolute;bottom: -36px;left:50%;width: 20px;height: 30px;background:url(/BB/images/dashboard/icon_mark01.png) no-repeat 0 0;content:"";margin-left:-7px;}
+.map_pnt a span {width: 50px;text-align:center;flex:0 0;flex-basis: 50px;font-size: 20px;font-weight:400;border-right:1px solid #ddd;} 
+.map_pnt a em {padding:0 8px;flex:1;font-size: 20px; font-weight:400;} 
+
+/* 지도 : 마커 스타일*/
+.map_pnt .st01 a{ color:#359aff; border-color:#359aff; }
+.map_pnt .st01 a:after{background:url(/BB/images/dashboard/icon_mark01.png) no-repeat 0 0;}
+.map_pnt .st01 a span{ border-color:#359aff; }
+.map_pnt .st02 a{ color:#4156e3; border-color:#4156e3; }
+.map_pnt .st02 a:after{background:url(/BB/images/dashboard/icon_mark02.png) no-repeat 0 0;}
+.map_pnt .st02 a span{ border-color:#4156e3; }
+.map_pnt .st03 a{ color:#122f70; border-color:#122f70; }
+.map_pnt .st03 a:after{background:url(/BB/images/dashboard/icon_mark03.png) no-repeat 0 0;}
+.map_pnt .st03 a span{ border-color:#122f70; }
+
+/* 지도 : 마커 active*/
+.map_pnt li.ac,
+.map_pnt li:hover{border-color:#152488;}
+.map_pnt li.ac a,
+.map_pnt li:hover a{background: #152488;color: #fff;}
+.map_pnt li.ac span,
+.map_pnt li:hover span{border-color:rgba(255,255,255,0.1);}
+
+/* 지도 : 마커 위치*/
+.map_pnt .pnt01{top: 14%;left: 17%;}
+.map_pnt .pnt02{top: 60%;left: 62%;}
+.map_pnt .pnt03{top: 48%;left: 51%;}
+.map_pnt .pnt04{top: 11%;left: 5%;}
+.map_pnt .pnt05{top: 62%;left: 11%;}
+.map_pnt .pnt06{top: 38%;left: 26%;}
+.map_pnt .pnt07{top: 51%;left: 68%;}
+.map_pnt .pnt08{top: 30%;left: 24%;}
+.map_pnt .pnt09{top: 4%;left: 24%;}
+.map_pnt .pnt10{top: 8%;left: 50%;}
+.map_pnt .pnt11{top: 24%;left: 40%;}
+.map_pnt .pnt12{top: 27%;left: 4%;}
+.map_pnt .pnt13{top: 51%;left: 16%;}
+.map_pnt .pnt14{top: 72%;left: 10%;}
+.map_pnt .pnt15{top: 32%;left: 60%;}
+.map_pnt .pnt16{top: 58%;left: 38%;}
+.map_pnt .pnt17{top: 84%;left: 25%;}
+.map_pnt .pnt18{top:0%; left:0%; }
+
+/* 지도 : 범례 */
+.map_indx{position:absolute;right: 50px;bottom: 50px;width: 112px;border:1px solid #73cdff;background:#fff;box-sizing:border-box; font-family: 'Gmarket';}
+.map_indx > .ttl{display:flex;height: 70px;background:#d8f5ff;color:#122f70;text-align:center;font-size: 20px;align-items: center;justify-content: center;line-height: normal;}
+.map_indx > .ttl strong{font-weight:700; }
+.map_indx .indx_list{ display:block; text-align:center; flex-direction: column; align-items:center;}
+.map_indx .indx_list > li{display:block;height: 30px;letter-spacing: -0.25px;font-size: 16px;line-height: 30px;border-top:1px solid #73cdff;box-sizing:border-box;}
+.map_indx .indx_list > li span{ background:url(/BB/images/dashboard/icon_mark01.png) no-repeat 0 center;padding-left:20px; background-size:auto 16px; font-weight:400;}
+.map_indx .indx_list > li .st01{background-image:url(/BB/images/dashboard/icon_mark01.png); }
+.map_indx .indx_list > li .st02{background-image:url(/BB/images/dashboard/icon_mark02.png); }
+.map_indx .indx_list > li .st03{background-image:url(/BB/images/dashboard/icon_mark03.png); }
+
+/* 종합상황판 */
+.dash_box_wrap{display:flex;gap: 12px;width: 100%;height: 100%;}
+.dash_box_wrap .dash_box{display: flex;flex: 1;padding: 12px 16px;background:#ef6154;border-radius: 5px;box-sizing: border-box;flex-direction: column;justify-content: space-between;}
+.dash_box_wrap .dash_box.sty01{background:#ef6154;}
+.dash_box_wrap .dash_box.sty02{background:#f7b34c;}
+.dash_box_wrap .dash_box.sty03{background:#2196f3;}
+.dash_box_wrap .dash_box.sty04{background:#284076;}
+.dash_box_wrap .dash_box.sty05{background: #dbdde1;}
+.dash_box_wrap .dash_box.sty06{background: #6b788d;}
+
+.dash_box_wrap .dash_box.sty01 .tit{background:url(/BB/images/dashboard/ico_dash01.png) no-repeat 0 0; }
+
+
+.dash_box_wrap .dash_box.sty05 .tit{color:#6b788d;}
+.dash_box_wrap .dash_box.sty05 .num{color:#6b788d;}
+.dash_box_wrap .dash_box.sty06 .tit{color: #fff;}
+.dash_box_wrap .dash_box.sty06 .num{color: #fff;}
+
+.dash_box_wrap .dash_box .tit{padding:0 0 0 30px; background:url(/BB/images/dashboard/ico_dash01.png) no-repeat 0 0; color:#fff; font-weight:500; font-size:14px; letter-spacing:-0.5px; line-height:1.6;}
+.dash_box_wrap .dash_box .num{color:#fff;font-weight:700;font-size: 24px;}
+.dash_box_wrap .dash_box .num em{font-size:16px; }
+.dash_box_wrap .dash_box .state{display:inline-block; padding:0 30px; background:rgba(0,0,0,0.3); color:#fff; font-weight:400; font-size:13px; line-height:16px; border-radius:20px;}
+
+.dash_box_wrap .total_dash_time{float: right;width: 320px;margin-top: 55px;}
+.dash_box_wrap .total_dash_time dl{display:flex;}
+.dash_box_wrap .total_dash_time .tit{ color:#6b788d; font-weight:400;font-size:14px;line-height: 30px;text-align: left;flex: 1;}
+.dash_box_wrap .total_dash_time .dec{ color:#6b788d;font-weight: 700;font-size:26px;line-height: 30px;text-align: right;}
+
+.dash_box_wrap .bul_point01{position: absolute; bottom: 16px;left: 16px;}
+
+
+/* location */
+.mapping_wrapper{display:block; position:relative; width:100%; text-align:center; padding:0 20px 120px 0; box-sizing:border-box;}
+.mapping_wrapper .mapping_top{display:block; position:relative; margin-bottom:30px;}
+.mapping_wrapper .mapping_top .mapping_tit{display:block; position:relative; width:100%; padding:9px 10px; box-sizing:border-box; border:1px solid #00337e; border-radius:10px; box-shadow:0 2px 5px rgba(0, 0, 0, 0.08); background:#fff; text-align:center; color:#00337e; font-size:18px; font-weight:700; letter-spacing:-0.75px; line-height:30px;}
+.mapping_wrapper .mapping_top .mapping_input{display:block; position:relative; text-align:center;}
+.mapping_wrapper .mapping_top .mapping_tit + .mapping_input{margin-top:30px;}
+.mapping_wrapper .total{display:inline-block; position:absolute; top:0; right:0; width:100%; max-width:180px; border-radius:10px; overflow:hidden;}
+.mapping_wrapper .total dt{display:block; position:relative; text-align:center; background:#ff6a6a; color:#fff; font-size:20px; font-weight:500; letter-spacing:-0.25px; line-height:40px;}
+.mapping_wrapper .total dd{display:block; position:relative; border-radius:0 0 10px 10px; box-sizing:border-box; border-style:dashed; border-color:transparent #ff6a6a #ff6a6a #ff6a6a; border-width:1px; text-align:center; background:#fff; color:#ff6a6a; font-size:20px; font-weight:700; letter-spacing:-0.25px; line-height:40px;}
+.mapping_wrapper .mapping{display:inline-block; position:relative; float:none;}
+.mapping_wrapper .mapping .mapping_list [class^="data_"]{display:inline-block; position:absolute; top:0; left:0;}
+.mapping_wrapper .mapping .mapping_list [class^="data_"] dl{display:table; position:relative; padding:10px 15px; box-sizing:border-box; border-radius:50px; box-shadow:5px 5px 10px rgba(0, 0, 0, 0.2); transition:all .3s;}
+.mapping_wrapper .mapping .mapping_list [class^="data_"] dl:before{display:block; position:absolute; bottom:-14px; left:50%; transform:translateX(-50%); width:0; height:0; border-width:7px; border-style:solid; content:""; transition:all .3s;}
+.mapping_wrapper .mapping .mapping_list .data_lv1 dl{background:#12cc4b;}
+.mapping_wrapper .mapping .mapping_list .data_lv2 dl{background:#00b0ff;}
+.mapping_wrapper .mapping .mapping_list .data_lv3 dl{background:#0064fe;}
+.mapping_wrapper .mapping .mapping_list .data_lv4 dl{background:#00337a;}
+.mapping_wrapper .mapping .mapping_list .data_lv1 dl:before{border-color:#12cc4b transparent transparent transparent;}
+.mapping_wrapper .mapping .mapping_list .data_lv2 dl:before{border-color:#00b0ff transparent transparent transparent;}
+.mapping_wrapper .mapping .mapping_list .data_lv3 dl:before{border-color:#0064fe transparent transparent transparent;}
+.mapping_wrapper .mapping .mapping_list .data_lv4 dl:before{border-color:#00337a transparent transparent transparent;}
+.mapping_wrapper .mapping .mapping_list [class^="data_"] dl dt{display:table-cell; position:relative; vertical-align:middle; color:#fff; font-size:15px; font-weight:500; letter-spacing:-0.25px; line-height:20px;}
+.mapping_wrapper .mapping .mapping_list [class^="data_"] dl dd{display:table-cell; position:relative; vertical-align:middle; padding-left:20px; box-sizing:border-box; color:#fff; font-size:15px; font-weight:500; letter-spacing:-0.5px; line-height:20px;}
+.mapping_wrapper .mapping .mapping_list [class^="data_"] dl dd:before{display:block; position:absolute; top:50%; left:9px; transform:translateY(-50%); width:2px; height:14px; content:""; background:rgba(255, 255, 255, 0.12);}
+.mapping_wrapper .mapping .mapping_list [class^="data_"] > a:hover dl{background:#ff6a6a !important;}
+.mapping_wrapper .mapping .mapping_list [class^="data_"] > a:hover dl:before{border-color:#ff6a6a transparent transparent transparent !important;}
+.mapping_wrapper .data_info{display:inline-block; position:absolute; bottom:0; right:20px; box-sizing:border-box; background:#fff; border:1px solid #e1e1e2;}
+.mapping_wrapper .data_info li{display:block; position:relative; border-top:1px solid #e1e1e2; padding:8px 10px; box-sizing:border-box;}
+.mapping_wrapper .data_info li:first-of-type{border-top:0;}
+.mapping_wrapper .data_info li span{display:block; position:relative; padding-left:20px; box-sizing:border-box; text-align:left; color:#333; font-size:13px; font-weight:400; letter-spacing:-0.25px; line-height:12px;}
+.mapping_wrapper .data_info li span:before{display:block; position:absolute; top:50%; left:0; transform:translateY(-50%); width:12px; height:12px; content:"";}
+.mapping_wrapper .data_info li span.lv1:before{background:#12cc4b;}
+.mapping_wrapper .data_info li span.lv2:before{background:#00b0ff;}
+.mapping_wrapper .data_info li span.lv3:before{background:#0064fe;}
+.mapping_wrapper .data_info li span.lv4:before{background:#00337a;}
+/* 서울 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="11"]{top:16%; left:16%;}
+/* 부산 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="26"]{top:65%; left:auto; right:0%;}
+/* 대구 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="27"]{top:49%; left:61%;}
+/* 인천 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="28"]{top:10%; left:0%;}
+/* 광주 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="29"]{top:65%; left:12%;}
+/* 대전 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="30"]{top:42%; left:26%;}
+/* 울산 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="31"]{top:56%; left:auto; right:0%;}
+/* 세종 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="36"]{top:35%; left:23%;}
+/* 경기 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="41"]{top:6%; left:25%;}
+/* 강원 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="51"]{top:14%; left:54%;}
+/* 충북 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="43"]{top:28%; left:42%;}
+/* 충남 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="44"]{top:28%; left:4%;}
+/* 전북 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="52"]{top:52%; left:18%;}
+/* 전남 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="46"]{top:74%; left:4%;}
+/* 경북 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="47"]{top:36%; left:68%;}
+/* 경남 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="48"]{top:58%; left:42%;}
+/* 제주 */
+.mapping_wrapper .mapping .mapping_list > li[data-local="50"]{top:89%; left:24%;}
+
+/* 지자체_서울 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li dl{padding:5px 10px;}
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li dl dt{font-size:15px;}
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li dl dd{font-size:20px;}
+/* 종로구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11110"]{top: 19%;left: 42%;}
+/* 중구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11140"]{top: 42%;left: 42%;}
+/* 용산구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11170"]{top: 57%;left: 41%;}
+/* 성동구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11200"]{top: 47%;left: 58%;}
+/* 광진구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11215"]{top: 54%;left: 65%;}
+/* 동대문구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11230"]{top: 37%;left:60%;}
+/* 중랑구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11260"]{top: 29%;left:72%;}
+/* 성북구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11290"]{top: 34%;left: 41%;}
+/* 강북구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11305"]{top: 9%;left: 48%;}
+/* 도봉구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11320"]{top: 0%;left: 53%;}
+/* 노원구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11350"]{top: 16%;left: 67%;}
+/* 은평구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11380"]{top: 12%;left: 27%;}
+/* 서대문구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11410"]{top: 26%;left: 34%;}
+/* 마포구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11440"]{top: 38%;left: 18%;}
+/* 양천구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11470"]{top: 60%;left: 9%;}
+/* 강서구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11500"]{top: 46%;left: 0%;}
+/* 구로구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11530"]{top: 70%;left: 7%;}
+/* 금천구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11545"]{top: 83%;left: 24%;}
+/* 영등포구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11560"]{top: 51%;left: 22%;}
+/* 동작구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11590"]{top: 67%;left: 39%;}
+/* 관악구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11620"]{top: 76%;left: 38%;}
+/* 서초구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11650"]{top: 83%;left: 61%;}
+/* 강남구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11680"]{top: 71%;left: 63%;}
+/* 송파구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11710"]{top: 65%;left:77%;}
+/* 강동구 */
+.mapping_wrapper .mapping[data-map="11"] .mapping_list > li[data-local="11740"]{top: 47%;left:auto;right: 0%;}
+
+/* 지자체_부산 */
+/* 중구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26110"]{top: 62%;left: 42%;}
+/* 서구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26140"]{top: 69%;left: 38%;}
+/* 동구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26170"]{top: 54%;left: 42%;}
+/* 영도구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26200"]{top: 72%;left: 51%;}
+/* 부산진구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26230"]{top: 47%;left: 37%;}
+/* 동래구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26260"]{top: 36%;left: 44%;}
+/* 남구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26290"]{top: 61%;left: 56%;}
+/* 북구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26320"]{top: 26%;left: 37%;}
+/* 해운대구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26350"]{top: 46%;left: 69%;}
+/* 사하구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26380"]{top: 75%;left: 27%;}
+/* 금정구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26410"]{top: 20%;left: 49%;}
+/* 강서구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26440"]{top: 82%;left:0%;}
+/* 연제구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26470"]{top: 42%;left: 54%;}
+/* 수영구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26500"]{top: 51%;left: 56%;}
+/* 사상구 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26530"]{top: 55%;left: 25%;}
+/* 기장군 */
+.mapping_wrapper .mapping[data-map="26"] .mapping_list > li[data-local="26710"]{top: 9%;left: auto;right: 10%;}
+
+/* 지자체_대구 */
+/* 중구 */
+.mapping_wrapper .mapping[data-map="27"] .mapping_list > li[data-local="27110"]{top: 30%;left: 51%;}
+/* 동구 */
+.mapping_wrapper .mapping[data-map="27"] .mapping_list > li[data-local="27140"]{top: 9%;left: auto;right: 10%;}
+/* 서구 */
+.mapping_wrapper .mapping[data-map="27"] .mapping_list > li[data-local="27170"]{top: 26%;left: 34%;}
+/* 남구 */
+.mapping_wrapper .mapping[data-map="27"] .mapping_list > li[data-local="27200"]{top: 37%;left: 46%;}
+/* 북구 */
+.mapping_wrapper .mapping[data-map="27"] .mapping_list > li[data-local="27230"]{top: 15%;left: 41%;}
+/* 수성구 */
+.mapping_wrapper .mapping[data-map="27"] .mapping_list > li[data-local="27260"]{top: 38%;left: auto;right: 12%;}
+/* 달서구 */
+.mapping_wrapper .mapping[data-map="27"] .mapping_list > li[data-local="27290"]{top: 45%;left: 38%;}
+/* 달성군 */
+.mapping_wrapper .mapping[data-map="27"] .mapping_list > li[data-local="27710"]{top: 57%;left: 20%;}
+
+/* 지자체_인천 */
+/* 중구 */
+.mapping_wrapper .mapping[data-map="28"] .mapping_list > li[data-local="28110"]{top: 68%;left: 36%;}
+/* 동구 */
+.mapping_wrapper .mapping[data-map="28"] .mapping_list > li[data-local="28140"]{top: 65%;left: auto;right: 19%;}
+/* 미추홀구 */
+.mapping_wrapper .mapping[data-map="28"] .mapping_list > li[data-local="28177"]{top: 73%;left: auto;right: 11%;}
+/* 연수구 */
+.mapping_wrapper .mapping[data-map="28"] .mapping_list > li[data-local="28185"]{top: 84%;left: auto;right: 13%;}
+/* 남동구 */
+.mapping_wrapper .mapping[data-map="28"] .mapping_list > li[data-local="28200"]{top: 79%;left: auto;right: 0%;}
+/* 부평구 */
+.mapping_wrapper .mapping[data-map="28"] .mapping_list > li[data-local="28237"]{top: 62%;left: auto;right: 3%;}
+/* 계약구 */
+.mapping_wrapper .mapping[data-map="28"] .mapping_list > li[data-local="28245"]{top: 50%;left: auto;right: 0%;}
+/* 서구 */
+.mapping_wrapper .mapping[data-map="28"] .mapping_list > li[data-local="28260"]{top: 45%;left: auto;right: 18%;}
+/* 강화군 */
+.mapping_wrapper .mapping[data-map="28"] .mapping_list > li[data-local="28710"]{top: 20%;left: 37%;}
+/* 웅진군 */
+.mapping_wrapper .mapping[data-map="28"] .mapping_list > li[data-local="28720"]{top: 59%;left:0%;}
+
+/* 지자체_광주 */
+/* 동구 */
+.mapping_wrapper .mapping[data-map="29"] .mapping_list > li[data-local="29110"]{top: 60%;left: auto;right: 9%;}
+/* 서구 */
+.mapping_wrapper .mapping[data-map="29"] .mapping_list > li[data-local="29140"]{top: 42%;left: 48%;}
+/* 남구 */
+.mapping_wrapper .mapping[data-map="29"] .mapping_list > li[data-local="29155"]{top: 76%;left: 42%;}
+/* 북구 */
+.mapping_wrapper .mapping[data-map="29"] .mapping_list > li[data-local="29170"]{top: 17%;left: auto;right: 20%;}
+/* 광산구 */
+.mapping_wrapper .mapping[data-map="29"] .mapping_list > li[data-local="29200"]{top: 33%;left: 19%;}
+
+/* 지자체_대전 */
+/* 동구 */
+.mapping_wrapper .mapping[data-map="30"] .mapping_list > li[data-local="30110"]{top: 45%;left: auto;right: 20%;}
+/* 중구 */
+.mapping_wrapper .mapping[data-map="30"] .mapping_list > li[data-local="30140"]{top: 57%;left: 43%;}
+/* 서구 */
+.mapping_wrapper .mapping[data-map="30"] .mapping_list > li[data-local="30170"]{top: 71%;left: 19%;}
+/* 유성구 */
+.mapping_wrapper .mapping[data-map="30"] .mapping_list > li[data-local="30200"]{top: 26%;left: 16%;}
+/* 대덕구 */
+.mapping_wrapper .mapping[data-map="30"] .mapping_list > li[data-local="30230"]{top: 18%;left: 51%;}
+
+/* 지자체_울산 */
+/* 중구 */
+.mapping_wrapper .mapping[data-map="31"] .mapping_list > li[data-local="31110"]{top: 29%;left: auto;right: 24%;}
+/* 남구 */
+.mapping_wrapper .mapping[data-map="31"] .mapping_list > li[data-local="31140"]{top: 45%;left: auto;right: 19%;}
+/* 동구 */
+.mapping_wrapper .mapping[data-map="31"] .mapping_list > li[data-local="31170"]{top: 39%;left: auto;right: 0%;}
+/* 북구 */
+.mapping_wrapper .mapping[data-map="31"] .mapping_list > li[data-local="31200"]{top: 18%;left: auto;right: 9%;}
+/* 울주군 */
+.mapping_wrapper .mapping[data-map="31"] .mapping_list > li[data-local="31710"]{top: 26%;left: 23%;}
+
+/* 지자체_세종 */
+.mapping_wrapper .mapping[data-map="36"] .mapping_list > li[data-local="36110"]{top: 45%;left: 35%;}
+
+/* 지자체_경기 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li dl{padding:5px 10px;}
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li dl dt{font-size:14px;}
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li dl dd{font-weight:18px;}
+/* 수원시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41110"]{top: 69%; left: 30%;}
+/* 성남시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41130"]{top: 53%; left: 42%;}
+/* 의정부시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41150"]{top: 32%; left: 34%;}
+/* 안양시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41170"]{top:59.5%; left: 23%;}
+/* 부천시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41190"]{top:49%; left:16%;}
+/* 광명시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41210"]{top:53%; left:21%;}
+/* 평택시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41220"]{top:90%; left:25%;}
+/* 동두천시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41250"]{top:18%; left:35%;}
+/* 안산시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41270"]{top:64%; left:9%;}
+/* 고양시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41280"]{top:42%; left:17%;}
+/* 과천시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41290"]{top:56%; left:33%;}
+/* 구리시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41310"]{top:42%; left:39%;}
+/* 남양주시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41360"]{top:37%; left:45%;}
+/* 오산시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41370"]{top:76%; left:35%;}
+/* 시흥시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41390"]{top:56%; left:13%;}
+/* 군포시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41410"]{top:63%; left:26%;}
+/* 의왕시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41430"]{top:60.5%; left:41%;}
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41430"] dl:before{top:50%; left:-12px; transform:translateY(-50%);}
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41430"].data_lv1 dl:before{border-color:transparent #12cc4b transparent transparent;}
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41430"].data_lv2 dl:before{border-color:transparent #00b0ff transparent transparent;}
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41430"].data_lv3 dl:before{border-color:transparent #0064fe transparent transparent;}
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41430"].data_lv4 dl:before{border-color:transparent #00337a transparent transparent;}
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41430"] > a:hover dl:before{border-color:transparent #ff6a6a transparent transparent !important;}
+/* 하남시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41450"]{top:48%; left:47%;}
+/* 용인시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41460"]{top:72%; left:47%;}
+/* 파주시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41480"]{top:23%; left:15%;}
+/* 이천시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41500"]{top:76%; left:69%;}
+/* 안성시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41550"]{top:85%; left:50%;}
+/* 김포시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41570"]{top:33%; left:0%;}
+/* 화성시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41590"]{top:72%; left:8%;}
+/* 광주시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41610"]{top:57%; left:52%;}
+/* 양주시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41630"]{top:36%; left:27%;}
+/* 포천시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41650"]{top:23%; left:48%;}
+/* 여주시 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41670"]{top:68%; right:1%; left:auto;}
+/* 연천구 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41800"]{top:8%; left:32%;}
+/* 가평군 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41820"]{top:28%; left:60%;}
+/* 양평군 */
+.mapping_wrapper .mapping[data-map="41"] .mapping_list > li[data-local="41830"]{top:50%; left:auto; right:8%;}
+
+/* 지자체_강원 */
+/* 춘천시 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51110"]{top: 35%;left: 18%;}
+/* 원주시 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51130"]{top: 77%;left: 21%;}
+/* 강릉시 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51150"]{top: 48%;left: auto;right: 12%;}
+/* 동해시 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51170"]{top: 62%;left: auto;right: 5%;}
+/* 태백시 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51190"]{top: 86%;left: auto;right: 10%;}
+/* 속초시 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51210"]{top: 20%;left: auto;right: 25%;}
+/* 삼척시 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51230"]{top: 77%;left: auto;right: 0%;}
+/* 홍천군 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51720"]{top: 45%;left: 31%;}
+/* 횡성군 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51730"]{top: 62%;left: 35%;}
+/* 영월군 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51750"]{top: 82%;left: 50%;}
+/* 평창군 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51760"]{top: 54%;left: 51%;}
+/* 정선군 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51770"]{top: 68%;left: 60%;}
+/* 철원군 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51780"]{top: 14%;left:0%;}
+/* 화천군 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51790"]{top: 24%;left: 19%;}
+/* 양구군 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51800"]{top: 17%;left: 32%;}
+/* 인제군 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51810"]{top: 31%;left: 37%;}
+/* 고성군 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51820"]{top: 6%;left: auto;right: 32%;}
+/* 양양군 */
+.mapping_wrapper .mapping[data-map="51"] .mapping_list > li[data-local="51830"]{top: 33%;left: auto;right: 22%;}
+
+/* 지자체_충북 */
+/* 청주시 */
+.mapping_wrapper .mapping[data-map="43"] .mapping_list > li[data-local="43110"]{top: 42%;left:0%;}
+/* 충주시 */
+.mapping_wrapper .mapping[data-map="43"] .mapping_list > li[data-local="43130"]{top: 12%;left: 32%;}
+/* 제천시 */
+.mapping_wrapper .mapping[data-map="43"] .mapping_list > li[data-local="43150"]{top: 4%;left: 52%;}
+/* 보은군 */
+.mapping_wrapper .mapping[data-map="43"] .mapping_list > li[data-local="43720"]{top: 54%;left: 24%;}
+/* 옥천군 */
+.mapping_wrapper .mapping[data-map="43"] .mapping_list > li[data-local="43730"]{top: 68%;left: 15%;}
+/* 영동군 */
+.mapping_wrapper .mapping[data-map="43"] .mapping_list > li[data-local="43740"]{top: 30%;left: 12%;}
+/* 증평군 */
+.mapping_wrapper .mapping[data-map="43"] .mapping_list > li[data-local="43745"]{top: 80%;left: 29%;}
+/* 진천군 */
+.mapping_wrapper .mapping[data-map="43"] .mapping_list > li[data-local="43750"]{top: 23%;left:0%;}
+/* 괴산군 */
+.mapping_wrapper .mapping[data-map="43"] .mapping_list > li[data-local="43760"]{top: 33%;left: 33%;}
+/* 음성군 */
+.mapping_wrapper .mapping[data-map="43"] .mapping_list > li[data-local="43770"]{top: 15%;left: 8%;}
+/* 단양군 */
+.mapping_wrapper .mapping[data-map="43"] .mapping_list > li[data-local="43800"]{top: 14%;left: auto;right: 8%;}
+
+/* 지자체_충남 */
+/* 천안시 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44130"]{top: 13%;left: 60%;}
+/* 공주시 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44150"]{top: 43%;left: 53%;}
+/* 보령시 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44180"]{top: 57%;left: 23%;}
+/* 아산시 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44200"]{top: 20%;left: 46%;}
+/* 서산시 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44210"]{top: 20%;left: 13%;}
+/* 논산시 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44230"]{top: 76%;left: auto;right: 20%;}
+/* 계룡시 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44250"]{top: 62%;left: auto;right: 19%;}
+/* 당진시 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44270"]{top: 6%;left: 23%;}
+/* 금산군 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44710"]{top: 82%;left: auto;right: 0%;}
+/* 부여군 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44760"]{top: 67%;left: 36%;}
+/* 서천군 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44770"]{top: 79%;left: 30%;}
+/* 청양군 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44790"]{top: 49%;left: 36%;}
+/* 홍성군 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44800"]{top: 39%;left: 20%;}
+/* 예산군 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44810"]{top: 30%;left: 36%;}
+/* 태안군 */
+.mapping_wrapper .mapping[data-map="44"] .mapping_list > li[data-local="44825"]{top: 12%;left:0%;}
+
+/* 지자체_전북 */
+/* 전주시 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52110"]{top: 31%;left: 37%;}
+/* 군산시 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52130"]{top: 16%;left: 11%;}
+/* 익산시 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52140"]{top: 4%;left: 27%;}
+/* 정읍시 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52180"]{top: 52%;left: 23%;}
+/* 남원시 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52190"]{top: 74%;left: 60%;}
+/* 김제시 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52210"]{top: 29%;left: 16%;}
+/* 완주군 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52710"]{top: 18%;left: 42%;}
+/* 진안군 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52720"]{top: 29%;left: 58%;}
+/* 무주군 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52730"]{top: 17%;left: auto;right: 2%;}
+/* 장수군 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52740"]{top: 47%;left: auto;right: 14%;}
+/* 임실군 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52750"]{top: 55%;left: 46%;}
+/* 순창군 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52770"]{top: 77%;left: 38%;}
+/* 고창군 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52790"]{top: 74%;left:0%;}
+/* 부안군 */
+.mapping_wrapper .mapping[data-map="52"] .mapping_list > li[data-local="52800"]{top: 48%;left:0%;}
+
+/* 지자체_전남 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li dl{padding:5px 10px;}
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li dl dt{font-size:14px;}
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li dl dd{font-size:18px;}
+/* 목포시 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46110"]{top: 47%;left: 24%;}
+/* 여수시 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46130"]{top: 52%;left: auto;right: 0%;}
+/* 순천시 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46150"]{top: 36%;left: auto;right: 13%;}
+/* 나주시 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46170"]{top: 38%;left: 36%;}
+/* 광양시 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46230"]{top: 31%;left: auto;right: 0%;}
+/* 담양군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46710"]{top: 5%;left: 51%;}
+/* 곡성군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46720"]{top: 14%;left: auto;right: 22%;}
+/* 구례군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46730"]{top: 17%;left: auto;right: 8%;}
+/* 고흥군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46770"]{top: 72%;left: auto;right: 16%;}
+/* 보성군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46780"]{top: 55%;left: 57%;}
+/* 화순군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46790"]{top: 31%;left: 49%;}
+/* 장흥군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46800"]{top: 49%;left: 45%;}
+/* 강진군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46810"]{top: 66%;left: 37%;}
+/* 해남군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46820"]{top: 75%;left: 28%;}
+/* 영암군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46830"]{top: 55%;left: 29%;}
+/* 무안군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46840"]{top: 33%;left: 21%;}
+/* 함평군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46860"]{top: 24%;left: 28%;}
+/* 영광군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46870"]{top: 13%;left: 21%;}
+/* 장성군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46880"]{top: 11%;left: 41%;}
+/* 완도군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46890"]{top: 86%;left: 36%;}
+/* 진도군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46900"]{top: 80%;left: 11%;}
+/* 신안군 */
+.mapping_wrapper .mapping[data-map="46"] .mapping_list > li[data-local="46910"]{top: 42%;left:0%;}
+
+/* 지자체_경북 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li dl{padding:5px 10px;}
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li dl dt{font-size:14px;}
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li dl dd{font-size:18px;}
+/* 포항시 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47110"]{top: 67%;left: auto;right: 16%;}
+/* 경주시 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47130"]{top: 79%;left: auto;right: 22%;}
+/* 김천시 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47150"]{top: 65%;left:0%;}
+/* 안동시 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47170"]{top: 25%;left: 37%;}
+/* 구미시 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47190"]{top: 50%;left: 13%;}
+/* 영주시 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47210"]{top: 9%;left: 24%;}
+/* 영천시 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47230"]{top: 64%;left: 44%;}
+/* 상주시 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47250"]{top: 41%;left: 2%;}
+/* 문경시 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47280"]{top: 25%;left: 9%;}
+/* 경산시 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47290"]{top: 77%;left: 37%;}
+/* 군위군 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47720"]{top: 56%;left: 33%;}
+/* 의성군 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47730"]{top: 44%;left: 24%;}
+/* 청송군 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47750"]{top: 42%;left: 49%;}
+/* 영양군 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47760"]{top: 19%;left: 51%;}
+/* 영덕군 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47770"]{top: 32%;left: auto;right: 23%;}
+/* 청도군 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47820"]{top: 88%;left: 36%;}
+/* 고령군 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47830"]{top: 84%;left: 15%;}
+/* 성주군 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47840"]{top: 74%;left: 12%;}
+/* 칠곡군 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47850"]{top: 65%;left: 24%;}
+/* 예천군 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47900"]{top: 20%;left: 20%;}
+/* 봉화군 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47920"]{top: 7%;left: 42%;}
+/* 울진군 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47930"]{top: 11%;left: auto;right: 24%;}
+/* 울릉군 */
+.mapping_wrapper .mapping[data-map="47"] .mapping_list > li[data-local="47940"]{top: 21%;left: auto;right: 3%;}
+
+/* 지자체_경남 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li dl{padding:5px 10px;}
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li dl dt{font-size:14px;}
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li dl dd{font-size:18px;}
+/* 창원시 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48120"]{top: 40%;left: 58%;}
+/* 진주시 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48170"]{top: 50%;left: 26%;}
+/* 통영시 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48220"]{top: 75%;left: 44%;}
+/* 사천시 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48240"]{top: 65%;left: 21%;}
+/* 김해시 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48250"]{top: 48%;left: auto;right: 15%;}
+/* 밀양시 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48270"]{top: 26%;left: auto;right: 17%;}
+/* 거제시 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48310"]{top: 80%;left: auto;right: 27%;}
+/* 양산시 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48330"]{top: 34%;left: auto;right: 2%;}
+/* 의령군 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48720"]{top: 38%;left: 33%;}
+/* 함안군 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48730"]{top: 46%;left: 43%;}
+/* 창녕군 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48740"]{top: 28%;left: 47%;}
+/* 고성군 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48820"]{top: 66%;left: 40%;}
+/* 남해군 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48840"]{top: 84%;left: 12%;}
+/* 하동군 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48850"]{top: 56%;left: 6%;}
+/* 산청군 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48860"]{top: 36%;left: 12%;}
+/* 함양군 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48870"]{top: 24%;left:0%;}
+/* 거창군 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48880"]{top: 9%;left: 12%;}
+/* 합천군 */
+.mapping_wrapper .mapping[data-map="48"] .mapping_list > li[data-local="48890"]{top: 25%;left: 25%;}
+
+/* 지자체_제주 */
+/* 제주시 */
+.mapping_wrapper .mapping[data-map="50"] .mapping_list > li[data-local="50110"]{top:21%; left:38%;}
+/* 서귀포시 */
+.mapping_wrapper .mapping[data-map="50"] .mapping_list > li[data-local="50130"]{top:48%; left:48%;}
+
+/* map_stats */
+.map_stats{display:flex; flex-wrap:nowrap; justify-content:space-between; position:relative;}
+.map_stats > .mapping_wrapper{display:block; position:relative; flex:0 1 30%; min-height:650px;}
+.map_stats > .stats{display:flex; flex-wrap:wrap; justify-content:space-between; position:relative; flex:0 1 69%;}
+.map_stats > .stats > .stats_con{display:block; position:relative; flex:0 1 calc(50% - 10px); padding:20px 25px; margin-top:20px; box-sizing:border-box; border-radius:5px; box-shadow:0 2px 5px rgba(0, 0, 0, 0.08); background:#fff;}
+.map_stats > .stats > .stats_con:first-of-type, .map_stats > .stats > .stats_con:nth-of-type(2){margin-top:0;}
+.map_stats > .con_box{flex:0 1 69%;}
+
+.mapping_wrapper .mapping_list > li.data_s dl{background:#1fb5ff;}
+.mapping_wrapper .mapping_list > li.data_s dl:after{border-color:#1fb5ff transparent transparent transparent;}
+.mapping_wrapper .mapping_list > li.data_m dl{background:#005aff;}
+.mapping_wrapper .mapping_list > li.data_m dl:after{border-color:#005aff transparent transparent transparent;}
+.mapping_wrapper .mapping_list > li.data_l dl{background:#00d9b2;}
+.mapping_wrapper .mapping_list > li.data_l dl:after{border-color:#00d9b2 transparent transparent transparent;}
