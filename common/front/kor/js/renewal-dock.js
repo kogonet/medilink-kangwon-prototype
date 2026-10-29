@@ -66,6 +66,86 @@
     if (b && b.firstChild && b.firstChild.nodeType === 3) b.firstChild.nodeValue = p[1] + ' ';
   });
 
+  /* 2.5) 옵션 항목 과다 대응: 자주 찾는 항목 우선 노출 + 더보기 + 패널 내 검색 (landing.js 무수정, 렌더 후 보강)
+   *  - 상위 노출 목록은 임시 기준(일반적 이용 빈도 가정) → 이용 로그/공공데이터 진료 건수로 교체 필요 */
+  var POP_DEPT = ['내과', '정형외과', '소아청소년과', '이비인후과', '피부과', '산부인과', '안과', '치과'];
+  var POP_SYM = ['감기', '두통', '발열', '기침', '어지럼증', '허리디스크', '당뇨', '고혈압'];
+  var CAP = 8;
+
+  function filterBox(ph, onInput) {
+    var wrap = doc.createElement('div');
+    wrap.className = 'rn_tools';
+    wrap.innerHTML = '<input class="rn_filter" type="search" placeholder="' + ph + '" autocomplete="off" aria-label="' + ph + '">';
+    wrap.firstChild.addEventListener('input', function (e) { e.stopPropagation(); onInput(e.target.value.trim()); });
+    return wrap;
+  }
+  function pinPopular(list, pops, attr) {
+    var items = [].slice.call(list.children).filter(function (el) { return el.tagName === 'BUTTON'; });
+    var pop = pops.map(function (n) { return items.filter(function (b) { return b.dataset[attr] === n; })[0]; }).filter(Boolean);
+    pop.slice().reverse().forEach(function (b) { list.insertBefore(b, list.firstChild); });
+    var all = [].slice.call(list.children).filter(function (el) { return el.tagName === 'BUTTON'; });
+    all.forEach(function (b, i) { if (i >= CAP) b.classList.add('rn_extra'); });
+    return all;
+  }
+  function moreBtn(list, label, total) {
+    var b = doc.createElement('button');
+    b.type = 'button'; b.className = 'rn_more_btn';
+    b.textContent = label + ' (' + total + ')';
+    b.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = list.classList.toggle('rn_open');
+      b.textContent = open ? '접기' : label + ' (' + total + ')';
+    });
+    return b;
+  }
+  function localFilter(list, items, more) {
+    return function (q) {
+      list.classList.toggle('rn_open', !!q);
+      if (more) more.hidden = !!q;
+      items.forEach(function (b) { b.hidden = !!q && b.textContent.indexOf(q) < 0; });
+    };
+  }
+  function enhance(panel) {
+    if (!panel || panel.querySelector('.rn_tools, .rn_more_btn')) return;
+    var id = panel.id, list, items, more, box;
+    if (id === 'department_panel') {
+      list = panel.querySelector('.department_grid'); if (!list) return;
+      items = pinPopular(list, POP_DEPT, 'department');
+      more = moreBtn(list, '전체 진료과 보기', items.length);
+      box = filterBox('진료과 검색', localFilter(list, items, more));
+      list.parentNode.insertBefore(box, list);
+      list.parentNode.insertBefore(more, list.nextSibling);
+    } else if (id === 'region_panel') {
+      var grids = panel.querySelectorAll('.panel_grid');
+      if (!grids.length) return;
+      items = [].slice.call(panel.querySelectorAll('.panel_item'));
+      var apply = function (q) { items.forEach(function (b) { b.hidden = !!q && b.textContent.indexOf(q) < 0; }); [].forEach.call(panel.querySelectorAll('.panel_label'), function (l) { l.hidden = !!q; }); };
+      box = filterBox(grids[0].classList.contains('emd_grid') ? '읍·면·동 검색' : '시·군 검색', apply);
+      grids[0].parentNode.insertBefore(box, panel.querySelector('.panel_all') || grids[0]);
+    } else if (id === 'symptom_panel') {
+      list = panel.querySelector('.symptom_list'); if (!list) return;
+      var qv = panel.querySelector('#symptom_query'), cat = panel.querySelector('.category_btn.is_active');
+      if ((qv && qv.value) || (cat && cat.dataset.category !== '전체')) { list.parentNode.insertBefore(Object.assign(doc.createElement('i'), { className: 'rn_tools' }), list); return; }
+      items = pinPopular(list, POP_SYM, 'symptom');
+      if (items.length <= CAP) return;
+      list.parentNode.insertBefore(moreBtn(list, '전체 증상 보기', items.length), list.nextSibling);
+    }
+  }
+  ['symptom_panel', 'region_panel', 'department_panel'].forEach(function (id) {
+    var panel = doc.getElementById(id);
+    if (!panel) return;
+    new MutationObserver(function () { enhance(panel); }).observe(panel, { childList: true });
+    enhance(panel);
+  });
+
+  /* 패널을 다시 열 때 이전 검색어 초기화 */
+  form.addEventListener('click', function (e) {
+    if (!e.target.closest('.option_btn')) return;
+    [].forEach.call(form.querySelectorAll('.rn_filter'), function (f) {
+      if (f.value) { f.value = ''; f.dispatchEvent(new Event('input')); }
+    });
+  });
+
   /* 3) 상태 제어 */
   var docked = false, min = false, hover = false;
   function panelOpen() { return !!form.querySelector('.option_panel:not([hidden])'); }

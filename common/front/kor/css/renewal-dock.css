@@ -95,11 +95,13 @@ form.search_form.rn_prompt {padding: 0; border: 0; border-radius: 0; background:
 .rn_slot {display: flex; justify-content: center; width: 100%;}
 
 /* ── 독(하단 고정) ── */
-.rn_prompt.is_dock {position: fixed; left: 50%; bottom: 20px; z-index: 520; width: min(780px, calc(100vw - 32px)); gap: 0; transform: translateX(-50%); animation: rn_dock_in .3s ease;}
+.rn_prompt.is_dock {position: fixed; left: 0; right: 0; bottom: 20px; z-index: 520; width: min(780px, calc(100vw - 32px)); margin: 0 auto; gap: 0; animation: rn_dock_in .3s ease;}
 .rn_prompt.is_dock .search_desc, .rn_prompt.is_dock .hero_chips, .rn_prompt.is_dock .hero_note {display: none;}
 .rn_prompt.is_dock .rn_composer {background: rgba(255,255,255,.9); box-shadow: 0 12px 40px rgba(0,56,195,.22);}
 .rn_prompt.is_dock .option_panel {top: auto; bottom: calc(100% + 18px);}
-@keyframes rn_dock_in {from {opacity: 0; transform: translate(-50%, 16px);} to {opacity: 1; transform: translate(-50%, 0);}}
+@keyframes rn_dock_in {from {opacity: 0; transform: translateY(16px);} to {opacity: 1; transform: none;}}
+
+form.search_form.rn_prompt.is_dock {margin: 0 auto;}
 
 /* ── 미니마이즈: 입력창 + 전송만 ── */
 .rn_prompt.is_dock.is_min {width: min(440px, calc(100vw - 32px));}
@@ -124,3 +126,23 @@ body.rn_has_dock .footer_wrap {padding-bottom: 96px;}
   .rn_prompt.is_dock.is_min {width: calc(100vw - 32px);}
 }
 @media (prefers-reduced-motion: reduce) {.rn_prompt.is_dock {animation: none;} .rn_composer {transition: none;}}
+
+/* ── 옵션 과다 대응: 자주 찾는 항목 + 더보기 + 패널 내 검색 ── */
+.rn_prompt [hidden] {display: none !important;}
+.rn_prompt .option_panel {max-height: min(70vh, 560px); overflow-y: auto; overscroll-behavior: contain;}
+.rn_prompt .rn_tools {margin: 0 0 10px;}
+.rn_prompt .rn_filter {width: 100%; min-height: 40px; padding: 0 14px; border: 1px solid var(--color-line); border-radius: 12px; background: #fff; font-size: 14px; outline: 0;}
+.rn_prompt .rn_filter:focus {border-color: var(--rnp-blue); box-shadow: 0 0 0 3px rgba(0,56,195,.15);}
+.rn_prompt .rn_extra {display: none;}
+.rn_prompt .rn_open .rn_extra {display: block;}
+.rn_prompt .department_grid.rn_open .rn_extra, .rn_prompt .symptom_list.rn_open .rn_extra {display: flex;}
+.rn_prompt .rn_more_btn {display: block; width: 100%; margin-top: 10px; min-height: 40px; border: 1px dashed #b9c5e6; border-radius: 12px; background: var(--rnp-blue-bg); color: var(--rnp-blue); font-size: 14px; font-weight: 600; cursor: pointer;}
+.rn_prompt .rn_more_btn:hover {background: #dbe4fa;}
+
+/* 모바일: 바텀시트 */
+@media (max-width: 760px) {
+  .rn_prompt:has(.option_panel:not([hidden])) .rn_composer {-webkit-backdrop-filter: none; backdrop-filter: none;}
+  .rn_prompt:not(.is_dock):has(.option_panel:not([hidden])) {position: relative; z-index: 600;}
+  .rn_prompt .option_panel:not([hidden]) {position: fixed; left: 0; right: 0; bottom: 0; top: auto; width: auto; max-height: 72vh; padding-bottom: calc(18px + env(safe-area-inset-bottom)); border-radius: 22px 22px 0 0; z-index: 610; box-shadow: 0 -12px 40px rgba(9,9,9,.25);}
+  .rn_prompt:has(.option_panel:not([hidden]))::before {content: ''; position: fixed; inset: 0; z-index: 605; background: rgba(9,9,9,.38);}
+}
