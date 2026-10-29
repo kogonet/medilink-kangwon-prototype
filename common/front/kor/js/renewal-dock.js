@@ -257,7 +257,8 @@
   });
 
   /* 3) 상태 제어: hero(랜딩 최상단 큰 상태) / min(한 줄) / 클릭·입력 시 큰 상태 */
-  var scrolled = !isLanding;   // 하위 페이지는 처음부터 미니
+  var tracks = isLanding || doc.body.getAttribute('data-rn-dock') === 'full';   // 랜딩/결과 페이지: 스크롤에 따라 축소
+  var scrolled = !tracks || (!isLanding && window.innerWidth <= 760);   // 결과 페이지는 모바일에서 한 줄로 시작   // 그 외 하위 페이지는 처음부터 미니
   var userOpen = false;
   function panelOpen() { return !!form.querySelector('.option_panel:not([hidden])'); }
   function hasValue() { return (input && input.value.trim()) || form.querySelector('.selected_tag'); }
@@ -290,7 +291,7 @@
   doc.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (input) input.blur(); setTimeout(maybeMin, 0); } });
 
   function onScroll() {
-    if (!isLanding) return;
+    if (!tracks) return;
     var s = (window.pageYOffset || doc.documentElement.scrollTop || 0) > 80;
     if (s === scrolled) { fitPanel(); return; }
     scrolled = s;
