@@ -105,7 +105,7 @@ body {margin: 0; background: #fff; color: var(--rn-ink); font-family: 'Pretendar
 .hero_wrap .hero_content, .hero_wrap .hero_bottom {transition: opacity .28s ease, transform .28s ease;}
 .hero_wrap.is_leaving .hero_content, .hero_wrap.is_leaving .hero_bottom {opacity: 0; transform: translateY(-18px);}
 body.is_chat .hero_wrap {display: none;}
-body.is_chat .rn_prompt.is_hero {bottom: 20px;}
+
 body.is_chat {background: #fff;}
 .op_thread {min-height: 100vh; padding-top: 96px; background: #fff; animation: op_in .32s ease;}
 .op_thread[hidden] {display: none;}
@@ -215,47 +215,79 @@ body.has_dist .rr_dist {display: inline-block;}
   .op_dots i {animation: none;}
 }
 
-/* 지도 시트: 독 위에 쌓여 위로 열림 (본문 reflow 없음) */
-:root {--op-dock-off: 120px; --op-sheet-h: 0px;}
-.op_map {position: fixed; left: 0; right: 0; margin: 0 auto; bottom: var(--op-dock-off); z-index: 590; display: flex; flex-direction: column; width: min(800px, calc(100% - 24px)); height: var(--op-snap-h, 40vh); max-height: calc(100vh - var(--op-dock-off) - 150px); padding: 0 16px; border: 1px solid var(--rn-rule); border-radius: 20px; background: #fff; box-shadow: 0 -10px 36px rgba(9,9,9,.14); transition: height .28s cubic-bezier(.2,.8,.2,1), bottom .2s;}
-.op_map[data-snap="peek"] {--op-snap-h: 60px;}
-.op_map[data-snap="mid"] {--op-snap-h: 40vh;}
-.op_map[data-snap="full"] {--op-snap-h: 72vh;}
-.op_map_hd {flex: none; height: 60px; margin: 0; gap: 8px;}
-.op_map_hd .op_x svg {transition: transform .2s;}
-.op_map[data-snap="mid"] #opMapSnap svg, .op_map[data-snap="full"] #opMapSnap svg {transform: rotate(180deg);}
-.op_map_hd .op_acts {display: flex; align-items: center;}
+/* ===== 바텀 네비게이터: 좌측 메뉴 + 우측 알림 스택, 프롬프트는 그 위 ===== */
+:root {--op-bar-h: 56px; --op-dock-off: 150px;}
+body.is_chat {--op-bar-h: 38px;}   /* 대화가 시작되면 바텀 메뉴는 미니마이즈 */
+.op_gbar {position: fixed; left: 0; right: 0; bottom: 0; z-index: 600; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: var(--op-bar-h); padding: 0 var(--rn-gutter); border-top: 1px solid var(--rn-hair); background: rgba(255,255,255,.94); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); transition: height .24s ease;}
+.op_menu {display: flex; align-items: center; gap: 2px; margin: 0; padding: 0; list-style: none;}
+.op_menu a, .op_mbtn {display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 12px; border: 0; border-radius: 10px; background: none; color: var(--rn-ink); font: 600 14px/1 'Pretendard', 'Noto Sans KR', sans-serif; text-decoration: none; cursor: pointer; transition: font-size .2s;}
+.op_menu a:hover, .op_mbtn:hover {background: var(--rn-gray);}
+.op_menu a[aria-current] {color: var(--rn-accent); box-shadow: inset 0 -2px 0 var(--rn-accent); border-radius: 0;}
+.op_menu a:focus-visible, .op_mbtn:focus-visible {outline: 2px solid var(--rn-ink); outline-offset: -2px;}
+.op_mbtn svg {width: 16px; height: 16px;}
+.op_m_only {display: none !important;}
+.op_gbar .op_tools {display: flex; align-items: center; gap: 2px;}
+.op_gbar .op_btn {min-height: 44px; padding: 0 12px; border: 0; background: none;}
+.op_gbar .op_btn:hover {background: var(--rn-gray);}
+body:not(.is_chat) .op_new {display: none;}
+body.is_chat .op_menu a, body.is_chat .op_mbtn {font-size: 12px; font-weight: 500; color: #555;}
+body.is_chat .op_menu a[aria-current] {color: var(--rn-accent);}
+body.is_chat .op_gbar:not(:hover):not(:focus-within) .op_btn span {display: none;}
+.op_gbar .op_pop {top: auto; bottom: calc(100% + 6px);}
+.op_gbar .op_pop_r {right: 0;}
+/* 프롬프트는 바텀 메뉴 위쪽 */
+body.is_chat form.search_form.rn_prompt.is_dock {bottom: calc(var(--op-bar-h) + 14px) !important;}
+/* 우측 알림 스택 */
+.op_stack {position: absolute; right: 16px; bottom: calc(100% + 14px); z-index: 1; display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 8px; pointer-events: none;}
+.op_stack > *, .op_stack .rr_chip {pointer-events: auto;}
+.op_stack .rr_chips {display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 8px;}
+body:not(.is_chat) .op_stack {display: none;}
+.op_alert, .op_stack .rr_chip {display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid var(--rn-rule); border-radius: 999px; background: #fff; color: var(--rn-ink); box-shadow: 0 8px 24px rgba(9,9,9,.14); font: 600 13px/1 'Pretendard', 'Noto Sans KR', sans-serif; cursor: pointer; animation: op_toast .32s cubic-bezier(.2,.8,.2,1) both;}
+.op_stack .rr_chip {padding: 0 8px 0 14px; cursor: default; color: var(--rn-accent); background: #fff; border-color: #c9d6f5;}
+.op_alert svg {width: 18px; height: 18px;}
+.op_alert em {color: var(--rn-accent); font-style: normal;}
+.op_alert:disabled {display: none;}
+.op_alert:hover {border-color: var(--rn-ink);}
+.op_alert.is_new {border-color: var(--rn-accent); box-shadow: 0 8px 24px rgba(0,56,195,.22);}
+.op_alert.is_new::after {content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--rn-accent);}
+.op_alert:focus-visible {outline: 2px solid var(--rn-ink); outline-offset: 2px;}
+@keyframes op_toast {from {opacity: 0; transform: translateY(14px) scale(.96);} to {opacity: 1; transform: none;}}
+/* 지도: 오버레이(모달) */
+.op_map {position: fixed; left: 50%; top: 50%; z-index: 710; display: flex; flex-direction: column; width: min(760px, calc(100% - 24px)); max-height: 82vh; padding: 0 20px 6px; border-radius: 20px; background: #fff; box-shadow: 0 24px 60px rgba(9,9,9,.3); transform: translate(-50%, -50%); animation: op_pop .22s ease;}
+.op_map[hidden] {display: none;}
+.op_map_hd {flex: none; height: 64px; margin: 0;}
 .op_pane {flex: 1 1 auto; min-height: 0; overflow-y: auto; padding-bottom: 4px;}
-.op_map[data-snap="peek"] .op_pane, .op_map[data-snap="peek"] .op_map_cap {display: none;}
-.op_map_cap {flex: none; margin: 6px 0 10px;}
-.op_stage {padding-bottom: calc(300px + var(--op-sheet-h));}
-@media (max-width: 760px) {
-  .op_map {width: calc(100% - 16px); padding: 0 12px; border-radius: 18px;}
-  .op_map[data-snap="mid"] {--op-snap-h: 44vh;}
-}
-@media (prefers-reduced-motion: reduce) {.op_map {transition: none;}}
-
-/* 도구 줄: 독 바로 위에 붙는 바텀 스택 (조건 칩 + 도구) */
-.op_bar {position: fixed; left: 0; right: 0; top: auto; bottom: var(--op-dock-off); z-index: 595; width: min(800px, calc(100% - 24px)); margin: 0 auto; border: 1px solid var(--rn-rule); border-radius: 18px; background: rgba(255,255,255,.96); box-shadow: 0 -6px 24px rgba(9,9,9,.08); transition: bottom .2s;}
-.op_bar_in {flex-direction: column; align-items: stretch; gap: 4px; max-width: none; padding: 6px 8px;}
-.op_cond {flex: none; gap: 8px; padding: 0 4px;}
-.op_cond:has(.rr_chips:empty) {display: none;}
-.op_cond_label {display: none;}
-.op_tools {flex: none; justify-content: space-between; gap: 4px; width: 100%;}
-.op_pop {top: auto; bottom: calc(100% + 8px);}
-.op_map {bottom: var(--op-bar-off, 190px); max-height: calc(100vh - var(--op-bar-off, 190px) - 90px);}
-.op_stage {padding-bottom: calc(300px + var(--op-sheet-h));}
+#opPanePin .rr_map_canvas {height: 340px;}
+.op_map_cap {flex: none; margin: 6px 0 12px;}
+.op_mapback {z-index: 705;}
+@keyframes op_pop {from {opacity: 0; transform: translate(-50%, -48%);} to {opacity: 1; transform: translate(-50%, -50%);}}
+/* 상단 헤더: 메뉴는 바텀으로 이동 — 로고와 우측 링크만 */
+.gm_header .gm_nav, .gm_header .gm_menu_btn {display: none !important;}
 .gm_header {transition: transform .26s ease;}
 body.is_chat .gm_header.op_hdr_hide {transform: translateY(-140%);}
-@media (max-width: 760px) {
-  .op_bar {width: calc(100% - 16px); border-radius: 16px;}
-  .op_bar_in {flex-wrap: nowrap; gap: 2px;}
-  .op_cond {flex: none;}
-  .op_tools {flex: none; justify-content: space-around;}
-  .op_pop_r {right: 0;}
-}
+.op_stage {padding-bottom: 300px;}
 @media (min-width: 761px) {
   .op_tile {gap: 5px;}
   .op_tile button {min-height: 42px; flex-direction: row; gap: 8px;}
   .op_tile button b {font-size: 14px;}
 }
+@media (max-width: 1180px) {
+  .op_stack {position: fixed; left: 12px; right: 12px; bottom: var(--op-dock-off); flex-direction: row; flex-wrap: wrap; justify-content: center;}
+  .op_stack .rr_chips {flex-direction: row; flex-wrap: wrap; justify-content: center;}
+}
+@media (max-width: 760px) {
+  :root {--rn-gutter: 8px;}
+  .op_menu > li:not(.op_popwrap) {display: none;}
+  .op_m_only {display: flex !important;}
+  .op_gbar {gap: 4px;}
+  .op_gbar .op_tools {flex: 0 0 auto;}
+  .op_gbar .op_tools {gap: 0;}
+  .op_gbar .op_btn {padding: 0 10px;}
+  .op_gbar .op_btn span {display: none;}
+  .op_gbar:not(:hover):not(:focus-within) .op_mbtn span {display: inline;}
+  .op_map {top: auto; bottom: 0; left: 0; width: 100%; max-height: 80vh; padding: 0 14px 10px; border-radius: 22px 22px 0 0; transform: none; animation: op_up .26s ease;}
+  @keyframes op_up {from {transform: translateY(40px); opacity: 0;} to {transform: none; opacity: 1;}}
+  .op_tile {gap: 4px;}
+  .op_tile button {min-height: 52px; font-size: 11px; flex-direction: column;}
+}
+@media (prefers-reduced-motion: reduce) {.op_map, .op_alert, .op_stack .rr_chip, .op_gbar {animation: none; transition: none;}}
