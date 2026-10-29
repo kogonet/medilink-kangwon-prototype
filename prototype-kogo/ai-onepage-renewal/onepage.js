@@ -58,14 +58,13 @@
   function newChat(fromPop) {
     clearTimers();
     state.cond = { region: '', symptom: '', department: '' }; state.lastText = ''; state.n = 0; state.last = null;
-    col.innerHTML = ''; renderChips(); closePanels(); mapBtn.disabled = true; mapBtn.classList.remove('is_new'); $('#opMapCnt').textContent = '';
+    col.innerHTML = ''; renderChips(); closePanels(); $('#opHistBtn').disabled = true; mapBtn.disabled = true; mapBtn.classList.remove('is_new'); $('#opMapCnt').textContent = '';
     body.classList.remove('is_chat', 'has_dist'); thread.hidden = true; hero.classList.remove('is_leaving');
     window.scrollTo(0, 0);
     if (!fromPop) { try { history.replaceState(null, '', location.pathname); } catch (e) { } }
     if (input) input.focus({ preventScroll: true });
     say('새 대화를 시작합니다.');
   }
-  $('#opNewBtn').addEventListener('click', function () { newChat(false); });
   window.addEventListener('popstate', function () { if (body.classList.contains('is_chat')) newChat(true); });
 
   /* ── 질문 접수 (landing.js 의 페이지 이동 submit 을 가로챈다) ── */
@@ -101,7 +100,7 @@
     renderChips();
     var cond = { region: state.cond.region, symptom: state.cond.symptom, department: state.cond.department };
     var label = composeLabel(cond, q.text);
-    enterChat(label);
+    enterChat(label); $('#opHistBtn').disabled = false;
     var rev = !!(opt.fromBar && state.lastTurn && state.lastTurn.isConnected);
     var turn = rev ? state.lastTurn : doc.createElement('section');
     if (rev) { $('.rr_q p', turn).textContent = label; $('.rr_a', turn).innerHTML = ''; var vv = $('.op_ver', turn); if (vv) vv.hidden = true; var ap = $('.rr_a', turn); respond(ap, turn, cond, q.text || '', true, label); if (opt.note) note(opt.note); input.focus({ preventScroll: true }); return; }
@@ -272,20 +271,12 @@
   window.addEventListener('scroll', syncLoop, { passive: true }); window.addEventListener('resize', syncLoop);
   form.addEventListener('focusin', syncLoop); form.addEventListener('transitionend', syncSheet);
   syncSheet();
-  /* ── 좌측 전역 패널(레이아웃에 포함, 기본은 레일) ── */
-  var side = $('#opSide'), sideTg = $('#opSideToggle'), sideM = $('#opSideMenuBtn');
-  function setSide(wide, keep) {
-    side.classList.toggle('is_wide', wide); sideTg.setAttribute('aria-expanded', wide); sideTg.setAttribute('aria-label', wide ? '메뉴 접기' : '메뉴 펼치기');
-    document.documentElement.style.setProperty('--side-pref', wide ? '236px' : '68px');
-    $$('.op_si').forEach(function (a) { var l = $('.op_lbl', a); if (wide) a.removeAttribute('title'); else a.title = l ? l.textContent : ''; });
-    if (!keep) { try { localStorage.setItem('op_side_wide', wide ? '1' : '0'); } catch (e) { } }
-    syncLoop();
-  }
-  try { setSide(localStorage.getItem('op_side_wide') === '1', true); } catch (e) { setSide(false, true); }
-  sideTg.addEventListener('click', function () { setSide(!side.classList.contains('is_wide')); });
-  sideM.addEventListener('click', function () { var o = !side.classList.contains('is_m_open'); side.classList.toggle('is_m_open', o); sideM.setAttribute('aria-expanded', o); sideM.setAttribute('aria-label', o ? '메뉴 닫기' : '메뉴 열기'); });
+  /* ── 좌측 전역 모듈: 로고(세션 중에는 새 대화) + 바로가기 3종. 좁은 화면에서는 버튼으로 펼침 ── */
+  var side = $('#opSide'), sideM = $('#opSideMenuBtn');
+  sideM.addEventListener('click', function () { var o = !side.classList.contains('is_m_open'); side.classList.toggle('is_m_open', o); sideM.setAttribute('aria-expanded', o); sideM.setAttribute('aria-label', o ? '바로가기 닫기' : '바로가기 열기'); });
   side.addEventListener('keydown', function (e) { if (e.key === 'Escape' && side.classList.contains('is_m_open')) { sideM.click(); sideM.focus(); } });
-  $('#opNewBtn').addEventListener('click', function () { newChat(false); side.classList.remove('is_m_open'); });
+  $('#opLogo').addEventListener('click', function (e) { if (body.classList.contains('is_chat')) { e.preventDefault(); newChat(false); } });
+  doc.addEventListener('click', function (e) { if (side.classList.contains('is_m_open') && !e.target.closest('#opSide')) sideM.click(); });
 
   /* ── 답변 내 상호작용(위임) ── */
   col.addEventListener('click', function (e) {

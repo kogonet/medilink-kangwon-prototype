@@ -49,31 +49,21 @@
 <!-- ====================== 헤더 ====================== -->
 <aside class="op_side" id="opSide" aria-label="전역 메뉴">
   <div class="op_side_top">
-    <a class="op_logo" href="#top" aria-label="메디링크 강원 홈"><img src="/common/front/kor/images/medilink-bi.svg" alt="메디링크 강원 MediLink Kangwon"></a>
-    <button class="op_side_tg" id="opSideToggle" type="button" aria-expanded="false" aria-controls="opSideNav" aria-label="메뉴 펼치기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
-    <button class="op_side_m" id="opSideMenuBtn" type="button" aria-expanded="false" aria-controls="opSideNav" aria-label="메뉴 열기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <a class="op_logo" id="opLogo" href="#top" aria-label="메디링크 강원 홈"><img src="/common/front/kor/images/medilink-bi.svg" alt="메디링크 강원 MediLink Kangwon"></a>
+    <button class="op_side_m" id="opSideMenuBtn" type="button" aria-expanded="false" aria-controls="opSideNav" aria-label="바로가기 열기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
   </div>
-  <nav class="op_side_nav" id="opSideNav" aria-label="주요 메뉴">
-    <button class="op_si op_si_new" id="opNewBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span class="op_lbl">새 대화</span></button>
-    <ul>
-      <li><a class="op_si" href="#" data-op-note="서비스 안내 페이지(분리 예정)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg><span class="op_lbl">서비스 안내</span></a></li>
-      <li><a class="op_si" href="#top" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7L19 21l-.7-1.6-2-.7 2-.7z"/></svg><span class="op_lbl">AI 상담</span></a></li>
-      <li><a class="op_si" href="#" data-op-note="공지·FAQ 페이지(분리 예정)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h14v10H9l-4 3z"/></svg><span class="op_lbl">공지·FAQ</span></a></li>
-      <li><a class="op_si" href="/front/medical/project.do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V5h9v15M14 10h5v10M8 9h3M8 13h3M3 20h18"/></svg><span class="op_lbl">회사소개</span></a></li>
-    </ul>
-    <p class="op_side_h"><span class="op_lbl">바로가기</span></p>
+  <nav class="op_side_nav" id="opSideNav" aria-label="바로가기">
     <ul>
       <li><a class="op_si" href="/front/medical/hospitalList.do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></svg><span class="op_lbl">병·의원 찾기</span></a></li>
-      <li><a class="op_si" href="/front/medical/erLive.do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg><span class="op_lbl">응급실 LIVE</span></a></li>
       <li><a class="op_si" href="/front/medical/pharmacyList.do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="9" width="17" height="6" rx="3" transform="rotate(-35 12 12)"/><path d="M9.5 7.8l5 8.4"/></svg><span class="op_lbl">약국 찾기</span></a></li>
-      <li><a class="op_si" href="/front/medical/vaccinationList.do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4l6 6M12 6l6 6M16 8l-8 8-3 1 1-3 8-8zM4 20l3-3"/></svg><span class="op_lbl">예방접종 병원 찾기</span></a></li>
+      <li><a class="op_si" href="/front/medical/erLive.do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg><span class="op_lbl">응급실 LIVE</span></a></li>
     </ul>
   </nav>
 </aside>
-<div class="op_util" role="toolbar" aria-label="지도·기록·로그인">
-  <button class="op_ub" id="opMapBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="opPnMap" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.5v13L9 17l6 3 6-2.5v-13L15 7zM9 4v13M15 7v13"/></svg><span>지도 <em id="opMapCnt"></em></span><i class="op_dot" aria-hidden="true"></i></button>
-  <button class="op_ub" id="opHistBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="opPnHist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5M12 8v5l3 2"/></svg><span>기록</span></button>
-  <button class="op_ub" id="opAcctBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="opPnAcct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span id="opAcctLabel">로그인</span></button>
+<div class="op_util" role="toolbar" aria-label="대화 도구">
+  <button class="op_ub" id="opHistBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="opPnHist" aria-label="채팅 기록" title="채팅 기록" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h14v10H9l-4 3z"/></svg></button>
+  <button class="op_ub" id="opMapBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="opPnMap" aria-label="지도 보기" title="지도 보기" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.5v13L9 17l6 3 6-2.5v-13L15 7zM9 4v13M15 7v13"/></svg><span class="op_sr"><em id="opMapCnt"></em></span><i class="op_dot" aria-hidden="true"></i></button>
+  <button class="op_ub" id="opAcctBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="opPnAcct" hidden><span id="opAcctLabel">로그인</span></button>
 </div>
 
 <!-- //헤더 -->
@@ -173,6 +163,41 @@
     </section>
 
 </main>
+    <aside class="quick_wrap" aria-label="퀵메뉴">
+      <div class="quick_group">
+        <span class="quick_title">QUICK<br>MENU</span>
+        <ul class="quick_list">
+          <li>
+            <a class="quick_link" href="/front/medical/vaccinationList.do">
+              <span class="quick_icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a1 1 0 0 1-1.4 0l-2.6-2.6a1 1 0 0 1 0-1.4L15 5M9 11l4 4M5 19l-3 3M14 4l6 6"/></svg></span>
+              <span class="quick_name">예방접종<br>병원찾기</span>
+            </a>
+          </li>
+          <li>
+            <a class="quick_link" href="/front/medical/pharmacyList.do">
+              <span class="quick_icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg></span>
+              <span class="quick_name">약국 찾기</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="quick_group quick_partner">
+        <a class="quick_link" href="http://pt-ai.ctit.co.kr/knuh/ai-consult.do" target="_blank" rel="noopener" title="강원대학교병원 AI 상담 (새 창)">
+          <img class="quick_logo" src="/common/front/kor/images/knuh_ci.png" alt="" width="371" height="128">
+          <span class="quick_name">강원대학교<br>병원</span>
+        </a>
+      </div>
+      <a class="quick_top" href="#top" aria-label="맨 위로 이동">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
+      </a>
+    </aside>
+<footer class="site-ft" id="opFooter">
+  <div class="site-ft-l"><a href="#top" class="ft-bi"><img src="/common/front/kor/images/medilink-bi-white.svg" alt="메디링크 강원 MediLink Kangwon"></a>
+    <nav class="site-ft-links" aria-label="푸터 메뉴"><a href="../intro-renewal/terms.html">이용약관</a><a href="../intro-renewal/intro-renewal.html">회사소개</a><a href="../intro-renewal/info.html">정보공개</a><a href="../intro-renewal/project.html">사업소개</a><a href="../intro-renewal/directions.html">찾아오시는길</a></nav></div>
+  <div class="site-ft-r"><p>주식회사 코고네트웍스 · 한국글로벌헬스케어사업협동조합 사업 자회사</p><p class="copy"><span class="en">&copy; MediLink Kangwon.</span> All rights reserved.</p></div>
+  <p class="site-ft-note">본 서비스의 모든 정보는 국가 공공데이터를 기반으로 하며, 의료적 판단의 최종 결정은 반드시 의료 전문가와 상의하시기 바랍니다.</p>
+</footer>
+
 
   <!-- ====================== 푸터 ====================== -->
 
