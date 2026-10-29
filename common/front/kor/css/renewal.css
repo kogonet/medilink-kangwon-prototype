@@ -177,19 +177,13 @@ html:has(#panel-intro,#panel-project) .page_scroll {background: var(--rn-paper);
 .gm_header .gm_nav a::after {content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--rn-accent); transform: scaleX(0); transform-origin: left; transition: transform .2s;}
 .gm_header .gm_nav a:hover, .gm_header .gm_nav a:focus-visible {color: var(--rn-ink);}
 .gm_header .gm_nav a:hover::after, .gm_header .gm_nav a:focus-visible::after {transform: scaleX(1);}
-.gm_header .gm_cta {grid-column: auto; margin-left: auto; height: 44px; padding: 0; border: 0; border-radius: 0; background: none; color: var(--rn-ink); font-size: 14px; font-weight: 500; position: relative;}
+.gm_header .gm_actions {margin-left: auto;}
+.gm_header .gm_cta {grid-column: auto; height: 44px; padding: 0; border: 0; border-radius: 0; background: none; color: var(--rn-ink); font-size: 14px; font-weight: 500; position: relative;}
 .gm_header .gm_cta::after {content: ' ↗'; white-space: pre;}
 .gm_header .gm_cta:hover {color: var(--rn-ink); background: none; text-decoration: underline; text-underline-offset: 4px;}
 .gm_header :focus-visible {outline: 2px solid var(--rn-ink); outline-offset: 3px;}
-/* 옵트인 토글 */
-.gm_rn_toggle {display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0; border: 0; background: none; color: var(--rn-ink); font: 500 13px 'Pretendard', sans-serif; cursor: pointer;}
-.gm_rn_sw {position: relative; width: 32px; height: 18px; border: 1px solid var(--rn-ink); background: #fff;}
-.gm_rn_sw::after {content: ''; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; background: var(--rn-ink); transition: transform .2s;}
-.gm_rn_toggle[aria-pressed="true"] .gm_rn_sw {background: var(--rn-accent); border-color: var(--rn-accent);}
-.gm_rn_toggle[aria-pressed="true"] .gm_rn_sw::after {background: #fff; transform: translateX(14px);}
 @media (max-width: 1024px) {
   .gm_header .gm_header_inner {gap: 16px;}
-  .gm_header .gm_cta {margin-left: auto;}
   .gm_header .gm_menu_btn {margin-left: 0; color: var(--rn-ink);}
   .gm_header .gm_nav {position: absolute; top: 100%; left: 0; right: 0; height: auto; flex-direction: column; align-items: stretch; gap: 0; border-bottom: 1px solid var(--rn-hair); background: #fff;}
   .gm_header .gm_nav a {height: auto; padding: 18px var(--rn-gutter); border-top: 1px solid var(--rn-rule); font-size: 16px;}
@@ -201,7 +195,6 @@ html:has(#panel-intro,#panel-project) .page_scroll {background: var(--rn-paper);
   .gm_header .gm_header_inner {padding: 0 24px;}
   .gm_header .gm_nav a {padding: 18px 24px;}
   .gm_header .gm_cta {display: none;}
-  .gm_rn_label {display: none;}
 }
 /* 푸터: 공통 가이드의 검정 Footer */
 html:has(#panel-intro,#panel-project) .site-ft {background: #000; color: #f5f5f5; text-align: left; padding: 64px var(--rn-gutter) calc(32px + env(safe-area-inset-bottom, 0px));}

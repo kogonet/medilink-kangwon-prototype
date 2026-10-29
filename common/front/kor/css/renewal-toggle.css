@@ -1,0 +1,14 @@
+/* 리뉴얼 옵트인 토글(테스트용) — 현재/리뉴얼 좌우 전환. default_medical_sub.jsp 의 renewalToggle=true 일 때만 로드. */
+.gm_actions { display: flex; grid-column: 3; align-items: center; justify-self: end; gap: 20px; }
+.gm_actions .gm_cta { grid-column: auto; justify-self: auto; }
+.gm_rn_toggle { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; align-items: center; width: 132px; height: 34px; padding: 0; border: 1px solid #171a1f; border-radius: 0; background: #fff; color: #171a1f; font: 500 13px/1 "Pretendard", "Noto Sans KR", sans-serif; cursor: pointer; }
+.gm_rn_opt { position: relative; z-index: 1; text-align: center; transition: color .2s; }
+.gm_rn_knob { position: absolute; top: -1px; bottom: -1px; left: -1px; width: calc(50% + 1px); background: #171a1f; transition: transform .25s ease, background .25s; }
+.gm_rn_toggle[aria-checked="false"] .gm_rn_opt:first-child { color: #fff; }
+.gm_rn_toggle[aria-checked="true"] .gm_rn_knob { transform: translateX(100%); background: #0038C3; }
+.gm_rn_toggle[aria-checked="true"] .gm_rn_opt:nth-child(2) { color: #fff; }
+.gm_rn_toggle:focus-visible { outline: 2px solid #171a1f; outline-offset: 3px; }
+@media (max-width: 1024px) { .gm_actions { grid-column: 2; } }
+@media (max-width: 768px) { .gm_actions { gap: 10px; } .gm_rn_toggle { width: 104px; height: 30px; font-size: 12px; } }
+@media (max-width: 480px) { .gm_rn_toggle { width: 92px; } .gm_actions .gm_cta { display: none; } }
+@media (prefers-reduced-motion: reduce) { .gm_rn_knob, .gm_rn_opt { transition: none; } }

@@ -26,6 +26,9 @@
      적용 확정 시 renewalDefault 를 true, 토글 노출은 renewalToggle 을 false 로 변경. 롤백은 renewalDefault=false. --%>
 <c:set var="renewalDefault" value="false"/>
 <c:set var="renewalToggle" value="true"/>
+<c:if test="${renewalToggle}">
+<link rel="stylesheet" href="/common/front/kor/css/renewal-toggle.css">
+</c:if>
 <c:if test="${param.renewal eq '1' or (param.renewal ne '0' and (renewalDefault or cookie.renewal.value eq '1'))}">
 <link rel="stylesheet" href="/common/front/kor/css/renewal.css">
 </c:if>
@@ -45,12 +48,14 @@
 			<a href="/front/medical/noticeList.do">공지사항</a>
 			<a href="/front/medical/faq.do">FAQ</a>
 		</nav>
+		<c:if test="${renewalToggle}"><div class="gm_actions"></c:if>
+		<c:if test="${renewalToggle}">
+		<%-- 리뉴얼 옵트인 토글(테스트용): 좌 현재 / 우 리뉴얼. 쿠키 renewal 에 0/1 저장 후 새로고침 --%>
+		<button class="gm_rn_toggle" id="gmRnToggle" type="button" role="switch" aria-checked="false" aria-label="리뉴얼 화면 보기"><span class="gm_rn_opt">현재</span><span class="gm_rn_opt">리뉴얼</span><span class="gm_rn_knob" aria-hidden="true"></span></button>
+		</c:if>
 		<%-- 2026-10-22 AI 상담5 팝업 전용 화면(gwtpax5 ai-consult-popup.jsp)으로 연결. 이전: /gwtpax/ai-consult3-popup.do (2026-10-21), 기존: /gwtpax/ai-consult.do --%>
 		<a class="gm_cta" href="/gwtpax/ai-consult5-popup.do" target="_blank" rel="noopener" title="AI 상담 (새 창)">AI에게 물어보기</a>
-		<c:if test="${renewalToggle}">
-		<%-- 리뉴얼 옵트인 토글(테스트용). 쿠키 renewal 에 1/0 저장 후 새로고침 --%>
-		<button class="gm_rn_toggle" id="gmRnToggle" type="button" aria-pressed="false" title="리뉴얼 화면 미리보기"><span class="gm_rn_label">리뉴얼</span><span class="gm_rn_sw" aria-hidden="true"></span></button>
-		</c:if>
+		<c:if test="${renewalToggle}"></div></c:if>
 		<button class="gm_menu_btn" id="gmMenuBtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="gmNav">
 			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
 				<path d="M4 5h16M4 12h16M4 19h16"/>
@@ -70,7 +75,7 @@
 	var rn = document.getElementById('gmRnToggle');
 	if (rn) {
 		var on = !!document.querySelector('link[href*="renewal.css"]');
-		rn.setAttribute('aria-pressed', on ? 'true' : 'false');
+		rn.setAttribute('aria-checked', on ? 'true' : 'false');
 		rn.addEventListener('click', function() {
 			document.cookie = 'renewal=' + (on ? '0' : '1') + '; path=/; max-age=31536000; SameSite=Lax';
 			var u = new URL(location.href); u.searchParams.delete('renewal');
