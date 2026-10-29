@@ -45,7 +45,7 @@
   function enterChat(label, first) {
     if (!body.classList.contains('is_chat')) {
       var done = function () {
-        body.classList.add('is_chat'); thread.hidden = false; hero.classList.remove('is_leaving');
+        var f0 = form.getBoundingClientRect().top; body.classList.add('is_chat'); thread.hidden = false; (function () { var d = f0 - form.getBoundingClientRect().top; if (!reduce && Math.abs(d) > 40) { document.documentElement.style.setProperty('--op-from', Math.round(d) + 'px'); form.classList.remove('is_settle'); void form.offsetWidth; form.classList.add('is_settle'); setTimeout(function () { form.classList.remove('is_settle'); }, 700); } })(); hero.classList.remove('is_leaving');
         window.scrollTo(0, 0);
       };
       hero.classList.add('is_leaving');
@@ -223,7 +223,7 @@
     if (!panelOpen('map')) mapBtn.classList.add('is_new');
   }
   /* ── 우상단 유틸리티(지도·기록·계정) → 우측 오버레이 패널: 지도는 넓게(본문을 덮음), 기록·계정은 좁게 ── */
-  var PN = { map: ['opMapBtn', 'opPnMap'], hist: ['opHistBtn', 'opPnHist'], acct: ['opAcctBtn', 'opPnAcct'] };
+  var PN = { map: ['opMapBtn', 'opPnMap'], hist: ['opHistBtn', 'opPnHist'] };
   var narrow = window.matchMedia('(max-width: 1100px)'), opened = null;
   function panelOpen(k) { return opened === k; }
   function openPanel(k) {
@@ -272,11 +272,11 @@
   form.addEventListener('focusin', syncLoop); form.addEventListener('transitionend', syncSheet);
   syncSheet();
   /* ── 좌측 전역 모듈: 로고(세션 중에는 새 대화) + 바로가기 3종. 좁은 화면에서는 버튼으로 펼침 ── */
-  var side = $('#opSide'), sideM = $('#opSideMenuBtn');
+  var side = $('#opUtil'), sideM = $('#opSideMenuBtn');
   sideM.addEventListener('click', function () { var o = !side.classList.contains('is_m_open'); side.classList.toggle('is_m_open', o); sideM.setAttribute('aria-expanded', o); sideM.setAttribute('aria-label', o ? '바로가기 닫기' : '바로가기 열기'); });
   side.addEventListener('keydown', function (e) { if (e.key === 'Escape' && side.classList.contains('is_m_open')) { sideM.click(); sideM.focus(); } });
   $('#opLogo').addEventListener('click', function (e) { if (body.classList.contains('is_chat')) { e.preventDefault(); newChat(false); } });
-  doc.addEventListener('click', function (e) { if (side.classList.contains('is_m_open') && !e.target.closest('#opSide')) sideM.click(); });
+  doc.addEventListener('click', function (e) { if (side.classList.contains('is_m_open') && !e.target.closest('#opUtil')) sideM.click(); });
 
   /* ── 답변 내 상호작용(위임) ── */
   col.addEventListener('click', function (e) {
@@ -335,4 +335,27 @@
   /* ── ?q= 딥링크: 로딩 시 자동 질문 ── */
   var q0 = new URLSearchParams(location.search).get('q');
   if (q0) setTimeout(function () { clearComposer(); ask({ text: q0 }); }, 60);
+})();
+
+/* 미니(도크) 프롬프트는 푸터 위에서 멈춘다: 푸터가 화면에 보이는 높이만큼 도크를 올린다 */
+(function () {
+  var ft = document.getElementById('opFooter'), root = document.documentElement, raf = 0;
+  if (!ft) return;
+  function sync() { raf = 0; var r = ft.getBoundingClientRect(), v = ft.offsetParent === null && getComputedStyle(ft).display === 'none' ? 0 : Math.max(0, window.innerHeight - r.top); root.style.setProperty('--op-ft', Math.round(v) + 'px'); }
+  function tick() { if (!raf) raf = requestAnimationFrame(sync); }
+  window.addEventListener('scroll', tick, { passive: true, capture: true }); window.addEventListener('resize', tick); sync();
+})();
+/* 히어로: 프롬프트를 키카피(설명문) 바로 아래에 묶어 함께 세로 중앙에 둔다 */
+(function () {
+  var root = document.documentElement, raf = 0;
+  function pos() {
+    raf = 0;
+    var d = document.querySelector('.rn_hero_aux .search_desc') || document.querySelector('.search_desc');
+    if (!d || window.innerWidth <= 760) { root.style.removeProperty('--op-hero-top'); return; }
+    var r = d.getBoundingClientRect();
+    root.style.setProperty('--op-hero-top', Math.round(r.bottom + 80) + 'px');   /* 설명문 아래 여백 + 셀렉트 줄(약 42px) */
+  }
+  function tick() { if (!raf) raf = requestAnimationFrame(pos); }
+  window.addEventListener('scroll', tick, { passive: true, capture: true }); window.addEventListener('resize', tick);
+  window.addEventListener('load', tick); setTimeout(pos, 300); pos();
 })();

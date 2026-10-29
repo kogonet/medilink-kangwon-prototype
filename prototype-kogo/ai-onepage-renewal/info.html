@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정보공개 - 메디링크 강원</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="/common/front/kor/css/landing.css">
+<link rel="stylesheet" href="/common/front/kor/css/renewal-main.css">
+<link rel="stylesheet" href="/common/front/kor/css/renewal-dock.css">
+<link rel="stylesheet" href="onepage.css">
+<link rel="stylesheet" href="subpage.css">
+<link rel="stylesheet" href="info.css">
+<script src="/common/front/kor/js/renewal-dock.js" defer></script>
+</head>
+<body class="op_sub op_info">
+<a class="op_skip" href="#main">본문으로 바로가기</a>
+<!-- 공통 모듈 ① 헤더(좌 로고 / 우 메뉴·지도·계정) — 원페이지 index.html 과 동일 마크업 -->
+<aside class="op_side" id="opSide" aria-label="전역 메뉴">
+  <a class="op_logo" id="opLogo" href="index.html" aria-label="메디링크 강원 홈"><img src="/common/front/kor/images/medilink-bi.svg" alt="메디링크 강원 MediLink Kangwon"></a>
+</aside>
+<div class="op_util" id="opUtil" role="toolbar" aria-label="바로가기와 대화 도구">
+  <nav class="op_tnav" id="opSideNav" aria-label="바로가기">
+    <a href="hospital.html">병·의원 찾기</a>
+    <a href="pharmacy.html">약국 찾기</a>
+    <a href="er-live.html">응급실 LIVE</a>
+  </nav>
+  <button class="op_ub op_side_m" id="opSideMenuBtn" type="button" aria-expanded="false" aria-controls="opSideNav" aria-label="바로가기 열기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <button class="op_ub" id="opMapBtn" type="button" aria-label="지도 보기" title="지도 보기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.5v13L9 17l6 3 6-2.5v-13L15 7zM9 4v13M15 7v13"/></svg></button>
+  <a class="op_ub" id="opAcctBtn" href="login.html" aria-label="로그인" title="로그인"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span class="op_sr" id="opAcctLabel">로그인</span></a>
+</div>
+
+<main id="main" tabindex="-1">
+<div class="ip">
+<div class="hero"><div class="hero-inner"><h1 class="hero-title">데이터 출처 및 정보공개</h1><p class="hero-lead">메디링크 강원는 어디서 <em>정보를 가져오나요?</em></p><p class="hero-desc">이 서비스에서 보여드리는 병원·약국·응급실 정보는 모두 정부 및 공공기관의 공식 데이터를 기반으로 합니다. 어떤 정보를 어디서 언제 가져오는지 투명하게 안내드립니다.</p><div class="chips"><span class="chip">실시간 업데이트 3종</span><span class="chip">의료기관 1,994곳</span><span class="chip">약국 702곳</span><span class="chip">공공기관 데이터 6곳</span></div></div></div>
+<main class="main">
+<section class="section"><div class="section-hd"><div class="section-eyebrow">실시간 연동</div><div class="section-title">지금 이 순간 업데이트되는 정보</div><div class=section-desc>아래 세 가지 정보는 화면을 열 때마다 정부 공공기관 서버에서 직접 가져와 가장 최신 상태를 보여드립니다.</div></div>
+<div class="cards"><article class="card"><div class="card-hd"><div><h3 class="card-title">응급실 현황 · 응급의료기관 정보</h3><div class="card-sub">국립중앙의료원 · 중앙응급의료센터 제공</div></div><span class="tag">실시간</span></div><p>강원도 내 응급의료기관의 <strong>지금 이용 가능한 병상 수</strong>를 실시간으로 보여드립니다. 일반 응급실 병상, 수술실, 중증 응급(ICU) 병상이 현재 몇 개 비어있는지 각 병원이 중앙응급의료센터에 실시간으로 보고하는 데이터를 그대로 표시합니다. 병원 등급(권역응급의료센터·지역응급의료센터·지역응급의료기관)도 함께 안내됩니다.</p><div class="meta"><span><b>제공처</b>국립중앙의료원</span><span><b>갱신</b>실시간 (각 병원 직접 보고)</span><span><b>지역</b>강원도 전체</span></div></article><article class="card"><div class="card-hd"><div><h3 class="card-title">달빛어린이병원</h3><div class="card-sub">국립중앙의료원 · 보건복지부 지정</div></div><span class="tag">지정기관</span></div><p><strong>보건복지부가 공식 지정한</strong> 달빛어린이병원 목록만 표시됩니다. 평일 야간이나 주말에도 소아청소년과 진료가 가능한 병원으로, 정부가 별도로 관리하는 공식 지정 기관 명단을 가져옵니다. 병원명, 주소, 전화번호, 야간 진료 가능 시간이 함께 제공됩니다.</p><div class="meta"><span><b>제공처</b>국립중앙의료원</span><span><b>갱신</b>지정 기관 변경 시 즉시 반영</span><span><b>범위</b>보건복지부 공식 지정 기관만</span></div></article><article class="card"><div class="card-hd"><div><h3 class="card-title">AED 위치 (자동심장충격기)</h3><div class="card-sub">행정안전부 제공</div></div><span class="tag">위치정보</span></div><p>심정지 응급 상황 시 즉시 사용할 수 있는 자동심장충격기(AED)의 정확한 설치 위치를 보여드립니다. 행정안전부가 전국 AED 설치 현황을 관리하며, 건물명·층·보관 장소까지 상세히 제공됩니다. 강원도 내 약 300여 개소의 설치 정보를 확인할 수 있습니다.</p><div class="meta"><span><b>제공처</b>행정안전부</span><span><b>갱신</b>설치·철거 시 반영</span><span><b>지역</b>강원도 300여 개소</span></div></article></div><p class="card-note">실시간 정보는 네트워크 상태에 따라 잠시 지연될 수 있으며, 연결이 어려울 경우 주요 의료기관의 기본 정보를 대신 보여드립니다. 응급 상황에서는 반드시 <a href="tel:119">119</a>에 먼저 연락하세요.</p></section>
+<section class="section"><div class="section-hd"><div class="section-eyebrow">기본 데이터</div><div class="section-title">강원도 병원·약국 정보</div><div class=section-desc>건강보험심사평가원이 공개한 공공데이터를 기반으로 강원도 내 전체 의료기관과 약국 정보를 제공합니다. 병원 지도, 진료과 검색, 약국 찾기 등 대부분의 기능이 이 데이터를 활용합니다.</div></div>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))"><article class="card"><div class="stat">1,994</div><div class="stat-unit">강원도 의료기관</div><h3 class="card-title">의료기관</h3><div class="card-sub">건강보험심사평가원 공공데이터</div><p style="margin-top:16px">병원·의원·한의원·치과·보건소 등 강원도 내 모든 요양기관의 이름, 주소, 전화번호, 진료과, 위치 정보가 포함됩니다. 진료과별 검색, 병원 지도, 주말·야간·예방접종 병원 안내에 활용됩니다.</p><ul class="pills"><li>병원 지도</li><li>진료과별 검색</li><li>주말 진료</li><li>야간 진료</li><li>예방접종 병원</li><li>의료기관 정보</li></ul></article><article class="card"><div class="stat">702</div><div class="stat-unit">강원도 약국</div><h3 class="card-title">약국</h3><div class="card-sub">건강보험심사평가원 공공데이터</div><p style="margin-top:16px">강원도 내 전체 약국의 이름, 주소, 전화번호, 영업시간, 위치 정보를 포함합니다. 약국 찾기 화면에서 지도·목록·지역 필터·검색 기능에 활용됩니다.</p><ul class="pills"><li>약국 지도</li><li>약국 목록</li><li>지역 필터</li><li>영업시간 안내</li></ul></article></div></section>
+<section class="section"><div class="section-hd"><div class="section-eyebrow">한눈에 보기</div><div class="section-title">기능별 데이터 출처</div><div class=section-desc>각 서비스에서 보여드리는 정보가 어디서 오는지 정리했습니다.</div></div>
+<ul class="rows"><li class="row"><strong>응급실 현황 · 응급의료기관 정보</strong><span class="src">국립중앙의료원</span><span class="flag">실시간</span></li><li class="row"><strong>달빛어린이병원</strong><span class="src">국립중앙의료원 · 보건복지부</span><span class="flag">실시간</span></li><li class="row"><strong>AED 위치 찾기</strong><span class="src">행정안전부</span><span class="flag">실시간</span></li><li class="row"><strong>병원 지도 · 의료기관 정보</strong><span class="src">건강보험심사평가원</span><span class="flag">공공데이터</span></li><li class="row"><strong>진료과별 병원 검색</strong><span class="src">건강보험심사평가원</span><span class="flag">공공데이터</span></li><li class="row"><strong>주말 진료 · 야간 진료 병원</strong><span class="src">건강보험심사평가원</span><span class="flag">공공데이터</span></li><li class="row"><strong>약국 찾기</strong><span class="src">건강보험심사평가원</span><span class="flag">공공데이터</span></li><li class="row"><strong>예방접종 병원 · 의료기관 평가</strong><span class="src">건강보험심사평가원</span><span class="flag">공공데이터</span></li></ul></section>
+<section class="section"><div class="section-hd"><div class="section-eyebrow">신뢰성</div><div class="section-title">이 정보를 믿어도 되나요?</div></div>
+<ul class="trust"><li><strong>정부·공공기관 공식 데이터</strong><p>국립중앙의료원, 행정안전부, 건강보험심사평가원 등 국가기관이 직접 관리하고 공개하는 공식 데이터만 사용합니다.</p></li><li><strong>최신 정보 유지</strong><p>응급실 병상 현황은 각 병원이 실시간으로 보고하며, 달빛어린이병원·AED는 지정·설치 변경 시 즉시 반영됩니다.</p></li><li><strong>참고용으로 활용하세요</strong><p>이 서비스의 정보는 참고 목적으로 제공됩니다. 실제 진료 가능 여부는 해당 의료기관에 직접 확인하시고, 응급 상황에서는 반드시 <a href="tel:119" style="color:var(--rn-accent);font-weight:500">119</a>에 연락하세요.</p></li></ul></section>
+<section class="section"><div class="section-hd"><div class="section-eyebrow">데이터 제공 기관</div><div class="section-title">원본 데이터 출처</div></div>
+<ul class="orgs"><li><strong>국립중앙의료원</strong><span>응급실 현황 및 달빛어린이병원 목록 제공</span><a href="https://nmc.or.kr" target="_blank" rel="noopener">nmc.or.kr →</a></li><li><strong>행정안전부</strong><span>전국 자동심장충격기(AED) 설치 위치 정보</span><a href="https://mois.go.kr" target="_blank" rel="noopener">mois.go.kr →</a></li><li><strong>건강보험심사평가원</strong><span>전국 의료기관 및 약국 현황 공공데이터</span><a href="https://hira.or.kr" target="_blank" rel="noopener">hira.or.kr →</a></li><li><strong>보건복지부</strong><span>달빛어린이병원 지정 기관 관리</span><a href="https://mohw.go.kr" target="_blank" rel="noopener">mohw.go.kr →</a></li><li><strong>공공데이터포털</strong><span>정부 공공데이터 통합 개방 플랫폼</span><a href="https://data.go.kr" target="_blank" rel="noopener">data.go.kr →</a></li></ul></section>
+
+</main>
+</div>
+</main>
+<!-- 공통 모듈 ② 퀵링크 -->
+<aside class="quick_wrap" aria-label="퀵메뉴">
+      <div class="quick_group">
+        <span class="quick_title">QUICK<br>MENU</span>
+        <ul class="quick_list">
+          <li>
+            <a class="quick_link" href="/front/medical/vaccinationList.do">
+              <span class="quick_icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a1 1 0 0 1-1.4 0l-2.6-2.6a1 1 0 0 1 0-1.4L15 5M9 11l4 4M5 19l-3 3M14 4l6 6"/></svg></span>
+              <span class="quick_name">예방접종<br>병원찾기</span>
+            </a>
+          </li>
+                  <li class="quick_partner">
+            <a class="quick_link" href="http://pt-ai.ctit.co.kr/knuh/ai-consult.do" target="_blank" rel="noopener" title="강원대학교병원 AI 상담 (새 창)">
+          <img class="quick_logo" src="/common/front/kor/images/knuh_ci.png" alt="" width="371" height="128">
+          <span class="quick_name">강원대학교<br>병원</span>
+        </a>
+          </li>
+        </ul>
+      </div>
+      <a class="quick_top" href="#top" aria-label="맨 위로 이동">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
+      </a>
+    </aside><footer class="site-ft" id="opFooter">
+  <div class="ft_in">
+    <div class="ft_top">
+      <a href="index.html" class="ft-bi" aria-label="메디링크 강원 맨 위로"><img src="/common/front/kor/images/medilink-bi-white.svg" alt="메디링크 강원 MediLink Kangwon"></a>
+      <nav class="site-ft-links" aria-label="푸터 메뉴">
+        <a href="terms.html">이용약관</a>
+        <a href="info.html">정보공개</a>
+        <a href="guide.html">서비스가이드</a>
+        <a href="project.html">사업소개</a>
+        <a href="company.html">회사소개</a>
+        <a href="directions.html">찾아오시는길</a>
+      </nav>
+    </div>
+    <div class="ft_body">
+      <address class="ft_info">
+        <p class="ft_org">한국글로벌헬스케어사업협동조합 · 코고네트웍스</p>
+        <p class="ft_en">KOGHA | KOGO NETWORKS</p>
+        <p>CP <a href="tel:+811088769980">81-10-8876-9980</a> · <a href="mailto:andy@polestarhc.com">andy@polestarhc.com</a></p>
+        <p>강원특별자치도 원주시 지정면 기업도시로 200 의료기기종합지원센터</p>
+        <p class="copy">© KOGO NETWORKS. ALL RIGHTS RESERVED.</p>
+      </address>
+      <a class="ft_totop" href="#main" aria-label="맨 위로 이동"><span>TOP</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></a>
+    </div>
+  </div>
+</footer>
+<!-- 공통 모듈 ③ 프롬프트 독은 renewal-dock.js 가 주입 -->
+
+<script src="subpage.js" defer></script>
+</body>
+</html>

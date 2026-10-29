@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>약국 찾기 - 메디링크 강원</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="/common/front/kor/css/landing.css">
+<link rel="stylesheet" href="/common/front/kor/css/renewal-main.css">
+<link rel="stylesheet" href="/common/front/kor/css/renewal-dock.css">
+<link rel="stylesheet" href="onepage.css">
+<link rel="stylesheet" href="subpage.css">
+<script src="/common/front/kor/js/renewal-dock.js" defer></script>
+</head>
+<body class="op_sub op_map">
+<a class="op_skip" href="#main">본문으로 바로가기</a>
+<!-- 공통 모듈 ① 헤더(좌 로고 / 우 메뉴·지도·계정) — 원페이지 index.html 과 동일 마크업 -->
+<aside class="op_side" id="opSide" aria-label="전역 메뉴">
+  <a class="op_logo" id="opLogo" href="index.html" aria-label="메디링크 강원 홈"><img src="/common/front/kor/images/medilink-bi.svg" alt="메디링크 강원 MediLink Kangwon"></a>
+</aside>
+<div class="op_util" id="opUtil" role="toolbar" aria-label="바로가기와 대화 도구">
+  <nav class="op_tnav" id="opSideNav" aria-label="바로가기">
+    <a href="hospital.html">병·의원 찾기</a>
+    <a href="pharmacy.html" aria-current="page">약국 찾기</a>
+    <a href="er-live.html">응급실 LIVE</a>
+  </nav>
+  <button class="op_ub op_side_m" id="opSideMenuBtn" type="button" aria-expanded="false" aria-controls="opSideNav" aria-label="바로가기 열기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <button class="op_ub" id="opMapBtn" type="button" aria-label="지도 보기" title="지도 보기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.5v13L9 17l6 3 6-2.5v-13L15 7zM9 4v13M15 7v13"/></svg></button>
+  <a class="op_ub" id="opAcctBtn" href="login.html" aria-label="로그인" title="로그인"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span class="op_sr" id="opAcctLabel">로그인</span></a>
+</div>
+
+<main id="main" tabindex="-1">
+
+<section class="mp" id="mp" aria-label="약국 찾기">
+  <div class="mp_map" id="mpMap" role="img" aria-label="지도 영역(시안). 모든 정보는 왼쪽 목록에도 있습니다.">
+    <div class="mp_pins" id="mpPins"><button class="mp_pin" type="button" data-i="0" style="left:40%;top:34%" aria-label="1번 기관 선택"><span>1</span></button><button class="mp_pin" type="button" data-i="1" style="left:58%;top:26%" aria-label="2번 기관 선택"><span>2</span></button><button class="mp_pin" type="button" data-i="2" style="left:72%;top:52%" aria-label="3번 기관 선택"><span>3</span></button><button class="mp_pin" type="button" data-i="3" style="left:48%;top:58%" aria-label="4번 기관 선택"><span>4</span></button><button class="mp_pin" type="button" data-i="4" style="left:36%;top:66%" aria-label="5번 기관 선택"><span>5</span></button><button class="mp_pin" type="button" data-i="5" style="left:64%;top:74%" aria-label="6번 기관 선택"><span>6</span></button><button class="mp_pin" type="button" data-i="6" style="left:52%;top:82%" aria-label="7번 기관 선택"><span>7</span></button><button class="mp_pin" type="button" data-i="7" style="left:82%;top:30%" aria-label="8번 기관 선택"><span>8</span></button></div>
+    <span class="mp_ph">지도 영역 (시안)</span>
+    <div class="mp_zoom" role="group" aria-label="지도 확대·축소"><button type="button" id="mpZin" aria-label="확대">＋</button><button type="button" id="mpZout" aria-label="축소">－</button></div>
+  </div>
+  <div class="mp_toggle" role="group" aria-label="보기 방식">
+    <button type="button" class="on" data-v="map" aria-pressed="true">지도 보기</button>
+    <button type="button" data-v="list" aria-pressed="false">목록 보기</button>
+  </div>
+  <div class="mp_panel" id="mpPanel">
+    <div class="mp_search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      <label class="op_sr" for="mpInp">약국 이름 또는 주소 검색</label><input id="mpInp" type="search" placeholder="약국 이름 또는 주소 검색" autocomplete="off"></div>
+    <div class="mp_chips" id="mpChips" role="group" aria-label="시·군 필터"></div>
+    <div class="mp_hd"><strong id="mpCnt">0곳</strong><span class="op_sample">시안 · 샘플 데이터</span></div>
+    <ul class="mp_list" id="mpList"></ul>
+  </div>
+</section>
+<script>var MP_DATA = [{"g": "춘천시", "t": "샘플온누리약국", "a": "강원특별자치도 춘천시 ○○로 15", "tel": "033-100-0001", "k": "약국", "s": "영업 중"}, {"g": "원주시", "t": "샘플건강약국", "a": "강원특별자치도 원주시 △△로 36", "tel": "033-100-0002", "k": "약국", "s": "영업 중"}, {"g": "강릉시", "t": "샘플바다약국", "a": "강원특별자치도 강릉시 □□로 58", "tel": "033-100-0003", "k": "약국", "s": "영업 종료"}, {"g": "홍천군", "t": "샘플홍천약국", "a": "강원특별자치도 홍천군 ○○로 02", "tel": "033-100-0004", "k": "약국", "s": "영업 중"}, {"g": "횡성군", "t": "샘플횡성약국", "a": "강원특별자치도 횡성군 △△로 03", "tel": "033-100-0005", "k": "약국", "s": "영업 중"}, {"g": "속초시", "t": "샘플설악약국", "a": "강원특별자치도 속초시 ◇◇로 80", "tel": "033-100-0006", "k": "약국", "s": "영업 종료"}, {"g": "평창군", "t": "샘플평창약국", "a": "강원특별자치도 평창군 ○○로 92", "tel": "033-100-0007", "k": "약국", "s": "영업 중"}, {"g": "동해시", "t": "샘플동해약국", "a": "강원특별자치도 동해시 △△로 23", "tel": "033-100-0008", "k": "약국", "s": "영업 중"}], MP_NOUN = "약국";</script>
+
+</main>
+<!-- 공통 모듈 ② 퀵링크 -->
+<aside class="quick_wrap" aria-label="퀵메뉴">
+      <div class="quick_group">
+        <span class="quick_title">QUICK<br>MENU</span>
+        <ul class="quick_list">
+          <li>
+            <a class="quick_link" href="/front/medical/vaccinationList.do">
+              <span class="quick_icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a1 1 0 0 1-1.4 0l-2.6-2.6a1 1 0 0 1 0-1.4L15 5M9 11l4 4M5 19l-3 3M14 4l6 6"/></svg></span>
+              <span class="quick_name">예방접종<br>병원찾기</span>
+            </a>
+          </li>
+                  <li class="quick_partner">
+            <a class="quick_link" href="http://pt-ai.ctit.co.kr/knuh/ai-consult.do" target="_blank" rel="noopener" title="강원대학교병원 AI 상담 (새 창)">
+          <img class="quick_logo" src="/common/front/kor/images/knuh_ci.png" alt="" width="371" height="128">
+          <span class="quick_name">강원대학교<br>병원</span>
+        </a>
+          </li>
+        </ul>
+      </div>
+      <a class="quick_top" href="#top" aria-label="맨 위로 이동">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
+      </a>
+    </aside><footer class="site-ft" id="opFooter">
+  <div class="ft_in">
+    <div class="ft_top">
+      <a href="index.html" class="ft-bi" aria-label="메디링크 강원 맨 위로"><img src="/common/front/kor/images/medilink-bi-white.svg" alt="메디링크 강원 MediLink Kangwon"></a>
+      <nav class="site-ft-links" aria-label="푸터 메뉴">
+        <a href="terms.html">이용약관</a>
+        <a href="info.html">정보공개</a>
+        <a href="guide.html">서비스가이드</a>
+        <a href="project.html">사업소개</a>
+        <a href="company.html">회사소개</a>
+        <a href="directions.html">찾아오시는길</a>
+      </nav>
+    </div>
+    <div class="ft_body">
+      <address class="ft_info">
+        <p class="ft_org">한국글로벌헬스케어사업협동조합 · 코고네트웍스</p>
+        <p class="ft_en">KOGHA | KOGO NETWORKS</p>
+        <p>CP <a href="tel:+811088769980">81-10-8876-9980</a> · <a href="mailto:andy@polestarhc.com">andy@polestarhc.com</a></p>
+        <p>강원특별자치도 원주시 지정면 기업도시로 200 의료기기종합지원센터</p>
+        <p class="copy">© KOGO NETWORKS. ALL RIGHTS RESERVED.</p>
+      </address>
+      <a class="ft_totop" href="#main" aria-label="맨 위로 이동"><span>TOP</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></a>
+    </div>
+  </div>
+</footer>
+<!-- 공통 모듈 ③ 프롬프트 독은 renewal-dock.js 가 주입 -->
+<script src="subpage.js" defer></script>
+</body>
+</html>
