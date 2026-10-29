@@ -30,7 +30,6 @@
 
   /* ── 상단 바: 조건 칩 ── */
   function renderChips() {
-    if (window.requestAnimationFrame) requestAnimationFrame(function () { if (typeof syncLoop === 'function') syncLoop(); });
     chipsEl.innerHTML = ['region', 'department', 'symptom'].filter(function (k) { return state.cond[k]; }).map(function (k) {
       return '<li class="rr_chip"><b>' + LABELS[k] + '</b>' + esc(state.cond[k]) + '<button type="button" data-rm="' + k + '" aria-label="' + LABELS[k] + ' 조건 ' + esc(state.cond[k]) + ' 삭제">×</button></li>';
     }).join('');
@@ -197,45 +196,30 @@
     }
     $('#opPaneTile').innerHTML = grid + '</div>';
     $('#opPanePin').innerHTML = '<div class="rr_map_canvas" role="img" aria-label="검색 결과 3곳의 위치(샘플)">' + m.fac.map(function (f) { return '<span class="rr_pin" style="left:' + f.pin[0] + '%;top:' + f.pin[1] + '%" data-pin="' + f.n + '">' + f.n + '</span>'; }).join('') + '</div>';
-    state.mapTab = m.compact ? 'pin' : 'tile';   // 지도는 자동으로 열지 않고 알림으로만 알린다
+    state.mapTab = m.compact ? 'pin' : 'tile';   // 자동으로 열지 않고 버튼 점으로만 알림
     mapBtn.classList.add('is_new');
   }
-  var mapBack = $('#opMapBack'), mapOpener = null;
-  function syncSheet() {   // 모바일/좁은 화면에서 알림 스택을 독 바로 위에 두기 위한 오프셋
-    var dock = $('.rn_prompt.is_dock');
-    var off = dock ? Math.max(12, window.innerHeight - dock.getBoundingClientRect().top + 10) : 150;
-    document.documentElement.style.setProperty('--op-dock-off', off + 'px');
-  }
-  var syncTick = 0;
-  function syncLoop() { cancelAnimationFrame(syncTick); var t0 = Date.now(); (function f() { syncSheet(); if (Date.now() - t0 < 500) syncTick = requestAnimationFrame(f); })(); }
-  window.addEventListener('scroll', syncLoop, { passive: true }); window.addEventListener('resize', syncLoop);
-  form.addEventListener('focusin', syncLoop); form.addEventListener('transitionend', syncSheet);
+  var wrap = $('#opMapWrap');
+  function mapOpen() { return wrap.classList.contains('is_open'); }
   function openMap(tab) {
-    mapOpener = doc.activeElement; mapEl.hidden = false; mapBack.hidden = false;
+    wrap.removeAttribute('inert'); wrap.classList.add('is_open');
     mapBtn.setAttribute('aria-pressed', 'true'); mapBtn.classList.remove('is_new');
-    selectTab(tab || state.mapTab || 'tile'); $('#opTabTile').focus();
+    selectTab(tab || state.mapTab || 'tile');
+    wrap.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    setTimeout(function () { var t = $('#opTabTile'); if (t) t.focus({ preventScroll: true }); }, reduce ? 0 : 120);
   }
   function closeMap() {
-    if (mapEl.hidden) return;
-    mapEl.hidden = true; mapBack.hidden = true; mapBtn.setAttribute('aria-pressed', 'false');
-    if (mapOpener && mapOpener.focus && doc.contains(mapOpener)) mapOpener.focus(); else mapBtn.focus();
+    if (!mapOpen()) return;
+    wrap.classList.remove('is_open'); wrap.setAttribute('inert', ''); mapBtn.setAttribute('aria-pressed', 'false');
   }
   function selectTab(t) {
     var pin = t === 'pin';
     $('#opTabTile').setAttribute('aria-selected', !pin); $('#opTabPin').setAttribute('aria-selected', pin);
     $('#opPaneTile').hidden = pin; $('#opPanePin').hidden = !pin;
   }
-  mapEl.addEventListener('keydown', function (e) {   // Esc 닫기 + 포커스 가두기(모달)
-    if (e.key === 'Escape') { e.stopPropagation(); closeMap(); return; }
-    if (e.key !== 'Tab') return;
-    var f = $$('button', mapEl).filter(function (x) { return !x.disabled && x.offsetParent; }); if (!f.length) return;
-    var first = f[0], last = f[f.length - 1];
-    if (e.shiftKey && doc.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && doc.activeElement === last) { e.preventDefault(); first.focus(); }
-  });
-  mapBack.addEventListener('click', closeMap);
-  mapBtn.addEventListener('click', function () { openMap(); say('지도를 열었습니다.'); });
-  $('#opMapClose').addEventListener('click', closeMap);
+  mapBtn.addEventListener('click', function () { if (!mapOpen()) { openMap(); say('지도를 열었습니다.'); } else { closeMap(); say('지도를 닫았습니다.'); } });
+  $('#opMapClose').addEventListener('click', function () { closeMap(); mapBtn.focus(); });
+  wrap.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeMap(); mapBtn.focus(); } });
   $('#opTabTile').addEventListener('click', function () { selectTab('tile'); });
   $('#opTabPin').addEventListener('click', function () { selectTab('pin'); });
   $('#opPaneTile').addEventListener('click', function (e) {
@@ -335,15 +319,6 @@
     if (e.shiftKey && doc.activeElement === first) { e.preventDefault(); last.focus(); }
     else if (!e.shiftKey && doc.activeElement === last) { e.preventDefault(); first.focus(); }
   });
-
-  /* 대화 중에는 스크롤 내릴 때 상단 헤더를 숨겨 세로 공간 확보 (올리면 복귀) */
-  var lastY = 0, hdr = $('.gm_header');
-  window.addEventListener('scroll', function () {
-    var y = window.scrollY, dn = y > lastY + 4, up = y < lastY - 4;
-    if (hdr && body.classList.contains('is_chat')) { if (dn && y > 120) hdr.classList.add('op_hdr_hide'); else if (up || y < 60) hdr.classList.remove('op_hdr_hide'); }
-    lastY = y;
-  }, { passive: true });
-  hdr && hdr.addEventListener('focusin', function () { hdr.classList.remove('op_hdr_hide'); });
 
   /* ── ?q= 딥링크: 로딩 시 자동 질문 ── */
   var q0 = new URLSearchParams(location.search).get('q');

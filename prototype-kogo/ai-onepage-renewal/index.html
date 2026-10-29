@@ -165,22 +165,59 @@
     <!-- ====================== 대화(결과) 영역: 히어로가 그 자리에서 변신 ====================== -->
     <section class="op_thread" id="opThread" aria-label="AI 상담 대화" hidden>
       <a class="op_skip" href="#opCol">결과로 바로가기</a>
-      <div class="op_stage" id="opStage">
-        <div class="op_col" id="opCol" tabindex="-1"></div>
-        <aside class="op_map" id="opMap" role="dialog" aria-modal="true" aria-label="지도 보기" hidden>
+      <div class="op_bar" role="toolbar" aria-label="대화 도구">
+        <div class="op_bar_in">
+          <div class="op_cond"><span class="op_cond_label">검색 조건</span><ul class="rr_chips" id="opChips"></ul></div>
+          <div class="op_tools">
+            <button class="op_btn" id="opMapBtn" type="button" aria-pressed="false" aria-controls="opMap" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.5v13L9 17l6 3 6-2.5v-13L15 7zM9 4v13M15 7v13"/></svg><span>지도 <em id="opMapCnt"></em></span></button>
+            <button class="op_btn" id="opHistBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="opDrawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5M12 8v5l3 2"/></svg><span>히스토리</span></button>
+            <div class="op_popwrap">
+              <button class="op_btn" id="opGoBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="opGoPop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>바로가기</span></button>
+              <div class="op_pop" id="opGoPop" hidden>
+                <a href="/front/medical/hospitalList.do">병·의원 찾기</a>
+                <a href="/front/medical/erLive.do">응급실 LIVE</a>
+                <a href="/front/medical/pharmacyList.do">약국 찾기</a>
+                <a href="/front/medical/vaccinationList.do">예방접종 병원 찾기</a>
+              </div>
+            </div>
+            <button class="op_btn" id="opNewBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>새 대화</span></button>
+            <div class="op_popwrap">
+              <button class="op_btn" id="opAcctBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="opAcctPop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span id="opAcctLabel">로그인</span></button>
+              <div class="op_pop op_pop_r op_acct" id="opAcctPop" hidden>
+                <div id="opAcctOut">
+                  <p class="op_pop_t">로그인은 선택입니다</p>
+                  <p class="op_pop_d">로그인 없이도 모든 기능을 쓸 수 있어요. 로그인하면 대화 기록과 즐겨찾는 기관을 저장할 수 있습니다.</p>
+                  <button class="op_primary" id="opLoginBtn" type="button">로그인 (시안)</button>
+                </div>
+                <div id="opAcctIn" hidden>
+                  <p class="op_pop_t">홍길동 님 <small>(샘플)</small></p>
+                  <button type="button" data-acct="hist">내 대화 기록</button>
+                  <button type="button" data-acct="fav">즐겨찾는 기관</button>
+                  <label class="op_switch"><input type="checkbox" id="opSaveHist" checked><span>대화 기록 저장</span></label>
+                  <button type="button" data-acct="clear">기록 전체 삭제</button>
+                  <button type="button" id="opLogoutBtn">로그아웃</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="op_mapwrap" id="opMapWrap" inert><div class="op_mapwrap_in">
+        <aside class="op_map" id="opMap" aria-label="지도 보기">
           <div class="op_map_hd">
             <div class="op_tabs" role="tablist" aria-label="지도 보기 방식">
               <button type="button" role="tab" id="opTabTile" aria-selected="true" aria-controls="opPaneTile">시·군 요약</button>
               <button type="button" role="tab" id="opTabPin" aria-selected="false" aria-controls="opPanePin">기관 위치</button>
             </div>
-            <div class="op_acts">
-              <button class="op_x" id="opMapClose" type="button" aria-label="지도 닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-            </div>
+            <button class="op_x" id="opMapClose" type="button" aria-label="지도 닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
           </div>
           <div class="op_pane" id="opPaneTile" role="tabpanel" aria-labelledby="opTabTile"></div>
           <div class="op_pane" id="opPanePin" role="tabpanel" aria-labelledby="opTabPin" hidden></div>
           <p class="op_map_cap">시안용 임시 지도입니다. 지도의 모든 정보는 목록에도 동일하게 있습니다.</p>
         </aside>
+      </div></div>
+      <div class="op_stage" id="opStage">
+        <div class="op_col" id="opCol" tabindex="-1"></div>
       </div>
     </section>
 
@@ -255,52 +292,6 @@
 
 
 
-
-  <nav class="op_gbar" id="opBar" aria-label="하단 메뉴">
-    <ul class="op_menu">
-      <li><a href="#" data-op-note="서비스 안내 페이지(분리 예정)">서비스 안내</a></li>
-      <li><a href="#top" aria-current="page">AI 상담</a></li>
-      <li><a href="#" data-op-note="공지·FAQ 페이지(분리 예정)">공지·FAQ</a></li>
-      <li class="op_popwrap">
-        <button class="op_mbtn" id="opGoBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="opGoPop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>바로가기</span></button>
-        <div class="op_pop" id="opGoPop" hidden>
-          <a class="op_m_only" href="#" data-op-note="서비스 안내 페이지(분리 예정)">서비스 안내</a>
-          <a class="op_m_only" href="#" data-op-note="공지·FAQ 페이지(분리 예정)">공지·FAQ</a>
-          <a href="/front/medical/hospitalList.do">병·의원 찾기</a>
-          <a href="/front/medical/erLive.do">응급실 LIVE</a>
-          <a href="/front/medical/pharmacyList.do">약국 찾기</a>
-          <a href="/front/medical/vaccinationList.do">예방접종 병원 찾기</a>
-        </div>
-      </li>
-    </ul>
-    <div class="op_tools">
-      <button class="op_btn" id="opHistBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="opDrawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5M12 8v5l3 2"/></svg><span>히스토리</span></button>
-      <button class="op_btn op_new" id="opNewBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>새 대화</span></button>
-      <div class="op_popwrap">
-        <button class="op_btn" id="opAcctBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="opAcctPop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span id="opAcctLabel">로그인</span></button>
-        <div class="op_pop op_pop_r op_acct" id="opAcctPop" hidden>
-          <div id="opAcctOut">
-            <p class="op_pop_t">로그인은 선택입니다</p>
-            <p class="op_pop_d">로그인 없이도 모든 기능을 쓸 수 있어요. 로그인하면 대화 기록과 즐겨찾는 기관을 저장할 수 있습니다.</p>
-            <button class="op_primary" id="opLoginBtn" type="button">로그인 (시안)</button>
-          </div>
-          <div id="opAcctIn" hidden>
-            <p class="op_pop_t">홍길동 님 <small>(샘플)</small></p>
-            <button type="button" data-acct="hist">내 대화 기록</button>
-            <button type="button" data-acct="fav">즐겨찾는 기관</button>
-            <label class="op_switch"><input type="checkbox" id="opSaveHist" checked><span>대화 기록 저장</span></label>
-            <button type="button" data-acct="clear">기록 전체 삭제</button>
-            <button type="button" id="opLogoutBtn">로그아웃</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="op_stack" id="opStack" role="group" aria-label="결과 알림">
-      <button class="op_alert" id="opMapBtn" type="button" aria-haspopup="dialog" aria-pressed="false" aria-controls="opMap" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.5v13L9 17l6 3 6-2.5v-13L15 7zM9 4v13M15 7v13"/></svg><span>지도 <em id="opMapCnt"></em></span></button>
-      <ul class="rr_chips" id="opChips"></ul>
-    </div>
-  </nav>
-  <div class="op_backdrop op_mapback" id="opMapBack" hidden></div>
   <aside class="op_drawer" id="opDrawer" role="dialog" aria-modal="true" aria-labelledby="opDrawerT" hidden>
     <div class="op_drawer_hd"><h2 id="opDrawerT">히스토리</h2><button class="op_x" id="opDrawerClose" type="button" aria-label="히스토리 닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
     <p class="op_drawer_note" id="opDrawerNote">이 기기에만 저장된 최근 검색입니다. 로그인하면 계정에 저장할 수 있어요.</p>
