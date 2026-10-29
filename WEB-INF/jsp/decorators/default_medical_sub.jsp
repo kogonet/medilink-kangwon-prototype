@@ -21,11 +21,13 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <decorator:head/>
 <link rel="stylesheet" href="/common/front/kor/css/medical_header.css">
-<%-- [리뉴얼 옵트인] 기본 off = 현재 화면 유지. ?renewal=1 로 미리보기(?renewal=0 은 강제 off).
-     적용 확정 시 renewalDefault 값을 true 로 변경. 롤백은 false 로 되돌리면 됨. --%>
+<%-- [리뉴얼 옵트인] 기본 off = 현재 화면 유지.
+     켜는 법: 헤더의 "리뉴얼" 토글(쿠키 renewal=1 저장) 또는 ?renewal=1 (?renewal=0 은 강제 off).
+     적용 확정 시 renewalDefault 를 true, 토글 노출은 renewalToggle 을 false 로 변경. 롤백은 renewalDefault=false. --%>
 <c:set var="renewalDefault" value="false"/>
-<c:if test="${(renewalDefault and param.renewal ne '0') or param.renewal eq '1'}">
-<link rel="stylesheet" href="/common/front/kor/css/renewal-footer.css">
+<c:set var="renewalToggle" value="true"/>
+<c:if test="${param.renewal eq '1' or (param.renewal ne '0' and (renewalDefault or cookie.renewal.value eq '1'))}">
+<link rel="stylesheet" href="/common/front/kor/css/renewal.css">
 </c:if>
 </head>
 <body class="gm_layout_solid <decorator:getProperty property="body.class"/>">
@@ -45,6 +47,10 @@
 		</nav>
 		<%-- 2026-10-22 AI 상담5 팝업 전용 화면(gwtpax5 ai-consult-popup.jsp)으로 연결. 이전: /gwtpax/ai-consult3-popup.do (2026-10-21), 기존: /gwtpax/ai-consult.do --%>
 		<a class="gm_cta" href="/gwtpax/ai-consult5-popup.do" target="_blank" rel="noopener" title="AI 상담 (새 창)">AI에게 물어보기</a>
+		<c:if test="${renewalToggle}">
+		<%-- 리뉴얼 옵트인 토글(테스트용). 쿠키 renewal 에 1/0 저장 후 새로고침 --%>
+		<button class="gm_rn_toggle" id="gmRnToggle" type="button" aria-pressed="false" title="리뉴얼 화면 미리보기"><span class="gm_rn_label">리뉴얼</span><span class="gm_rn_sw" aria-hidden="true"></span></button>
+		</c:if>
 		<button class="gm_menu_btn" id="gmMenuBtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="gmNav">
 			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
 				<path d="M4 5h16M4 12h16M4 19h16"/>
@@ -61,6 +67,16 @@
 	var header = document.getElementById('gmHeader');
 	var btn = document.getElementById('gmMenuBtn');
 	if (!header || !btn) return;
+	var rn = document.getElementById('gmRnToggle');
+	if (rn) {
+		var on = !!document.querySelector('link[href*="renewal.css"]');
+		rn.setAttribute('aria-pressed', on ? 'true' : 'false');
+		rn.addEventListener('click', function() {
+			document.cookie = 'renewal=' + (on ? '0' : '1') + '; path=/; max-age=31536000; SameSite=Lax';
+			var u = new URL(location.href); u.searchParams.delete('renewal');
+			location.href = u.toString();
+		});
+	}
 	var cta = header.querySelector('.gm_cta');
 	if (cta) {
 		cta.addEventListener('click', function(event) {

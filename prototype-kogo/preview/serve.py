@@ -23,6 +23,7 @@ def read(p):
 
 # ── 아주 작은 EL 평가기: param.x, 변수, eq/ne/and/or/not, true/false, '문자열' ──
 def eval_el(expr, params, vars_):
+    expr = expr.replace('cookie.renewal.value', 'cookie.renewal')
     tokens = re.findall(r"'[^']*'|\w+(?:\.\w+)?|\(|\)|\S", expr)
     out = []
     for tk in tokens:
@@ -32,6 +33,7 @@ def eval_el(expr, params, vars_):
         elif tk == 'ne': out.append('!=')
         elif tk == 'true': out.append('True')
         elif tk == 'false': out.append('False')
+        elif tk.startswith('cookie.'): out.append(repr(params.get('__cookie_' + tk[7:], '')))
         elif tk.startswith('param.'): out.append(repr(params.get(tk[6:], '')))
         elif re.fullmatch(r'\w+', tk): out.append(repr(vars_.get(tk, '')) if tk in vars_ else "''")
         else: out.append(tk)
@@ -101,6 +103,8 @@ class H(SimpleHTTPRequestHandler):
         q = {k: v[0] for k, v in urllib.parse.parse_qs(u.query).items()}
         if p == '/': self.send_response(302); self.send_header('Location', '/prototype-kogo/preview/'); self.end_headers(); return
         if re.match(r'^/(WEB-INF|\.git|META-INF)(/|$)', p): self.send_error(404); return
+        for part in (self.headers.get('Cookie') or '').split(';'):
+            if '=' in part: k, v = part.strip().split('=', 1); q['__cookie_' + k] = v
         html = render(p, q)
         if html is not None:
             b = html.encode('utf-8'); self.send_response(200)

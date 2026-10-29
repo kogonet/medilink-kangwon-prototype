@@ -1,20 +1,21 @@
-/* 메디링크 강원 리뉴얼(v1) 옵트인 레이어 — 회사소개/사업소개 한정. default_medical_sub.jsp 의 renewal 스위치로만 로드됨. */
-html:has(#panel-intro,#panel-project) {--rn-ink: #090909; --rn-paper: #fff; --rn-gray: #f1f1f1; --rn-muted: #666; --rn-rule: #e5e5e5; --rn-hair: #dedede; --rn-accent: #0038C3; --rn-accent-text: #004EA2; --rn-accent-bg: #E9EEFA; --rn-accent-on-dark: #8DB9F0; --rn-body: 13px; --rn-gutter: 40px;}
+/* 메디링크 강원 리뉴얼 옵트인 레이어. default_medical_sub.jsp 의 renewal 스위치(헤더 토글/쿠키/?renewal=1)로만 로드됨.
+   기준: Hello.Persona DESIGN.md (ink #090909 · line #DEDEDE · muted #737373 · panel #F1F1F1 · radius 0 · Pretendard · GNB 64/56 · Footer #000). 테마 컬러만 블루 유지(라임 → 블루). */
+html:has(#panel-intro,#panel-project) {--rn-ink: #090909; --rn-paper: #fff; --rn-gray: #f1f1f1; --rn-muted: #737373; --rn-rule: #dedede; --rn-hair: #dedede; --rn-accent: #0038C3; --rn-accent-text: #004EA2; --rn-accent-bg: #E9EEFA; --rn-accent-on-dark: #8DB9F0; --rn-footer-muted: #a2a2a2; --rn-footer-line: #333; --rn-header-h: 64px; --rn-body: 14px; --rn-gutter: 48px;}
 html:has(#panel-intro,#panel-project),
 html:has(#panel-intro,#panel-project) body {font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif; font-size: var(--rn-body); line-height: 1.5; color: var(--rn-ink); background: var(--rn-paper) !important;}
 html:has(#panel-intro,#panel-project) :focus-visible {outline: 2px solid var(--rn-ink); outline-offset: 3px;}
 html:has(#panel-intro,#panel-project) .hero {background: var(--rn-paper); border-bottom: 1px solid var(--rn-ink); padding: 72px var(--rn-gutter) 64px;}
-html:has(#panel-intro,#panel-project) .hero-title {font-size: clamp(34px, 5.2vw, 56px); font-weight: 500; line-height: 1.08; letter-spacing: -.045em; color: var(--rn-ink); margin-bottom: 24px;}
+html:has(#panel-intro,#panel-project) .hero-title {font-size: clamp(34px, 4.4vw, 48px); font-weight: 400; line-height: 1.12; letter-spacing: -.055em; color: var(--rn-ink); margin-bottom: 24px;}
 html:has(#panel-intro,#panel-project) .hero-lead {font-size: clamp(16px, 2.2vw, 20px); font-weight: 500; line-height: 1.45; letter-spacing: -.03em; color: var(--rn-ink); margin-bottom: 16px;}
 html:has(#panel-intro,#panel-project) .hero-lead em {color: var(--rn-accent-text); background: none; -webkit-text-fill-color: currentColor; -webkit-background-clip: border-box; background-clip: border-box; animation: none;}
-html:has(#panel-intro,#panel-project) .hero-desc {font-size: var(--rn-body); color: var(--rn-muted); max-width: 640px; line-height: 1.7; margin-bottom: 0;}
+html:has(#panel-intro,#panel-project) .hero-desc {font-size: 16px; color: var(--rn-muted); max-width: 640px; line-height: 1.65; margin-bottom: 0;}
 html:has(#panel-intro,#panel-project) .main {padding-top: 0; padding-bottom: 96px; gap: 0 !important;}
 html:has(#panel-intro,#panel-project) .section {padding: 56px 0 64px; border-top: 1px solid var(--rn-ink);}
 html:has(#panel-intro,#panel-project) .section:first-child {border-top: 0;}
 html:has(#panel-intro,#panel-project) .section-hd {margin-bottom: 32px;}
 html:has(#panel-intro,#panel-project) .section-eyebrow {font-size: 12px; font-weight: 500; letter-spacing: .06em; color: var(--rn-accent-text); margin-bottom: 12px;}
-html:has(#panel-intro,#panel-project) .section-title {font-size: clamp(22px, 2.8vw, 32px); font-weight: 500; line-height: 1.2; letter-spacing: -.04em; color: var(--rn-ink); margin-bottom: 12px; max-width: 880px;}
-html:has(#panel-intro,#panel-project) .section-desc {font-size: var(--rn-body); line-height: 1.7; color: var(--rn-muted); max-width: 720px;}
+html:has(#panel-intro,#panel-project) .section-title {font-size: clamp(24px, 2.6vw, 32px); font-weight: 400; line-height: 1.25; letter-spacing: -.04em; color: var(--rn-ink); margin-bottom: 12px; max-width: 880px;}
+html:has(#panel-intro,#panel-project) .section-desc {font-size: 16px; line-height: 1.65; color: var(--rn-muted); max-width: 720px;}
 html:has(#panel-intro,#panel-project) .why-kicker {font-size: 11px; font-weight: 500; letter-spacing: .08em; color: var(--rn-muted);}
 html:has(#panel-intro,#panel-project) .eco-diagram,
 html:has(#panel-intro,#panel-project) .layer-table,
@@ -166,3 +167,50 @@ html:has(#panel-project) .rm-card dd {color: var(--rn-ink); font-weight: 500;}
 html:has(#panel-intro,#panel-project) .section,
 html:has(#panel-intro,#panel-project) .main,
 html:has(#panel-intro,#panel-project) .page_scroll {background: var(--rn-paper);}
+
+/* ── 공통 가이드 정합(Hello.Persona): GNB 64/56px, 흰 배경, 1px line, 14px/500, 밑줄 hover(블루) ── */
+.gm_header {border-bottom: 1px solid var(--rn-hair); background: #fff; color: var(--rn-ink); font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;}
+.gm_header .gm_header_inner {display: flex; align-items: center; gap: 80px; height: var(--rn-header-h); padding: 0 var(--rn-gutter);}
+.gm_header .gm_brand_logo {height: 32px;}
+.gm_header .gm_nav {display: flex; grid-column: auto; gap: 32px; align-self: stretch; align-items: center;}
+.gm_header .gm_nav a {position: relative; display: inline-flex; align-items: center; height: 100%; color: var(--rn-ink); font-size: 14px; font-weight: 500; letter-spacing: 0; transition: none;}
+.gm_header .gm_nav a::after {content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--rn-accent); transform: scaleX(0); transform-origin: left; transition: transform .2s;}
+.gm_header .gm_nav a:hover, .gm_header .gm_nav a:focus-visible {color: var(--rn-ink);}
+.gm_header .gm_nav a:hover::after, .gm_header .gm_nav a:focus-visible::after {transform: scaleX(1);}
+.gm_header .gm_cta {grid-column: auto; margin-left: auto; height: 44px; padding: 0; border: 0; border-radius: 0; background: none; color: var(--rn-ink); font-size: 14px; font-weight: 500; position: relative;}
+.gm_header .gm_cta::after {content: ' ↗'; white-space: pre;}
+.gm_header .gm_cta:hover {color: var(--rn-ink); background: none; text-decoration: underline; text-underline-offset: 4px;}
+.gm_header :focus-visible {outline: 2px solid var(--rn-ink); outline-offset: 3px;}
+/* 옵트인 토글 */
+.gm_rn_toggle {display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0; border: 0; background: none; color: var(--rn-ink); font: 500 13px 'Pretendard', sans-serif; cursor: pointer;}
+.gm_rn_sw {position: relative; width: 32px; height: 18px; border: 1px solid var(--rn-ink); background: #fff;}
+.gm_rn_sw::after {content: ''; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; background: var(--rn-ink); transition: transform .2s;}
+.gm_rn_toggle[aria-pressed="true"] .gm_rn_sw {background: var(--rn-accent); border-color: var(--rn-accent);}
+.gm_rn_toggle[aria-pressed="true"] .gm_rn_sw::after {background: #fff; transform: translateX(14px);}
+@media (max-width: 1024px) {
+  .gm_header .gm_header_inner {gap: 16px;}
+  .gm_header .gm_cta {margin-left: auto;}
+  .gm_header .gm_menu_btn {margin-left: 0; color: var(--rn-ink);}
+  .gm_header .gm_nav {position: absolute; top: 100%; left: 0; right: 0; height: auto; flex-direction: column; align-items: stretch; gap: 0; border-bottom: 1px solid var(--rn-hair); background: #fff;}
+  .gm_header .gm_nav a {height: auto; padding: 18px var(--rn-gutter); border-top: 1px solid var(--rn-rule); font-size: 16px;}
+  .gm_header .gm_nav a::after {display: none;}
+}
+@media (max-width: 760px) {
+  :root {--rn-header-h: 56px;}
+  html:has(#panel-intro,#panel-project) {--rn-gutter: 24px;}
+  .gm_header .gm_header_inner {padding: 0 24px;}
+  .gm_header .gm_nav a {padding: 18px 24px;}
+  .gm_header .gm_cta {display: none;}
+  .gm_rn_label {display: none;}
+}
+/* 푸터: 공통 가이드의 검정 Footer */
+html:has(#panel-intro,#panel-project) .site-ft {background: #000; color: #f5f5f5; text-align: left; padding: 64px var(--rn-gutter) calc(32px + env(safe-area-inset-bottom, 0px));}
+html:has(#panel-intro,#panel-project) .site-ft p {color: #f5f5f5; font-size: 13px; line-height: 1.8; max-width: 720px;}
+html:has(#panel-intro,#panel-project) .site-ft .copy {margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--rn-footer-line); color: var(--rn-footer-muted); font-size: 12px; max-width: none;}
+/* 서브 타이틀바(tp_nav): 각진 컨트롤 · 1px line */
+html:has(#panel-intro,#panel-project) .tp_nav {background: #fff; border-bottom: 1px solid var(--rn-hair); padding-left: var(--rn-gutter); padding-right: var(--rn-gutter);}
+html:has(#panel-intro,#panel-project) .tp_nav_title {color: var(--rn-ink); font-weight: 500;}
+html:has(#panel-intro,#panel-project) .tp_nav_actions a,
+html:has(#panel-intro,#panel-project) .tp_nav_actions button {border-radius: 0; background: #fff; border: 1px solid var(--rn-ink); color: var(--rn-ink); font-weight: 500;}
+html:has(#panel-intro,#panel-project) .tp_nav_actions a:hover,
+html:has(#panel-intro,#panel-project) .tp_nav_actions button:hover {background: var(--rn-ink); color: #fff;}
