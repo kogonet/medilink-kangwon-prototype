@@ -1,0 +1,305 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메디링크 강원 — 한 페이지 AI 상담 (리뉴얼 시안)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+
+
+
+<meta name="description" content="강원특별자치도 공공 의료 안내 서비스">
+<meta name="gm-header" content="overlay">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="/common/front/kor/css/landing.css">
+<script>
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("is_motion");
+    window.addEventListener("load", function () { document.documentElement.classList.remove("is_motion"); });
+  }
+</script>
+<style>
+  video.hero_image { display: block; object-fit: cover; background: #000 url("/common/front/kor/images/visual_img.jpg") center / cover no-repeat; pointer-events: none; }
+</style>
+
+<link rel="stylesheet" href="/common/front/kor/css/medical_header.css">
+
+
+
+
+<link rel="stylesheet" href="/common/front/kor/css/renewal-toggle.css">
+
+
+
+<link rel="stylesheet" href="/common/front/kor/css/renewal-main.css">
+<link rel="stylesheet" href="/common/front/kor/css/renewal-dock.css">
+<script src="/common/front/kor/js/renewal-main.js" defer></script>
+<script src="/common/front/kor/js/renewal-dock.js" defer></script>
+
+<link rel="stylesheet" href="onepage.css">
+</head>
+<body class="gm_layout_overlay ">
+
+<!-- ====================== 헤더 ====================== -->
+<header class="gm_header is_overlay" id="gmHeader">
+	<div class="gm_header_inner">
+		<a class="gm_brand" href="#top" aria-label="메디링크 강원 홈">
+			<img class="gm_brand_logo" src="/common/front/kor/images/medilink-bi-white.svg" alt="메디링크 강원 MediLink Kangwon">
+		</a>
+		
+		
+		<nav class="gm_nav" id="gmNav" aria-label="주요 메뉴">
+			<a href="#" data-op-note="서비스 안내 페이지(분리 예정)">서비스 안내</a>
+			<a href="#top" aria-current="page">AI 상담</a>
+			<a href="#" data-op-note="공지·FAQ 페이지(분리 예정)">공지·FAQ</a>
+			<a class="gm_nav_biz" href="/front/medical/project.do">사업소개</a>
+		</nav>
+		
+		
+		<div class="gm_actions">
+		
+		<a class="gm_biz" href="/front/medical/project.do">사업소개 <span aria-hidden="true">↗</span></a>
+		
+		<a class="gm_cta" href="#" data-focus-prompt>AI에게 물어보기</a>
+		</div>
+		<button class="gm_menu_btn" id="gmMenuBtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="gmNav">
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+				<path d="M4 5h16M4 12h16M4 19h16"/>
+			</svg>
+		</button>
+	</div>
+</header>
+<!-- //헤더 -->
+
+
+  <main>
+    <!-- ====================== 히어로 ====================== -->
+    <section class="hero_wrap" id="top" aria-labelledby="hero_title">
+      <video class="hero_image" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="/common/front/kor/images/visual_img.jpg" disablepictureinpicture disableremoteplayback aria-label="메디링크 강원 메인 비주얼 영상">
+        <source src="/common/front/kor/images/main_visual_low.mp4" type="video/mp4">
+        <img src="/common/front/kor/images/visual_img.jpg" alt="메디링크 강원 메인 비주얼 이미지">
+      </video>
+      <div class="hero_overlay" aria-hidden="true"></div>
+      <div class="hero_inner">
+        <div class="hero_content">
+          <div class="hero_copy">
+            <p class="hero_label">AI Medical Portal for Gangwon</p>
+            <h1 class="hero_title" id="hero_title">강원도민의 건강,<br><em>묻고, 잇고,</em> 찾습니다.</h1>
+          </div>
+          <form class="search_form" role="search">
+            <p class="search_desc">병의원·질병·응급까지, 궁금한 것을 말하면 AI가 공공데이터를 근거로 가까운 의료기관과 다음 행동을 안내합니다.</p>
+            <div class="search_options" aria-label="검색 조건">
+
+              <div class="option_wrap">
+                <button class="option_btn" id="symptom_btn" type="button" aria-expanded="false" aria-controls="symptom_panel">증상별 검색 <svg class="option_chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+                <div class="option_panel symptom_panel" id="symptom_panel" hidden></div>
+              </div>
+
+              <div class="option_wrap">
+                <button class="option_btn" id="region_btn" type="button" aria-expanded="false" aria-controls="region_panel">지역별 검색 <svg class="option_chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+                <div class="option_panel region_panel" id="region_panel" hidden></div>
+              </div>
+              
+              <div class="option_wrap">
+                <button class="option_btn" id="department_btn" type="button" aria-expanded="false" aria-controls="department_panel">진료과별 검색 <svg class="option_chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+                <div class="option_panel department_panel" id="department_panel" hidden></div>
+              </div>
+            </div>
+            <div class="selected_tags" id="selected_tags" aria-live="polite"></div>
+            <div class="search_field">
+              <svg class="search_icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+              </svg>
+              <label for="medical_search" hidden>증상, 지역 또는 진료과 검색</label>
+              <input class="search_input" id="medical_search" type="search" placeholder="허리 통증이 있을 땐 어떤 과를 가야 해?" autocomplete="off">
+              <button class="search_btn" type="submit" aria-label="의료기관 검색">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6"/>
+                </svg>
+              </button>
+            </div>
+            <div class="hero_chips" aria-label="바로가기">
+              <a class="hero_chip" href="/front/medical/hospitalList.do">병·의원 찾기</a>
+              <button class="hero_chip" type="button" data-open-panel="symptom">질병 정보</button>
+              <a class="hero_chip" href="/front/medical/erLive.do">응급실 LIVE</a>
+              <a class="hero_chip" href="/front/medical/pharmacyList.do">약국 찾기</a>
+            </div>
+            <p class="hero_note">본 서비스의 안내는 의료적 판단을 대신하지 않습니다. 응급 상황에서는 119에 연락하세요.</p>
+          </form>
+        </div>
+        <div class="hero_bottom">
+          <a class="service_link" href="#" data-op-note="서비스 안내 페이지(분리 예정)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+            서비스 안내
+          </a>
+          <div class="emergency_group" aria-label="긴급 연락처">
+            <a class="emergency_link" href="tel:119"><span>응급·화재·구조</span><strong>119</strong></a>
+            <a class="emergency_link emergency_sub" href="tel:1339"><span>응급의료 상담</span><strong>1339</strong></a>
+            <a class="emergency_link emergency_sub" href="tel:1577-1000"><span>건강보험 상담</span><strong>1577-1000</strong></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== 의료 서비스 ====================== -->
+
+
+    <!-- ====================== 퀵메뉴 ====================== -->
+
+
+    <!-- ====================== AI Concierge ====================== -->
+
+
+    <!-- ====================== 공지사항 / FAQ (메디링크 게시판 최근 4건 - frontMedicalAI.Index) ====================== -->
+
+  
+    <!-- ====================== 대화(결과) 영역: 히어로가 그 자리에서 변신 ====================== -->
+    <section class="op_thread" id="opThread" aria-label="AI 상담 대화" hidden>
+      <a class="op_skip" href="#opCol">결과로 바로가기</a>
+      <div class="op_bar" role="toolbar" aria-label="대화 도구">
+        <div class="op_bar_in">
+          <div class="op_cond"><span class="op_cond_label">검색 조건</span><ul class="rr_chips" id="opChips"></ul></div>
+          <div class="op_tools">
+            <button class="op_btn" id="opMapBtn" type="button" aria-pressed="false" aria-controls="opMap" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.5v13L9 17l6 3 6-2.5v-13L15 7zM9 4v13M15 7v13"/></svg><span>지도 <em id="opMapCnt"></em></span></button>
+            <button class="op_btn" id="opHistBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="opDrawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5M12 8v5l3 2"/></svg><span>히스토리</span></button>
+            <div class="op_popwrap">
+              <button class="op_btn" id="opGoBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="opGoPop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>바로가기</span></button>
+              <div class="op_pop" id="opGoPop" hidden>
+                <a href="/front/medical/hospitalList.do">병·의원 찾기</a>
+                <a href="/front/medical/erLive.do">응급실 LIVE</a>
+                <a href="/front/medical/pharmacyList.do">약국 찾기</a>
+                <a href="/front/medical/vaccinationList.do">예방접종 병원 찾기</a>
+              </div>
+            </div>
+            <button class="op_btn" id="opNewBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>새 대화</span></button>
+            <div class="op_popwrap">
+              <button class="op_btn" id="opAcctBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="opAcctPop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span id="opAcctLabel">로그인</span></button>
+              <div class="op_pop op_pop_r op_acct" id="opAcctPop" hidden>
+                <div id="opAcctOut">
+                  <p class="op_pop_t">로그인은 선택입니다</p>
+                  <p class="op_pop_d">로그인 없이도 모든 기능을 쓸 수 있어요. 로그인하면 대화 기록과 즐겨찾는 기관을 저장할 수 있습니다.</p>
+                  <button class="op_primary" id="opLoginBtn" type="button">로그인 (시안)</button>
+                </div>
+                <div id="opAcctIn" hidden>
+                  <p class="op_pop_t">홍길동 님 <small>(샘플)</small></p>
+                  <button type="button" data-acct="hist">내 대화 기록</button>
+                  <button type="button" data-acct="fav">즐겨찾는 기관</button>
+                  <label class="op_switch"><input type="checkbox" id="opSaveHist" checked><span>대화 기록 저장</span></label>
+                  <button type="button" data-acct="clear">기록 전체 삭제</button>
+                  <button type="button" id="opLogoutBtn">로그아웃</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="op_stage" id="opStage">
+        <div class="op_col" id="opCol" tabindex="-1"></div>
+        <aside class="op_map" id="opMap" aria-label="지도 보기" hidden>
+          <div class="op_map_hd">
+            <div class="op_tabs" role="tablist" aria-label="지도 보기 방식">
+              <button type="button" role="tab" id="opTabTile" aria-selected="true" aria-controls="opPaneTile">시·군 요약</button>
+              <button type="button" role="tab" id="opTabPin" aria-selected="false" aria-controls="opPanePin">기관 위치</button>
+            </div>
+            <button class="op_x" id="opMapClose" type="button" aria-label="지도 닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+          </div>
+          <div class="op_pane" id="opPaneTile" role="tabpanel" aria-labelledby="opTabTile"></div>
+          <div class="op_pane" id="opPanePin" role="tabpanel" aria-labelledby="opTabPin" hidden></div>
+          <p class="op_map_cap">시안용 임시 지도입니다. 지도의 모든 정보는 목록에도 동일하게 있습니다.</p>
+        </aside>
+      </div>
+    </section>
+
+</main>
+
+  <!-- ====================== 푸터 ====================== -->
+
+
+  <script src="/common/front/kor/js/landing.js" defer></script>
+  <script>
+  document.addEventListener("click", function (event) {
+    var trigger = event.target.closest("[data-open-panel]");
+    if (!trigger) return;
+    var button = document.getElementById(trigger.getAttribute("data-open-panel") + "_btn");
+    if (!button) return;
+    event.preventDefault();
+    event.stopPropagation();
+    button.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (button.getAttribute("aria-expanded") !== "true") button.click();
+    button.focus({ preventScroll: true });
+  }, true);
+
+  (function () {
+    var link = document.querySelector(".quick_partner .quick_link");
+    if (!link) return;
+    link.addEventListener("click", function (event) {
+      var w = Math.min(1280, screen.availWidth);
+      var h = Math.min(900, screen.availHeight);
+      var l = (screen.availLeft || 0) + (screen.availWidth - w) / 2;
+      var t = (screen.availTop || 0) + (screen.availHeight - h) / 2;
+      var popup = window.open(link.href, "knuh_ai_popup",
+        "width=" + w + ",height=" + h + ",left=" + l + ",top=" + t + ",scrollbars=yes,resizable=yes");
+      if (!popup) return;
+      event.preventDefault();
+      popup.focus();
+    });
+  })();
+  </script>
+  <script>
+  (function () {
+    var video = document.querySelector("video.hero_image");
+    if (!video) return;
+
+    function start() {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.volume = 0;
+      video.setAttribute("muted", "");
+      video.setAttribute("playsinline", "");
+      video.setAttribute("webkit-playsinline", "");
+      var play = video.play();
+      if (play && typeof play.catch === "function") play.catch(function () {});
+    }
+
+    video.addEventListener("ended", function () {
+      video.currentTime = 0;
+      start();
+    });
+
+    if (video.readyState >= 2) start();
+    else video.addEventListener("canplay", start, { once: true });
+
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden && video.paused) start();
+    });
+    window.addEventListener("pageshow", function () {
+      if (video.paused) start();
+    });
+  })();
+  </script>
+
+
+
+
+  <aside class="op_drawer" id="opDrawer" role="dialog" aria-modal="true" aria-labelledby="opDrawerT" hidden>
+    <div class="op_drawer_hd"><h2 id="opDrawerT">히스토리</h2><button class="op_x" id="opDrawerClose" type="button" aria-label="히스토리 닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <p class="op_drawer_note" id="opDrawerNote">이 기기에만 저장된 최근 검색입니다. 로그인하면 계정에 저장할 수 있어요.</p>
+    <ul class="op_hist" id="opHist"></ul>
+    <button class="op_clear" id="opHistClear" type="button">기록 전체 삭제</button>
+  </aside>
+  <div class="op_backdrop" id="opBackdrop" hidden></div>
+  <div class="op_note" id="opNote" role="status" aria-live="polite" hidden></div>
+  <div class="op_live" id="opLive" role="status" aria-live="polite"></div>
+
+  <script src="onepage.js" defer></script>
+</body>
+</html>
