@@ -31,6 +31,7 @@
 <c:set var="rnOn" value="${param.renewal eq '1' or (param.renewal ne '0' and (renewalDefault or cookie.renewal.value eq '1'))}"/>
 <c:if test="${rnOn}">
 <link rel="stylesheet" href="/common/front/kor/css/renewal-main.css">
+<script src="/common/front/kor/js/renewal-main.js" defer></script>
 </c:if>
 </head>
 <body class="gm_layout_overlay <decorator:getProperty property="body.class"/>">

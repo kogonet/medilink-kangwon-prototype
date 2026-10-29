@@ -251,3 +251,128 @@ body { color: var(--rn-ink); letter-spacing: -.04em; }
   .gm_header .gm_biz {display: none;}
   .gm_header .gm_nav a.gm_nav_biz {display: flex;}
 }
+
+/* ════════════════════════════════════════════════════════════════
+   15. 메인 히어로·헤더: 글래스모피즘 + 라운디드 + 스카이블루 엠비언트 배경 (가독성: 밝은 배경 + 잉크 글자)
+   - 배경 영상은 숨김(video/overlay hidden). 대신 renewal-main.js 가 OKLab 그라데이션 캔버스를 그림
+   ════════════════════════════════════════════════════════════════ */
+.hero_wrap .hero_image, .hero_wrap .hero_overlay {display: none !important;}
+.hero_wrap {background: linear-gradient(180deg, #1E90FF 0%, #86C4FF 50%, #fff 100%);}
+.rn_ambient {position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; display: block; pointer-events: none;}
+.hero_wrap .hero_inner {z-index: 10;}
+
+/* 헤더: 떠 있는 글래스 바 */
+body .gm_header.is_overlay {top: 12px; left: 16px; right: 16px; width: auto; border: 1px solid rgba(255,255,255,.75); border-radius: 24px; background: rgba(255,255,255,.45); box-shadow: 0 8px 32px rgba(0,56,195,.12); -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5); color: var(--rn-ink);}
+body .gm_header.is_overlay.is_scrolled {background: rgba(255,255,255,.78); -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5);}
+body .gm_header.is_overlay .gm_header_inner {height: 60px; padding: 0 24px; gap: 56px;}
+body .gm_header.is_overlay .gm_nav a, body .gm_header.is_overlay .gm_cta, body .gm_header.is_overlay .gm_biz {color: var(--rn-ink);}
+body .gm_header.is_overlay .gm_nav a::after {background: var(--rn-fill); bottom: 6px; height: 2px;}
+body .gm_header.is_overlay .gm_nav a:hover {color: var(--rn-ink);}
+body .gm_header.is_overlay .gm_cta:hover {color: var(--rn-ink);}
+body .gm_header.is_overlay :focus-visible {outline-color: var(--rn-ink);}
+body .gm_header.is_overlay .gm_menu_btn {color: var(--rn-ink);}
+/* 토글: 둥근 알약 */
+body .gm_header.is_overlay .gm_rn_toggle {border-color: var(--rn-ink); border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.5); color: var(--rn-ink);}
+body .gm_header.is_overlay .gm_rn_knob {background: var(--rn-ink); border-radius: 999px;}
+body .gm_header.is_overlay .gm_rn_toggle[aria-checked="false"] .gm_rn_opt:first-child {color: #fff;}
+body .gm_header.is_overlay .gm_rn_toggle[aria-checked="true"] .gm_rn_knob {background: var(--rn-fill);}
+@media (max-width: 1024px) {
+  body .gm_header.is_overlay .gm_header_inner {gap: 16px;}
+  body .gm_header.is_overlay .gm_nav {top: calc(100% + 8px); left: 0; right: 0; border: 1px solid rgba(255,255,255,.8); border-radius: 20px; background: rgba(255,255,255,.88); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); overflow: hidden; box-shadow: 0 8px 32px rgba(0,56,195,.14);}
+  body .gm_header.is_overlay .gm_nav a {color: var(--rn-ink); border-top-color: var(--rn-hair);}
+  body .gm_header.is_overlay .gm_nav a:hover {background: var(--rn-fill-bg); color: var(--rn-ink);}
+}
+@media (max-width: 760px) {
+  body .gm_header.is_overlay {top: 8px; left: 8px; right: 8px; border-radius: 20px;}
+  body .gm_header.is_overlay .gm_header_inner {height: 52px; padding: 0 16px;}
+}
+
+/* 히어로 타이포: 밝은 배경 위 잉크 */
+.hero_wrap {color: var(--rn-ink);}
+.hero_wrap .hero_label {color: var(--rn-ink); opacity: .7;}
+.hero_wrap .hero_title {color: var(--rn-ink);}
+.hero_wrap .hero_title em {color: var(--rn-fill); text-shadow: none;}
+.hero_wrap .search_desc, .hero_wrap .hero_chip {color: var(--rn-ink);}
+.hero_wrap .hero_note {color: #3a4a5c;}
+.hero_wrap .hero_chip::after {color: var(--rn-ink);}
+.hero_wrap .service_link {color: var(--rn-ink);}
+
+/* 검색 패널: 글래스 */
+.hero_wrap .search_form {border: 1px solid rgba(255,255,255,.8); border-radius: 28px; background: rgba(255,255,255,.5); box-shadow: 0 12px 40px rgba(0,56,195,.14); -webkit-backdrop-filter: blur(24px) saturate(1.5); backdrop-filter: blur(24px) saturate(1.5);}
+.hero_wrap .option_btn {border: 1px solid rgba(255,255,255,.9); border-radius: 999px; background: rgba(255,255,255,.6); color: var(--rn-ink);}
+.hero_wrap .option_btn:hover, .hero_wrap .option_btn.is_open {border-color: var(--rn-fill); background: var(--rn-fill); color: #fff;}
+.hero_wrap .search_field {padding: 8px 8px 8px 20px; border: 1px solid rgba(255,255,255,.9); border-radius: 999px; background: rgba(255,255,255,.72);}
+.hero_wrap .search_icon {color: var(--rn-ink);}
+.hero_wrap .search_input {color: var(--rn-ink);}
+.hero_wrap .search_input::placeholder {color: #5b6b7e;}
+.hero_wrap .search_btn {border-radius: 50%; background: var(--rn-fill);}
+.hero_wrap .search_btn:hover {background: var(--rn-ink);}
+.hero_wrap .selected_tag {border-radius: 999px; background: var(--rn-fill);}
+.hero_wrap .option_panel {border: 1px solid rgba(255,255,255,.9); border-radius: 20px; background: rgba(255,255,255,.92); box-shadow: 0 16px 48px rgba(0,56,195,.18); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);}
+.hero_wrap .panel_item, .hero_wrap .panel_all, .hero_wrap .panel_search input {border-radius: 12px;}
+.hero_wrap .category_btn {border-radius: 999px;}
+.hero_wrap .panel_item:hover {color: #fff;}
+
+/* 응급 연락처: 알약 — 119 는 레드, 상담 번호는 글래스 */
+.hero_wrap .emergency_link {border-radius: 999px;}
+.hero_wrap .emergency_sub {border: 1px solid rgba(255,255,255,.9); background: rgba(255,255,255,.6); color: var(--rn-ink); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);}
+.hero_wrap .emergency_sub:hover {background: #fff; color: var(--rn-ink);}
+
+/* 퀵메뉴: 글래스 카드 */
+.quick_group {border: 1px solid rgba(255,255,255,.9); border-radius: 24px; background: rgba(255,255,255,.7); box-shadow: 0 8px 32px rgba(0,56,195,.14); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);}
+.quick_icon {border-radius: 50%;}
+.quick_top {border-radius: 50%;}
+
+/* 헤더 오브젝트 중앙 정렬: 로고(좌) · 메뉴(정중앙) · 유틸리티(우), 세로 중앙 */
+@media (min-width: 1025px) {
+  body .gm_header.is_overlay .gm_header_inner {display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px;}
+  body .gm_header.is_overlay .gm_brand {justify-self: start;}
+  body .gm_header.is_overlay .gm_nav {grid-column: 2; justify-content: center; gap: 40px;}
+  body .gm_header.is_overlay .gm_actions {grid-column: 3; justify-self: end; margin-left: 0;}
+}
+
+/* ════════════════════════════════════════════════════════════════
+   16. 헤더 센터 정렬 + 프롬프트 중심 히어로 UX
+   - 헤더: [로고] ——— [메뉴(중앙)] ——— [유틸리티]  (좌/중/우 3분할, 메뉴는 화면 중앙)
+   - 히어로: 제목 → 프롬프트 입력창(가장 크게) → 선택 태그 → 검색 조건(지역·증상·진료과) → 추천 바로가기 → 고지
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1025px) {
+  body .gm_header.is_overlay .gm_header_inner {display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px;}
+  body .gm_header.is_overlay .gm_nav {justify-self: center; gap: 40px;}
+  body .gm_header.is_overlay .gm_actions {justify-self: end; margin-left: 0;}
+  body .gm_header.is_overlay .gm_brand {justify-self: start;}
+}
+
+.hero_wrap .hero_inner {align-items: stretch;}
+.hero_wrap .hero_content {display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 36px; padding-top: 24px; text-align: center;}
+.hero_wrap .hero_copy {max-width: 980px;}
+.hero_wrap .hero_label {margin-bottom: 20px;}
+.hero_wrap .hero_title {font-size: clamp(36px, 5.2vw, 72px);}
+.hero_wrap .search_form {display: flex; width: min(780px, 100%); max-width: none; flex-direction: column; align-items: stretch; gap: 14px; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; text-align: left;}
+.hero_wrap .search_form > * {margin: 0;}
+.hero_wrap .search_desc {order: 0; text-align: center; font-size: 16px; line-height: 1.6; max-width: 640px; align-self: center;}
+/* 프롬프트 입력창: 화면의 중심 */
+.hero_wrap .search_field {order: 1; gap: 12px; min-height: 76px; padding: 10px 10px 10px 28px; border: 1px solid rgba(255,255,255,.95); border-radius: 999px; background: rgba(255,255,255,.78); box-shadow: 0 16px 48px rgba(0,56,195,.22), inset 0 1px 0 rgba(255,255,255,.9); -webkit-backdrop-filter: blur(24px) saturate(1.5); backdrop-filter: blur(24px) saturate(1.5); transition: box-shadow .2s, background .2s;}
+.hero_wrap .search_field:focus-within {background: rgba(255,255,255,.95); box-shadow: 0 16px 56px rgba(0,56,195,.3), 0 0 0 3px rgba(0,56,195,.35);}
+.hero_wrap .search_input {font-size: 20px; letter-spacing: -.02em;}
+.hero_wrap .search_icon {width: 26px;}
+.hero_wrap .search_btn {width: 56px; height: 56px;}
+.hero_wrap .search_btn svg {width: 24px;}
+.hero_wrap .selected_tags {order: 2; justify-content: center;}
+/* 검색 조건: 입력창 아래 중앙 정렬 알약 */
+.hero_wrap .search_options {order: 3; justify-content: center; margin: 0; gap: 10px;}
+.hero_wrap .option_btn {min-height: 44px; padding: 0 20px;}
+.hero_wrap .hero_chips {order: 4; justify-content: center; gap: 10px; margin-top: 4px;}
+.hero_wrap .hero_chip {min-height: 40px; padding: 0 18px; border: 1px solid rgba(255,255,255,.9); border-radius: 999px; background: rgba(255,255,255,.55); font-size: 15px; -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); transition: background .2s, color .2s;}
+.hero_wrap .hero_chip:hover {background: var(--rn-fill); border-color: var(--rn-fill); color: #fff;}
+.hero_wrap .hero_chip:hover::after {color: #fff;}
+.hero_wrap .hero_note {order: 5; text-align: center; margin-top: 4px;}
+.hero_wrap .symptom_panel {left: 50%; transform: translateX(-50%);}
+@media (max-width: 760px) {
+  .hero_wrap .hero_content {gap: 24px;}
+  .hero_wrap .search_field {min-height: 64px; padding: 8px 8px 8px 20px;}
+  .hero_wrap .search_input {font-size: 15px;}
+  .hero_wrap .search_btn {width: 48px; height: 48px;}
+  .hero_wrap .search_desc {font-size: 14px;}
+  .hero_wrap .option_wrap {position: static;}
+}

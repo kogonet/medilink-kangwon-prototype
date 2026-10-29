@@ -221,3 +221,11 @@ html:has(#panel-intro,#panel-project) .tp_nav_actions button:hover {background: 
   .gm_header .gm_biz {display: none;}
   .gm_header .gm_nav a.gm_nav_biz {display: flex;}
 }
+
+/* 헤더 오브젝트 중앙 정렬: 로고(좌) · 메뉴(정중앙) · 유틸리티(우), 세로 중앙 */
+@media (min-width: 1025px) {
+  .gm_header .gm_header_inner {display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px;}
+  .gm_header .gm_brand {justify-self: start;}
+  .gm_header .gm_nav {grid-column: 2; justify-content: center; gap: 40px;}
+  .gm_header .gm_actions {grid-column: 3; justify-self: end; margin-left: 0;}
+}
