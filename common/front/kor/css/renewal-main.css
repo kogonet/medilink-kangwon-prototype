@@ -330,3 +330,6 @@ body .gm_header.is_overlay .gm_rn_toggle[aria-checked="true"] .gm_rn_knob {backg
 .hero_wrap .hero_label {margin-bottom: 20px;}
 .hero_wrap .hero_title {font-size: clamp(36px, 5.2vw, 72px);}
 @media (max-width: 760px) {.hero_wrap .hero_content {gap: 24px;}}
+
+/* 우측 퀵메뉴는 오버레이: 본문 좌우 여백에 반영하지 않는다(landing.css 의 --rail-gutter 무력화) */
+:root {--rail-gutter: 0px !important;}
