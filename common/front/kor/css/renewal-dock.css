@@ -31,7 +31,7 @@ form.search_form.rn_prompt {padding: 0; border: 0; border-radius: 0; background:
 .rn_bar {display: contents;}
 /* 옵션 = 입력 옵션(아이콘 + 라벨, 카드 안) */
 .rn_prompt .search_options {grid-area: opts; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; padding: 0 0 10px; border-bottom: 1px solid #e8ebf1;}
-.rn_prompt .option_wrap {position: relative;}
+.rn_prompt .option_wrap {position: static;}
 .rn_prompt .option_btn {display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 12px 0 10px; border: 1px solid #d5dae3; border-radius: 12px; background: #fff; color: var(--rnp-ink); font-size: 14px; font-weight: 500; cursor: pointer; transition: background .15s, color .15s;}
 .rn_prompt .option_btn::before {content: ''; width: 18px; height: 18px; background: currentColor; -webkit-mask: var(--ic) center / contain no-repeat; mask: var(--ic) center / contain no-repeat;}
 #symptom_btn {--ic: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12h4l3-8 4 16 3-8h4'/%3E%3C/svg%3E");}
@@ -160,3 +160,35 @@ body.rn_has_dock .footer_wrap {padding-bottom: 96px;}
 /* 히어로: 하단 고정 프롬프트와 겹치지 않도록 본문 위쪽으로 */
 @media (min-width: 761px) {.hero_wrap .hero_content {padding-bottom: 210px;}}
 @media (max-width: 760px) {.hero_wrap .hero_content {padding-bottom: 250px;}}
+
+/* ── 넓은 옵션 패널(컴포저 폭): 개수·최근검색·칩 목록 ── */
+.rn_prompt .option_panel {left: 0; right: 0; width: auto; padding: 20px 22px 22px;}
+.rn_prompt .panel_head strong {font-size: 18px;}
+.rn_prompt .panel_grid, .rn_prompt .emd_grid {grid-template-columns: repeat(4, 1fr); gap: 6px;}
+.rn_prompt .department_grid {grid-template-columns: repeat(4, 1fr); gap: 6px;}
+.rn_prompt .panel_item {display: flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #e6e9f0; border-radius: 12px; background: #fff;}
+.rn_prompt .panel_item small {color: #8a94a6; font-size: 12px;}
+.rn_prompt .panel_item:hover small {color: rgba(255,255,255,.85);}
+.rn_prompt .category_btn small {margin-left: 6px; opacity: .65; font-size: 12px;}
+.rn_prompt .symptom_list {display: flex; flex-wrap: wrap; gap: 8px; max-height: none; overflow: visible; border-top: 0; padding-top: 4px;}
+.rn_prompt .symptom_item {display: inline-flex; width: auto; padding: 9px 16px; border: 1px solid #e6e9f0; border-radius: 999px; background: #fff; font-size: 14px;}
+.rn_prompt .symptom_item small {display: none;}
+.rn_prompt .symptom_item:hover {border-color: var(--rnp-blue); background: var(--rnp-blue-bg); color: var(--rnp-blue);}
+.rn_prompt .symptom_list.rn_open .rn_extra, .rn_prompt .symptom_list .rn_extra {display: none;}
+.rn_prompt .symptom_list.rn_open .rn_extra {display: inline-flex;}
+.rn_prompt .department_grid.rn_open .rn_extra {display: flex;}
+.rn_recent {display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: -6px 0 14px;}
+.rn_recent span {color: #8a94a6; font-size: 12px; font-weight: 600; margin-right: 4px;}
+.rn_recent_chip {max-width: 100%; min-height: 28px; padding: 0 12px; border: 1px solid #d5dae3; border-radius: 999px; background: #fff; color: #3a4a5c; font-size: 13px; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.rn_recent_chip:hover {border-color: var(--rnp-blue); color: var(--rnp-blue);}
+/* 칩으로 쌓인 선택 */
+.rn_prompt .selected_tags:not(:empty) {padding-bottom: 2px;}
+@media (max-width: 760px) {
+  .rn_prompt .panel_grid, .rn_prompt .emd_grid, .rn_prompt .department_grid {grid-template-columns: repeat(2, 1fr);}
+}
+
+/* 더보기 접힘 상태 보정(항목 display 규칙보다 우선) */
+.rn_prompt .panel_item.rn_extra, .rn_prompt .symptom_item.rn_extra {display: none;}
+.rn_prompt .rn_open .panel_item.rn_extra {display: flex;}
+.rn_prompt .rn_open .symptom_item.rn_extra {display: inline-flex;}
+.rn_prompt .option_panel {background: rgba(255,255,255,.99);}

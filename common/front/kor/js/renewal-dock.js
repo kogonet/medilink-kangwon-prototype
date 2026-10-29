@@ -142,11 +142,97 @@
       list.parentNode.insertBefore(moreBtn(list, '전체 증상 보기', items.length), list.nextSibling);
     }
   }
+  /* 최근 검색 (localStorage, 실패 시 무시) */
+  var RK = 'rn_recent_q';
+  function getRecent() { try { return JSON.parse(localStorage.getItem(RK) || '[]'); } catch (e) { return []; } }
+  function currentQuery() {
+    var t = input && input.value.trim();
+    if (t) return t;
+    return [].map.call(form.querySelectorAll('.selected_tag'), function (x) {
+      var c = x.cloneNode(true);
+      [].forEach.call(c.querySelectorAll('b, button'), function (n) { n.remove(); });
+      return c.textContent.trim();
+    }).join(' ').trim();
+  }
+  form.addEventListener('submit', function () {
+    var q = currentQuery(); if (!q) return;
+    try {
+      var list = getRecent().filter(function (x) { return x !== q; });
+      list.unshift(q);
+      localStorage.setItem(RK, JSON.stringify(list.slice(0, 5)));
+    } catch (e) { /* 저장 불가 환경 */ }
+  }, true);
+  function addRecent(panel) {
+    var rec = getRecent().slice(0, 3);
+    if (!rec.length || panel.querySelector('.rn_recent')) return;
+    var box = doc.createElement('div');
+    box.className = 'rn_recent';
+    box.innerHTML = '<span>최근 검색</span>' + rec.map(function (q) {
+      return '<button type="button" class="rn_recent_chip">' + q.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</button>';
+    }).join('');
+    box.addEventListener('click', function (e) {
+      var c = e.target.closest('.rn_recent_chip'); if (!c) return;
+      e.stopPropagation();
+      if (input) { input.value = c.textContent; input.dispatchEvent(new Event('input', { bubbles: true })); input.focus(); }
+      var btn = doc.getElementById(panel.id.replace('_panel', '_btn')); if (btn) btn.click();
+    });
+    var head = panel.querySelector('.panel_head');
+    panel.insertBefore(box, head ? head.nextSibling : panel.firstChild);
+  }
+  /* 개수 표시 (데이터는 landing.js 에서 노출한 window.__rnData) */
+  function decorate(panel) {
+    var d = window.__rnData; if (!d || !panel) return;
+    var head = panel.querySelector('.panel_head span');
+    if (panel.id === 'department_panel') {
+      if (head && !head.dataset.rn) { head.textContent = d.departments.length + '개 진료과'; head.dataset.rn = 1; }
+    } else if (panel.id === 'region_panel') {
+      var parents = panel.querySelectorAll('[data-parent]');
+      if (parents.length) {
+        if (head && !head.dataset.rn) { head.textContent = parents.length + '개 시·군'; head.dataset.rn = 1; }
+        [].forEach.call(parents, function (b) {
+          if (b.querySelector('small')) return;
+          var r = d.regions.filter(function (x) { return x.name === b.dataset.parent; })[0];
+          if (r) b.insertAdjacentHTML('beforeend', '<small>' + r.children.length + '</small>');
+        });
+      }
+    } else if (panel.id === 'symptom_panel') {
+      [].forEach.call(panel.querySelectorAll('.category_btn'), function (b) {
+        if (b.querySelector('small')) return;
+        var c = b.dataset.category;
+        var n = c === '전체' ? d.symptoms.length : d.symptoms.filter(function (x) { return x.category === c; }).length;
+        b.insertAdjacentHTML('beforeend', '<small>' + n + '</small>');
+      });
+    }
+  }
+
+  /* 선택은 칩으로 쌓고 '전송'으로 묻는다 (landing.js 의 즉시 이동을 대체) */
+  window.__rnSelect = function (type, value, a) {
+    a.selected[type] = value;
+    a.renderTags();
+    a.closePanels();
+    expand();
+    if (input) input.focus({ preventScroll: true });
+  };
+  function hookLanding() {
+    try {
+      if (typeof selectOption === 'function' && typeof selected !== 'undefined') {
+        window.selectOption = function (type, value) {
+          window.__rnSelect(type, value, { selected: selected, renderTags: renderTags, closePanels: closePanels });
+        };
+        window.__rnData = { regions: regions, departments: departments, symptoms: symptoms };
+        ['symptom_panel', 'region_panel', 'department_panel'].forEach(function (id) { decorate(doc.getElementById(id)); });
+      }
+    } catch (e) { /* landing.js 미로딩 */ }
+  }
+  if (isLanding) {
+    if (doc.readyState === 'complete') hookLanding(); else doc.addEventListener('DOMContentLoaded', hookLanding);   // defer 스크립트 실행 시점의 readyState 는 'interactive'
+  }
+
   ['symptom_panel', 'region_panel', 'department_panel'].forEach(function (id) {
     var panel = doc.getElementById(id);
     if (!panel) return;
-    new MutationObserver(function () { enhance(panel); fitPanel(); }).observe(panel, { childList: true });
-    enhance(panel);
+    new MutationObserver(function () { enhance(panel); decorate(panel); addRecent(panel); fitPanel(); }).observe(panel, { childList: true });
+    enhance(panel); decorate(panel); addRecent(panel);
   });
 
   /* 열린 패널이 헤더 아래로 숨지 않도록 높이 제한 (데스크톱; 모바일은 바텀시트) */
@@ -156,7 +242,7 @@
     [].forEach.call(form.querySelectorAll('.option_panel'), function (p) {
       if (p.hidden) { p.style.maxHeight = ''; return; }
       if (window.innerWidth <= 760) { p.style.maxHeight = ''; return; }
-      var wrapTop = p.parentNode.getBoundingClientRect().top;
+      var wrapTop = composer.getBoundingClientRect().top;
       p.style.maxHeight = Math.max(200, Math.min(560, wrapTop - top - 24)) + 'px';
     });
   }
@@ -219,7 +305,12 @@
   if (!isLanding) {
     /* landing.js 연결 (최상위 const 충돌 방지를 위해 함수 스코프로 실행) */
     fetch('/common/front/kor/js/landing.js').then(function (r) { return r.text(); }).then(function (src) {
-      try { (new Function(src))(); } catch (e) { if (window.console) console.warn('[renewal-dock] landing.js', e); }
+      try {
+        src = src.replace('function selectOption(type, value) {', 'function selectOption(type, value) { if (window.__rnSelect) { return window.__rnSelect(type, value, { selected: selected, renderTags: renderTags, closePanels: closePanels }); }');
+        src += '\n;window.__rnData = { regions: regions, departments: departments, symptoms: symptoms };';
+        (new Function(src))();
+        ['symptom_panel', 'region_panel', 'department_panel'].forEach(function (id) { var pn = doc.getElementById(id); decorate(pn); addRecent(pn); });
+      } catch (e) { if (window.console) console.warn('[renewal-dock] landing.js', e); }
     });
   }
   onScroll();
