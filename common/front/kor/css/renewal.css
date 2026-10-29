@@ -185,7 +185,8 @@ html:has(#panel-intro,#panel-project) .page_scroll {background: var(--rn-paper);
 @media (max-width: 1024px) {
   .gm_header .gm_header_inner {gap: 16px;}
   .gm_header .gm_menu_btn {margin-left: 0; color: var(--rn-ink);}
-  .gm_header .gm_nav {position: absolute; top: 100%; left: 0; right: 0; height: auto; flex-direction: column; align-items: stretch; gap: 0; border-bottom: 1px solid var(--rn-hair); background: #fff;}
+  .gm_header .gm_nav {display: none; position: absolute; top: 100%; left: 0; right: 0; height: auto; flex-direction: column; align-items: stretch; gap: 0; border-bottom: 1px solid var(--rn-hair); background: #fff;}
+  .gm_header.is_open .gm_nav {display: flex;}
   .gm_header .gm_nav a {height: auto; padding: 18px var(--rn-gutter); border-top: 1px solid var(--rn-rule); font-size: 16px;}
   .gm_header .gm_nav a::after {display: none;}
 }

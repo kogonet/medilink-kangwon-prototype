@@ -12,3 +12,9 @@
 @media (max-width: 768px) { .gm_actions { gap: 10px; } .gm_rn_toggle { width: 104px; height: 30px; font-size: 12px; } }
 @media (max-width: 480px) { .gm_rn_toggle { width: 92px; } .gm_actions .gm_cta { display: none; } }
 @media (prefers-reduced-motion: reduce) { .gm_rn_knob, .gm_rn_opt { transition: none; } }
+/* 히어로 위 오버레이 헤더(랜딩): 흰 외곽선 */
+.gm_header.is_overlay .gm_rn_toggle { border-color: #fff; background: rgba(9, 9, 9, .35); color: #fff; }
+.gm_header.is_overlay .gm_rn_knob { background: #fff; }
+.gm_header.is_overlay .gm_rn_toggle[aria-checked="false"] .gm_rn_opt:first-child { color: #090909; }
+.gm_header.is_overlay .gm_rn_toggle[aria-checked="true"] .gm_rn_knob { background: #0038C3; }
+.gm_header.is_overlay .gm_rn_toggle[aria-checked="true"] .gm_rn_opt:nth-child(2) { color: #fff; }

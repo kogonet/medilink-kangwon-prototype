@@ -74,7 +74,7 @@
 	if (!header || !btn) return;
 	var rn = document.getElementById('gmRnToggle');
 	if (rn) {
-		var on = !!document.querySelector('link[href*="renewal.css"]');
+		var on = !!document.querySelector('link[href*="renewal.css"],link[href*="renewal-main.css"]');
 		rn.setAttribute('aria-checked', on ? 'true' : 'false');
 		rn.addEventListener('click', function() {
 			document.cookie = 'renewal=' + (on ? '0' : '1') + '; path=/; max-age=31536000; SameSite=Lax';
