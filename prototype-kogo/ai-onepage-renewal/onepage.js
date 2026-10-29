@@ -11,7 +11,7 @@
   var form = $('form.search_form'), input = $('#medical_search');
   var hero = $('.hero_wrap'), thread = $('#opThread'), col = $('#opCol'), stage = $('#opStage');
   var live = $('#opLive'), chipsEl = $('#opChips');
-  var mapBtn = $('#opMapBtn'), mapEl = $('#opMap');
+  var mapBtn = $('#opMapBtn'), mapEl = $('#opPnMap');
   if (!form || !thread) return;
 
   var state = { cond: { region: '', symptom: '', department: '' }, lastText: '', n: 0, timers: [], loc: false, mapAuto: false, last: null, user: false };
@@ -58,7 +58,7 @@
   function newChat(fromPop) {
     clearTimers();
     state.cond = { region: '', symptom: '', department: '' }; state.lastText = ''; state.n = 0; state.last = null;
-    col.innerHTML = ''; renderChips(); closeMap(); mapBtn.disabled = true; mapBtn.classList.remove('is_new'); $('#opMapCnt').textContent = '';
+    col.innerHTML = ''; renderChips(); closePanels(); mapBtn.disabled = true; mapBtn.classList.remove('is_new'); $('#opMapCnt').textContent = '';
     body.classList.remove('is_chat', 'has_dist'); thread.hidden = true; hero.classList.remove('is_leaving');
     window.scrollTo(0, 0);
     if (!fromPop) { try { history.replaceState(null, '', location.pathname); } catch (e) { } }
@@ -102,16 +102,18 @@
     var cond = { region: state.cond.region, symptom: state.cond.symptom, department: state.cond.department };
     var label = composeLabel(cond, q.text);
     enterChat(label);
-    var turn = doc.createElement('section');
-    turn.className = 'op_turn'; turn.id = 'turn' + (++state.n);
+    var rev = !!(opt.fromBar && state.lastTurn && state.lastTurn.isConnected);
+    var turn = rev ? state.lastTurn : doc.createElement('section');
+    if (rev) { $('.rr_q p', turn).textContent = label; $('.rr_a', turn).innerHTML = ''; var vv = $('.op_ver', turn); if (vv) vv.hidden = true; var ap = $('.rr_a', turn); respond(ap, turn, cond, q.text || '', true, label); if (opt.note) note(opt.note); input.focus({ preventScroll: true }); return; }
+    turn.className = 'op_turn'; turn.id = 'turn' + (++state.n); turn._v = { list: [], i: -1 };
     turn.setAttribute('aria-label', '질문 ' + state.n);
     if (state.n === 1) col.insertAdjacentHTML('beforeend', '<p class="rr_notice"><strong>응급 상황이면 119</strong><span>이 안내는 의료적 판단을 대신하지 않습니다. 진료시간과 운영 여부는 방문 전 전화로 확인해 주세요.</span></p>');
-    turn.innerHTML = '<div class="rr_q"><p>' + esc(label) + '</p></div><article class="rr_a" aria-label="AI 답변"></article>';
-    col.appendChild(turn);
+    turn.innerHTML = '<div class="rr_q"><p>' + esc(label) + '</p></div><div class="op_ver" hidden></div><article class="rr_a" aria-label="AI 답변"></article>';
+    col.appendChild(turn); state.lastTurn = turn;
     state.last = { q: q, cond: cond, label: label };
     var ans = $('.rr_a', turn);
     if (opt.note) note(opt.note);
-    respond(ans, turn, cond, q.text || '');
+    respond(ans, turn, cond, q.text || '', false, label);
     input.focus({ preventScroll: true });
   }
 
@@ -133,7 +135,7 @@
     return { regionFull: regionFull, first: first, compact: compact, dept: dept, total: compact ? 12 : 34, fac: fac, counts: counts, spread: compact ? 8 : 96 };
   }
 
-  function respond(ans, turn, cond, text) {
+  function respond(ans, turn, cond, text, revised, label) {
     var ctrl = '<p class="op_status" role="status"><span class="op_dots" aria-hidden="true"><i></i><i></i><i></i></span><span>공공데이터에서 찾는 중…</span><button class="op_stop" type="button">중지</button></p>';
     ans.innerHTML = '<p class="rr_who"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z" fill="currentColor"/></svg>메디링크 AI</p>' + ctrl;
     say('검색 중입니다.');
@@ -176,11 +178,33 @@
           '<div class="rr_follow"><h4>이어서 물어보기</h4><ul>' + depts.map(function (d) { return '<li><button type="button" data-ask-dept="' + d + '">다른 진료과: ' + d + '</button></li>'; }).join('') +
           '<li><button type="button" data-ask-text="' + esc(m.first) + ' 응급실">' + esc(m.first) + ' 응급실</button></li><li><button type="button" data-ask-text="' + esc(m.dept) + ' 진료 전 준비할 것">' + esc(m.dept) + ' 진료 전 준비할 것</button></li></ul></div>' +
           '<div class="rr_fb"><span>이 답변이 도움이 되었나요?</span><button type="button" aria-label="도움이 됨">👍</button><button type="button" aria-label="도움이 안 됨">👎</button></div>');
+        snap(turn, ans, cond, label, m, revised);
         publish(m);
         say(m.dept + ' 진료 가능한 의료기관 ' + m.total + '곳 중 3곳을 안내했습니다.' + (m.compact ? ' 지도를 함께 표시했습니다.' : ' 지도는 접어 두었습니다.'));
       }
-    }, 900);
+    }, revised ? 380 : 900);
   }
+
+  /* ── 필터형 변경은 새 턴이 아니라 직전 답변을 갱신(버전 이동 ‹ n/m ›) ── */
+  function condText(c) { return [c.region, c.department, c.symptom].filter(Boolean).join(' · ') || '조건 없음'; }
+  function snap(turn, ans, cond, label, m, revised) {
+    var V = turn._v; V.list.push({ cond: cond, label: label, html: ans.innerHTML, m: m }); V.i = V.list.length - 1; stepper(turn);
+    if (revised) say('조건을 바꿔 직전 답변을 갱신했습니다. ' + (V.i + 1) + '/' + V.list.length + '번째 결과입니다.');
+  }
+  function stepper(turn) {
+    var V = turn._v, box = $('.op_ver', turn); if (V.list.length < 2) { box.hidden = true; return; }
+    box.hidden = false;
+    box.innerHTML = '<button type="button" class="op_vb" data-v="-1" aria-label="이전 조건의 결과"' + (V.i === 0 ? ' disabled' : '') + '>‹</button><span class="op_vn" aria-live="polite">' + (V.i + 1) + ' / ' + V.list.length + '</span><button type="button" class="op_vb" data-v="1" aria-label="다음 조건의 결과"' + (V.i === V.list.length - 1 ? ' disabled' : '') + '>›</button><ol class="op_trail" aria-label="조건 변경 이력">' + V.list.map(function (v, i) { return '<li' + (i === V.i ? ' aria-current="true"' : '') + '>' + esc(condText(v.cond)) + '</li>'; }).join('') + '</ol>';
+  }
+  col.addEventListener('click', function (e) {
+    var b = e.target.closest('.op_vb'); if (!b) return;
+    var turn = b.closest('.op_turn'), V = turn._v, n = V.i + parseInt(b.dataset.v, 10); if (n < 0 || n >= V.list.length) return;
+    V.i = n; var v = V.list[n];
+    $('.rr_a', turn).innerHTML = v.html; $('.rr_q p', turn).textContent = v.label;
+    state.cond = { region: v.cond.region, symptom: v.cond.symptom, department: v.cond.department }; renderChips(); publish(v.m); stepper(turn);
+    var nb = $('.op_vb[data-v="' + b.dataset.v + '"]', turn) || $('.op_vb', turn); if (nb && !nb.disabled) nb.focus();
+    say((n + 1) + '번째 결과입니다. 조건: ' + condText(v.cond));
+  });
 
   /* ── 지도: 기본은 접힘, 결과가 좁게 모일 때만 자동 펼침 ── */
   var TILES = [['철원', 1, 1], ['화천', 2, 1], ['양구', 3, 1], ['인제', 4, 1], ['고성', 5, 1], ['춘천', 1, 2], ['홍천', 2, 2], ['평창', 3, 2], ['속초', 4, 2], ['양양', 5, 2], ['원주', 1, 3], ['횡성', 2, 3], ['정선', 3, 3], ['강릉', 5, 3], ['영월', 2, 4], ['태백', 3, 4], ['동해', 4, 4], ['삼척', 5, 4]];
@@ -197,36 +221,71 @@
     $('#opPaneTile').innerHTML = grid + '</div>';
     $('#opPanePin').innerHTML = '<div class="rr_map_canvas" role="img" aria-label="검색 결과 3곳의 위치(샘플)">' + m.fac.map(function (f) { return '<span class="rr_pin" style="left:' + f.pin[0] + '%;top:' + f.pin[1] + '%" data-pin="' + f.n + '">' + f.n + '</span>'; }).join('') + '</div>';
     state.mapTab = m.compact ? 'pin' : 'tile';   // 자동으로 열지 않고 버튼 점으로만 알림
-    mapBtn.classList.add('is_new');
+    if (!panelOpen('map')) mapBtn.classList.add('is_new');
   }
-  var wrap = $('#opMapWrap');
-  function mapOpen() { return wrap.classList.contains('is_open'); }
-  function openMap(tab) {
-    wrap.removeAttribute('inert'); wrap.classList.add('is_open');
-    mapBtn.setAttribute('aria-pressed', 'true'); mapBtn.classList.remove('is_new');
-    selectTab(tab || state.mapTab || 'tile');
-    wrap.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-    setTimeout(function () { var t = $('#opTabTile'); if (t) t.focus({ preventScroll: true }); }, reduce ? 0 : 120);
+  /* ── 우상단 유틸리티(지도·기록·계정) → 우측 오버레이 패널: 지도는 넓게(본문을 덮음), 기록·계정은 좁게 ── */
+  var PN = { map: ['opMapBtn', 'opPnMap'], hist: ['opHistBtn', 'opPnHist'], acct: ['opAcctBtn', 'opPnAcct'] };
+  var narrow = window.matchMedia('(max-width: 1100px)'), opened = null;
+  function panelOpen(k) { return opened === k; }
+  function openPanel(k) {
+    closePanel(null, true);
+    var el = $('#' + PN[k][1]); el.hidden = false; void el.offsetWidth; el.classList.add('is_open');
+    $('#' + PN[k][0]).setAttribute('aria-expanded', 'true'); opened = k; syncSheet();
+    if (k === 'map') mapBtn.classList.remove('is_new');
+    if (k === 'hist') renderHist();
+    setTimeout(function () { var t = $('h2', el); if (t) t.focus({ preventScroll: true }); }, reduce ? 0 : 60);
   }
-  function closeMap() {
-    if (!mapOpen()) return;
-    wrap.classList.remove('is_open'); wrap.setAttribute('inert', ''); mapBtn.setAttribute('aria-pressed', 'false');
+  function closePanel(k, silent) {
+    var key = k || opened; if (!key || opened !== key) return;
+    var el = $('#' + PN[key][1]); el.classList.remove('is_open'); el.hidden = true;
+    var b = $('#' + PN[key][0]); b.setAttribute('aria-expanded', 'false'); opened = null;
+    if (!silent) b.focus();
   }
+  function closePanels() { closePanel(null, true); }
+  Object.keys(PN).forEach(function (k) {
+    $('#' + PN[k][0]).addEventListener('click', function () { if (panelOpen(k)) closePanel(k); else { openPanel(k); if (k === 'map') say('지도 패널을 열었습니다.'); } });
+    $('#' + PN[k][1]).addEventListener('keydown', function (e) { if (e.key === 'Escape') { e.stopPropagation(); closePanel(k); } });
+  });
+  $$('[data-close]').forEach(function (b) { b.addEventListener('click', function () { closePanel(b.dataset.close); }); });
+  function openMap(tab) { openPanel('map'); selectTab(tab || state.mapTab || 'tile'); }
   function selectTab(t) {
     var pin = t === 'pin';
     $('#opTabTile').setAttribute('aria-selected', !pin); $('#opTabPin').setAttribute('aria-selected', pin);
     $('#opPaneTile').hidden = pin; $('#opPanePin').hidden = !pin;
   }
-  mapBtn.addEventListener('click', function () { if (!mapOpen()) { openMap(); say('지도를 열었습니다.'); } else { closeMap(); say('지도를 닫았습니다.'); } });
-  $('#opMapClose').addEventListener('click', function () { closeMap(); mapBtn.focus(); });
-  wrap.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeMap(); mapBtn.focus(); } });
   $('#opTabTile').addEventListener('click', function () { selectTab('tile'); });
   $('#opTabPin').addEventListener('click', function () { selectTab('pin'); });
   $('#opPaneTile').addEventListener('click', function (e) {
     var b = e.target.closest('[data-region]'); if (!b) return;
-    closeMap(); state.cond.region = b.dataset.region; renderChips();
-    ask({ text: state.lastText }, { fromBar: true, note: b.dataset.region + '으로 좁혀 다시 찾았어요' });
+    if (narrow.matches) closePanel('map', true);
+    state.cond.region = b.dataset.region; renderChips();
+    ask({ text: state.lastText }, { fromBar: true, note: b.dataset.region + '으로 좁혀 답변을 갱신했어요' });
   });
+  /* 패널은 입력 독 위에 놓는다 */
+  function syncSheet() {
+    var dock = $('.rn_prompt.is_dock');
+    var off = dock ? Math.max(12, window.innerHeight - dock.getBoundingClientRect().top + 10) : 170;
+    document.documentElement.style.setProperty('--op-dock-off', off + 'px');
+  }
+  var syncTick = 0;
+  function syncLoop() { cancelAnimationFrame(syncTick); var t0 = Date.now(); (function f() { syncSheet(); if (Date.now() - t0 < 500) syncTick = requestAnimationFrame(f); })(); }
+  window.addEventListener('scroll', syncLoop, { passive: true }); window.addEventListener('resize', syncLoop);
+  form.addEventListener('focusin', syncLoop); form.addEventListener('transitionend', syncSheet);
+  syncSheet();
+  /* ── 좌측 전역 패널(레이아웃에 포함, 기본은 레일) ── */
+  var side = $('#opSide'), sideTg = $('#opSideToggle'), sideM = $('#opSideMenuBtn');
+  function setSide(wide, keep) {
+    side.classList.toggle('is_wide', wide); sideTg.setAttribute('aria-expanded', wide); sideTg.setAttribute('aria-label', wide ? '메뉴 접기' : '메뉴 펼치기');
+    document.documentElement.style.setProperty('--side-pref', wide ? '236px' : '68px');
+    $$('.op_si').forEach(function (a) { var l = $('.op_lbl', a); if (wide) a.removeAttribute('title'); else a.title = l ? l.textContent : ''; });
+    if (!keep) { try { localStorage.setItem('op_side_wide', wide ? '1' : '0'); } catch (e) { } }
+    syncLoop();
+  }
+  try { setSide(localStorage.getItem('op_side_wide') === '1', true); } catch (e) { setSide(false, true); }
+  sideTg.addEventListener('click', function () { setSide(!side.classList.contains('is_wide')); });
+  sideM.addEventListener('click', function () { var o = !side.classList.contains('is_m_open'); side.classList.toggle('is_m_open', o); sideM.setAttribute('aria-expanded', o); sideM.setAttribute('aria-label', o ? '메뉴 닫기' : '메뉴 열기'); });
+  side.addEventListener('keydown', function (e) { if (e.key === 'Escape' && side.classList.contains('is_m_open')) { sideM.click(); sideM.focus(); } });
+  $('#opNewBtn').addEventListener('click', function () { newChat(false); side.classList.remove('is_m_open'); });
 
   /* ── 답변 내 상호작용(위임) ── */
   col.addEventListener('click', function (e) {
@@ -254,22 +313,6 @@
     if (f) { e.preventDefault(); input.focus(); }
   });
 
-  /* ── 팝오버(바로가기·계정) ── */
-  var pops = [['opGoBtn', 'opGoPop'], ['opAcctBtn', 'opAcctPop']];
-  function closePops(except) {
-    pops.forEach(function (p) { if (p[0] === except) return; var b = $('#' + p[0]), el = $('#' + p[1]); el.hidden = true; b.setAttribute('aria-expanded', 'false'); });
-  }
-  pops.forEach(function (p) {
-    var b = $('#' + p[0]), el = $('#' + p[1]);
-    b.addEventListener('click', function (e) {
-      e.stopPropagation(); closePops(p[0]);
-      var open = el.hidden; el.hidden = !open; b.setAttribute('aria-expanded', open);
-      if (open) { var f = $('a, button, input', el); if (f) f.focus(); }
-    });
-    el.addEventListener('keydown', function (e) { if (e.key === 'Escape') { e.stopPropagation(); closePops(); b.focus(); } });
-  });
-  doc.addEventListener('click', function (e) { if (!e.target.closest('.op_popwrap')) closePops(); });
-
   /* ── 계정(시안) ── */
   function setUser(on) {
     state.user = on;
@@ -277,47 +320,25 @@
     $('#opAcctLabel').textContent = on ? '홍길동' : '로그인';
     $('#opDrawerNote').textContent = on ? '계정에 저장된 대화 기록입니다. 설정에서 저장을 끄거나 전체 삭제할 수 있어요.' : '이 기기에만 저장된 최근 검색입니다. 로그인하면 계정에 저장할 수 있어요.';
   }
-  $('#opLoginBtn').addEventListener('click', function () { setUser(true); say('로그인했습니다. (시안)'); $('#opAcctBtn').focus(); closePops(); });
-  $('#opLogoutBtn').addEventListener('click', function () { setUser(false); say('로그아웃했습니다.'); closePops(); $('#opAcctBtn').focus(); });
+  $('#opLoginBtn').addEventListener('click', function () { setUser(true); say('로그인했습니다. (시안)'); });
+  $('#opLogoutBtn').addEventListener('click', function () { setUser(false); say('로그아웃했습니다.'); });
   $('#opAcctIn').addEventListener('click', function (e) {
     var b = e.target.closest('[data-acct]'); if (!b) return;
-    closePops();
-    if (b.dataset.acct === 'hist') openDrawer();
+    if (b.dataset.acct === 'hist') openPanel('hist');
     else if (b.dataset.acct === 'clear') { clearHist(); note('기록을 모두 삭제했습니다 (시안)'); }
     else note('즐겨찾는 기관 (시안 — 준비 중)');
   });
-
-  /* ── 히스토리 드로어 ── */
-  var drawer = $('#opDrawer'), backdrop = $('#opBackdrop'), lastFocus = null;
+  /* ── 기록 ── */
   function histItems() { try { return JSON.parse(localStorage.getItem('rn_recent_q') || '[]'); } catch (e) { return []; } }
   function clearHist() { try { localStorage.removeItem('rn_recent_q'); } catch (e) { } renderHist(); }
   function renderHist() {
     var h = histItems();
     $('#opHist').innerHTML = h.length ? h.map(function (q) { return '<li><button type="button" data-q="' + esc(q) + '">' + esc(q) + '</button></li>'; }).join('') : '<li class="op_empty">아직 검색 기록이 없습니다.</li>';
   }
-  function openDrawer() {
-    lastFocus = doc.activeElement; renderHist(); drawer.hidden = false; backdrop.hidden = false;
-    $('#opHistBtn').setAttribute('aria-expanded', 'true'); $('#opDrawerClose').focus();
-  }
-  function closeDrawer() {
-    drawer.hidden = true; backdrop.hidden = true; $('#opHistBtn').setAttribute('aria-expanded', 'false');
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
-  }
-  $('#opHistBtn').addEventListener('click', openDrawer);
-  $('#opDrawerClose').addEventListener('click', closeDrawer);
-  backdrop.addEventListener('click', closeDrawer);
   $('#opHistClear').addEventListener('click', function () { clearHist(); say('기록을 삭제했습니다.'); });
   $('#opHist').addEventListener('click', function (e) {
     var b = e.target.closest('[data-q]'); if (!b) return;
-    closeDrawer(); ask({ text: b.dataset.q });
-  });
-  drawer.addEventListener('keydown', function (e) {   // 포커스 가두기 + Esc
-    if (e.key === 'Escape') { e.stopPropagation(); closeDrawer(); return; }
-    if (e.key !== 'Tab') return;
-    var f = $$('button', drawer).filter(function (x) { return !x.disabled; }); if (!f.length) return;
-    var first = f[0], last = f[f.length - 1];
-    if (e.shiftKey && doc.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && doc.activeElement === last) { e.preventDefault(); first.focus(); }
+    closePanel('hist', true); ask({ text: b.dataset.q });
   });
 
   /* ── ?q= 딥링크: 로딩 시 자동 질문 ── */
