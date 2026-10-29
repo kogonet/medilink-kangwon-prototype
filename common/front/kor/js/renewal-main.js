@@ -44,7 +44,12 @@
   }
   // 스카이 블루(상단) → 흰색(하단). 이미지 레퍼런스: 상단 #1E90FF 계열 → 연한 하늘색 → 백색
   var STOPS = [[0, 0x1E90FF], [0.26, 0x38C6FF], [0.5, 0x86C4FF], [0.74, 0xD3E8FF], [1, 0xFFFFFF]];
-  var LABS = STOPS.map(function (s) { return [s[0], hexLab(s[1])]; });
+  // 농도 70%: 각 정지점을 흰색과 OKLab 에서 30% 섞는다
+  var STRENGTH = 0.7, WHITE = hexLab(0xFFFFFF);
+  var LABS = STOPS.map(function (s) {
+    var L = hexLab(s[1]);
+    return [s[0], L.map(function (x, j) { return WHITE[j] + (x - WHITE[j]) * STRENGTH; })];
+  });
   var LUT = new Uint8ClampedArray(256 * 3);
   for (var i = 0; i < 256; i++) {
     var v = i / 255, k = 1;

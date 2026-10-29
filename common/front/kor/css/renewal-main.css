@@ -257,7 +257,7 @@ body { color: var(--rn-ink); letter-spacing: -.04em; }
    - 배경 영상은 숨김(video/overlay hidden). 대신 renewal-main.js 가 OKLab 그라데이션 캔버스를 그림
    ════════════════════════════════════════════════════════════════ */
 .hero_wrap .hero_image, .hero_wrap .hero_overlay {display: none !important;}
-.hero_wrap {background: linear-gradient(180deg, #1E90FF 0%, #86C4FF 50%, #fff 100%);}
+.hero_wrap {background: linear-gradient(180deg, #61B1FF 0%, #A9D3FF 50%, #fff 100%);}
 .rn_ambient {position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; display: block; pointer-events: none;}
 .hero_wrap .hero_inner {z-index: 10;}
 
@@ -376,3 +376,6 @@ body .gm_header.is_overlay .gm_rn_toggle[aria-checked="true"] .gm_rn_knob {backg
   .hero_wrap .search_desc {font-size: 14px;}
   .hero_wrap .option_wrap {position: static;}
 }
+
+/* 퀵메뉴는 오버레이: 본문을 좌측으로 밀지 않는다(landing.css 의 --rail-gutter 예약 폭 제거) */
+:root {--rail-gutter: 0px !important;}
