@@ -208,3 +208,16 @@ html:has(#panel-intro,#panel-project) .tp_nav_actions a,
 html:has(#panel-intro,#panel-project) .tp_nav_actions button {border-radius: 0; background: #fff; border: 1px solid var(--rn-ink); color: var(--rn-ink); font-weight: 500;}
 html:has(#panel-intro,#panel-project) .tp_nav_actions a:hover,
 html:has(#panel-intro,#panel-project) .tp_nav_actions button:hover {background: var(--rn-ink); color: #fff;}
+
+/* ── 메뉴 구조: 좌측=홈 섹션(스크롤), 우측 유틸리티=사업소개(페이지 이동) ── */
+.gm_actions {display: flex; grid-column: 3; align-items: center; justify-self: end; gap: 24px; margin-left: auto;}
+.gm_actions .gm_cta {grid-column: auto; justify-self: auto;}
+.gm_header .gm_biz {display: inline-flex; align-items: center; gap: 4px; height: 44px; color: var(--rn-ink); font-size: 14px; font-weight: 500; position: relative;}
+.gm_header .gm_biz:hover {text-decoration: underline; text-underline-offset: 4px;}
+.gm_header .gm_biz[aria-current] {text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px;}
+.gm_header .gm_nav a[aria-current]::after {transform: scaleX(1);}
+.gm_header .gm_nav a.gm_nav_biz {display: none;}
+@media (max-width: 1024px) {
+  .gm_header .gm_biz {display: none;}
+  .gm_header .gm_nav a.gm_nav_biz {display: flex;}
+}
