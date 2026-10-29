@@ -210,7 +210,10 @@
               <button type="button" role="tab" id="opTabTile" aria-selected="true" aria-controls="opPaneTile">시·군 요약</button>
               <button type="button" role="tab" id="opTabPin" aria-selected="false" aria-controls="opPanePin">기관 위치</button>
             </div>
-            <button class="op_x" id="opMapClose" type="button" aria-label="지도 닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+            <div class="op_acts">
+              <button class="op_x" id="opMapSnap" type="button" aria-label="지도 크게 보기" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
+              <button class="op_x" id="opMapClose" type="button" aria-label="지도 닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+            </div>
           </div>
           <div class="op_pane" id="opPaneTile" role="tabpanel" aria-labelledby="opTabTile"></div>
           <div class="op_pane" id="opPanePin" role="tabpanel" aria-labelledby="opTabPin" hidden></div>
