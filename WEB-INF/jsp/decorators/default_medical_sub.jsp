@@ -78,7 +78,7 @@
 		rn.setAttribute('aria-checked', on ? 'true' : 'false');
 		rn.addEventListener('click', function() {
 			document.cookie = 'renewal=' + (on ? '0' : '1') + '; path=/; max-age=31536000; SameSite=Lax';
-			var u = new URL(location.href); u.searchParams.delete('renewal');
+			var u = new URL(location.href); u.searchParams.set('renewal', on ? '0' : '1'); /* 쿠키 미지원 환경 대비: 현재 페이지는 파라미터로도 즉시 전환 */
 			location.href = u.toString();
 		});
 	}
