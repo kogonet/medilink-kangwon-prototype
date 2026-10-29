@@ -21,6 +21,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <decorator:head/>
 <link rel="stylesheet" href="/common/front/kor/css/medical_header.css">
+<%-- [리뉴얼 옵트인] 기본 off = 현재 화면 유지. ?renewal=1 로 미리보기(?renewal=0 은 강제 off).
+     적용 확정 시 renewalDefault 값을 true 로 변경. 롤백은 false 로 되돌리면 됨. --%>
+<c:set var="renewalDefault" value="false"/>
+<c:if test="${(renewalDefault and param.renewal ne '0') or param.renewal eq '1'}">
+<link rel="stylesheet" href="/common/front/kor/css/renewal-footer.css">
+</c:if>
 </head>
 <body class="gm_layout_solid <decorator:getProperty property="body.class"/>">
 

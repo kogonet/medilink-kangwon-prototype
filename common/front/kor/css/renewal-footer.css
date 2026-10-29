@@ -1,0 +1,168 @@
+/* 메디링크 강원 리뉴얼(v1) 옵트인 레이어 — 회사소개/사업소개 한정. default_medical_sub.jsp 의 renewal 스위치로만 로드됨. */
+html:has(#panel-intro,#panel-project) {--rn-ink: #090909; --rn-paper: #fff; --rn-gray: #f1f1f1; --rn-muted: #666; --rn-rule: #e5e5e5; --rn-hair: #dedede; --rn-accent: #0038C3; --rn-accent-text: #004EA2; --rn-accent-bg: #E9EEFA; --rn-accent-on-dark: #8DB9F0; --rn-body: 13px; --rn-gutter: 40px;}
+html:has(#panel-intro,#panel-project),
+html:has(#panel-intro,#panel-project) body {font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif; font-size: var(--rn-body); line-height: 1.5; color: var(--rn-ink); background: var(--rn-paper) !important;}
+html:has(#panel-intro,#panel-project) :focus-visible {outline: 2px solid var(--rn-ink); outline-offset: 3px;}
+html:has(#panel-intro,#panel-project) .hero {background: var(--rn-paper); border-bottom: 1px solid var(--rn-ink); padding: 72px var(--rn-gutter) 64px;}
+html:has(#panel-intro,#panel-project) .hero-title {font-size: clamp(34px, 5.2vw, 56px); font-weight: 500; line-height: 1.08; letter-spacing: -.045em; color: var(--rn-ink); margin-bottom: 24px;}
+html:has(#panel-intro,#panel-project) .hero-lead {font-size: clamp(16px, 2.2vw, 20px); font-weight: 500; line-height: 1.45; letter-spacing: -.03em; color: var(--rn-ink); margin-bottom: 16px;}
+html:has(#panel-intro,#panel-project) .hero-lead em {color: var(--rn-accent-text); background: none; -webkit-text-fill-color: currentColor; -webkit-background-clip: border-box; background-clip: border-box; animation: none;}
+html:has(#panel-intro,#panel-project) .hero-desc {font-size: var(--rn-body); color: var(--rn-muted); max-width: 640px; line-height: 1.7; margin-bottom: 0;}
+html:has(#panel-intro,#panel-project) .main {padding-top: 0; padding-bottom: 96px; gap: 0 !important;}
+html:has(#panel-intro,#panel-project) .section {padding: 56px 0 64px; border-top: 1px solid var(--rn-ink);}
+html:has(#panel-intro,#panel-project) .section:first-child {border-top: 0;}
+html:has(#panel-intro,#panel-project) .section-hd {margin-bottom: 32px;}
+html:has(#panel-intro,#panel-project) .section-eyebrow {font-size: 12px; font-weight: 500; letter-spacing: .06em; color: var(--rn-accent-text); margin-bottom: 12px;}
+html:has(#panel-intro,#panel-project) .section-title {font-size: clamp(22px, 2.8vw, 32px); font-weight: 500; line-height: 1.2; letter-spacing: -.04em; color: var(--rn-ink); margin-bottom: 12px; max-width: 880px;}
+html:has(#panel-intro,#panel-project) .section-desc {font-size: var(--rn-body); line-height: 1.7; color: var(--rn-muted); max-width: 720px;}
+html:has(#panel-intro,#panel-project) .why-kicker {font-size: 11px; font-weight: 500; letter-spacing: .08em; color: var(--rn-muted);}
+html:has(#panel-intro,#panel-project) .eco-diagram,
+html:has(#panel-intro,#panel-project) .layer-table,
+html:has(#panel-intro,#panel-project) .deck-foot {border-radius: 0;}
+html:has(#panel-intro,#panel-project) .eco-node,
+html:has(#panel-intro,#panel-project) .why-steps li,
+html:has(#panel-intro,#panel-project) .why-need li,
+html:has(#panel-intro,#panel-project) .anchor-in-card {background: var(--rn-gray); border-radius: 0; transition: background .2s, color .2s;}
+html:has(#panel-intro,#panel-project) .eco-node:hover,
+html:has(#panel-intro,#panel-project) .why-steps li:hover,
+html:has(#panel-intro,#panel-project) .why-need li:hover,
+html:has(#panel-intro,#panel-project) .anchor-in-card:hover {background: var(--rn-ink); color: var(--rn-paper);}
+html:has(#panel-intro,#panel-project) .eco-node:hover .eco-cat,
+html:has(#panel-intro,#panel-project) .why-steps li:hover span,
+html:has(#panel-intro,#panel-project) .anchor-in-card:hover .why-kicker {color: var(--rn-accent-on-dark);}
+html:has(#panel-intro,#panel-project) .eco-node:hover .eco-nm,
+html:has(#panel-intro,#panel-project) .why-steps li:hover strong,
+html:has(#panel-intro,#panel-project) .why-need li:hover strong,
+html:has(#panel-intro,#panel-project) .anchor-in-card:hover strong {color: var(--rn-paper);}
+html:has(#panel-intro,#panel-project) .why-steps li:hover p,
+html:has(#panel-intro,#panel-project) .why-need li:hover span {color: #d4d4d4;}
+html:has(#panel-intro,#panel-project) .eco-diagram {background: var(--rn-paper); border: 1px solid var(--rn-hair);}
+html:has(#panel-intro,#panel-project) .eco-spoke {background: var(--rn-hair);}
+html:has(#panel-intro,#panel-project) .eco-hub {border-radius: 0; background: var(--rn-ink); color: var(--rn-paper); box-shadow: none;}
+html:has(#panel-intro,#panel-project) .eco-hub strong {font-weight: 500; letter-spacing: -.03em;}
+html:has(#panel-intro,#panel-project) .eco-hub span {font-weight: 500; opacity: 1; color: var(--rn-accent-on-dark);}
+html:has(#panel-intro,#panel-project) .eco-node {padding: 14px 10px;}
+html:has(#panel-intro,#panel-project) .eco-node::after {border-radius: 0; background: var(--rn-ink); width: 7px; height: 7px;}
+html:has(#panel-intro,#panel-project) .eco-cat {font-weight: 500; letter-spacing: .06em; color: var(--rn-accent-text);}
+html:has(#panel-intro,#panel-project) .eco-nm {font-weight: 500; letter-spacing: -.02em; color: var(--rn-ink);}
+html:has(#panel-intro,#panel-project) .why-steps li,
+html:has(#panel-intro,#panel-project) .why-need li {padding: 18px 20px;}
+html:has(#panel-intro,#panel-project) .why-steps span {font-weight: 500; color: var(--rn-accent-text);}
+html:has(#panel-intro,#panel-project) .why-steps strong {font-weight: 500; letter-spacing: -.03em; color: var(--rn-ink);}
+html:has(#panel-intro,#panel-project) .why-steps p {color: var(--rn-muted);}
+html:has(#panel-intro,#panel-project) .why-need strong {font-weight: 500; letter-spacing: -.02em; color: var(--rn-ink);}
+html:has(#panel-intro,#panel-project) .why-need span {color: var(--rn-muted);}
+html:has(#panel-intro,#panel-project) .why-mid {color: var(--rn-ink);}
+html:has(#panel-intro,#panel-project) .why-issue {border-radius: 0; background: var(--rn-ink); color: var(--rn-paper);}
+html:has(#panel-intro,#panel-project) .why-issue span {font-weight: 500; opacity: 1; color: var(--rn-accent-on-dark);}
+html:has(#panel-intro,#panel-project) .why-issue strong {font-weight: 500; letter-spacing: .04em;}
+html:has(#panel-intro,#panel-project) .deck-foot {background: var(--rn-paper); border: 0; border-top: 1px solid var(--rn-rule); margin-top: 40px; padding: 32px 0 0; font-weight: 500; letter-spacing: -.04em; color: var(--rn-ink);}
+html:has(#panel-intro,#panel-project) .deck-foot em {color: var(--rn-ink); background: linear-gradient(180deg, transparent 58%, var(--rn-accent-bg) 58%);}
+html:has(#panel-intro,#panel-project) .anchor-in-card strong {font-weight: 500; letter-spacing: -.03em; color: var(--rn-ink);}
+html:has(#panel-intro,#panel-project) .anchor-core {border-radius: 0; background: var(--rn-accent); color: var(--rn-paper);}
+html:has(#panel-intro,#panel-project) .anchor-core-hd {border-bottom-color: rgba(255,255,255,.4);}
+html:has(#panel-intro,#panel-project) .anchor-core-hd span {font-weight: 500; opacity: 1;}
+html:has(#panel-intro,#panel-project) .anchor-core-hd strong {font-weight: 500;}
+html:has(#panel-intro,#panel-project) .anchor-core li {font-weight: 500; border-bottom-color: rgba(255,255,255,.25);}
+html:has(#panel-intro,#panel-project) .anchor-core li span {font-weight: 500; opacity: .85;}
+html:has(#panel-intro,#panel-project) .anchor-out {border-radius: 0; background: var(--rn-ink); color: var(--rn-paper);}
+html:has(#panel-intro,#panel-project) .anchor-out .why-kicker {color: var(--rn-accent-on-dark);}
+html:has(#panel-intro,#panel-project) .anchor-out > strong {font-weight: 500; letter-spacing: -.04em;}
+html:has(#panel-intro,#panel-project) .anchor-out li {font-weight: 400; color: #e5e5e5;}
+html:has(#panel-intro,#panel-project) .anchor-out li::before {border-radius: 0; background: var(--rn-accent-on-dark);}
+html:has(#panel-intro,#panel-project) .layer-table {background: var(--rn-paper); border: 0; border-top: 1px solid var(--rn-ink); border-bottom: 1px solid var(--rn-ink); padding: 8px 0 4px;}
+html:has(#panel-intro,#panel-project) .layer-head,
+html:has(#panel-intro,#panel-project) .layer-row {border-top-color: var(--rn-rule);}
+html:has(#panel-intro,#panel-project) .layer-head {border-top: 0;}
+html:has(#panel-intro,#panel-project) .layer-head-l,
+html:has(#panel-intro,#panel-project) .layer-caps {color: var(--rn-muted); font-weight: 500;}
+html:has(#panel-intro,#panel-project) .layer-title {font-weight: 500; letter-spacing: -.03em; color: var(--rn-ink);}
+html:has(#panel-intro,#panel-project) .layer-title em {border-radius: 0; font-weight: 500; background: var(--rn-ink); color: var(--rn-paper);}
+html:has(#panel-intro,#panel-project) .layer-copy p {color: var(--rn-muted);}
+html:has(#panel-intro,#panel-project) .layer-dots i {border-radius: 0; width: 10px; height: 10px; background: var(--rn-rule);}
+html:has(#panel-intro,#panel-project) .layer-dots i.on {background: var(--rn-accent);}
+@media (max-width: 900px) {
+html:has(#panel-intro,#panel-project) .layer-dots i,
+html:has(#panel-intro,#panel-project) .layer-dots i.on {width: auto; height: auto; background: none;}
+html:has(#panel-intro,#panel-project) .layer-dots i::before {border-radius: 0; background: var(--rn-rule);}
+html:has(#panel-intro,#panel-project) .layer-dots i.on::before {background: var(--rn-accent);}
+html:has(#panel-intro,#panel-project) .layer-dots i::after {color: var(--rn-muted); font-style: normal;}
+html:has(#panel-intro,#panel-project) .layer-dots i.on::after {color: var(--rn-accent-text);}
+html:has(#panel-intro,#panel-project) .section {padding: 40px 0 48px;}
+}
+@media (max-width: 680px) {
+html:has(#panel-intro,#panel-project) .hero {padding: 48px 20px 40px;}
+html:has(#panel-intro,#panel-project) .deck-foot {padding: 24px 0 0;}
+}
+@media (prefers-reduced-motion: reduce) {
+html:has(#panel-intro,#panel-project) .eco-node,
+html:has(#panel-intro,#panel-project) .why-steps li,
+html:has(#panel-intro,#panel-project) .why-need li,
+html:has(#panel-intro,#panel-project) .anchor-in-card {transition: none;}
+}
+/* ── 사업소개(project.jsp) 전용 레이어: rm-* ── */
+html:has(#panel-project) .hero-kicker {font-weight: 500; letter-spacing: .08em; color: var(--rn-accent-text);}
+html:has(#panel-project) .rm-path {gap: 0; max-width: none; border-top: 1px solid var(--rn-ink);}
+html:has(#panel-project) .rm-path li {background: var(--rn-paper); border-radius: 0; border-bottom: 1px solid var(--rn-rule); padding: 14px 16px; flex: 1 1 220px;}
+html:has(#panel-project) .rm-path li span {font-weight: 500; color: var(--rn-accent-text);}
+html:has(#panel-project) .rm-path li strong {font-weight: 500; color: var(--rn-ink); letter-spacing: -.02em;}
+html:has(#panel-project) .rm-path li em {background: var(--rn-gray); color: var(--rn-muted); border-radius: 0; font-weight: 500;}
+html:has(#panel-project) .rm-path-note {font-weight: 500; color: var(--rn-muted);}
+html:has(#panel-project) .rm-agenda {gap: 0; border-top: 1px solid var(--rn-ink);}
+html:has(#panel-project) .rm-agenda li {background: var(--rn-paper); border-radius: 0; border-bottom: 1px solid var(--rn-rule); padding: 22px 20px; transition: background .2s, color .2s;}
+html:has(#panel-project) .rm-agenda li:hover {background: var(--rn-ink); color: var(--rn-paper);}
+html:has(#panel-project) .rm-agenda span {font-weight: 500; color: var(--rn-accent-text);}
+html:has(#panel-project) .rm-agenda strong {font-weight: 500; color: var(--rn-ink); letter-spacing: -.03em;}
+html:has(#panel-project) .rm-agenda p {color: var(--rn-muted);}
+html:has(#panel-project) .rm-agenda li:hover span {color: var(--rn-accent-on-dark);}
+html:has(#panel-project) .rm-agenda li:hover strong {color: var(--rn-paper);}
+html:has(#panel-project) .rm-agenda li:hover p {color: #d4d4d4;}
+/* 동심원 다이어그램: 면/그림자 제거, 1px 선 + 단색 */
+html:has(#panel-project) .rm-map {background: var(--rn-paper); border: 1px solid var(--rn-hair); border-radius: 0;}
+html:has(#panel-project) .rm-dia-rail {background: var(--rn-ink); width: 1px;}
+html:has(#panel-project) .rm-dia-yr {border: 1px solid var(--rn-ink); border-radius: 0; box-shadow: none; background: var(--rn-paper); color: var(--rn-ink); font-weight: 500;}
+html:has(#panel-project) .rm-dia-yr-26 {background: var(--rn-accent); border-color: var(--rn-accent); color: #fff; box-shadow: none;}
+html:has(#panel-project) .rm-dia-c4 {background: var(--rn-paper); border: 1px solid var(--rn-ink);}
+html:has(#panel-project) .rm-dia-c3 {background: #fafafa; border: 1px solid var(--rn-ink);}
+html:has(#panel-project) .rm-dia-c2 {background: var(--rn-gray); border: 1px solid var(--rn-ink);}
+html:has(#panel-project) .rm-dia-c1 {background: var(--rn-accent-bg); border: 1px solid var(--rn-accent);}
+html:has(#panel-project) .rm-dia-core {background: var(--rn-accent); border: 0; box-shadow: none;}
+html:has(#panel-project) .rm-dia-core strong {color: #fff; opacity: .8; font-weight: 500;}
+html:has(#panel-project) .rm-dia-core span {font-weight: 500;}
+html:has(#panel-project) .rm-dia-copy span {color: var(--rn-accent-text); font-weight: 500;}
+html:has(#panel-project) .rm-dia-copy strong {color: var(--rn-ink); font-weight: 500; letter-spacing: -.03em;}
+html:has(#panel-project) .rm-dia-copy p {color: var(--rn-muted);}
+html:has(#panel-project) .rm-dia-side {color: var(--rn-muted);}
+/* 모바일 대체 레이어 */
+html:has(#panel-project) .rm-m-ly {border-radius: 0; border: 1px solid var(--rn-ink);}
+html:has(#panel-project) .rm-m-4 {background: var(--rn-paper); border-color: var(--rn-ink);}
+html:has(#panel-project) .rm-m-3 {background: #fafafa; border-color: var(--rn-ink);}
+html:has(#panel-project) .rm-m-2 {background: var(--rn-gray); border-color: var(--rn-ink);}
+html:has(#panel-project) .rm-m-1 {background: var(--rn-accent-bg); border-color: var(--rn-accent);}
+html:has(#panel-project) .rm-m-ly time {border-radius: 0; border: 1px solid var(--rn-ink); color: var(--rn-ink); font-weight: 500;}
+html:has(#panel-project) .rm-m-1 time {background: var(--rn-accent); border-color: var(--rn-accent); color: #fff;}
+html:has(#panel-project) .rm-m-ly header span, html:has(#panel-project) .rm-m-ly header b {color: var(--rn-accent-text); font-weight: 500;}
+html:has(#panel-project) .rm-m-ly header em {color: var(--rn-muted); font-weight: 500;}
+html:has(#panel-project) .rm-m-ly > strong {color: var(--rn-ink); font-weight: 500;}
+html:has(#panel-project) .rm-m-ly > p, html:has(#panel-project) .rm-m-cap {color: var(--rn-muted) !important;}
+html:has(#panel-project) .rm-m-core {background: var(--rn-accent); border: 0; box-shadow: none; border-radius: 50%;}
+html:has(#panel-project) .rm-m-core strong {color: #fff; opacity: .8;}
+html:has(#panel-project) .rm-m-side li {background: var(--rn-gray); border-radius: 0; color: var(--rn-ink); font-weight: 500;}
+/* 3열 카드 */
+html:has(#panel-project) .rm-who {gap: 0; border-top: 1px solid var(--rn-ink);}
+html:has(#panel-project) .rm-card {background: var(--rn-paper); border-radius: 0; border-right: 1px solid var(--rn-rule); border-bottom: 1px solid var(--rn-rule);}
+html:has(#panel-project) .rm-card:last-child {border-right: 0;}
+html:has(#panel-project) .rm-card-hd {background: var(--rn-gray); color: var(--rn-ink); font-weight: 500; border-radius: 0;}
+html:has(#panel-project) .rm-card-navy .rm-card-hd {background: var(--rn-accent); color: #fff;}
+html:has(#panel-project) .rm-card-lead {color: var(--rn-ink); font-weight: 500;}
+html:has(#panel-project) .rm-card dl div {border-top: 1px solid var(--rn-rule);}
+html:has(#panel-project) .rm-card dt {color: var(--rn-accent-text); font-weight: 500;}
+html:has(#panel-project) .rm-card dd {color: var(--rn-ink); font-weight: 500;}
+@media (max-width: 760px) {
+  html:has(#panel-project) .hero {padding: 48px 20px 40px;}
+  html:has(#panel-project) .rm-card {border-right: 0;}
+}
+/* 원본의 옅은 면 배경 제거 → 백지 + 1px 선 */
+html:has(#panel-intro,#panel-project) .section,
+html:has(#panel-intro,#panel-project) .main,
+html:has(#panel-intro,#panel-project) .page_scroll {background: var(--rn-paper);}
