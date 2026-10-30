@@ -21,7 +21,7 @@
         var k = f.dataset.ac;
         if (k === 'login') { location.href = 'index.html'; return; }
         if (k === 'join') { var a = f.querySelector('#pw').value, b = f.querySelector('#pw2').value; if (a !== b) { msg(f, '비밀번호가 서로 달라요.'); f.querySelector('#pw2').focus(); return; } msg(f, '가입 신청을 받았어요. (시안 — 실제로 가입되지 않습니다)', true); return; }
-        msg(f, '입력하신 정보로 안내를 보냈어요. (시안 — 실제로 발송되지 않습니다)', true);
+        msg(f, '입력하신 정보로 안내를 보냈어요.', true);
       });
     });
     var tid = document.getElementById('tId'), tpw = document.getElementById('tPw');
@@ -80,15 +80,29 @@
       var n = 0;
       D.forEach(function (d, i) {
         var m = match(d); if (m) n++;
-        list.children[i].hidden = !m; var p = pins.children[i]; if (p) p.hidden = !m;
+        list.querySelector('li[data-i="' + i + '"]').hidden = !m; var p = pins.children[i]; if (p) p.hidden = !m;
       });
-      list.lastChild.hidden = n > 0; $('#mpCnt').textContent = n + '곳';
+      list.querySelector('.mp_none').hidden = n > 0; $('#mpCnt').textContent = n + '곳';
     }
+
+    /* 정렬 옵션: 선택한 상태(진료 중 / 진료 종료)를 먼저 보여 줌 · 다시 누르면 기본 순서 */
+    var sortEl = $('#mpSort'), sortBy = '';
+    var sts = D.map(function (d) { return d.s; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).sort(function (a, b) { return /종료/.test(a) - /종료/.test(b); });
+    sortEl.innerHTML = sts.map(function (s) { return '<button type="button" class="' + (/종료/.test(s) ? 'closed' : 'open') + '" data-s="' + s + '" aria-pressed="false">' + s.replace(/\s/g, '') + '</button>'; }).join('');
+    function applySort() {
+      var none = list.querySelector('.mp_none');
+      [].slice.call(list.querySelectorAll('li[data-i]')).sort(function (a, b) {
+        var ra = sortBy && D[+a.dataset.i].s !== sortBy ? 1 : 0, rb = sortBy && D[+b.dataset.i].s !== sortBy ? 1 : 0;
+        return ra - rb || a.dataset.i - b.dataset.i;
+      }).forEach(function (li) { list.insertBefore(li, none); });
+      [].forEach.call(sortEl.children, function (b) { var on = b.dataset.s === sortBy; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+    }
+    sortEl.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; sortBy = sortBy === b.dataset.s ? '' : b.dataset.s; applySort(); });
     function select(i, scroll) {
       sel = i;
-      [].forEach.call(list.querySelectorAll('.mp_item'), function (b, k) { b.classList.toggle('is_on', k === i); });
+      [].forEach.call(list.querySelectorAll('li[data-i]'), function (li) { li.querySelector('.mp_item').classList.toggle('is_on', +li.dataset.i === i); });
       [].forEach.call(pins.children, function (p, k) { p.classList.toggle('is_on', k === i); });
-      if (scroll) list.children[i].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      if (scroll) list.querySelector('li[data-i="' + i + '"]').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
     chips.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; g = b.textContent; [].forEach.call(chips.children, function (c) { c.classList.toggle('on', c === b); c.setAttribute('aria-pressed', c === b); }); render(); });
     $('#mpInp').addEventListener('input', function (e) { q = e.target.value.trim(); render(); });
@@ -99,10 +113,11 @@
     $('#mpZout').addEventListener('click', function () { zoomTo(zoom - .2); });
     function setView(v) {
       mp.classList.toggle('is_list', v === 'list');
-      [].forEach.call(mp.querySelectorAll('.mp_toggle button'), function (b) { var on = b.dataset.v === v; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+      [].forEach.call(mp.querySelectorAll('.mp_toggle button[data-v="map"], .mp_toggle button[data-v="list"]'), function (b) { var on = b.dataset.v === v; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+      var sw = mp.querySelector('.mp_sw'); if (sw) sw.setAttribute('aria-checked', v === 'list');
       if (mapBtn) mapBtn.classList.toggle('is_on', v === 'map');
     }
-    $('.mp_toggle').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) setView(b.dataset.v); });
+    $('.mp_toggle').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; setView(b.dataset.v === 'toggle' ? (mp.classList.contains('is_list') ? 'map' : 'list') : b.dataset.v); });
     if (mapBtn) { mapBtn.addEventListener('click', function () { setView('map'); }); mapBtn.classList.add('is_on'); }
     render();
   } else if (mapBtn) {

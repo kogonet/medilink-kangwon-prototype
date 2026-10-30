@@ -25,7 +25,8 @@
     <a href="er-live.html">응급실 LIVE</a>
   </nav>
   <button class="op_ub op_side_m" id="opSideMenuBtn" type="button" aria-expanded="false" aria-controls="opSideNav" aria-label="바로가기 열기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-  <button class="op_ub" id="opMapBtn" type="button" aria-label="지도 보기" title="지도 보기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.5v13L9 17l6 3 6-2.5v-13L15 7zM9 4v13M15 7v13"/></svg></button>
+  <button class="op_ub" id="opMapBtn" type="button" aria-label="지도 보기" title="지도 보기" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.5v13L9 17l6 3 6-2.5v-13L15 7zM9 4v13M15 7v13"/></svg></button>
+  <button class="op_ub" id="opHistBtn" type="button" aria-label="채팅 기록" title="채팅 기록" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h14v10H9l-4 3z"/></svg></button>
   <a class="op_ub" id="opAcctBtn" href="login.html" aria-label="로그인" title="로그인"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span class="op_sr" id="opAcctLabel">로그인</span></a>
 </div>
 
@@ -34,18 +35,18 @@
 <section class="mp" id="mp" aria-label="병·의원 찾기">
   <div class="mp_map" id="mpMap" role="img" aria-label="지도 영역(시안). 모든 정보는 왼쪽 목록에도 있습니다.">
     <div class="mp_pins" id="mpPins"><button class="mp_pin" type="button" data-i="0" style="left:40%;top:34%" aria-label="1번 기관 선택"><span>1</span></button><button class="mp_pin" type="button" data-i="1" style="left:58%;top:26%" aria-label="2번 기관 선택"><span>2</span></button><button class="mp_pin" type="button" data-i="2" style="left:72%;top:52%" aria-label="3번 기관 선택"><span>3</span></button><button class="mp_pin" type="button" data-i="3" style="left:48%;top:58%" aria-label="4번 기관 선택"><span>4</span></button><button class="mp_pin" type="button" data-i="4" style="left:36%;top:66%" aria-label="5번 기관 선택"><span>5</span></button><button class="mp_pin" type="button" data-i="5" style="left:64%;top:74%" aria-label="6번 기관 선택"><span>6</span></button><button class="mp_pin" type="button" data-i="6" style="left:52%;top:82%" aria-label="7번 기관 선택"><span>7</span></button><button class="mp_pin" type="button" data-i="7" style="left:82%;top:30%" aria-label="8번 기관 선택"><span>8</span></button></div>
-    <span class="mp_ph">지도 영역 (시안)</span>
     <div class="mp_zoom" role="group" aria-label="지도 확대·축소"><button type="button" id="mpZin" aria-label="확대">＋</button><button type="button" id="mpZout" aria-label="축소">－</button></div>
   </div>
   <div class="mp_toggle" role="group" aria-label="보기 방식">
     <button type="button" class="on" data-v="map" aria-pressed="true">지도 보기</button>
+    <button type="button" class="mp_sw" role="switch" aria-checked="false" aria-label="목록 보기로 전환" data-v="toggle"><i></i></button>
     <button type="button" data-v="list" aria-pressed="false">목록 보기</button>
   </div>
   <div class="mp_panel" id="mpPanel">
     <div class="mp_search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
       <label class="op_sr" for="mpInp">병·의원 이름 또는 주소 검색</label><input id="mpInp" type="search" placeholder="병·의원 이름 또는 주소 검색" autocomplete="off"></div>
     <div class="mp_chips" id="mpChips" role="group" aria-label="시·군 필터"></div>
-    <div class="mp_hd"><strong id="mpCnt">0곳</strong><span class="op_sample">시안 · 샘플 데이터</span></div>
+    <div class="mp_hd"><strong id="mpCnt">0곳</strong><div class="mp_sort" id="mpSort" role="group" aria-label="정렬"></div></div>
     <ul class="mp_list" id="mpList"></ul>
   </div>
 </section>
