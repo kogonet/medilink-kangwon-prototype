@@ -1,0 +1,13 @@
+/* 메디링크 강원 리뉴얼 — 메인(index) 전용. rn.css 다음에 로드 */
+
+/* ═════════════════ 메인 히어로 ═════════════════ */
+/* 메인 히어로: 화이트 배경 (dev index.jsp 의 영상 배경 대신) */
+.hero_wrap { background: #fff !important; }
+
+/* 메인 히어로 보정 */
+.hero_wrap .hero_content { padding-top: 150px; }
+html.hs-live .hero_wrap .hero_inner { position: relative; z-index: 10; }
+body::before { background: rgba(255,255,255,.78); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+@media (max-width: 760px) {
+  .hero_wrap form.search_form.rn_prompt.is_hero { max-width: calc(100vw - 32px); left: 16px; }
+}

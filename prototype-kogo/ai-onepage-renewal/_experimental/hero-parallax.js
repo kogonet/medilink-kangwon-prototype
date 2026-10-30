@@ -2,6 +2,7 @@
  * 히어로가 화면 밖이거나 세션(hs-live)이 열려 있으면 계산하지 않는다. 움직임 줄이기 설정이면 정지 */
 (function () {
   'use strict';
+  if (new URLSearchParams(window.location.search).get('bg') !== 'original') return;
   var hero = document.querySelector('.hero_wrap'); if (!hero) return;
   var bg = document.createElement('div'); bg.className = 'hero_bg'; bg.setAttribute('aria-hidden', 'true');
   hero.insertBefore(bg, hero.firstChild);

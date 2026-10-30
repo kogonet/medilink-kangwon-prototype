@@ -6,31 +6,12 @@
 <title>회사소개 - 메디링크 강원</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="/common/front/kor/css/landing.css">
-<link rel="stylesheet" href="/common/front/kor/css/renewal-main.css">
-<link rel="stylesheet" href="/common/front/kor/css/renewal-dock.css">
-<link rel="stylesheet" href="onepage.css">
-<link rel="stylesheet" href="subpage.css">
-<link rel="stylesheet" href="info.css">
-<script src="/common/front/kor/js/renewal-dock.js" defer></script>
-<link rel="stylesheet" href="hospital-session.css">
+<!-- 리뉴얼 레이어: 원안 CSS 다음 -->
+<link rel="stylesheet" href="common/front/kor/css/rn.css">
+<link rel="stylesheet" href="common/front/kor/css/rn-sub.css">
+<link rel="stylesheet" href="common/front/kor/css/rn-docs.css">
 </head>
 <body class="op_sub op_info">
-<a class="op_skip" href="#main">본문으로 바로가기</a>
-<!-- 공통 모듈 ① 헤더(좌 로고 / 우 메뉴·지도·계정) — 원페이지 index.html 과 동일 마크업 -->
-<aside class="op_side" id="opSide" aria-label="전역 메뉴">
-  <a class="op_logo" id="opLogo" href="index.html" aria-label="메디링크 강원 홈"><img src="/common/front/kor/images/medilink-bi.svg" alt="메디링크 강원 MediLink Kangwon"></a>
-</aside>
-<div class="op_util" id="opUtil" role="toolbar" aria-label="바로가기와 대화 도구">
-  <nav class="op_tnav" id="opSideNav" aria-label="바로가기">
-    <a href="hospital.html">병·의원 찾기</a>
-    <a href="pharmacy.html">약국 찾기</a>
-    <a href="er-live.html">응급실 LIVE</a>
-  </nav>
-  <button class="op_ub op_side_m" id="opSideMenuBtn" type="button" aria-expanded="false" aria-controls="opSideNav" aria-label="바로가기 열기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-  <button class="op_ub" id="opMapBtn" type="button" aria-label="지도 보기" title="지도 보기" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.5v13L9 17l6 3 6-2.5v-13L15 7zM9 4v13M15 7v13"/></svg></button>
-  <button class="op_ub" id="opHistBtn" type="button" aria-label="채팅 기록" title="채팅 기록" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h14v10H9l-4 3z"/></svg></button>
-  <a class="op_ub" id="opAcctBtn" href="login.html" aria-label="로그인" title="로그인"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span class="op_sr" id="opAcctLabel">로그인</span></a>
-</div>
 
 <main id="main" tabindex="-1">
 <div class="ip">
@@ -277,56 +258,10 @@
 
 </div>
 </main>
-<!-- 공통 모듈 ② 퀵링크 -->
-<aside class="quick_wrap" aria-label="퀵메뉴">
-      <div class="quick_group">
-        <span class="quick_title">QUICK<br>MENU</span>
-        <ul class="quick_list">
-          <li>
-            <a class="quick_link" href="/front/medical/vaccinationList.do">
-              <span class="quick_icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a1 1 0 0 1-1.4 0l-2.6-2.6a1 1 0 0 1 0-1.4L15 5M9 11l4 4M5 19l-3 3M14 4l6 6"/></svg></span>
-              <span class="quick_name">예방접종<br>병원찾기</span>
-            </a>
-          </li>
-                  <li class="quick_partner">
-            <a class="quick_link" href="http://pt-ai.ctit.co.kr/knuh/ai-consult.do" target="_blank" rel="noopener" title="강원대학교병원 AI 상담 열기">
-          <img class="quick_logo" src="/common/front/kor/images/knuh_ci.png" alt="" width="371" height="128">
-          <span class="quick_name">강원대학교<br>병원</span>
-        </a>
-          </li>
-        </ul>
-      </div>
-      <a class="quick_top" href="#top" aria-label="맨 위로 이동">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
-      </a>
-    </aside><footer class="site-ft" id="opFooter">
-  <div class="ft_in">
-    <div class="ft_top">
-      <a href="index.html" class="ft-bi" aria-label="메디링크 강원 맨 위로"><img src="/common/front/kor/images/medilink-bi-white.svg" alt="메디링크 강원 MediLink Kangwon"></a>
-      <nav class="site-ft-links" aria-label="푸터 메뉴">
-        <a href="terms.html">이용약관</a>
-        <a href="info.html">정보공개</a>
-        <a href="guide.html">서비스가이드</a>
-        <a href="project.html">사업소개</a>
-        <a href="company.html">회사소개</a>
-        <a href="directions.html">찾아오시는길</a>
-      </nav>
-    </div>
-    <div class="ft_body">
-      <address class="ft_info">
-        <p class="ft_org">한국글로벌헬스케어사업협동조합 · 코고네트웍스</p>
-        <p class="ft_en">KOGHA | KOGO NETWORKS</p>
-        <p>CP <a href="tel:+811088769980">81-10-8876-9980</a> · <a href="mailto:andy@polestarhc.com">andy@polestarhc.com</a></p>
-        <p>강원특별자치도 원주시 지정면 기업도시로 200 의료기기종합지원센터</p>
-        <p class="copy">© KOGO NETWORKS. ALL RIGHTS RESERVED.</p>
-      </address>
-      <a class="ft_totop" href="#main" aria-label="맨 위로 이동"><span>TOP</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></a>
-    </div>
-  </div>
-</footer>
-<!-- 공통 모듈 ③ 프롬프트 독은 renewal-dock.js 가 주입 -->
+<!-- 헤더·퀵메뉴·푸터·프롬프트 독·병원 AI 세션은 rn.js 가 주입 -->
 
-<script src="subpage.js" defer></script>
-<script src="hospital-session.js" defer></script>
+<!-- 리뉴얼 레이어: 원안 스크립트 다음 -->
+<script src="common/front/kor/js/rn.js" defer></script>
+<script src="common/front/kor/js/rn-sub.js" defer></script>
 </body>
 </html>

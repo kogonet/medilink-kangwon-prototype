@@ -1,3 +1,6 @@
+/* 메디링크 강원 리뉴얼 — 하위 페이지 공통. rn.js 다음에 로드 */
+
+/* ═════════════════ 하위 페이지 (구 subpage.js) ═════════════════ */
 /* 병·의원 / 약국 / 응급실 LIVE 시안 공통 스크립트 (샘플 데이터 · 서버 연동 없음) */
 (function () {
   var $ = function (s, r) { return (r || document).querySelector(s); }, body = document.body;
@@ -146,4 +149,18 @@
   function sync() { raf = 0; var r = ft.getBoundingClientRect(); root.style.setProperty('--op-ft', Math.max(0, Math.round(window.innerHeight - r.top)) + 'px'); }
   function tick() { if (!raf) raf = requestAnimationFrame(sync); }
   window.addEventListener('scroll', tick, { passive: true, capture: true }); window.addEventListener('resize', tick); window.addEventListener('load', tick); sync();
+})();
+
+/* ═════════════════ 서비스가이드 (구 guide.js) ═════════════════ */
+(function () {
+  var tabs = [].slice.call(document.querySelectorAll('.gd_tab')), items = [].slice.call(document.querySelectorAll('.gd_q')), q = document.getElementById('gdSq'), cnt = document.getElementById('gdCnt'), emp = document.getElementById('gdEmpty'), cat = '';
+  if (!tabs.length) return;
+  function run() {
+    var k = (q.value || '').trim().toLowerCase(), n = 0;
+    items.forEach(function (it) { var ok = (!cat || it.dataset.c === cat) && (!k || it.textContent.toLowerCase().indexOf(k) > -1); it.hidden = !ok; if (ok) n++; });
+    cnt.textContent = n; emp.hidden = n > 0;
+  }
+  tabs.forEach(function (t) { t.addEventListener('click', function () { cat = t.dataset.c; tabs.forEach(function (x) { x.setAttribute('aria-selected', x === t); }); run(); }); });
+  q.addEventListener('input', run);
+  var p = new URLSearchParams(location.search).get('category'); if (p) { var t = tabs.filter(function (x) { return x.dataset.c === p; })[0]; if (t) t.click(); }
 })();
