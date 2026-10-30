@@ -23,9 +23,6 @@
   if (!hero || hero.getAttribute('data-rn-amb')) return;
   hero.setAttribute('data-rn-amb', '1');
 
-  // 밝은 히어로 위에서는 컬러 로고 사용
-  var logo = document.querySelector('.gm_brand_logo');
-  if (logo && /medilink-bi-white\.svg/.test(logo.getAttribute('src') || '')) logo.setAttribute('src', logo.getAttribute('src').replace('medilink-bi-white.svg', 'medilink-bi.svg'));
 
   var cv = document.createElement('canvas');
   cv.className = 'rn_ambient';

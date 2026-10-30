@@ -34,6 +34,12 @@
   };
   window.RN_ROUTES = ROUTES;   // 다른 리뉴얼 스크립트(메인 지도 이동 등)가 같은 경로를 쓴다
   var IMG = '/common/front/kor/images/';
+  /* 브랜드 — 로고·서비스명은 여기 한 곳만 바꾼다 (메디플로 전환 시: 이미지 2개 교체 + 아래 값 수정) */
+  var BRAND = window.RN_BRAND || {
+    name: '메디링크 강원', alt: '메디링크 강원 MediLink Kangwon',
+    logo: IMG + 'medilink-bi.svg',          // 흰 바탕용(헤더)
+    logoWhite: IMG + 'medilink-bi-white.svg' // 어두운 바탕용(푸터)
+  };
 
   /* 페이지 종류: 메인(히어로 존재) / 지도형(병·의원·약국) / 응급실 / 계정 / 문서 */
   var isHome = !!doc.querySelector('.hero_wrap');
@@ -59,7 +65,7 @@
   var head =
     (isHome ? '' : '<a class="op_skip" href="#main">본문으로 바로가기</a>') +
     '<aside class="op_side" id="opSide" aria-label="전역 메뉴">' +
-      '<a class="op_logo" id="opLogo" href="' + (isHome ? '#top' : ROUTES.home) + '" aria-label="메디링크 강원 홈"><img src="' + IMG + 'medilink-bi.svg" alt="메디링크 강원 MediLink Kangwon"></a>' +
+      '<a class="op_logo" id="opLogo" href="' + (isHome ? '#top' : ROUTES.home) + '" aria-label="' + BRAND.name + ' 홈"><img src="' + BRAND.logo + '" alt="' + BRAND.alt + '"></a>' +
     '</aside>' +
     '<div class="op_util" id="opUtil" role="toolbar" aria-label="바로가기와 대화 도구">' +
       '<nav class="op_tnav" id="opSideNav" aria-label="바로가기">' + nav('hospital', '병·의원 찾기') + nav('pharmacy', '약국 찾기') + nav('er', '응급실 LIVE') + '</nav>' +
@@ -89,7 +95,7 @@
   var top = isHome ? '#top' : ROUTES.home;
   var foot =
     '<footer class="site-ft" id="opFooter"><div class="ft_in">' +
-      '<div class="ft_top"><a href="' + top + '" class="ft-bi" aria-label="메디링크 강원 맨 위로"><img src="' + IMG + 'medilink-bi-white.svg" alt="메디링크 강원 MediLink Kangwon"></a>' +
+      '<div class="ft_top"><a href="' + top + '" class="ft-bi" aria-label="' + BRAND.name + ' 맨 위로"><img src="' + BRAND.logoWhite + '" alt="' + BRAND.alt + '"></a>' +
         '<nav class="site-ft-links" aria-label="푸터 메뉴">' +
           '<a href="' + ROUTES.terms + '">이용약관</a><a href="' + ROUTES.info + '">정보공개</a><a href="' + ROUTES.guide + '">서비스가이드</a>' +
           '<a href="' + ROUTES.project + '">사업소개</a><a href="' + ROUTES.company + '">회사소개</a><a href="' + ROUTES.directions + '">찾아오시는길</a>' +
