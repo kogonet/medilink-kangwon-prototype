@@ -14,24 +14,7 @@
 
 <main id="main" tabindex="-1">
 
-<section class="mp" id="mp" aria-label="병·의원 찾기">
-  <div class="mp_map" id="mpMap" role="img" aria-label="지도 영역(시안). 모든 정보는 왼쪽 목록에도 있습니다.">
-    <div class="mp_pins" id="mpPins"><button class="mp_pin" type="button" data-i="0" style="left:40%;top:34%" aria-label="1번 기관 선택"><span>1</span></button><button class="mp_pin" type="button" data-i="1" style="left:58%;top:26%" aria-label="2번 기관 선택"><span>2</span></button><button class="mp_pin" type="button" data-i="2" style="left:72%;top:52%" aria-label="3번 기관 선택"><span>3</span></button><button class="mp_pin" type="button" data-i="3" style="left:48%;top:58%" aria-label="4번 기관 선택"><span>4</span></button><button class="mp_pin" type="button" data-i="4" style="left:36%;top:66%" aria-label="5번 기관 선택"><span>5</span></button><button class="mp_pin" type="button" data-i="5" style="left:64%;top:74%" aria-label="6번 기관 선택"><span>6</span></button><button class="mp_pin" type="button" data-i="6" style="left:52%;top:82%" aria-label="7번 기관 선택"><span>7</span></button><button class="mp_pin" type="button" data-i="7" style="left:82%;top:30%" aria-label="8번 기관 선택"><span>8</span></button></div>
-    <div class="mp_zoom" role="group" aria-label="지도 확대·축소"><button type="button" id="mpZin" aria-label="확대">＋</button><button type="button" id="mpZout" aria-label="축소">－</button></div>
-  </div>
-  <div class="mp_toggle" role="group" aria-label="보기 방식">
-    <button type="button" class="on" data-v="map" aria-pressed="true">지도 보기</button>
-    <button type="button" class="mp_sw" role="switch" aria-checked="false" aria-label="목록 보기로 전환" data-v="toggle"><i></i></button>
-    <button type="button" data-v="list" aria-pressed="false">목록 보기</button>
-  </div>
-  <div class="mp_panel" id="mpPanel">
-    <div class="mp_search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-      <label class="op_sr" for="mpInp">병·의원 이름 또는 주소 검색</label><input id="mpInp" type="search" placeholder="병·의원 이름 또는 주소 검색" autocomplete="off"></div>
-    <div class="mp_chips" id="mpChips" role="group" aria-label="시·군 필터"></div>
-    <div class="mp_hd"><strong id="mpCnt">0곳</strong><div class="mp_sort" id="mpSort" role="group" aria-label="정렬"></div></div>
-    <ul class="mp_list" id="mpList"></ul>
-  </div>
-</section>
+<section class="mp" id="mp" aria-label="병·의원 찾기" data-label="병·의원"></section><!-- 지도·목록은 공통 지도 모듈(RNMap)이 그린다 -->
 <script>var MP_DATA = [{"g": "춘천시", "t": "샘플춘천병원", "a": "강원특별자치도 춘천시 ○○로 12", "tel": "033-000-0001", "k": "병원", "s": "진료 중"}, {"g": "원주시", "t": "샘플원주의원", "a": "강원특별자치도 원주시 △△로 34", "tel": "033-000-0002", "k": "의원", "s": "진료 중"}, {"g": "강릉시", "t": "샘플강릉병원", "a": "강원특별자치도 강릉시 □□로 56", "tel": "033-000-0003", "k": "병원", "s": "진료 중"}, {"g": "홍천군", "t": "샘플정형외과의원 A", "a": "강원특별자치도 홍천군 ○○로 00", "tel": "033-000-0004", "k": "의원", "s": "진료 종료"}, {"g": "횡성군", "t": "샘플정형외과병원 B", "a": "강원특별자치도 횡성군 △△로 00", "tel": "033-000-0005", "k": "병원", "s": "진료 중"}, {"g": "속초시", "t": "샘플속초의원", "a": "강원특별자치도 속초시 ◇◇로 78", "tel": "033-000-0006", "k": "의원", "s": "진료 종료"}, {"g": "평창군", "t": "샘플평창의원", "a": "강원특별자치도 평창군 ○○로 90", "tel": "033-000-0007", "k": "의원", "s": "진료 중"}, {"g": "동해시", "t": "샘플동해병원", "a": "강원특별자치도 동해시 △△로 21", "tel": "033-000-0008", "k": "병원", "s": "진료 중"}], MP_NOUN = "병·의원";</script>
 
 </main>

@@ -9,7 +9,7 @@
   if (!hero || doc.getElementById('opThread')) return;
   function frag(html) { var t = doc.createElement('template'); t.innerHTML = html; return t.content; }
   hero.parentNode.insertBefore(frag("<section class=\"op_thread\" id=\"opThread\" aria-label=\"AI 상담 대화\" hidden>\n      <a class=\"op_skip\" href=\"#opCol\">결과로 바로가기</a>\n      <div class=\"op_stage\" id=\"opStage\">\n        <div class=\"op_condbar\" id=\"opCondBar\"><span class=\"op_cond_label\">검색 조건</span><ul class=\"rr_chips\" id=\"opChips\" aria-label=\"적용된 검색 조건\"></ul></div>\n        <div class=\"op_col\" id=\"opCol\" tabindex=\"-1\"></div>\n      </div>\n    </section>"), hero.nextSibling);   // 대화(결과) 영역: 히어로가 그 자리에서 변신
-  doc.body.appendChild(frag("<section class=\"op_ovp op_ovp_wide\" id=\"opPnMap\" role=\"dialog\" aria-modal=\"false\" aria-labelledby=\"opPnMapT\" hidden>\n    <div class=\"op_ovp_hd\"><h2 id=\"opPnMapT\" tabindex=\"-1\">지도</h2><button class=\"op_x\" type=\"button\" data-close=\"map\" aria-label=\"지도 닫기\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6 6 18\"/></svg></button></div>\n    <div class=\"op_ovp_bd\">\n      <div class=\"op_tabs\" role=\"tablist\" aria-label=\"지도 보기 방식\">\n        <button type=\"button\" role=\"tab\" id=\"opTabTile\" aria-selected=\"true\" aria-controls=\"opPaneTile\">시·군 요약</button>\n        <button type=\"button\" role=\"tab\" id=\"opTabPin\" aria-selected=\"false\" aria-controls=\"opPanePin\">기관 위치</button>\n      </div>\n      <div class=\"op_pane\" id=\"opPaneTile\" role=\"tabpanel\" aria-labelledby=\"opTabTile\"></div>\n      <div class=\"op_pane\" id=\"opPanePin\" role=\"tabpanel\" aria-labelledby=\"opTabPin\" hidden></div>\n      <p class=\"op_map_cap\">시안용 임시 지도입니다. 지도의 모든 정보는 목록에도 동일하게 있습니다.</p>\n    </div>\n  </section>\n  <section class=\"op_ovp\" id=\"opPnHist\" role=\"dialog\" aria-modal=\"false\" aria-labelledby=\"opPnHistT\" hidden>\n    <div class=\"op_ovp_hd\"><h2 id=\"opPnHistT\" tabindex=\"-1\">기록</h2><button class=\"op_x\" type=\"button\" data-close=\"hist\" aria-label=\"기록 닫기\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6 6 18\"/></svg></button></div>\n    <div class=\"op_ovp_bd\">\n      <p class=\"op_drawer_note\" id=\"opDrawerNote\">이 기기에만 저장된 최근 검색입니다. 로그인하면 계정에 저장할 수 있어요.</p>\n      <ul class=\"op_hist\" id=\"opHist\"></ul>\n      <button class=\"op_clear\" id=\"opHistClear\" type=\"button\">기록 전체 삭제</button>\n    </div>\n  </section>\n  <section class=\"op_ovp\" id=\"opPnAcct\" role=\"dialog\" aria-modal=\"false\" aria-labelledby=\"opPnAcctT\" hidden>\n    <div class=\"op_ovp_hd\"><h2 id=\"opPnAcctT\" tabindex=\"-1\">계정</h2><button class=\"op_x\" type=\"button\" data-close=\"acct\" aria-label=\"계정 닫기\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6 6 18\"/></svg></button></div>\n    <div class=\"op_ovp_bd\">\n      <div id=\"opAcctOut\">\n        <p class=\"op_pop_t\">로그인은 선택입니다</p>\n        <p class=\"op_pop_d\">로그인 없이도 모든 기능을 쓸 수 있어요. 로그인하면 대화 기록과 즐겨찾는 기관을 저장하고 직접 관리할 수 있습니다.</p>\n        <button class=\"op_primary\" id=\"opLoginBtn\" type=\"button\">로그인 (시안)</button>\n      </div>\n      <div id=\"opAcctIn\" hidden>\n        <p class=\"op_pop_t\">홍길동 님 <small>(샘플)</small></p>\n        <button type=\"button\" data-acct=\"hist\">내 대화 기록</button>\n        <button type=\"button\" data-acct=\"fav\">즐겨찾는 기관</button>\n        <label class=\"op_switch\"><input type=\"checkbox\" id=\"opSaveHist\" checked><span>대화 기록 저장</span></label>\n        <button type=\"button\" data-acct=\"clear\">기록 전체 삭제</button>\n        <button type=\"button\" id=\"opLogoutBtn\">로그아웃</button>\n      </div>\n    </div>\n  </section>\n  <div class=\"op_note\" id=\"opNote\" role=\"status\" aria-live=\"polite\" hidden></div>\n  <div class=\"op_live\" id=\"opLive\" role=\"status\" aria-live=\"polite\"></div>"));                              // 지도·기록·계정 패널, 알림
+  doc.body.appendChild(frag("<section class=\"op_ovp\" id=\"opPnHist\" role=\"dialog\" aria-modal=\"false\" aria-labelledby=\"opPnHistT\" hidden>\n    <div class=\"op_ovp_hd\"><h2 id=\"opPnHistT\" tabindex=\"-1\">기록</h2><button class=\"op_x\" type=\"button\" data-close=\"hist\" aria-label=\"기록 닫기\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6 6 18\"/></svg></button></div>\n    <div class=\"op_ovp_bd\">\n      <p class=\"op_drawer_note\" id=\"opDrawerNote\">이 기기에만 저장된 최근 검색입니다. 로그인하면 계정에 저장할 수 있어요.</p>\n      <ul class=\"op_hist\" id=\"opHist\"></ul>\n      <button class=\"op_clear\" id=\"opHistClear\" type=\"button\">기록 전체 삭제</button>\n    </div>\n  </section>\n  <section class=\"op_ovp\" id=\"opPnAcct\" role=\"dialog\" aria-modal=\"false\" aria-labelledby=\"opPnAcctT\" hidden>\n    <div class=\"op_ovp_hd\"><h2 id=\"opPnAcctT\" tabindex=\"-1\">계정</h2><button class=\"op_x\" type=\"button\" data-close=\"acct\" aria-label=\"계정 닫기\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6 6 18\"/></svg></button></div>\n    <div class=\"op_ovp_bd\">\n      <div id=\"opAcctOut\">\n        <p class=\"op_pop_t\">로그인은 선택입니다</p>\n        <p class=\"op_pop_d\">로그인 없이도 모든 기능을 쓸 수 있어요. 로그인하면 대화 기록과 즐겨찾는 기관을 저장하고 직접 관리할 수 있습니다.</p>\n        <button class=\"op_primary\" id=\"opLoginBtn\" type=\"button\">로그인 (시안)</button>\n      </div>\n      <div id=\"opAcctIn\" hidden>\n        <p class=\"op_pop_t\">홍길동 님 <small>(샘플)</small></p>\n        <button type=\"button\" data-acct=\"hist\">내 대화 기록</button>\n        <button type=\"button\" data-acct=\"fav\">즐겨찾는 기관</button>\n        <label class=\"op_switch\"><input type=\"checkbox\" id=\"opSaveHist\" checked><span>대화 기록 저장</span></label>\n        <button type=\"button\" data-acct=\"clear\">기록 전체 삭제</button>\n        <button type=\"button\" id=\"opLogoutBtn\">로그아웃</button>\n      </div>\n    </div>\n  </section>\n  <div class=\"op_note\" id=\"opNote\" role=\"status\" aria-live=\"polite\" hidden></div>\n  <div class=\"op_live\" id=\"opLive\" role=\"status\" aria-live=\"polite\"></div>"));                              // 지도·기록·계정 패널, 알림
 })();
 
 /* ═════════════════ 히어로 엠비언트 (구 renewal-main.js) ═════════════════ */
@@ -128,7 +128,7 @@
   var form = $('form.search_form'), input = $('#medical_search');
   var hero = $('.hero_wrap'), thread = $('#opThread'), col = $('#opCol'), stage = $('#opStage');
   var live = $('#opLive'), chipsEl = $('#opChips');
-  var mapBtn = $('#opMapBtn'), mapEl = $('#opPnMap');
+  var mapBtn = $('#opMapBtn');
   if (!form || !thread) return;
 
   var state = { cond: { region: '', symptom: '', department: '' }, lastText: '', n: 0, timers: [], loc: false, mapAuto: false, last: null, user: false };
@@ -273,7 +273,7 @@
       $('.op_status', ans).remove();
       ans.insertAdjacentHTML('beforeend',
         '<p class="rr_sum"><strong>' + esc(m.regionFull === '강원특별자치도 전체' ? '강원도' : m.first) + '에서 ' + esc(m.dept) + ' 진료가 가능한 의료기관 ' + m.total + '곳</strong>을 찾았고, 먼저 3곳을 안내합니다. 공공데이터에 등록된 순서이며, 내 위치를 알려주시면 거리순으로 다시 정리해 드립니다.</p>' +
-        (m.compact ? '' : '<div class="op_hint"><span>결과가 강원도 여러 시·군에 넓게 흩어져 있어 <b>지도는 접어 두고 목록을 먼저</b> 보여 드려요.</span><button type="button" data-open-map="tile">시·군별 분포 보기</button></div>') +
+        (m.compact ? '' : '<div class="op_hint"><span>결과가 강원도 여러 시·군에 넓게 흩어져 있어 <b>지도는 접어 두고 목록을 먼저</b> 보여 드려요.</span><button type="button" data-open-map>지도로 보기</button></div>') +
         '<ol class="rr_list is_pending"></ol>');
       var ol = $('.rr_list', ans);
       m.fac.forEach(function (f, i) {
@@ -323,31 +323,23 @@
   });
 
   /* ── 지도: 기본은 접힘, 결과가 좁게 모일 때만 자동 펼침 ── */
-  var TILES = [['철원', 1, 1], ['화천', 2, 1], ['양구', 3, 1], ['인제', 4, 1], ['고성', 5, 1], ['춘천', 1, 2], ['홍천', 2, 2], ['평창', 3, 2], ['속초', 4, 2], ['양양', 5, 2], ['원주', 1, 3], ['횡성', 2, 3], ['정선', 3, 3], ['강릉', 5, 3], ['영월', 2, 4], ['태백', 3, 4], ['동해', 4, 4], ['삼척', 5, 4]];
   var SUFFIX = { '철원': '군', '화천': '군', '양구': '군', '인제': '군', '고성': '군', '홍천': '군', '평창': '군', '양양': '군', '횡성': '군', '정선': '군', '영월': '군', '춘천': '시', '속초': '시', '원주': '시', '강릉': '시', '태백': '시', '동해': '시', '삼척': '시' };
   function publish(m) {
     mapBtn.disabled = false; $('#opMapCnt').textContent = '(' + m.total + '곳)';
-    var grid = '<div class="op_tile" role="group" aria-label="강원도 시·군별 결과 수 (개략 배치)">';
-    for (var r = 1; r <= 4; r++) for (var c = 1; c <= 5; c++) {
-      var t = TILES.filter(function (x) { return x[1] === c && x[2] === r; })[0];
-      if (!t) { grid += '<button class="gap" type="button" tabindex="-1" aria-hidden="true"></button>'; continue; }
-      var full = t[0] + SUFFIX[t[0]], n = m.counts[full] || 0;
-      grid += '<button type="button" class="' + (n ? 'has' : '') + '" data-region="' + full + '" aria-label="' + full + ' ' + n + '곳, 이 지역으로 좁히기"><span>' + t[0] + '</span><b>' + n + '</b></button>';
-    }
-    $('#opPaneTile').innerHTML = grid + '</div>';
-    $('#opPanePin').innerHTML = '<div class="rr_map_canvas" role="img" aria-label="검색 결과 3곳의 위치(샘플)">' + m.fac.map(function (f) { return '<span class="rr_pin" style="left:' + f.pin[0] + '%;top:' + f.pin[1] + '%" data-pin="' + f.n + '">' + f.n + '</span>'; }).join('') + '</div>';
-    state.mapTab = m.compact ? 'pin' : 'tile';   // 자동으로 열지 않고 버튼 점으로만 알림
-    if (!panelOpen('map')) mapBtn.classList.add('is_new');
+    /* 지도는 병·의원 찾기 페이지(공통 지도 모듈)로 보낸다 — 결과 기관을 넘겨 그 페이지가 같은 화면으로 그린다 */
+    try { sessionStorage.setItem('rn.mapItems', JSON.stringify({ q: state.lastText, total: m.total, items: m.fac.map(function (f) {
+      return { g: f.addr.split(' ')[0], t: f.name, a: f.addr, tel: f.tel, k: f.kind, s: '', p: f.pin };
+    }) })); } catch (e) { }
+    mapBtn.classList.add('is_new');
   }
   /* ── 우상단 유틸리티(지도·기록·계정) → 우측 오버레이 패널: 지도는 넓게(본문을 덮음), 기록·계정은 좁게 ── */
-  var PN = { map: ['opMapBtn', 'opPnMap'], hist: ['opHistBtn', 'opPnHist'] };
+  var PN = { hist: ['opHistBtn', 'opPnHist'] };
   var narrow = window.matchMedia('(max-width: 1100px)'), opened = null;
   function panelOpen(k) { return opened === k; }
   function openPanel(k) {
     closePanel(null, true);
     var el = $('#' + PN[k][1]); el.hidden = false; void el.offsetWidth; el.classList.add('is_open');
     $('#' + PN[k][0]).setAttribute('aria-expanded', 'true'); opened = k; syncSheet();
-    if (k === 'map') mapBtn.classList.remove('is_new');
     if (k === 'hist') renderHist();
     setTimeout(function () { var t = $('h2', el); if (t) t.focus({ preventScroll: true }); }, reduce ? 0 : 60);
   }
@@ -359,24 +351,12 @@
   }
   function closePanels() { closePanel(null, true); }
   Object.keys(PN).forEach(function (k) {
-    $('#' + PN[k][0]).addEventListener('click', function () { if (panelOpen(k)) closePanel(k); else { openPanel(k); if (k === 'map') say('지도 패널을 열었습니다.'); } });
+    $('#' + PN[k][0]).addEventListener('click', function () { if (panelOpen(k)) closePanel(k); else { openPanel(k); } });
     $('#' + PN[k][1]).addEventListener('keydown', function (e) { if (e.key === 'Escape') { e.stopPropagation(); closePanel(k); } });
   });
   $$('[data-close]').forEach(function (b) { b.addEventListener('click', function () { closePanel(b.dataset.close); }); });
-  function openMap(tab) { openPanel('map'); selectTab(tab || state.mapTab || 'tile'); }
-  function selectTab(t) {
-    var pin = t === 'pin';
-    $('#opTabTile').setAttribute('aria-selected', !pin); $('#opTabPin').setAttribute('aria-selected', pin);
-    $('#opPaneTile').hidden = pin; $('#opPanePin').hidden = !pin;
-  }
-  $('#opTabTile').addEventListener('click', function () { selectTab('tile'); });
-  $('#opTabPin').addEventListener('click', function () { selectTab('pin'); });
-  $('#opPaneTile').addEventListener('click', function (e) {
-    var b = e.target.closest('[data-region]'); if (!b) return;
-    if (narrow.matches) closePanel('map', true);
-    state.cond.region = b.dataset.region; renderChips();
-    ask({ text: state.lastText }, { fromBar: true, note: b.dataset.region + '으로 좁혀 답변을 갱신했어요' });
-  });
+  function openMap() { location.href = ((window.RN_ROUTES || {}).hospital || 'hospital.html') + '?from=chat'; }
+  mapBtn.addEventListener('click', openMap);
   /* 패널은 입력 독 위에 놓는다 */
   function syncSheet() {
     var dock = $('.rn_prompt.is_dock');
@@ -398,7 +378,7 @@
   /* ── 답변 내 상호작용(위임) ── */
   col.addEventListener('click', function (e) {
     var t;
-    if ((t = e.target.closest('[data-open-map]'))) { openMap(t.dataset.openMap); say('시·군별 분포를 열었습니다.'); return; }
+    if ((t = e.target.closest('[data-open-map]'))) { openMap(); return; }
     if ((t = e.target.closest('[data-ask-dept]'))) { state.cond.department = t.dataset.askDept; renderChips(); ask({ text: state.lastText }, { fromBar: true }); return; }
     if ((t = e.target.closest('[data-ask-text]'))) { ask({ text: t.dataset.askText }); return; }
     if ((t = e.target.closest('.op_dist_btn'))) {
@@ -412,7 +392,7 @@
   col.addEventListener('mouseout', function (e) { pinHover(e, false); });
   function pinHover(e, on) {
     var c = e.target.closest('.rr_card'); if (!c) return;
-    var p = $('#opPanePin .rr_pin[data-pin="' + c.dataset.pin + '"]'); if (p) p.classList.toggle('is_on', on); c.classList.toggle('is_on', on);
+    c.classList.toggle('is_on', on);
   }
   doc.addEventListener('click', function (e) {
     var t = e.target.closest('[data-op-note]');

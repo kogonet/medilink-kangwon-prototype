@@ -32,6 +32,7 @@
     terms: 'terms.html', info: 'info.html', guide: 'guide.html', project: 'project.html', company: 'company.html', directions: 'directions.html',
     vaccination: '/front/medical/vaccinationList.do', knuh: 'http://pt-ai.ctit.co.kr/knuh/ai-consult.do'
   };
+  window.RN_ROUTES = ROUTES;   // 다른 리뉴얼 스크립트(메인 지도 이동 등)가 같은 경로를 쓴다
   var IMG = '/common/front/kor/images/';
 
   /* 페이지 종류: 메인(히어로 존재) / 지도형(병·의원·약국) / 응급실 / 계정 / 문서 */
@@ -54,7 +55,6 @@
   function frag(html) { var t = doc.createElement('template'); t.innerHTML = html; return t.content; }
 
   /* ① 헤더 */
-  var mapAttr = isHome ? ' aria-haspopup="dialog" aria-expanded="false" aria-controls="opPnMap"' : '';
   var mapState = isMap ? ' aria-current="page"' : ' disabled';
   var head =
     (isHome ? '' : '<a class="op_skip" href="#main">본문으로 바로가기</a>') +
@@ -64,7 +64,7 @@
     '<div class="op_util" id="opUtil" role="toolbar" aria-label="바로가기와 대화 도구">' +
       '<nav class="op_tnav" id="opSideNav" aria-label="바로가기">' + nav('hospital', '병·의원 찾기') + nav('pharmacy', '약국 찾기') + nav('er', '응급실 LIVE') + '</nav>' +
       '<button class="op_ub op_side_m" id="opSideMenuBtn" type="button" aria-expanded="false" aria-controls="opSideNav" aria-label="바로가기 열기">' + ICON.menu + '</button>' +
-      '<button class="op_ub" id="opMapBtn" type="button"' + mapAttr + ' aria-label="지도 보기" title="지도 보기"' + mapState + '>' + ICON.map +
+      '<button class="op_ub" id="opMapBtn" type="button" aria-label="지도 보기" title="지도 보기"' + mapState + '>' + ICON.map +
         (isHome ? '<span class="op_sr"><em id="opMapCnt"></em></span><i class="op_dot" aria-hidden="true"></i>' : '') + '</button>' +
       '<button class="op_ub" id="opHistBtn" type="button"' + (isHome ? ' aria-haspopup="dialog" aria-expanded="false" aria-controls="opPnHist"' : '') + ' aria-label="채팅 기록" title="채팅 기록" disabled>' + ICON.hist + '</button>' +
       '<a class="op_ub" id="opAcctBtn" href="' + ROUTES.login + '" aria-label="로그인" title="로그인">' + ICON.acct + '<span class="op_sr" id="opAcctLabel">로그인</span></a>' +
@@ -102,6 +102,101 @@
     '</div></footer>';
   var q = doc.querySelector('.quick_wrap');
   body.insertBefore(frag(foot), q && q.parentNode === body ? q.nextSibling : tail);
+})();
+
+/* ═════════════════ 공통 지도 모듈 ═════════════════ */
+/* 공통 지도 모듈 — 병·의원 찾기·약국 찾기·메인 대화의 지도 패널이 같은 모듈을 쓴다.
+ * RNMap.mount(root, data, opts)
+ *   root : <section class="mp">  (메인 대화의 '지도'는 병·의원 찾기 페이지로 이동해 이 모듈로 그린다)
+ *   data : [{ g: 시·군, t: 기관명, a: 주소, tel, k: 종류, s: 상태('진료 중' 등), p: [x%, y%] }]
+ *   opts : { id: 'mp'(요소 id 접두어), label: '병·의원', mapBtn: 헤더 지도 버튼 }
+ * 반환   : { select(i), hover(i, on), setView('map'|'list') }
+ * 실제 지도 SDK 를 붙일 때는 .mp_map 안쪽(핀 그리기·확대)만 교체한다. */
+(function () {
+  'use strict';
+  var PINS = [[40, 34], [58, 26], [72, 52], [48, 58], [36, 66], [64, 74], [52, 82], [82, 30]];   // 시안용 핀 위치
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function uniq(v, i, a) { return a.indexOf(v) === i; }
+
+  function mount(root, D, o) {
+    o = o || {};
+    var id = o.id || 'mp', label = o.label || '기관', mapBtn = o.mapBtn || null;
+    var g = '전체', q = '', zoom = 1, sortBy = '';
+    var $ = function (s) { return root.querySelector(s); };
+    root.innerHTML =
+      '<div class="mp_map" id="' + id + 'Map" role="img" aria-label="지도 영역(시안). 모든 정보는 왼쪽 목록에도 있습니다.">' +
+        '<div class="mp_pins" id="' + id + 'Pins">' + D.map(function (d, i) {
+          var p = d.p || PINS[i % PINS.length];
+          return '<button class="mp_pin" type="button" data-i="' + i + '" style="left:' + p[0] + '%;top:' + p[1] + '%" aria-label="' + (i + 1) + '번 기관 선택"><span>' + (i + 1) + '</span></button>';
+        }).join('') + '</div>' +
+        '<div class="mp_zoom" role="group" aria-label="지도 확대·축소"><button type="button" id="' + id + 'Zin" aria-label="확대">＋</button><button type="button" id="' + id + 'Zout" aria-label="축소">－</button></div>' +
+      '</div>' +
+      '<div class="mp_toggle" role="group" aria-label="보기 방식">' +
+        '<button type="button" class="on" data-v="map" aria-pressed="true">지도 보기</button>' +
+        '<button type="button" class="mp_sw" role="switch" aria-checked="false" aria-label="목록 보기로 전환" data-v="toggle"><i></i></button>' +
+        '<button type="button" data-v="list" aria-pressed="false">목록 보기</button>' +
+      '</div>' +
+      '<div class="mp_panel" id="' + id + 'Panel">' +
+        '<div class="mp_search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>' +
+          '<label class="op_sr" for="' + id + 'Inp">' + label + ' 이름 또는 주소 검색</label><input id="' + id + 'Inp" type="search" placeholder="' + label + ' 이름 또는 주소 검색" autocomplete="off"></div>' +
+        '<div class="mp_chips" role="group" aria-label="시·군 필터"></div>' +
+        '<div class="mp_hd"><strong class="mp_cnt">0곳</strong><div class="mp_sort" role="group" aria-label="정렬"></div></div>' +
+        '<ul class="mp_list"></ul>' +
+      '</div>';
+    var chips = $('.mp_chips'), list = $('.mp_list'), pins = $('.mp_pins'), sortEl = $('.mp_sort');
+
+    var gs = ['전체'].concat(D.map(function (d) { return d.g; }).filter(uniq));
+    chips.innerHTML = gs.map(function (x) { return '<button type="button" class="' + (x === g ? 'on' : '') + '" aria-pressed="' + (x === g) + '">' + x + '</button>'; }).join('');
+    list.innerHTML = D.map(function (d, i) {
+      var open = /진료 중|영업 중/.test(d.s);
+      return '<li data-i="' + i + '"><button type="button" class="mp_item"><span class="mp_no">' + (i + 1) + '</span><span class="mp_tx"><span class="mp_nm">' + esc(d.t) + (d.s ? ' <em class="' + (open ? 'is_open' : '') + '">' + esc(d.s) + '</em>' : '') + '</span><span class="mp_ad">' + esc(d.a) + '</span><span class="mp_tl">' + esc(d.tel) + '</span></span></button></li>';
+    }).join('') + '<li class="mp_none" hidden>검색 결과가 없습니다.</li>';
+
+    function match(d) { return (g === '전체' || d.g === g) && (!q || (d.t + d.a).indexOf(q) > -1); }
+    function render() {
+      var n = 0;
+      D.forEach(function (d, i) {
+        var m = match(d); if (m) n++;
+        list.querySelector('li[data-i="' + i + '"]').hidden = !m; var p = pins.children[i]; if (p) p.hidden = !m;
+      });
+      list.querySelector('.mp_none').hidden = n > 0; $('.mp_cnt').textContent = n + '곳';
+    }
+    /* 정렬: 선택한 상태(진료 중 / 진료 종료)를 먼저 · 다시 누르면 기본 순서 */
+    var sts = D.map(function (d) { return d.s; }).filter(Boolean).filter(uniq).sort(function (a, b) { return /종료/.test(a) - /종료/.test(b); });
+    sortEl.innerHTML = sts.map(function (s) { return '<button type="button" class="' + (/종료/.test(s) ? 'closed' : 'open') + '" data-s="' + s + '" aria-pressed="false">' + s.replace(/\s/g, '') + '</button>'; }).join('');
+    function applySort() {
+      var none = list.querySelector('.mp_none');
+      [].slice.call(list.querySelectorAll('li[data-i]')).sort(function (a, b) {
+        var ra = sortBy && D[+a.dataset.i].s !== sortBy ? 1 : 0, rb = sortBy && D[+b.dataset.i].s !== sortBy ? 1 : 0;
+        return ra - rb || a.dataset.i - b.dataset.i;
+      }).forEach(function (li) { list.insertBefore(li, none); });
+      [].forEach.call(sortEl.children, function (b) { var on = b.dataset.s === sortBy; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+    }
+    function select(i, scroll) {
+      [].forEach.call(list.querySelectorAll('li[data-i]'), function (li) { li.querySelector('.mp_item').classList.toggle('is_on', +li.dataset.i === i); });
+      [].forEach.call(pins.children, function (p, k) { p.classList.toggle('is_on', k === i); });
+      if (scroll) list.querySelector('li[data-i="' + i + '"]').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+    function hover(i, on) { var p = pins.children[i]; if (p) p.classList.toggle('is_on', on); }
+    function zoomTo(z) { zoom = Math.max(1, Math.min(1.8, z)); pins.style.transform = 'scale(' + zoom + ')'; }
+    function setView(v) {
+      root.classList.toggle('is_list', v === 'list');
+      [].forEach.call(root.querySelectorAll('.mp_toggle button[data-v="map"], .mp_toggle button[data-v="list"]'), function (b) { var on = b.dataset.v === v; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+      var sw = $('.mp_sw'); if (sw) sw.setAttribute('aria-checked', v === 'list');
+      if (mapBtn) mapBtn.classList.toggle('is_on', v === 'map');
+    }
+    sortEl.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; sortBy = sortBy === b.dataset.s ? '' : b.dataset.s; applySort(); });
+    chips.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; g = b.textContent; [].forEach.call(chips.children, function (c) { c.classList.toggle('on', c === b); c.setAttribute('aria-pressed', c === b); }); render(); });
+    $('#' + id + 'Inp').addEventListener('input', function (e) { q = e.target.value.trim(); render(); });
+    list.addEventListener('click', function (e) { var li = e.target.closest('li[data-i]'); if (li) select(+li.dataset.i, false); });
+    pins.addEventListener('click', function (e) { var p = e.target.closest('.mp_pin'); if (p) select(+p.dataset.i, true); });
+    $('#' + id + 'Zin').addEventListener('click', function () { zoomTo(zoom + .2); });
+    $('#' + id + 'Zout').addEventListener('click', function () { zoomTo(zoom - .2); });
+    $('.mp_toggle').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; setView(b.dataset.v === 'toggle' ? (root.classList.contains('is_list') ? 'map' : 'list') : b.dataset.v); });
+    render();
+    return { select: select, hover: hover, setView: setView };
+  }
+  window.RNMap = { mount: mount };
 })();
 
 /* ═════════════════ 프롬프트 독 (구 renewal-dock.js) ═════════════════ */
@@ -605,12 +700,10 @@
     rail.setAttribute('aria-label', h.name + ' AI');
     rail.innerHTML =
       '<button type="button" class="hs_rail_open" id="hsRailOpen" aria-label="' + h.name + ' AI 서랍 열기">' + (h.logo ? '<img src="' + h.logo + '" alt="">' : '<b class="hs_rail_nm">' + h.name + '</b>') + '<span class="hs_rail_txt">' + h.name + ' AI</span></button>' +
-      '<ul>' + h.tabs.map(function (t, i) { return '<li><button type="button" data-rail-tab="' + i + '">' + t[0] + '</button></li>'; }).join('') + '</ul>' +
       '<button type="button" class="hs_rail_end" id="hsRailEnd" aria-label="세션 종료">종료</button>';
   }
   rail.addEventListener('click', function (e) {
     if (e.target.closest('#hsRailOpen')) { setMode('open'); return; }
-    var rt = e.target.closest('[data-rail-tab]'); if (rt) { st.tab = +rt.getAttribute('data-rail-tab'); setMode('open'); return; }
     if (e.target.closest('#hsRailEnd')) endSession();
   });
 

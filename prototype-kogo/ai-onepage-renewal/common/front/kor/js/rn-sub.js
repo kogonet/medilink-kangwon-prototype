@@ -69,60 +69,12 @@
   /* ── 지도 기반 페이지(병·의원/약국): 구글 지도식 레이아웃 ── */
   var mp = $('#mp');
   var mapBtn = $('#opMapBtn');
-  if (mp && window.MP_DATA) {
-    var D = MP_DATA, g = '전체', q = '', sel = -1, zoom = 1;
-    var chips = $('#mpChips'), list = $('#mpList'), pins = $('#mpPins');
-    var gs = ['전체'].concat(D.map(function (d) { return d.g; }).filter(function (v, i, a) { return a.indexOf(v) === i; }));
-    chips.innerHTML = gs.map(function (x) { return '<button type="button" class="' + (x === g ? 'on' : '') + '" aria-pressed="' + (x === g) + '">' + x + '</button>'; }).join('');
-    list.innerHTML = D.map(function (d, i) {
-      var open = /진료 중|영업 중/.test(d.s);
-      return '<li data-i="' + i + '"><button type="button" class="mp_item"><span class="mp_no">' + (i + 1) + '</span><span class="mp_tx"><span class="mp_nm">' + esc(d.t) + ' <em class="' + (open ? 'is_open' : '') + '">' + d.s + '</em></span><span class="mp_ad">' + esc(d.a) + '</span><span class="mp_tl">' + d.tel + '</span></span></button></li>';
-    }).join('') + '<li class="mp_none" hidden>검색 결과가 없습니다.</li>';
-    function match(d) { return (g === '전체' || d.g === g) && (!q || (d.t + d.a).indexOf(q) > -1); }
-    function render() {
-      var n = 0;
-      D.forEach(function (d, i) {
-        var m = match(d); if (m) n++;
-        list.querySelector('li[data-i="' + i + '"]').hidden = !m; var p = pins.children[i]; if (p) p.hidden = !m;
-      });
-      list.querySelector('.mp_none').hidden = n > 0; $('#mpCnt').textContent = n + '곳';
-    }
-
-    /* 정렬 옵션: 선택한 상태(진료 중 / 진료 종료)를 먼저 보여 줌 · 다시 누르면 기본 순서 */
-    var sortEl = $('#mpSort'), sortBy = '';
-    var sts = D.map(function (d) { return d.s; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).sort(function (a, b) { return /종료/.test(a) - /종료/.test(b); });
-    sortEl.innerHTML = sts.map(function (s) { return '<button type="button" class="' + (/종료/.test(s) ? 'closed' : 'open') + '" data-s="' + s + '" aria-pressed="false">' + s.replace(/\s/g, '') + '</button>'; }).join('');
-    function applySort() {
-      var none = list.querySelector('.mp_none');
-      [].slice.call(list.querySelectorAll('li[data-i]')).sort(function (a, b) {
-        var ra = sortBy && D[+a.dataset.i].s !== sortBy ? 1 : 0, rb = sortBy && D[+b.dataset.i].s !== sortBy ? 1 : 0;
-        return ra - rb || a.dataset.i - b.dataset.i;
-      }).forEach(function (li) { list.insertBefore(li, none); });
-      [].forEach.call(sortEl.children, function (b) { var on = b.dataset.s === sortBy; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
-    }
-    sortEl.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; sortBy = sortBy === b.dataset.s ? '' : b.dataset.s; applySort(); });
-    function select(i, scroll) {
-      sel = i;
-      [].forEach.call(list.querySelectorAll('li[data-i]'), function (li) { li.querySelector('.mp_item').classList.toggle('is_on', +li.dataset.i === i); });
-      [].forEach.call(pins.children, function (p, k) { p.classList.toggle('is_on', k === i); });
-      if (scroll) list.querySelector('li[data-i="' + i + '"]').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-    }
-    chips.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; g = b.textContent; [].forEach.call(chips.children, function (c) { c.classList.toggle('on', c === b); c.setAttribute('aria-pressed', c === b); }); render(); });
-    $('#mpInp').addEventListener('input', function (e) { q = e.target.value.trim(); render(); });
-    list.addEventListener('click', function (e) { var li = e.target.closest('li[data-i]'); if (li) select(+li.dataset.i, false); });
-    pins.addEventListener('click', function (e) { var p = e.target.closest('.mp_pin'); if (p) select(+p.dataset.i, true); });
-    function zoomTo(z) { zoom = Math.max(1, Math.min(1.8, z)); pins.style.transform = 'scale(' + zoom + ')'; }
-    $('#mpZin').addEventListener('click', function () { zoomTo(zoom + .2); });
-    $('#mpZout').addEventListener('click', function () { zoomTo(zoom - .2); });
-    function setView(v) {
-      mp.classList.toggle('is_list', v === 'list');
-      [].forEach.call(mp.querySelectorAll('.mp_toggle button[data-v="map"], .mp_toggle button[data-v="list"]'), function (b) { var on = b.dataset.v === v; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
-      var sw = mp.querySelector('.mp_sw'); if (sw) sw.setAttribute('aria-checked', v === 'list');
-      if (mapBtn) mapBtn.classList.toggle('is_on', v === 'map');
-    }
-    $('.mp_toggle').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; setView(b.dataset.v === 'toggle' ? (mp.classList.contains('is_list') ? 'map' : 'list') : b.dataset.v); });
-    if (mapBtn) { mapBtn.addEventListener('click', function () { setView('map'); }); mapBtn.classList.add('is_on'); }
-    render();
+  if (mp && window.MP_DATA && window.RNMap) {
+    /* 메인 대화의 '지도' 에서 넘어오면(?from=chat) 그 답변의 기관을 그린다 */
+    var D = MP_DATA;
+    if (/[?&]from=chat\b/.test(location.search)) { try { var c = JSON.parse(sessionStorage.getItem('rn.mapItems') || 'null'); if (c && c.items && c.items.length) D = c.items; } catch (e) { } }
+    var map = RNMap.mount(mp, D, { id: 'mp', label: mp.getAttribute('data-label') || '기관', mapBtn: mapBtn });
+    if (mapBtn) { mapBtn.addEventListener('click', function () { map.setView('map'); }); mapBtn.classList.add('is_on'); }
   } else if (mapBtn) {
     mapBtn.addEventListener('click', function () { location.href = 'hospital.html'; });   /* 지도 아이콘: 지도 기반 페이지로 */
   }
