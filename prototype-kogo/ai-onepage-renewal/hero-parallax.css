@@ -1,0 +1,44 @@
+/* --hero-bg-scale: 배경 이미지 너비(1=화면 너비). 작을수록 사람이 작아진다.
+/* 히어로 전체 배경 이미지 + 패럴랙스 — 히어로에서만 보이고 병원 세션(서랍)이 열리면 숨김 */
+.hero_wrap > .hero_bg {--s: var(--hero-bg-scale, 1); position: absolute; top: 0; left: calc(50% * (1 - var(--s))); z-index: 0; width: calc(100% * var(--s)); aspect-ratio: 1672 / 941; background: url("../images/hero-v2.png") center / 100% 100% no-repeat; opacity: .95; pointer-events: none; will-change: transform; transition: opacity .3s ease; -webkit-mask-image: linear-gradient(180deg, #000, #000 86%, transparent); mask-image: linear-gradient(180deg, #000, #000 86%, transparent);}
+html.hs-live .hero_wrap .hero_inner {position: relative; z-index: 10;}
+/* 이미지 중앙의 빈 공간(하단 쪽)에 콘텐츠가 앉도록 살짝 내린다 */
+.hero_wrap .hero_content {padding-top: 150px;}
+html.hs-live .hero_wrap > .hero_bg {opacity: 0; visibility: hidden;}
+@media (max-width: 760px) {
+  .hero_wrap > .hero_bg {--s: 1.6; top: 0; opacity: .75;}
+  }
+@media (prefers-reduced-motion: reduce) {
+  .hero_wrap > .hero_bg {transform: none !important;}
+}
+
+/* 헤더 바: 살짝 불투명 — 뒤의 배경 이미지가 은은하게 비친다 */
+body::before {background: rgba(255,255,255,.78); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);}
+
+/* 가독성용 화이트 블러 오브젝트 — oklab 보간 그라디언트 3개가 서로 다른 주기로 천천히 떠다닌다.
+ * 움직여도 가장자리가 드러나지 않도록 콘텐츠보다 훨씬 넓게 잡았고, 색은 화이트만 쓴다. */
+.hero_wrap > .hero_veil {position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; transition: opacity .3s ease;}
+html.hs-live .hero_wrap > .hero_veil {opacity: 0; visibility: hidden;}
+.hero_veil i {position: absolute; display: block; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,.96) 0%, rgba(255,255,255,.9) 46%, rgba(255,255,255,0) 100%); filter: blur(26px); will-change: transform;}
+@supports (background: radial-gradient(in oklab, red, blue)) {
+  .hero_veil i {background: radial-gradient(closest-side in oklab, rgb(255 255 255 / .96) 0%, rgb(255 255 255 / .9) 46%, rgb(255 255 255 / 0) 100%);}
+}
+.hero_veil i:nth-child(1) {left: 50%; top: var(--hv-cy, 58%); width: 84vw; height: 650px; margin: -325px 0 0 -42vw; animation: hv_a 19s ease-in-out infinite alternate;}
+.hero_veil i:nth-child(2) {left: 40%; top: var(--hv-cy, 58%); width: 62vw; height: 560px; margin: -280px 0 0 -31vw; opacity: .85; animation: hv_b 27s ease-in-out infinite alternate;}
+.hero_veil i:nth-child(3) {left: 60%; top: var(--hv-cy, 58%); width: 66vw; height: 520px; margin: -260px 0 0 -33vw; opacity: .85; animation: hv_c 33s ease-in-out infinite alternate;}
+@keyframes hv_a {0% {transform: translate3d(-2%, -1.5%, 0) scale(1);} 50% {transform: translate3d(1.5%, 2%, 0) scale(1.06);} 100% {transform: translate3d(3%, -1%, 0) scale(.97);}}
+@keyframes hv_b {0% {transform: translate3d(3%, 2%, 0) scale(1.04) rotate(-4deg);} 100% {transform: translate3d(-3%, -2.5%, 0) scale(.96) rotate(5deg);}}
+@keyframes hv_c {0% {transform: translate3d(-3%, -2%, 0) scale(.98) rotate(3deg);} 100% {transform: translate3d(2.5%, 3%, 0) scale(1.05) rotate(-4deg);}}
+@media (max-width: 760px) {
+  .hero_veil i:nth-child(1) {width: 150vw; margin-left: -75vw; height: 620px; margin-top: -310px;}
+  .hero_veil i:nth-child(2), .hero_veil i:nth-child(3) {width: 120vw; margin-left: -60vw;}
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero_veil i {animation: none;}
+}
+
+/* 응급·화재·구조 줄: 아래에서 위로 올라오는 화이트 페이드로 가독성 확보 */
+.hero_veil::after {content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 200px; background: linear-gradient(to top, rgb(255 255 255 / 1) 0%, rgb(255 255 255 / .94) 38%, rgb(255 255 255 / 0) 100%);}
+@supports (background: linear-gradient(in oklab, red, blue)) {
+  .hero_veil::after {background: linear-gradient(to top in oklab, rgb(255 255 255 / 1) 0%, rgb(255 255 255 / .94) 38%, rgb(255 255 255 / 0) 100%);}
+}
